@@ -4,10 +4,12 @@ import { GuessInput } from "../game/GuessInput";
 import { getConfirmedFacts } from "./categories";
 import { ConfirmedFacts } from "./ConfirmedFacts";
 import { GuessTable } from "./GuessTable";
+import { LastGuess } from "./LastGuess";
 import { useAlexGame } from "./useAlexGame";
 
 export default function AlexApp() {
-  const { state, guess, newGame } = useAlexGame();
+  const { state, pendingGuess, lastGuess, guess, commitGuess, newGame } = useAlexGame();
+  const displayedGuess = pendingGuess ?? lastGuess;
 
   return (
     <Container size="lg" py="xl">
@@ -21,7 +23,7 @@ export default function AlexApp() {
 
         <Card withBorder padding="lg" radius="md">
           <Stack gap="md">
-            {state.status === "playing" && (
+            {state.status === "playing" && !pendingGuess && (
               <GuessInput
                 onGuess={guess}
                 guessedNames={new Set(state.guesses.map((g) => g.country.name))}
@@ -38,16 +40,24 @@ export default function AlexApp() {
             )}
 
             {state.guesses.length > 0 && (
-              <>
-                <ConfirmedFacts facts={getConfirmedFacts(state.guesses)} />
+              <ConfirmedFacts facts={getConfirmedFacts(state.guesses)} />
+            )}
 
-                <Stack gap={4}>
-                  <Text size="xs" c="dimmed">
-                    Guesses ({state.guesses.length})
-                  </Text>
-                  <GuessTable guesses={state.guesses} />
-                </Stack>
-              </>
+            {displayedGuess && (
+              <LastGuess
+                feedback={displayedGuess}
+                revealing={displayedGuess === pendingGuess}
+                onRevealComplete={() => commitGuess(displayedGuess)}
+              />
+            )}
+
+            {state.guesses.length > 0 && (
+              <Stack gap={4}>
+                <Text size="xs" c="dimmed">
+                  Guesses ({state.guesses.length})
+                </Text>
+                <GuessTable guesses={state.guesses} />
+              </Stack>
             )}
 
             <Button onClick={newGame} w="fit-content" variant="subtle">

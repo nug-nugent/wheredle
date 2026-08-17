@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
 
 export function FlagSegment({
@@ -25,6 +26,9 @@ export function FlagSegment({
       <img
         src={flagUrl}
         alt=""
+        draggable={false}
+        onDragStart={(e) => e.preventDefault()}
+        onContextMenu={(e) => e.preventDefault()}
         style={{
           width: scaledWidth,
           height: scaledHeight,
@@ -32,7 +36,9 @@ export function FlagSegment({
           position: "relative",
           left: `-${(focalX / 100) * (scaledWidth - FLAG_CROP_SIZE.width)}px`,
           top: `-${(focalY / 100) * (scaledHeight - FLAG_CROP_SIZE.height)}px`,
-        }}
+          userSelect: "none",
+          WebkitUserDrag: "none",
+        } as CSSProperties}
       />
     </div>
   );

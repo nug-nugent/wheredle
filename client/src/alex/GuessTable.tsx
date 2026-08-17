@@ -1,39 +1,8 @@
-import { Stack, Table, Text } from "@mantine/core";
+import { Table, Text } from "@mantine/core";
 import { CATEGORIES, isLanguageConfirmed } from "./categories";
 import type { GuessFeedback } from "./engine";
-import type { LanguageMatch } from "./languageFamily";
-
-// A wrapping, roomy alternative to Mantine's Badge — Badge forces single-line
-// text with an ellipsis, which mangles longer values like government types
-// or multi-currency lists.
-function ResultCell({ match, label }: { match: boolean; label: string }) {
-  return (
-    <Text
-      fw={500}
-      size="sm"
-      style={{
-        display: "inline-block",
-        padding: "6px 10px",
-        borderRadius: 6,
-        lineHeight: 1.3,
-        backgroundColor: match ? "var(--mantine-color-green-light)" : "var(--mantine-color-red-light)",
-        color: match ? "var(--mantine-color-green-9)" : "var(--mantine-color-red-9)",
-      }}
-    >
-      {label}
-    </Text>
-  );
-}
-
-function LanguageLineage({ match }: { match: LanguageMatch }) {
-  return (
-    <Stack gap={6} align="flex-start">
-      {match.lineage.map((level, i) => (
-        <ResultCell key={i} match={i < match.sharedDepth} label={level} />
-      ))}
-    </Stack>
-  );
-}
+import { LanguageLineage } from "./LanguageLineage";
+import { ResultCell } from "./ResultCell";
 
 export function GuessTable({ guesses }: { guesses: GuessFeedback[] }) {
   // Once a category has been confirmed (matched by some earlier guess), it

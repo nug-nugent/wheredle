@@ -2,18 +2,19 @@ import type { Country } from "../data/country";
 import { FLAG_ZOOM } from "./flagLayout";
 import { pickFlagSegmentFocal } from "./flagSampler";
 
-// Q1 and Q2 always reveal in this fixed order. After that the player picks
-// freely among the three ChoosableHintType hints; once all three have been
-// used, fullFlag is forced as the final hint. 6 hints total = 6 guesses max.
+// Clue 1, Clue 2, and Clue 3 always reveal in this fixed order. After that
+// the player picks freely among the three ChoosableHintType hints; once all
+// three have been used, fullFlag is forced as the final hint. 7 hints total
+// = 7 guesses max.
 export type ChoosableHintType = "continent" | "population" | "language";
-export type HintType = "letter" | "flagSegment" | ChoosableHintType | "fullFlag";
+export type HintType = "letter" | "flagSegment" | "borderOutline" | ChoosableHintType | "fullFlag";
 
 export const CHOOSABLE_HINTS: readonly ChoosableHintType[] = [
   "continent",
   "population",
   "language",
 ];
-export const MAX_GUESSES = 6;
+export const MAX_GUESSES = 7;
 
 export interface LetterHint {
   type: "letter";
@@ -25,7 +26,7 @@ export interface FlagSegmentHint {
   focalY: number; // 0-100
 }
 export interface SimpleHint {
-  type: "continent" | "population" | "language" | "fullFlag";
+  type: "continent" | "population" | "language" | "fullFlag" | "borderOutline";
 }
 export type Hint = LetterHint | FlagSegmentHint | SimpleHint;
 
@@ -83,6 +84,7 @@ function revealedTypes(state: GameState): HintType[] {
 export function planNextHint(state: GameState): NextHintPlan {
   const revealed = revealedTypes(state);
   if (!revealed.includes("flagSegment")) return { kind: "auto", hint: "flagSegment" };
+  if (!revealed.includes("borderOutline")) return { kind: "auto", hint: "borderOutline" };
 
   const remaining = CHOOSABLE_HINTS.filter((h) => !revealed.includes(h));
   if (remaining.length > 1) return { kind: "choice", options: remaining };

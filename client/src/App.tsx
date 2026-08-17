@@ -1,6 +1,7 @@
 import { Badge, Button, Card, Container, Group, Stack, Text, Title } from "@mantine/core";
 import { ChoicePrompt } from "./game/ChoicePrompt";
 import { CountryReveal } from "./game/CountryReveal";
+import { MAX_GUESSES } from "./game/engine";
 import { GuessInput } from "./game/GuessInput";
 import { HintPanel } from "./game/HintPanel";
 import { useGame } from "./game/useGame";
@@ -42,7 +43,7 @@ export default function App() {
             {state.guesses.length > 0 && (
               <Stack gap={4}>
                 <Text size="xs" c="dimmed">
-                  Guesses ({state.guesses.length}/6)
+                  Guesses ({state.guesses.length}/{MAX_GUESSES})
                 </Text>
                 <Group gap="xs" wrap="wrap">
                   {state.guesses.map((g, i) => (
