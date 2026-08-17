@@ -59,14 +59,12 @@ export function startAlexGame(target: Country): AlexGameState {
   return { target, guesses: [], status: "playing" };
 }
 
-export function submitAlexGuess(state: AlexGameState, guessed: Country): AlexGameState {
-  if (state.status !== "playing") return state;
-  if (state.guesses.some((g) => g.country.cca3 === guessed.cca3)) return state;
-
-  const correct = guessed.cca3 === state.target.cca3;
-  const feedback: GuessFeedback = {
+// Split from the old submitAlexGuess so the UI can compute a guess's result
+// and hold it back for the reveal ceremony before it's added to game state.
+export function computeGuessFeedback(state: AlexGameState, guessed: Country): GuessFeedback {
+  return {
     country: guessed,
-    correct,
+    correct: guessed.cca3 === state.target.cca3,
     sameContinent: guessed.continent === state.target.continent,
     populationTertile: populationTertileOf(guessed),
     samePopulationTertile: populationTertileOf(guessed) === populationTertileOf(state.target),
@@ -83,10 +81,15 @@ export function submitAlexGuess(state: AlexGameState, guessed: Country): AlexGam
       guessed.currencies.some((c) => state.target.currencies.includes(c)),
     languageMatch: bestLanguageMatch(guessed.languages, state.target.languages),
   };
+}
+
+export function applyGuessFeedback(state: AlexGameState, feedback: GuessFeedback): AlexGameState {
+  if (state.status !== "playing") return state;
+  if (state.guesses.some((g) => g.country.cca3 === feedback.country.cca3)) return state;
 
   return {
     ...state,
     guesses: [feedback, ...state.guesses],
-    status: correct ? "won" : "playing",
+    status: feedback.correct ? "won" : "playing",
   };
 }

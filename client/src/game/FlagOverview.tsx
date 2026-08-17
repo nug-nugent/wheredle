@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
 
 const HIGHLIGHT_COLOR = "var(--mantine-color-blue-6)";
@@ -46,6 +47,9 @@ export function FlagOverview({
         <img
           src={flagUrl}
           alt=""
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          onContextMenu={(e) => e.preventDefault()}
           style={{
             position: "absolute",
             width: FLAG_CROP_SIZE.width,
@@ -53,7 +57,9 @@ export function FlagOverview({
             maxWidth: "none",
             left: -boxLeftPx,
             top: -boxTopPx,
-          }}
+            userSelect: "none",
+            WebkitUserDrag: "none",
+          } as CSSProperties}
         />
       </div>
     </div>

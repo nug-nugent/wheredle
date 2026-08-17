@@ -1,5 +1,6 @@
 import { Badge, Group, Image, Stack, Text } from "@mantine/core";
 import type { Country } from "../data/country";
+import { BorderOutline } from "./BorderOutline";
 import type { Hint } from "./engine";
 import { FlagOverview } from "./FlagOverview";
 import { FlagSegment } from "./FlagSegment";
@@ -7,6 +8,7 @@ import { FlagSegment } from "./FlagSegment";
 const LABELS: Record<Hint["type"], string> = {
   letter: "Contains the letter",
   flagSegment: "Flag segment",
+  borderOutline: "Border outline",
   continent: "Continent",
   population: "Population",
   language: "Language(s)",
@@ -24,6 +26,8 @@ function HintValue({ hint, target }: { hint: Hint; target: Country }) {
           <FlagSegment flagUrl={target.flagUrl} focalX={hint.focalX} focalY={hint.focalY} />
         </Group>
       );
+    case "borderOutline":
+      return <BorderOutline cca2={target.cca2} />;
     case "continent":
       return <Badge>{target.continent}</Badge>;
     case "population":
@@ -43,7 +47,7 @@ export function HintPanel({ hints, target }: { hints: Hint[]; target: Country })
       {hints.map((hint, i) => (
         <Stack key={i} gap={4} align="flex-start">
           <Text size="xs" c="dimmed">
-            Q{i + 1} — {LABELS[hint.type]}
+            Clue {i + 1} — {LABELS[hint.type]}
           </Text>
           <HintValue hint={hint} target={target} />
         </Stack>
