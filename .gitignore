@@ -7,6 +7,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+# Visual Studio local cache/index (not in the template this file is based on)
+.vs/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

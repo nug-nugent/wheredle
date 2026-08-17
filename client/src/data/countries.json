@@ -1,0 +1,4033 @@
+[
+  {
+    "cca2": "AF",
+    "cca3": "AFG",
+    "name": "Afghanistan",
+    "continent": "Asia",
+    "capital": "Kabul",
+    "population": 37172386,
+    "area": 652230,
+    "languages": [
+      "Dari",
+      "Pashto",
+      "Turkmen"
+    ],
+    "currencies": [
+      "Afghan afghani"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/af.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Islamic Emirate",
+    "borderCount": 6
+  },
+  {
+    "cca2": "AL",
+    "cca3": "ALB",
+    "name": "Albania",
+    "continent": "Europe",
+    "capital": "Tirana",
+    "population": 2866376,
+    "area": 28748,
+    "languages": [
+      "Albanian"
+    ],
+    "currencies": [
+      "Albanian lek"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/al.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "DZ",
+    "cca3": "DZA",
+    "name": "Algeria",
+    "continent": "Africa",
+    "capital": "Algiers",
+    "population": 42228429,
+    "area": 2381741,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Algerian dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dz.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "AD",
+    "cca3": "AND",
+    "name": "Andorra",
+    "continent": "Europe",
+    "capital": "Andorra la Vella",
+    "population": 77006,
+    "area": 468,
+    "languages": [
+      "Catalan"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ad.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Parliamentary Coprincipality",
+    "borderCount": 2
+  },
+  {
+    "cca2": "AO",
+    "cca3": "AGO",
+    "name": "Angola",
+    "continent": "Africa",
+    "capital": "Luanda",
+    "population": 30809762,
+    "area": 1246700,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Angolan kwanza"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ao.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "AG",
+    "cca3": "ATG",
+    "name": "Antigua and Barbuda",
+    "continent": "Americas",
+    "capital": "Saint John's",
+    "population": 96286,
+    "area": 442,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ag.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "AR",
+    "cca3": "ARG",
+    "name": "Argentina",
+    "continent": "Americas",
+    "capital": "Buenos Aires",
+    "population": 44494502,
+    "area": 2780400,
+    "languages": [
+      "Guaraní",
+      "Spanish"
+    ],
+    "currencies": [
+      "Argentine peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ar.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "AM",
+    "cca3": "ARM",
+    "name": "Armenia",
+    "continent": "Asia",
+    "capital": "Yerevan",
+    "population": 2951776,
+    "area": 29743,
+    "languages": [
+      "Armenian"
+    ],
+    "currencies": [
+      "Armenian dram"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/am.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "AU",
+    "cca3": "AUS",
+    "name": "Australia",
+    "continent": "Oceania",
+    "capital": "Canberra",
+    "population": 24982688,
+    "area": 7692024,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Australian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/au.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federation Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "AT",
+    "cca3": "AUT",
+    "name": "Austria",
+    "continent": "Europe",
+    "capital": "Vienna",
+    "population": 8840521,
+    "area": 83871,
+    "languages": [
+      "Austro-Bavarian German"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/at.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "AZ",
+    "cca3": "AZE",
+    "name": "Azerbaijan",
+    "continent": "Asia",
+    "capital": "Baku",
+    "population": 9939800,
+    "area": 86600,
+    "languages": [
+      "Azerbaijani",
+      "Russian"
+    ],
+    "currencies": [
+      "Azerbaijani manat"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/az.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Federal Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "BS",
+    "cca3": "BHS",
+    "name": "Bahamas",
+    "continent": "Americas",
+    "capital": "Nassau",
+    "population": 385640,
+    "area": 13943,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Bahamian dollar",
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bs.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "BH",
+    "cca3": "BHR",
+    "name": "Bahrain",
+    "continent": "Asia",
+    "capital": "Manama",
+    "population": 1569439,
+    "area": 765,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Bahraini dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bh.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Monarchy (Emirate)",
+    "borderCount": 0
+  },
+  {
+    "cca2": "BD",
+    "cca3": "BGD",
+    "name": "Bangladesh",
+    "continent": "Asia",
+    "capital": "Dhaka",
+    "population": 161356039,
+    "area": 147570,
+    "languages": [
+      "Bengali"
+    ],
+    "currencies": [
+      "Bangladeshi taka"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bd.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "BB",
+    "cca3": "BRB",
+    "name": "Barbados",
+    "continent": "Americas",
+    "capital": "Bridgetown",
+    "population": 286641,
+    "area": 430,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Barbadian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bb.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "BY",
+    "cca3": "BLR",
+    "name": "Belarus",
+    "continent": "Europe",
+    "capital": "Minsk",
+    "population": 9483499,
+    "area": 207600,
+    "languages": [
+      "Belarusian",
+      "Russian"
+    ],
+    "currencies": [
+      "Belarusian ruble"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/by.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "BE",
+    "cca3": "BEL",
+    "name": "Belgium",
+    "continent": "Europe",
+    "capital": "Brussels",
+    "population": 11433256,
+    "area": 30528,
+    "languages": [
+      "German",
+      "French",
+      "Dutch"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/be.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federation Constitutional Monarchy",
+    "borderCount": 4
+  },
+  {
+    "cca2": "BZ",
+    "cca3": "BLZ",
+    "name": "Belize",
+    "continent": "Americas",
+    "capital": "Belmopan",
+    "population": 383071,
+    "area": 22966,
+    "languages": [
+      "Belizean Creole",
+      "English",
+      "Spanish"
+    ],
+    "currencies": [
+      "Belize dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bz.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "BJ",
+    "cca3": "BEN",
+    "name": "Benin",
+    "continent": "Africa",
+    "capital": "Porto-Novo",
+    "population": 11485048,
+    "area": 112622,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bj.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "BT",
+    "cca3": "BTN",
+    "name": "Bhutan",
+    "continent": "Asia",
+    "capital": "Thimphu",
+    "population": 754394,
+    "area": 38394,
+    "languages": [
+      "Dzongkha"
+    ],
+    "currencies": [
+      "Bhutanese ngultrum",
+      "Indian rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bt.svg",
+    "flagColorCount": 5,
+    "religion": "Buddhism",
+    "governmentType": "Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "BO",
+    "cca3": "BOL",
+    "name": "Bolivia",
+    "continent": "Americas",
+    "capital": "Sucre",
+    "population": 11353142,
+    "area": 1098581,
+    "languages": [
+      "Aymara",
+      "Guaraní",
+      "Quechua",
+      "Spanish"
+    ],
+    "currencies": [
+      "Bolivian boliviano"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bo.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "BA",
+    "cca3": "BIH",
+    "name": "Bosnia and Herzegovina",
+    "continent": "Europe",
+    "capital": "Sarajevo",
+    "population": 3323929,
+    "area": 51209,
+    "languages": [
+      "Bosnian",
+      "Croatian",
+      "Serbian"
+    ],
+    "currencies": [
+      "Bosnia and Herzegovina convertible mark"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ba.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "BW",
+    "cca3": "BWA",
+    "name": "Botswana",
+    "continent": "Africa",
+    "capital": "Gaborone",
+    "population": 2254126,
+    "area": 582000,
+    "languages": [
+      "English",
+      "Tswana"
+    ],
+    "currencies": [
+      "Botswana pula"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bw.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "BR",
+    "cca3": "BRA",
+    "name": "Brazil",
+    "continent": "Americas",
+    "capital": "Brasília",
+    "population": 209469333,
+    "area": 8515767,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Brazilian real"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/br.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 10
+  },
+  {
+    "cca2": "BN",
+    "cca3": "BRN",
+    "name": "Brunei",
+    "continent": "Asia",
+    "capital": "Bandar Seri Begawan",
+    "population": 428962,
+    "area": 5765,
+    "languages": [
+      "Malay"
+    ],
+    "currencies": [
+      "Brunei dollar",
+      "Singapore dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bn.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Monarchy (Sultanate)",
+    "borderCount": 1
+  },
+  {
+    "cca2": "BG",
+    "cca3": "BGR",
+    "name": "Bulgaria",
+    "continent": "Europe",
+    "capital": "Sofia",
+    "population": 7025037,
+    "area": 110879,
+    "languages": [
+      "Bulgarian"
+    ],
+    "currencies": [
+      "Bulgarian lev"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bg.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "BF",
+    "cca3": "BFA",
+    "name": "Burkina Faso",
+    "continent": "Africa",
+    "capital": "Ouagadougou",
+    "population": 19751535,
+    "area": 272967,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bf.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "BI",
+    "cca3": "BDI",
+    "name": "Burundi",
+    "continent": "Africa",
+    "capital": "Gitega",
+    "population": 11175378,
+    "area": 27834,
+    "languages": [
+      "French",
+      "Kirundi"
+    ],
+    "currencies": [
+      "Burundian franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bi.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "KH",
+    "cca3": "KHM",
+    "name": "Cambodia",
+    "continent": "Asia",
+    "capital": "Phnom Penh",
+    "population": 16249798,
+    "area": 181035,
+    "languages": [
+      "Khmer"
+    ],
+    "currencies": [
+      "Cambodian riel",
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kh.svg",
+    "flagColorCount": 3,
+    "religion": "Buddhism",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 3
+  },
+  {
+    "cca2": "CM",
+    "cca3": "CMR",
+    "name": "Cameroon",
+    "continent": "Africa",
+    "capital": "Yaoundé",
+    "population": 25216237,
+    "area": 475442,
+    "languages": [
+      "English",
+      "French"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cm.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "CA",
+    "cca3": "CAN",
+    "name": "Canada",
+    "continent": "Americas",
+    "capital": "Ottawa",
+    "population": 37057765,
+    "area": 9984670,
+    "languages": [
+      "English",
+      "French"
+    ],
+    "currencies": [
+      "Canadian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ca.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy, Federation",
+    "borderCount": 1
+  },
+  {
+    "cca2": "CV",
+    "cca3": "CPV",
+    "name": "Cape Verde",
+    "continent": "Africa",
+    "capital": "Praia",
+    "population": 555987,
+    "area": 4033,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Cape Verdean escudo"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cv.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "CF",
+    "cca3": "CAF",
+    "name": "Central African Republic",
+    "continent": "Africa",
+    "capital": "Bangui",
+    "population": 4666377,
+    "area": 622984,
+    "languages": [
+      "French",
+      "Sango"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cf.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "TD",
+    "cca3": "TCD",
+    "name": "Chad",
+    "continent": "Africa",
+    "capital": "N'Djamena",
+    "population": 15477751,
+    "area": 1284000,
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/td.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "CL",
+    "cca3": "CHL",
+    "name": "Chile",
+    "continent": "Americas",
+    "capital": "Santiago",
+    "population": 18729160,
+    "area": 756102,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Chilean peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cl.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "CN",
+    "cca3": "CHN",
+    "name": "China",
+    "continent": "Asia",
+    "capital": "Beijing",
+    "population": 1392730000,
+    "area": 9706961,
+    "languages": [
+      "Chinese"
+    ],
+    "currencies": [
+      "Chinese yuan"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cn.svg",
+    "flagColorCount": 2,
+    "religion": null,
+    "governmentType": "People's Republic",
+    "borderCount": 16
+  },
+  {
+    "cca2": "CO",
+    "cca3": "COL",
+    "name": "Colombia",
+    "continent": "Americas",
+    "capital": "Bogotá",
+    "population": 49648685,
+    "area": 1141748,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Colombian peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/co.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "KM",
+    "cca3": "COM",
+    "name": "Comoros",
+    "continent": "Africa",
+    "capital": "Moroni",
+    "population": 832322,
+    "area": 1862,
+    "languages": [
+      "Arabic",
+      "French",
+      "Comorian"
+    ],
+    "currencies": [
+      "Comorian franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/km.svg",
+    "flagColorCount": 5,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "CG",
+    "cca3": "COG",
+    "name": "Congo",
+    "continent": "Africa",
+    "capital": "Brazzaville",
+    "population": 5244363,
+    "area": 342000,
+    "languages": [
+      "French",
+      "Kikongo",
+      "Lingala"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cg.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "CR",
+    "cca3": "CRI",
+    "name": "Costa Rica",
+    "continent": "Americas",
+    "capital": "San José",
+    "population": 4999441,
+    "area": 51100,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Costa Rican colón"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cr.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "HR",
+    "cca3": "HRV",
+    "name": "Croatia",
+    "continent": "Europe",
+    "capital": "Zagreb",
+    "population": 4087843,
+    "area": 56594,
+    "languages": [
+      "Croatian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hr.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "CU",
+    "cca3": "CUB",
+    "name": "Cuba",
+    "continent": "Americas",
+    "capital": "Havana",
+    "population": 11338138,
+    "area": 109884,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Cuban convertible peso",
+      "Cuban peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cu.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Socialistic Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "CY",
+    "cca3": "CYP",
+    "name": "Cyprus",
+    "continent": "Europe",
+    "capital": "Nicosia",
+    "population": 1189265,
+    "area": 9251,
+    "languages": [
+      "Greek",
+      "Turkish"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cy.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "CZ",
+    "cca3": "CZE",
+    "name": "Czechia",
+    "continent": "Europe",
+    "capital": "Prague",
+    "population": 10629928,
+    "area": 78865,
+    "languages": [
+      "Czech",
+      "Slovak"
+    ],
+    "currencies": [
+      "Czech koruna"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cz.svg",
+    "flagColorCount": 3,
+    "religion": null,
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "DK",
+    "cca3": "DNK",
+    "name": "Denmark",
+    "continent": "Europe",
+    "capital": "Copenhagen",
+    "population": 5793636,
+    "area": 43094,
+    "languages": [
+      "Danish"
+    ],
+    "currencies": [
+      "Danish krone"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dk.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "DJ",
+    "cca3": "DJI",
+    "name": "Djibouti",
+    "continent": "Africa",
+    "capital": "Djibouti",
+    "population": 958920,
+    "area": 23200,
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "currencies": [
+      "Djiboutian franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dj.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "DM",
+    "cca3": "DMA",
+    "name": "Dominica",
+    "continent": "Americas",
+    "capital": "Roseau",
+    "population": 71625,
+    "area": 751,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dm.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "DO",
+    "cca3": "DOM",
+    "name": "Dominican Republic",
+    "continent": "Americas",
+    "capital": "Santo Domingo",
+    "population": 10627165,
+    "area": 48671,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Dominican peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/do.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "CD",
+    "cca3": "COD",
+    "name": "DR Congo",
+    "continent": "Africa",
+    "capital": "Kinshasa",
+    "population": 84068091,
+    "area": 2344858,
+    "languages": [
+      "French",
+      "Kikongo",
+      "Lingala",
+      "Tshiluba",
+      "Swahili"
+    ],
+    "currencies": [
+      "Congolese franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cd.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 9
+  },
+  {
+    "cca2": "EC",
+    "cca3": "ECU",
+    "name": "Ecuador",
+    "continent": "Americas",
+    "capital": "Quito",
+    "population": 17084357,
+    "area": 276841,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ec.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "EG",
+    "cca3": "EGY",
+    "name": "Egypt",
+    "continent": "Africa",
+    "capital": "Cairo",
+    "population": 98423595,
+    "area": 1002450,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Egyptian pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/eg.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "SV",
+    "cca3": "SLV",
+    "name": "El Salvador",
+    "continent": "Americas",
+    "capital": "San Salvador",
+    "population": 6420744,
+    "area": 21041,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sv.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "GQ",
+    "cca3": "GNQ",
+    "name": "Equatorial Guinea",
+    "continent": "Africa",
+    "capital": "Malabo",
+    "population": 1308974,
+    "area": 28051,
+    "languages": [
+      "French",
+      "Portuguese",
+      "Spanish"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gq.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "ER",
+    "cca3": "ERI",
+    "name": "Eritrea",
+    "continent": "Africa",
+    "capital": "Asmara",
+    "population": 6213972,
+    "area": 117600,
+    "languages": [
+      "Arabic",
+      "English",
+      "Tigrinya"
+    ],
+    "currencies": [
+      "Eritrean nakfa"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/er.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "EE",
+    "cca3": "EST",
+    "name": "Estonia",
+    "continent": "Europe",
+    "capital": "Tallinn",
+    "population": 1321977,
+    "area": 45227,
+    "languages": [
+      "Estonian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ee.svg",
+    "flagColorCount": 3,
+    "religion": null,
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "SZ",
+    "cca3": "SWZ",
+    "name": "Eswatini",
+    "continent": "Africa",
+    "capital": "Lobamba",
+    "population": 1136191,
+    "area": 17364,
+    "languages": [
+      "English",
+      "Swazi"
+    ],
+    "currencies": [
+      "Swazi lilangeni",
+      "South African rand"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sz.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "ET",
+    "cca3": "ETH",
+    "name": "Ethiopia",
+    "continent": "Africa",
+    "capital": "Addis Ababa",
+    "population": 109224559,
+    "area": 1104300,
+    "languages": [
+      "Amharic"
+    ],
+    "currencies": [
+      "Ethiopian birr"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/et.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "FJ",
+    "cca3": "FJI",
+    "name": "Fiji",
+    "continent": "Oceania",
+    "capital": "Suva",
+    "population": 883483,
+    "area": 18272,
+    "languages": [
+      "English",
+      "Fijian",
+      "Fiji Hindi"
+    ],
+    "currencies": [
+      "Fijian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fj.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "FI",
+    "cca3": "FIN",
+    "name": "Finland",
+    "continent": "Europe",
+    "capital": "Helsinki",
+    "population": 5515525,
+    "area": 338424,
+    "languages": [
+      "Finnish",
+      "Swedish"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fi.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "FR",
+    "cca3": "FRA",
+    "name": "France",
+    "continent": "Europe",
+    "capital": "Paris",
+    "population": 66977107,
+    "area": 551695,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fr.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "GA",
+    "cca3": "GAB",
+    "name": "Gabon",
+    "continent": "Africa",
+    "capital": "Libreville",
+    "population": 2119275,
+    "area": 267668,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "Central African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ga.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "GM",
+    "cca3": "GMB",
+    "name": "Gambia",
+    "continent": "Africa",
+    "capital": "Banjul",
+    "population": 2280102,
+    "area": 10689,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "dalasi"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gm.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "GE",
+    "cca3": "GEO",
+    "name": "Georgia",
+    "continent": "Asia",
+    "capital": "Tbilisi",
+    "population": 3726549,
+    "area": 69700,
+    "languages": [
+      "Georgian"
+    ],
+    "currencies": [
+      "lari"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ge.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "DE",
+    "cca3": "DEU",
+    "name": "Germany",
+    "continent": "Europe",
+    "capital": "Berlin",
+    "population": 82905782,
+    "area": 357114,
+    "languages": [
+      "German"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/de.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 9
+  },
+  {
+    "cca2": "GH",
+    "cca3": "GHA",
+    "name": "Ghana",
+    "continent": "Africa",
+    "capital": "Accra",
+    "population": 29767108,
+    "area": 238533,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Ghanaian cedi"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gh.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "GR",
+    "cca3": "GRC",
+    "name": "Greece",
+    "continent": "Europe",
+    "capital": "Athens",
+    "population": 10731726,
+    "area": 131990,
+    "languages": [
+      "Greek"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gr.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "GD",
+    "cca3": "GRD",
+    "name": "Grenada",
+    "continent": "Americas",
+    "capital": "St. George's",
+    "population": 111454,
+    "area": 344,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gd.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "GT",
+    "cca3": "GTM",
+    "name": "Guatemala",
+    "continent": "Americas",
+    "capital": "Guatemala City",
+    "population": 17247807,
+    "area": 108889,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Guatemalan quetzal"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gt.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "GN",
+    "cca3": "GIN",
+    "name": "Guinea",
+    "continent": "Africa",
+    "capital": "Conakry",
+    "population": 12414318,
+    "area": 245857,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "Guinean franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gn.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "GW",
+    "cca3": "GNB",
+    "name": "Guinea-Bissau",
+    "continent": "Africa",
+    "capital": "Bissau",
+    "population": 1874309,
+    "area": 36125,
+    "languages": [
+      "Portuguese",
+      "Upper Guinea Creole"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gw.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "GY",
+    "cca3": "GUY",
+    "name": "Guyana",
+    "continent": "Americas",
+    "capital": "Georgetown",
+    "population": 779004,
+    "area": 214969,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Guyanese dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gy.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "HT",
+    "cca3": "HTI",
+    "name": "Haiti",
+    "continent": "Americas",
+    "capital": "Port-au-Prince",
+    "population": 11123176,
+    "area": 27750,
+    "languages": [
+      "French",
+      "Haitian Creole"
+    ],
+    "currencies": [
+      "Haitian gourde"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ht.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "HN",
+    "cca3": "HND",
+    "name": "Honduras",
+    "continent": "Americas",
+    "capital": "Tegucigalpa",
+    "population": 9587522,
+    "area": 112492,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Honduran lempira"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hn.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "HU",
+    "cca3": "HUN",
+    "name": "Hungary",
+    "continent": "Europe",
+    "capital": "Budapest",
+    "population": 9775564,
+    "area": 93028,
+    "languages": [
+      "Hungarian"
+    ],
+    "currencies": [
+      "Hungarian forint"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hu.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "IS",
+    "cca3": "ISL",
+    "name": "Iceland",
+    "continent": "Europe",
+    "capital": "Reykjavik",
+    "population": 352721,
+    "area": 103000,
+    "languages": [
+      "Icelandic"
+    ],
+    "currencies": [
+      "Icelandic króna"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/is.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "IN",
+    "cca3": "IND",
+    "name": "India",
+    "continent": "Asia",
+    "capital": "New Delhi",
+    "population": 1352617328,
+    "area": 3287590,
+    "languages": [
+      "English",
+      "Hindi",
+      "Tamil"
+    ],
+    "currencies": [
+      "Indian rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/in.svg",
+    "flagColorCount": 3,
+    "religion": "Hinduism",
+    "governmentType": "Federal Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "ID",
+    "cca3": "IDN",
+    "name": "Indonesia",
+    "continent": "Asia",
+    "capital": "Jakarta",
+    "population": 267663435,
+    "area": 1904569,
+    "languages": [
+      "Indonesian"
+    ],
+    "currencies": [
+      "Indonesian rupiah"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/id.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "IR",
+    "cca3": "IRN",
+    "name": "Iran",
+    "continent": "Asia",
+    "capital": "Tehran",
+    "population": 81800269,
+    "area": 1648195,
+    "languages": [
+      "Persian (Farsi)"
+    ],
+    "currencies": [
+      "Iranian rial"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ir.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Islamic Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "IQ",
+    "cca3": "IRQ",
+    "name": "Iraq",
+    "continent": "Asia",
+    "capital": "Baghdad",
+    "population": 38433600,
+    "area": 438317,
+    "languages": [
+      "Arabic",
+      "Aramaic",
+      "Sorani"
+    ],
+    "currencies": [
+      "Iraqi dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/iq.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "IE",
+    "cca3": "IRL",
+    "name": "Ireland",
+    "continent": "Europe",
+    "capital": "Dublin",
+    "population": 4867309,
+    "area": 70273,
+    "languages": [
+      "English",
+      "Irish"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ie.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "IL",
+    "cca3": "ISR",
+    "name": "Israel",
+    "continent": "Asia",
+    "capital": "Jerusalem",
+    "population": 8882800,
+    "area": 20770,
+    "languages": [
+      "Arabic",
+      "Hebrew"
+    ],
+    "currencies": [
+      "Israeli new shekel"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/il.svg",
+    "flagColorCount": 2,
+    "religion": "Judaism",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "IT",
+    "cca3": "ITA",
+    "name": "Italy",
+    "continent": "Europe",
+    "capital": "Rome",
+    "population": 60421760,
+    "area": 301336,
+    "languages": [
+      "Italian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/it.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "CI",
+    "cca3": "CIV",
+    "name": "Ivory Coast",
+    "continent": "Africa",
+    "capital": "Yamoussoukro",
+    "population": 25069229,
+    "area": 322463,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ci.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "JM",
+    "cca3": "JAM",
+    "name": "Jamaica",
+    "continent": "Americas",
+    "capital": "Kingston",
+    "population": 2934855,
+    "area": 10991,
+    "languages": [
+      "English",
+      "Jamaican Patois"
+    ],
+    "currencies": [
+      "Jamaican dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jm.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "JP",
+    "cca3": "JPN",
+    "name": "Japan",
+    "continent": "Asia",
+    "capital": "Tokyo",
+    "population": 126529100,
+    "area": 377930,
+    "languages": [
+      "Japanese"
+    ],
+    "currencies": [
+      "Japanese yen"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jp.svg",
+    "flagColorCount": 2,
+    "religion": null,
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "JO",
+    "cca3": "JOR",
+    "name": "Jordan",
+    "continent": "Asia",
+    "capital": "Amman",
+    "population": 9956011,
+    "area": 89342,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Jordanian dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jo.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 5
+  },
+  {
+    "cca2": "KZ",
+    "cca3": "KAZ",
+    "name": "Kazakhstan",
+    "continent": "Asia",
+    "capital": "Astana",
+    "population": 18272430,
+    "area": 2724900,
+    "languages": [
+      "Kazakh",
+      "Russian"
+    ],
+    "currencies": [
+      "Kazakhstani tenge"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kz.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "KE",
+    "cca3": "KEN",
+    "name": "Kenya",
+    "continent": "Africa",
+    "capital": "Nairobi",
+    "population": 51393010,
+    "area": 580367,
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "currencies": [
+      "Kenyan shilling"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ke.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "KI",
+    "cca3": "KIR",
+    "name": "Kiribati",
+    "continent": "Oceania",
+    "capital": "South Tarawa",
+    "population": 115847,
+    "area": 811,
+    "languages": [
+      "English",
+      "Gilbertese"
+    ],
+    "currencies": [
+      "Australian dollar",
+      "Kiribati dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ki.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "KW",
+    "cca3": "KWT",
+    "name": "Kuwait",
+    "continent": "Asia",
+    "capital": "Kuwait City",
+    "population": 4137309,
+    "area": 17818,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Kuwaiti dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kw.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Constitutional Monarchy (Emirate)",
+    "borderCount": 2
+  },
+  {
+    "cca2": "KG",
+    "cca3": "KGZ",
+    "name": "Kyrgyzstan",
+    "continent": "Asia",
+    "capital": "Bishkek",
+    "population": 6322800,
+    "area": 199951,
+    "languages": [
+      "Kyrgyz",
+      "Russian"
+    ],
+    "currencies": [
+      "Kyrgyzstani som"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kg.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "LA",
+    "cca3": "LAO",
+    "name": "Laos",
+    "continent": "Asia",
+    "capital": "Vientiane",
+    "population": 7061507,
+    "area": 236800,
+    "languages": [
+      "Lao"
+    ],
+    "currencies": [
+      "Lao kip"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/la.svg",
+    "flagColorCount": 3,
+    "religion": "Buddhism",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "LV",
+    "cca3": "LVA",
+    "name": "Latvia",
+    "continent": "Europe",
+    "capital": "Riga",
+    "population": 1927174,
+    "area": 64559,
+    "languages": [
+      "Latvian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lv.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "LB",
+    "cca3": "LBN",
+    "name": "Lebanon",
+    "continent": "Asia",
+    "capital": "Beirut",
+    "population": 6848925,
+    "area": 10452,
+    "languages": [
+      "Arabic",
+      "French"
+    ],
+    "currencies": [
+      "Lebanese pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lb.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "LS",
+    "cca3": "LSO",
+    "name": "Lesotho",
+    "continent": "Africa",
+    "capital": "Maseru",
+    "population": 2108132,
+    "area": 30355,
+    "languages": [
+      "English",
+      "Sotho"
+    ],
+    "currencies": [
+      "Lesotho loti",
+      "South African rand"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ls.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "LR",
+    "cca3": "LBR",
+    "name": "Liberia",
+    "continent": "Africa",
+    "capital": "Monrovia",
+    "population": 4818977,
+    "area": 111369,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Liberian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lr.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "LY",
+    "cca3": "LBY",
+    "name": "Libya",
+    "continent": "Africa",
+    "capital": "Tripoli",
+    "population": 6678567,
+    "area": 1759540,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Libyan dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ly.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Socialistic State",
+    "borderCount": 6
+  },
+  {
+    "cca2": "LI",
+    "cca3": "LIE",
+    "name": "Liechtenstein",
+    "continent": "Europe",
+    "capital": "Vaduz",
+    "population": 37910,
+    "area": 160,
+    "languages": [
+      "German"
+    ],
+    "currencies": [
+      "Swiss franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/li.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "LT",
+    "cca3": "LTU",
+    "name": "Lithuania",
+    "continent": "Europe",
+    "capital": "Vilnius",
+    "population": 2801543,
+    "area": 65300,
+    "languages": [
+      "Lithuanian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lt.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "LU",
+    "cca3": "LUX",
+    "name": "Luxembourg",
+    "continent": "Europe",
+    "capital": "Luxembourg",
+    "population": 607950,
+    "area": 2586,
+    "languages": [
+      "German",
+      "French",
+      "Luxembourgish"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lu.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 3
+  },
+  {
+    "cca2": "MG",
+    "cca3": "MDG",
+    "name": "Madagascar",
+    "continent": "Africa",
+    "capital": "Antananarivo",
+    "population": 26262368,
+    "area": 587041,
+    "languages": [
+      "French",
+      "Malagasy"
+    ],
+    "currencies": [
+      "Malagasy ariary"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mg.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "MW",
+    "cca3": "MWI",
+    "name": "Malawi",
+    "continent": "Africa",
+    "capital": "Lilongwe",
+    "population": 18143315,
+    "area": 118484,
+    "languages": [
+      "English",
+      "Chewa"
+    ],
+    "currencies": [
+      "Malawian kwacha"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mw.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "MY",
+    "cca3": "MYS",
+    "name": "Malaysia",
+    "continent": "Asia",
+    "capital": "Kuala Lumpur",
+    "population": 31528585,
+    "area": 330803,
+    "languages": [
+      "English",
+      "Malay"
+    ],
+    "currencies": [
+      "Malaysian ringgit"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/my.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 3
+  },
+  {
+    "cca2": "MV",
+    "cca3": "MDV",
+    "name": "Maldives",
+    "continent": "Asia",
+    "capital": "Malé",
+    "population": 515696,
+    "area": 300,
+    "languages": [
+      "Maldivian"
+    ],
+    "currencies": [
+      "Maldivian rufiyaa"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mv.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "ML",
+    "cca3": "MLI",
+    "name": "Mali",
+    "continent": "Africa",
+    "capital": "Bamako",
+    "population": 19077690,
+    "area": 1240192,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ml.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "MT",
+    "cca3": "MLT",
+    "name": "Malta",
+    "continent": "Europe",
+    "capital": "Valletta",
+    "population": 484630,
+    "area": 316,
+    "languages": [
+      "English",
+      "Maltese"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mt.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "MH",
+    "cca3": "MHL",
+    "name": "Marshall Islands",
+    "continent": "Oceania",
+    "capital": "Majuro",
+    "population": 58413,
+    "area": 181,
+    "languages": [
+      "English",
+      "Marshallese"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mh.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "MR",
+    "cca3": "MRT",
+    "name": "Mauritania",
+    "continent": "Africa",
+    "capital": "Nouakchott",
+    "population": 4403319,
+    "area": 1030700,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Mauritanian ouguiya"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mr.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "MU",
+    "cca3": "MUS",
+    "name": "Mauritius",
+    "continent": "Africa",
+    "capital": "Port Louis",
+    "population": 1265303,
+    "area": 2040,
+    "languages": [
+      "English",
+      "French",
+      "Mauritian Creole"
+    ],
+    "currencies": [
+      "Mauritian rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mu.svg",
+    "flagColorCount": 4,
+    "religion": "Hinduism",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "MX",
+    "cca3": "MEX",
+    "name": "Mexico",
+    "continent": "Americas",
+    "capital": "Mexico City",
+    "population": 126190788,
+    "area": 1964375,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Mexican peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mx.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "FM",
+    "cca3": "FSM",
+    "name": "Micronesia",
+    "continent": "Oceania",
+    "capital": "Palikir",
+    "population": 112640,
+    "area": 702,
+    "languages": [
+      "English"
+    ],
+    "currencies": [],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fm.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "MD",
+    "cca3": "MDA",
+    "name": "Moldova",
+    "continent": "Europe",
+    "capital": "Chișinău",
+    "population": 2706049,
+    "area": 33846,
+    "languages": [
+      "Moldavian"
+    ],
+    "currencies": [
+      "Moldovan leu"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/md.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "MC",
+    "cca3": "MCO",
+    "name": "Monaco",
+    "continent": "Europe",
+    "capital": "Monaco",
+    "population": 38682,
+    "area": 2.02,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mc.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "MN",
+    "cca3": "MNG",
+    "name": "Mongolia",
+    "continent": "Asia",
+    "capital": "Ulan Bator",
+    "population": 3170208,
+    "area": 1564110,
+    "languages": [
+      "Mongolian"
+    ],
+    "currencies": [
+      "Mongolian tögrög"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mn.svg",
+    "flagColorCount": 3,
+    "religion": "Buddhism",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "ME",
+    "cca3": "MNE",
+    "name": "Montenegro",
+    "continent": "Europe",
+    "capital": "Podgorica",
+    "population": 631219,
+    "area": 13812,
+    "languages": [
+      "Montenegrin"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/me.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": null,
+    "borderCount": 5
+  },
+  {
+    "cca2": "MA",
+    "cca3": "MAR",
+    "name": "Morocco",
+    "continent": "Africa",
+    "capital": "Rabat",
+    "population": 36029138,
+    "area": 446550,
+    "languages": [
+      "Arabic",
+      "Berber"
+    ],
+    "currencies": [
+      "Moroccan dirham"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ma.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 3
+  },
+  {
+    "cca2": "MZ",
+    "cca3": "MOZ",
+    "name": "Mozambique",
+    "continent": "Africa",
+    "capital": "Maputo",
+    "population": 29495962,
+    "area": 801590,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Mozambican metical"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mz.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "MM",
+    "cca3": "MMR",
+    "name": "Myanmar",
+    "continent": "Asia",
+    "capital": "Naypyidaw",
+    "population": 53708395,
+    "area": 676578,
+    "languages": [
+      "Burmese"
+    ],
+    "currencies": [
+      "Burmese kyat"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mm.svg",
+    "flagColorCount": 4,
+    "religion": "Buddhism",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "NA",
+    "cca3": "NAM",
+    "name": "Namibia",
+    "continent": "Africa",
+    "capital": "Windhoek",
+    "population": 2448255,
+    "area": 825615,
+    "languages": [
+      "Afrikaans",
+      "German",
+      "English",
+      "Herero",
+      "Khoekhoe",
+      "Kwangali",
+      "Lozi",
+      "Ndonga",
+      "Tswana"
+    ],
+    "currencies": [
+      "Namibian dollar",
+      "South African rand"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/na.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "NR",
+    "cca3": "NRU",
+    "name": "Nauru",
+    "continent": "Oceania",
+    "capital": "Yaren",
+    "population": 12704,
+    "area": 21,
+    "languages": [
+      "English",
+      "Nauru"
+    ],
+    "currencies": [
+      "Australian dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nr.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "NP",
+    "cca3": "NPL",
+    "name": "Nepal",
+    "continent": "Asia",
+    "capital": "Kathmandu",
+    "population": 28087871,
+    "area": 147181,
+    "languages": [
+      "Nepali"
+    ],
+    "currencies": [
+      "Nepalese rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/np.svg",
+    "flagColorCount": 3,
+    "religion": "Hinduism",
+    "governmentType": "Federal parliamentary republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "NL",
+    "cca3": "NLD",
+    "name": "Netherlands",
+    "continent": "Europe",
+    "capital": "Amsterdam",
+    "population": 17231624,
+    "area": 41850,
+    "languages": [
+      "Dutch"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nl.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "NZ",
+    "cca3": "NZL",
+    "name": "New Zealand",
+    "continent": "Oceania",
+    "capital": "Wellington",
+    "population": 4841000,
+    "area": 270467,
+    "languages": [
+      "English",
+      "Māori",
+      "New Zealand Sign Language"
+    ],
+    "currencies": [
+      "New Zealand dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nz.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "NI",
+    "cca3": "NIC",
+    "name": "Nicaragua",
+    "continent": "Americas",
+    "capital": "Managua",
+    "population": 6465513,
+    "area": 130373,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Nicaraguan córdoba"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ni.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "NE",
+    "cca3": "NER",
+    "name": "Niger",
+    "continent": "Africa",
+    "capital": "Niamey",
+    "population": 22442948,
+    "area": 1267000,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ne.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "NG",
+    "cca3": "NGA",
+    "name": "Nigeria",
+    "continent": "Africa",
+    "capital": "Abuja",
+    "population": 195874740,
+    "area": 923768,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Nigerian naira"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ng.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "KP",
+    "cca3": "PRK",
+    "name": "North Korea",
+    "continent": "Asia",
+    "capital": "Pyongyang",
+    "population": 25549819,
+    "area": 120538,
+    "languages": [
+      "Korean"
+    ],
+    "currencies": [
+      "North Korean won"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kp.svg",
+    "flagColorCount": 3,
+    "religion": null,
+    "governmentType": "Socialistic Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "MK",
+    "cca3": "MKD",
+    "name": "North Macedonia",
+    "continent": "Europe",
+    "capital": "Skopje",
+    "population": 2084367,
+    "area": 25713,
+    "languages": [
+      "Macedonian"
+    ],
+    "currencies": [
+      "denar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mk.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "NO",
+    "cca3": "NOR",
+    "name": "Norway",
+    "continent": "Europe",
+    "capital": "Oslo",
+    "population": 5311916,
+    "area": 323802,
+    "languages": [
+      "Norwegian Nynorsk",
+      "Norwegian Bokmål",
+      "Sami"
+    ],
+    "currencies": [
+      "Norwegian krone"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/no.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 3
+  },
+  {
+    "cca2": "OM",
+    "cca3": "OMN",
+    "name": "Oman",
+    "continent": "Asia",
+    "capital": "Muscat",
+    "population": 4829483,
+    "area": 309500,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Omani rial"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/om.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Monarchy (Sultanate)",
+    "borderCount": 3
+  },
+  {
+    "cca2": "PK",
+    "cca3": "PAK",
+    "name": "Pakistan",
+    "continent": "Asia",
+    "capital": "Islamabad",
+    "population": 212215030,
+    "area": 881912,
+    "languages": [
+      "English",
+      "Urdu"
+    ],
+    "currencies": [
+      "Pakistani rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pk.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "PW",
+    "cca3": "PLW",
+    "name": "Palau",
+    "continent": "Oceania",
+    "capital": "Ngerulmud",
+    "population": 17907,
+    "area": 459,
+    "languages": [
+      "English",
+      "Palauan"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pw.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "PA",
+    "cca3": "PAN",
+    "name": "Panama",
+    "continent": "Americas",
+    "capital": "Panama City",
+    "population": 4176873,
+    "area": 75417,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Panamanian balboa",
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pa.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "PG",
+    "cca3": "PNG",
+    "name": "Papua New Guinea",
+    "continent": "Oceania",
+    "capital": "Port Moresby",
+    "population": 8606316,
+    "area": 462840,
+    "languages": [
+      "English",
+      "Hiri Motu",
+      "Tok Pisin"
+    ],
+    "currencies": [
+      "Papua New Guinean kina"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pg.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "PY",
+    "cca3": "PRY",
+    "name": "Paraguay",
+    "continent": "Americas",
+    "capital": "Asunción",
+    "population": 6956071,
+    "area": 406752,
+    "languages": [
+      "Guaraní",
+      "Spanish"
+    ],
+    "currencies": [
+      "Paraguayan guaraní"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/py.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "PE",
+    "cca3": "PER",
+    "name": "Peru",
+    "continent": "Americas",
+    "capital": "Lima",
+    "population": 31989256,
+    "area": 1285216,
+    "languages": [
+      "Aymara",
+      "Quechua",
+      "Spanish"
+    ],
+    "currencies": [
+      "Peruvian sol"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pe.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "PH",
+    "cca3": "PHL",
+    "name": "Philippines",
+    "continent": "Asia",
+    "capital": "Manila",
+    "population": 106651922,
+    "area": 342353,
+    "languages": [
+      "English",
+      "Filipino"
+    ],
+    "currencies": [
+      "Philippine peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ph.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "PL",
+    "cca3": "POL",
+    "name": "Poland",
+    "continent": "Europe",
+    "capital": "Warsaw",
+    "population": 37974750,
+    "area": 312679,
+    "languages": [
+      "Polish"
+    ],
+    "currencies": [
+      "Polish złoty"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pl.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "PT",
+    "cca3": "PRT",
+    "name": "Portugal",
+    "continent": "Europe",
+    "capital": "Lisbon",
+    "population": 10283822,
+    "area": 92090,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pt.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "QA",
+    "cca3": "QAT",
+    "name": "Qatar",
+    "continent": "Asia",
+    "capital": "Doha",
+    "population": 2781677,
+    "area": 11586,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Qatari riyal"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/qa.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "RO",
+    "cca3": "ROU",
+    "name": "Romania",
+    "continent": "Europe",
+    "capital": "Bucharest",
+    "population": 19466145,
+    "area": 238391,
+    "languages": [
+      "Romanian"
+    ],
+    "currencies": [
+      "Romanian leu"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ro.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "RU",
+    "cca3": "RUS",
+    "name": "Russia",
+    "continent": "Europe",
+    "capital": "Moscow",
+    "population": 144478050,
+    "area": 17098242,
+    "languages": [
+      "Russian"
+    ],
+    "currencies": [
+      "Russian ruble"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ru.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 14
+  },
+  {
+    "cca2": "RW",
+    "cca3": "RWA",
+    "name": "Rwanda",
+    "continent": "Africa",
+    "capital": "Kigali",
+    "population": 12301939,
+    "area": 26338,
+    "languages": [
+      "English",
+      "French",
+      "Kinyarwanda"
+    ],
+    "currencies": [
+      "Rwandan franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/rw.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "KN",
+    "cca3": "KNA",
+    "name": "Saint Kitts and Nevis",
+    "continent": "Americas",
+    "capital": "Basseterre",
+    "population": 52441,
+    "area": 261,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kn.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "LC",
+    "cca3": "LCA",
+    "name": "Saint Lucia",
+    "continent": "Americas",
+    "capital": "Castries",
+    "population": 181889,
+    "area": 616,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lc.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "VC",
+    "cca3": "VCT",
+    "name": "Saint Vincent and the Grenadines",
+    "continent": "Americas",
+    "capital": "Kingstown",
+    "population": 110210,
+    "area": 389,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Eastern Caribbean dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vc.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "WS",
+    "cca3": "WSM",
+    "name": "Samoa",
+    "continent": "Oceania",
+    "capital": "Apia",
+    "population": 196130,
+    "area": 2842,
+    "languages": [
+      "English",
+      "Samoan"
+    ],
+    "currencies": [
+      "Samoan tālā"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ws.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Parliamentary Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "SM",
+    "cca3": "SMR",
+    "name": "San Marino",
+    "continent": "Europe",
+    "capital": "City of San Marino",
+    "population": 33785,
+    "area": 61,
+    "languages": [
+      "Italian"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sm.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "ST",
+    "cca3": "STP",
+    "name": "São Tomé and Príncipe",
+    "continent": "Africa",
+    "capital": "São Tomé",
+    "population": 211028,
+    "area": 964,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "São Tomé and Príncipe dobra"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/st.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "SA",
+    "cca3": "SAU",
+    "name": "Saudi Arabia",
+    "continent": "Asia",
+    "capital": "Riyadh",
+    "population": 33699947,
+    "area": 2149690,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Saudi riyal"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sa.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Monarchy",
+    "borderCount": 7
+  },
+  {
+    "cca2": "SN",
+    "cca3": "SEN",
+    "name": "Senegal",
+    "continent": "Africa",
+    "capital": "Dakar",
+    "population": 15854360,
+    "area": 196722,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sn.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "RS",
+    "cca3": "SRB",
+    "name": "Serbia",
+    "continent": "Europe",
+    "capital": "Belgrade",
+    "population": 6963764,
+    "area": 88361,
+    "languages": [
+      "Serbian"
+    ],
+    "currencies": [
+      "Serbian dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/rs.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "SC",
+    "cca3": "SYC",
+    "name": "Seychelles",
+    "continent": "Africa",
+    "capital": "Victoria",
+    "population": 96762,
+    "area": 452,
+    "languages": [
+      "Seychellois Creole",
+      "English",
+      "French"
+    ],
+    "currencies": [
+      "Seychellois rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sc.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "SL",
+    "cca3": "SLE",
+    "name": "Sierra Leone",
+    "continent": "Africa",
+    "capital": "Freetown",
+    "population": 7650154,
+    "area": 71740,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Sierra Leonean leone"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sl.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "SG",
+    "cca3": "SGP",
+    "name": "Singapore",
+    "continent": "Asia",
+    "capital": "Singapore",
+    "population": 5638676,
+    "area": 710,
+    "languages": [
+      "English",
+      "Malay",
+      "Tamil",
+      "Chinese"
+    ],
+    "currencies": [
+      "Singapore dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sg.svg",
+    "flagColorCount": 2,
+    "religion": "Buddhism",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "SK",
+    "cca3": "SVK",
+    "name": "Slovakia",
+    "continent": "Europe",
+    "capital": "Bratislava",
+    "population": 5446771,
+    "area": 49037,
+    "languages": [
+      "Slovak"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sk.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "SI",
+    "cca3": "SVN",
+    "name": "Slovenia",
+    "continent": "Europe",
+    "capital": "Ljubljana",
+    "population": 2073894,
+    "area": 20273,
+    "languages": [
+      "Slovene"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/si.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "SB",
+    "cca3": "SLB",
+    "name": "Solomon Islands",
+    "continent": "Oceania",
+    "capital": "Honiara",
+    "population": 652858,
+    "area": 28896,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Solomon Islands dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sb.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "SO",
+    "cca3": "SOM",
+    "name": "Somalia",
+    "continent": "Africa",
+    "capital": "Mogadishu",
+    "population": 15008154,
+    "area": 637657,
+    "languages": [
+      "Arabic",
+      "Somali"
+    ],
+    "currencies": [
+      "Somali shilling"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/so.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "ZA",
+    "cca3": "ZAF",
+    "name": "South Africa",
+    "continent": "Africa",
+    "capital": "Pretoria",
+    "population": 57779622,
+    "area": 1221037,
+    "languages": [
+      "Afrikaans",
+      "English",
+      "Southern Ndebele",
+      "Northern Sotho",
+      "Southern Sotho",
+      "Swazi",
+      "Tswana",
+      "Tsonga",
+      "Venda",
+      "Xhosa",
+      "Zulu"
+    ],
+    "currencies": [
+      "South African rand"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/za.svg",
+    "flagColorCount": 6,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 6
+  },
+  {
+    "cca2": "KR",
+    "cca3": "KOR",
+    "name": "South Korea",
+    "continent": "Asia",
+    "capital": "Seoul",
+    "population": 51606633,
+    "area": 100210,
+    "languages": [
+      "Korean"
+    ],
+    "currencies": [
+      "South Korean won"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kr.svg",
+    "flagColorCount": 4,
+    "religion": null,
+    "governmentType": "Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "SS",
+    "cca3": "SSD",
+    "name": "South Sudan",
+    "continent": "Africa",
+    "capital": "Juba",
+    "population": 10975920,
+    "area": 619745,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "South Sudanese pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ss.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": null,
+    "borderCount": 6
+  },
+  {
+    "cca2": "ES",
+    "cca3": "ESP",
+    "name": "Spain",
+    "continent": "Europe",
+    "capital": "Madrid",
+    "population": 46796540,
+    "area": 505992,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/es.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 5
+  },
+  {
+    "cca2": "LK",
+    "cca3": "LKA",
+    "name": "Sri Lanka",
+    "continent": "Asia",
+    "capital": "Colombo",
+    "population": 21670000,
+    "area": 65610,
+    "languages": [
+      "Sinhala",
+      "Tamil"
+    ],
+    "currencies": [
+      "Sri Lankan rupee"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lk.svg",
+    "flagColorCount": 4,
+    "religion": "Buddhism",
+    "governmentType": "Unitary Semi-Presidential Republic",
+    "borderCount": 1
+  },
+  {
+    "cca2": "SD",
+    "cca3": "SDN",
+    "name": "Sudan",
+    "continent": "Africa",
+    "capital": "Khartoum",
+    "population": 41801533,
+    "area": 1886068,
+    "languages": [
+      "Arabic",
+      "English"
+    ],
+    "currencies": [
+      "Sudanese pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sd.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Islamic Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "SR",
+    "cca3": "SUR",
+    "name": "Suriname",
+    "continent": "Americas",
+    "capital": "Paramaribo",
+    "population": 575991,
+    "area": 163820,
+    "languages": [
+      "Dutch"
+    ],
+    "currencies": [
+      "Surinamese dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sr.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "SE",
+    "cca3": "SWE",
+    "name": "Sweden",
+    "continent": "Europe",
+    "capital": "Stockholm",
+    "population": 10175214,
+    "area": 450295,
+    "languages": [
+      "Swedish"
+    ],
+    "currencies": [
+      "Swedish krona"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/se.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 2
+  },
+  {
+    "cca2": "CH",
+    "cca3": "CHE",
+    "name": "Switzerland",
+    "continent": "Europe",
+    "capital": "Bern",
+    "population": 8513227,
+    "area": 41284,
+    "languages": [
+      "French",
+      "Swiss German",
+      "Italian",
+      "Romansh"
+    ],
+    "currencies": [
+      "Swiss franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ch.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Federation",
+    "borderCount": 5
+  },
+  {
+    "cca2": "SY",
+    "cca3": "SYR",
+    "name": "Syria",
+    "continent": "Asia",
+    "capital": "Damascus",
+    "population": 16906283,
+    "area": 185180,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Syrian pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sy.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "TJ",
+    "cca3": "TJK",
+    "name": "Tajikistan",
+    "continent": "Asia",
+    "capital": "Dushanbe",
+    "population": 9100837,
+    "area": 143100,
+    "languages": [
+      "Russian",
+      "Tajik"
+    ],
+    "currencies": [
+      "Tajikistani somoni"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tj.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "TZ",
+    "cca3": "TZA",
+    "name": "Tanzania",
+    "continent": "Africa",
+    "capital": "Dodoma",
+    "population": 56318348,
+    "area": 945087,
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "currencies": [
+      "Tanzanian shilling"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tz.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "TH",
+    "cca3": "THA",
+    "name": "Thailand",
+    "continent": "Asia",
+    "capital": "Bangkok",
+    "population": 69428524,
+    "area": 513120,
+    "languages": [
+      "Thai"
+    ],
+    "currencies": [
+      "Thai baht"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/th.svg",
+    "flagColorCount": 3,
+    "religion": "Buddhism",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 4
+  },
+  {
+    "cca2": "TL",
+    "cca3": "TLS",
+    "name": "Timor-Leste",
+    "continent": "Asia",
+    "capital": "Dili",
+    "population": 1267972,
+    "area": 14874,
+    "languages": [
+      "Portuguese",
+      "Tetum"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tl.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Administrated by the UN",
+    "borderCount": 1
+  },
+  {
+    "cca2": "TG",
+    "cca3": "TGO",
+    "name": "Togo",
+    "continent": "Africa",
+    "capital": "Lomé",
+    "population": 7889094,
+    "area": 56785,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tg.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "TO",
+    "cca3": "TON",
+    "name": "Tonga",
+    "continent": "Oceania",
+    "capital": "Nuku'alofa",
+    "population": 103197,
+    "area": 747,
+    "languages": [
+      "English",
+      "Tongan"
+    ],
+    "currencies": [
+      "Tongan paʻanga"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/to.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "TT",
+    "cca3": "TTO",
+    "name": "Trinidad and Tobago",
+    "continent": "Americas",
+    "capital": "Port of Spain",
+    "population": 1389858,
+    "area": 5130,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Trinidad and Tobago dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tt.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "TN",
+    "cca3": "TUN",
+    "name": "Tunisia",
+    "continent": "Africa",
+    "capital": "Tunis",
+    "population": 11565204,
+    "area": 163610,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Tunisian dinar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tn.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "TR",
+    "cca3": "TUR",
+    "name": "Türkiye",
+    "continent": "Asia",
+    "capital": "Ankara",
+    "population": 82319724,
+    "area": 783562,
+    "languages": [
+      "Turkish"
+    ],
+    "currencies": [
+      "Turkish lira"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tr.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "TM",
+    "cca3": "TKM",
+    "name": "Turkmenistan",
+    "continent": "Asia",
+    "capital": "Ashgabat",
+    "population": 5850908,
+    "area": 488100,
+    "languages": [
+      "Russian",
+      "Turkmen"
+    ],
+    "currencies": [
+      "Turkmenistan manat"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tm.svg",
+    "flagColorCount": 2,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 4
+  },
+  {
+    "cca2": "TV",
+    "cca3": "TUV",
+    "name": "Tuvalu",
+    "continent": "Oceania",
+    "capital": "Funafuti",
+    "population": 11508,
+    "area": 26,
+    "languages": [
+      "English",
+      "Tuvaluan"
+    ],
+    "currencies": [
+      "Australian dollar",
+      "Tuvaluan dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tv.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 0
+  },
+  {
+    "cca2": "UG",
+    "cca3": "UGA",
+    "name": "Uganda",
+    "continent": "Africa",
+    "capital": "Kampala",
+    "population": 42723139,
+    "area": 241550,
+    "languages": [
+      "English",
+      "Swahili"
+    ],
+    "currencies": [
+      "Ugandan shilling"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ug.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "UA",
+    "cca3": "UKR",
+    "name": "Ukraine",
+    "continent": "Europe",
+    "capital": "Kyiv",
+    "population": 44622516,
+    "area": 603500,
+    "languages": [
+      "Ukrainian"
+    ],
+    "currencies": [
+      "Ukrainian hryvnia"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ua.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 7
+  },
+  {
+    "cca2": "AE",
+    "cca3": "ARE",
+    "name": "United Arab Emirates",
+    "continent": "Asia",
+    "capital": "Abu Dhabi",
+    "population": 9630959,
+    "area": 83600,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "United Arab Emirates dirham"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ae.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Emirate Federation",
+    "borderCount": 2
+  },
+  {
+    "cca2": "GB",
+    "cca3": "GBR",
+    "name": "United Kingdom",
+    "continent": "Europe",
+    "capital": "London",
+    "population": 66460344,
+    "area": 242900,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "British pound"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gb.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Constitutional Monarchy",
+    "borderCount": 1
+  },
+  {
+    "cca2": "US",
+    "cca3": "USA",
+    "name": "United States",
+    "continent": "Americas",
+    "capital": "Washington D.C.",
+    "population": 326687501,
+    "area": 9372610,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "United States dollar"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "UY",
+    "cca3": "URY",
+    "name": "Uruguay",
+    "continent": "Americas",
+    "capital": "Montevideo",
+    "population": 3449299,
+    "area": 181034,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Uruguayan peso"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/uy.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "UZ",
+    "cca3": "UZB",
+    "name": "Uzbekistan",
+    "continent": "Asia",
+    "capital": "Tashkent",
+    "population": 32955400,
+    "area": 447400,
+    "languages": [
+      "Russian",
+      "Uzbek"
+    ],
+    "currencies": [
+      "Uzbekistani soʻm"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/uz.svg",
+    "flagColorCount": 4,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5
+  },
+  {
+    "cca2": "VU",
+    "cca3": "VUT",
+    "name": "Vanuatu",
+    "continent": "Oceania",
+    "capital": "Port Vila",
+    "population": 292680,
+    "area": 12189,
+    "languages": [
+      "Bislama",
+      "English",
+      "French"
+    ],
+    "currencies": [
+      "Vanuatu vatu"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vu.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0
+  },
+  {
+    "cca2": "VA",
+    "cca3": "VAT",
+    "name": "Vatican City",
+    "continent": "Europe",
+    "capital": "Vatican City",
+    "population": 825,
+    "area": 0.44,
+    "languages": [
+      "Italian",
+      "Latin"
+    ],
+    "currencies": [
+      "Euro"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/va.svg",
+    "flagColorCount": 2,
+    "religion": "Christianity",
+    "governmentType": "Independent Church State",
+    "borderCount": 1
+  },
+  {
+    "cca2": "VE",
+    "cca3": "VEN",
+    "name": "Venezuela",
+    "continent": "Americas",
+    "capital": "Caracas",
+    "population": 28870195,
+    "area": 916445,
+    "languages": [
+      "Spanish"
+    ],
+    "currencies": [
+      "Venezuelan bolívar soberano"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ve.svg",
+    "flagColorCount": 3,
+    "religion": "Christianity",
+    "governmentType": "Federal Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "VN",
+    "cca3": "VNM",
+    "name": "Vietnam",
+    "continent": "Asia",
+    "capital": "Hanoi",
+    "population": 95540395,
+    "area": 331212,
+    "languages": [
+      "Vietnamese"
+    ],
+    "currencies": [
+      "Vietnamese đồng"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vn.svg",
+    "flagColorCount": 2,
+    "religion": "Folk Religions",
+    "governmentType": "Socialistic Republic",
+    "borderCount": 3
+  },
+  {
+    "cca2": "YE",
+    "cca3": "YEM",
+    "name": "Yemen",
+    "continent": "Asia",
+    "capital": "Sana'a",
+    "population": 28498687,
+    "area": 527968,
+    "languages": [
+      "Arabic"
+    ],
+    "currencies": [
+      "Yemeni rial"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ye.svg",
+    "flagColorCount": 3,
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 2
+  },
+  {
+    "cca2": "ZM",
+    "cca3": "ZMB",
+    "name": "Zambia",
+    "continent": "Africa",
+    "capital": "Lusaka",
+    "population": 17351822,
+    "area": 752612,
+    "languages": [
+      "English"
+    ],
+    "currencies": [
+      "Zambian kwacha"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/zm.svg",
+    "flagColorCount": 4,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 8
+  },
+  {
+    "cca2": "ZW",
+    "cca3": "ZWE",
+    "name": "Zimbabwe",
+    "continent": "Africa",
+    "capital": "Harare",
+    "population": 14439018,
+    "area": 390757,
+    "languages": [
+      "Chibarwe",
+      "English",
+      "Kalanga",
+      "Khoisan",
+      "Ndau",
+      "Northern Ndebele",
+      "Chewa",
+      "Shona",
+      "Sotho",
+      "Tonga",
+      "Tswana",
+      "Tsonga",
+      "Venda",
+      "Xhosa",
+      "Zimbabwean Sign Language"
+    ],
+    "currencies": [
+      "Botswana pula",
+      "Chinese yuan",
+      "Euro",
+      "British pound",
+      "Indian rupee",
+      "Japanese yen",
+      "United States dollar",
+      "South African rand",
+      "Zimbabwean bonds"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/zw.svg",
+    "flagColorCount": 5,
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 4
+  }
+]
