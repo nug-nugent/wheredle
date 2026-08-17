@@ -1,0 +1,39 @@
+import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
+
+export function FlagSegment({
+  flagUrl,
+  focalX,
+  focalY,
+}: {
+  flagUrl: string;
+  focalX: number;
+  focalY: number;
+}) {
+  const scaledWidth = FLAG_CROP_SIZE.width * FLAG_ZOOM;
+  const scaledHeight = FLAG_CROP_SIZE.height * FLAG_ZOOM;
+
+  return (
+    <div
+      style={{
+        width: FLAG_CROP_SIZE.width,
+        height: FLAG_CROP_SIZE.height,
+        overflow: "hidden",
+        borderRadius: 8,
+        border: "1px solid var(--mantine-color-default-border)",
+      }}
+    >
+      <img
+        src={flagUrl}
+        alt=""
+        style={{
+          width: scaledWidth,
+          height: scaledHeight,
+          maxWidth: "none",
+          position: "relative",
+          left: `-${(focalX / 100) * (scaledWidth - FLAG_CROP_SIZE.width)}px`,
+          top: `-${(focalY / 100) * (scaledHeight - FLAG_CROP_SIZE.height)}px`,
+        }}
+      />
+    </div>
+  );
+}
