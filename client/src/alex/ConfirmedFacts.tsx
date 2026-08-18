@@ -41,7 +41,7 @@ export function ConfirmedFacts({
         <div
           key={fact.key}
           style={{
-            background: COLORS.accent,
+            background: COLORS.correctBg,
             padding: direction === "row" ? "8px 10px" : "10px 12px",
             display: "flex",
             flexDirection: "column",
@@ -56,7 +56,7 @@ export function ConfirmedFacts({
               fontSize: direction === "row" ? 9 : 10,
               letterSpacing: "0.07em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.75)",
+              color: COLORS.correctLabel,
             }}
           >
             {fact.header}
@@ -65,7 +65,7 @@ export function ConfirmedFacts({
             style={{
               fontSize: direction === "row" ? 12 : 14,
               fontWeight: 800,
-              color: "#fff2ef",
+              color: COLORS.correctValue,
               whiteSpace: direction === "row" ? "nowrap" : undefined,
             }}
           >

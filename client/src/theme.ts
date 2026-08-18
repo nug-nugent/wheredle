@@ -1,7 +1,15 @@
 // Shared palette and typography (see the "Wheredle game design
-// exploration" project on claude.ai/design) — flat, square-cornered,
-// Archivo-set, with the brand red marking a match rather than green.
-// Used by both game modes so they read as one product.
+// exploration"/Modernist project on claude.ai/design) — flat,
+// square-cornered, Archivo-set. Used by both game modes so they read as
+// one product.
+//
+// "Correct" indicators (tiles, chips, dots, the Confirmed panel) use a
+// green rather than the brand red, so a match doesn't read as a warning
+// and isn't visually confused with the accent used for chrome (buttons,
+// borders, links, badges). That green is derived in OKLCH from the
+// accent's own lightness and chroma — oklch(61.12% 0.2252 31.45) for
+// #ec3013 — with only the hue rotated to green (145°), so the two read as
+// equally vivid/dark rather than as two unrelated colours.
 export const COLORS = {
   page: "#e7e5e5",
   surface: "#f3f2f2",
@@ -16,11 +24,11 @@ export const COLORS = {
   accent: "#ec3013",
   accentHover: "#ae1800",
 
-  correctBg: "#ec3013",
-  correctBorder: "#ec3013",
+  correctBg: "oklch(61.12% 0.2252 145deg)",
+  correctBorder: "oklch(61.12% 0.2252 145deg)",
   correctLabel: "rgba(255,255,255,0.75)",
-  correctValue: "#fff2ef",
-  correctIcon: "#fff2ef",
+  correctValue: "#f2fff5",
+  correctIcon: "#f2fff5",
 
   wrongBg: "#eae7e7",
   wrongBorder: "#d7d3d3",
