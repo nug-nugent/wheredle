@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { Group, Paper, Stack, Text } from "@mantine/core";
-import { CATEGORIES } from "./categories";
+import { Stack, Text } from "@mantine/core";
 import type { GuessFeedback } from "./engine";
-import { FactCard } from "./FactCard";
-import { LanguageLineage } from "./LanguageLineage";
+import { GUESS_SLOT_COUNT, GuessFactCards } from "./GuessFactCards";
 
 const REVEAL_INTERVAL_MS = 200;
-// Every non-language category, plus one slot for language.
-const SLOT_COUNT = CATEGORIES.length + 1;
 
 export function LastGuess({
   feedback,
@@ -21,11 +17,11 @@ export function LastGuess({
   revealing: boolean;
   onRevealComplete?: () => void;
 }) {
-  const [revealCount, setRevealCount] = useState(revealing ? 0 : SLOT_COUNT);
+  const [revealCount, setRevealCount] = useState(revealing ? 0 : GUESS_SLOT_COUNT);
 
   useEffect(() => {
     if (!revealing) {
-      setRevealCount(SLOT_COUNT);
+      setRevealCount(GUESS_SLOT_COUNT);
       return;
     }
 
@@ -34,7 +30,7 @@ export function LastGuess({
     const timer = setInterval(() => {
       count += 1;
       setRevealCount(count);
-      if (count >= SLOT_COUNT) {
+      if (count >= GUESS_SLOT_COUNT) {
         clearInterval(timer);
         window.setTimeout(() => onRevealComplete?.(), REVEAL_INTERVAL_MS);
       }
@@ -52,30 +48,7 @@ export function LastGuess({
       <Text size="xs" c="dimmed">
         Last guess: {feedback.country.name}
       </Text>
-      <Group gap="sm" align="flex-start">
-        {CATEGORIES.map((category, i) =>
-          i < revealCount ? (
-            <FactCard
-              key={category.key}
-              header={category.header}
-              label={category.label(feedback)}
-              state={category.match(feedback) ? "match" : "mismatch"}
-            />
-          ) : (
-            <FactCard key={category.key} header={category.header} label="" state="pending" />
-          )
-        )}
-        {revealCount > CATEGORIES.length ? (
-          <Paper withBorder p="xs" radius="md">
-            <Text size="xs" c="dimmed">
-              Language
-            </Text>
-            <LanguageLineage match={feedback.languageMatch} />
-          </Paper>
-        ) : (
-          <FactCard header="Language" label="" state="pending" />
-        )}
-      </Group>
+      <GuessFactCards feedback={feedback} revealCount={revealCount} />
     </Stack>
   );
 }

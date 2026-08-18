@@ -4,7 +4,7 @@ import { GuessInput } from "../game/GuessInput";
 import { ShareScoreButton } from "../share/ShareScoreButton";
 import { getConfirmedFacts } from "./categories";
 import { ConfirmedFacts } from "./ConfirmedFacts";
-import { GuessTable } from "./GuessTable";
+import { GuessHistory } from "./GuessHistory";
 import { LastGuess } from "./LastGuess";
 import { buildAlexShare } from "./share";
 import { useAlexGame } from "./useAlexGame";
@@ -59,7 +59,7 @@ export default function AlexApp() {
                 <Text size="xs" c="dimmed">
                   Guesses ({state.guesses.length})
                 </Text>
-                <GuessTable guesses={state.guesses} />
+                <GuessHistory guesses={state.guesses} />
               </Stack>
             )}
 
