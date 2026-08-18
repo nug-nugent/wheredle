@@ -5,7 +5,8 @@ import "@mantine/core/styles.css";
 import AlexApp from "./alex/AlexApp.tsx";
 import App from "./App.tsx";
 
-const Page = window.location.pathname === "/alex" ? AlexApp : App;
+const isAlexPath = window.location.pathname.replace(/\/+$/, "").endsWith("/alex");
+const Page = isAlexPath ? AlexApp : App;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
