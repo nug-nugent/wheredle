@@ -1,10 +1,12 @@
 import { Badge, Button, Card, Container, Stack, Text, Title } from "@mantine/core";
 import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
+import { ShareScoreButton } from "../share/ShareScoreButton";
 import { getConfirmedFacts } from "./categories";
 import { ConfirmedFacts } from "./ConfirmedFacts";
 import { GuessTable } from "./GuessTable";
 import { LastGuess } from "./LastGuess";
+import { buildAlexShare } from "./share";
 import { useAlexGame } from "./useAlexGame";
 
 export default function AlexApp() {
@@ -36,6 +38,7 @@ export default function AlexApp() {
                   Correct!
                 </Badge>
                 <CountryReveal country={state.target} />
+                <ShareScoreButton gameLabel="Wheredle: Alex Mode" {...buildAlexShare(state)} />
               </Stack>
             )}
 
