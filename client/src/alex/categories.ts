@@ -14,9 +14,11 @@ export interface CategoryDef {
 }
 
 // Single source of truth for the tile categories: both the guess list and
-// the confirmed rail read from this. Currency and language aren't here —
-// they're chip lists rather than a single tile, so they're handled
-// separately wherever CATEGORIES is consumed.
+// the confirmed rail read from this. Language isn't here — a country can
+// speak several languages with a meaningful "family" partial match between
+// them, so it gets its own chip list rather than a single tile. Currency
+// can also be multi-valued, but with no partial-credit tier worth showing,
+// so it stays a plain tile like continent or government.
 export const CATEGORIES: CategoryDef[] = [
   {
     key: "continent",
@@ -66,6 +68,12 @@ export const CATEGORIES: CategoryDef[] = [
     flag: (f) => (f.sameGovernmentType ? "correct" : "wrong"),
     label: (f) => f.country.governmentType ?? "Unknown",
   },
+  {
+    key: "currency",
+    header: "Currency",
+    flag: (f) => (f.sameCurrency ? "correct" : "wrong"),
+    label: (f) => f.country.currencies.join(", ") || "Unknown",
+  },
 ];
 
 export interface ConfirmedFact {
@@ -80,17 +88,6 @@ export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
   for (const category of CATEGORIES) {
     const matched = guesses.find((f) => category.flag(f) === "correct");
     if (matched) facts.push({ key: category.key, header: category.header, label: category.label(matched) });
-  }
-
-  const currencyMatch = guesses.find(
-    (f) => f.currencyChips.length > 0 && f.currencyChips.every((c) => c.correct)
-  );
-  if (currencyMatch) {
-    facts.push({
-      key: "currency",
-      header: "Currency",
-      label: currencyMatch.currencyChips.map((c) => c.name).join(", "),
-    });
   }
 
   const languageMatch = guesses.find((f) => f.languageChips.some((c) => c.state === "correct"));

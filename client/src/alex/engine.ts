@@ -13,11 +13,6 @@ export type Tertile = "bottom" | "middle" | "top";
 // length, flag colours, borders).
 export type TileFlag = "correct" | "wrong" | "up" | "down";
 
-export interface CurrencyChip {
-  name: string;
-  correct: boolean;
-}
-
 export type LanguageChipState = "correct" | "family" | "wrong";
 export interface LanguageChip {
   name: string;
@@ -86,7 +81,12 @@ export interface GuessFeedback {
   borderDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
-  currencyChips: CurrencyChip[];
+  // Currency is treated as a single-valued attribute, like continent or
+  // government: correct if any of the guessed country's currencies is also
+  // one of the target's. Multi-currency countries are rare enough (a dozen
+  // or so in the dataset) that this doesn't need per-currency chip credit
+  // the way language does.
+  sameCurrency: boolean;
   languageChips: LanguageChip[];
 }
 
@@ -133,10 +133,9 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
     borderDirection: direction(guessed.borderCount, target.borderCount, sameBorderCount),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
-    currencyChips: guessed.currencies.map((name) => ({
-      name,
-      correct: target.currencies.includes(name),
-    })),
+    sameCurrency:
+      guessed.currencies.length > 0 &&
+      guessed.currencies.some((c) => target.currencies.includes(c)),
     languageChips: guessed.languages.map((name) => ({
       name,
       state: languageChipState(name, target.languages),

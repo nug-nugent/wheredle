@@ -6,17 +6,17 @@ import { COLORS, FONT_FAMILY } from "../theme";
 import { Tile } from "./Tile";
 
 const REVEAL_INTERVAL_MS = 200;
-// One slot per tile, plus one each for the currency and language boxes.
-const REVEAL_SLOT_COUNT = CATEGORIES.length + 2;
+// One slot per tile, plus one for the language box.
+const REVEAL_SLOT_COUNT = CATEGORIES.length + 1;
 
 function chipTone(state: LanguageChipState) {
   return state === "correct" ? "correct" : state === "family" ? "partial" : "wrong";
 }
 
-// The most recent guess: always shown in full (tiles + currency + language
-// chips), rather than collapsed to a dot summary like older guesses.
-// `revealing` blinks through each slot in turn for a guess that hasn't
-// settled into history yet; everyone else shows fully resolved.
+// The most recent guess: always shown in full (tiles + language chips),
+// rather than collapsed to a dot summary like older guesses. `revealing`
+// blinks through each slot in turn for a guess that hasn't settled into
+// history yet; everyone else shows fully resolved.
 export function LatestGuessCard({
   feedback,
   revealing,
@@ -72,29 +72,6 @@ export function LatestGuessCard({
             display: "flex",
             flexDirection: "column",
             gap: 6,
-            minWidth: 160,
-          }}
-        >
-          <span
-            style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}
-          >
-            Currency
-          </span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {revealCount > CATEGORIES.length &&
-              feedback.currencyChips.map((c) => (
-                <Chip key={c.name} name={c.name} tone={c.correct ? "correct" : "wrong"} />
-              ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            border: `1px solid ${COLORS.border}`,
-            padding: "10px 12px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 6,
             minWidth: 200,
           }}
         >
@@ -104,7 +81,7 @@ export function LatestGuessCard({
             Language
           </span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {revealCount > CATEGORIES.length + 1 &&
+            {revealCount > CATEGORIES.length &&
               feedback.languageChips.map((c) => <Chip key={c.name} name={c.name} tone={chipTone(c.state)} />)}
           </div>
         </div>

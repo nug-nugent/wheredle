@@ -4,21 +4,18 @@ import type { GuessFeedback } from "./engine";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { TileGrid } from "./TileGrid";
 
-// One dot per tile, plus one each for currency and language — a compact
-// summary of a settled guess, click to expand into the full tile grid.
-// (Currency/language don't get their own detail here, only in the latest
-// card — the dots are the only trace of them for older guesses.)
+// One dot per tile, plus one for language — a compact summary of a settled
+// guess, click to expand into the full tile grid. (Language doesn't get its
+// own detail here, only in the latest card — the dot is the only trace of
+// it for older guesses.)
 function dotColors(feedback: GuessFeedback): string[] {
   const tileDots = CATEGORIES.map((c) => (c.flag(feedback) === "correct" ? COLORS.correctBg : COLORS.wrongBorder));
 
-  const currencyConfirmed = feedback.currencyChips.length > 0 && feedback.currencyChips.every((c) => c.correct);
-  const currencyPartial = feedback.currencyChips.some((c) => c.correct);
   const languageConfirmed = feedback.languageChips.some((c) => c.state === "correct");
   const languagePartial = feedback.languageChips.some((c) => c.state === "family");
 
   return [
     ...tileDots,
-    currencyConfirmed ? COLORS.correctBg : currencyPartial ? COLORS.partialBorder : COLORS.wrongBorder,
     languageConfirmed ? COLORS.correctBg : languagePartial ? COLORS.partialBorder : COLORS.wrongBorder,
   ];
 }
