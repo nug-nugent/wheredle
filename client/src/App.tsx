@@ -4,7 +4,9 @@ import { CountryReveal } from "./game/CountryReveal";
 import { MAX_GUESSES } from "./game/engine";
 import { GuessInput } from "./game/GuessInput";
 import { HintPanel } from "./game/HintPanel";
+import { buildWheredleShare } from "./game/share";
 import { useGame } from "./game/useGame";
+import { ShareScoreButton } from "./share/ShareScoreButton";
 
 export default function App() {
   const { state, guess, chooseHint, newGame, choiceOptions } = useGame();
@@ -37,6 +39,7 @@ export default function App() {
                   {state.status === "won" ? "Correct!" : "Out of guesses"}
                 </Badge>
                 <CountryReveal country={state.target} />
+                <ShareScoreButton gameLabel="Wheredle" {...buildWheredleShare(state)} />
               </Stack>
             )}
 
