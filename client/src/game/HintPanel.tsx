@@ -1,5 +1,5 @@
-import { Badge, Group, Image, Stack, Text } from "@mantine/core";
 import type { Country } from "../data/country";
+import { COLORS, FONT_FAMILY } from "../theme";
 import { BorderOutline } from "./BorderOutline";
 import type { Hint } from "./engine";
 import { FlagOverview } from "./FlagOverview";
@@ -18,40 +18,57 @@ const LABELS: Record<Hint["type"], string> = {
 function HintValue({ hint, target }: { hint: Hint; target: Country }) {
   switch (hint.type) {
     case "letter":
-      return <Text fw={700}>{hint.letter}</Text>;
+      return <span style={{ fontWeight: 700, fontSize: 16 }}>{hint.letter}</span>;
     case "flagSegment":
       return (
-        <Group gap="xs" align="flex-start" wrap="wrap">
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "flex-start" }}>
           <FlagOverview flagUrl={target.flagUrl} focalX={hint.focalX} focalY={hint.focalY} />
           <FlagSegment flagUrl={target.flagUrl} focalX={hint.focalX} focalY={hint.focalY} />
-        </Group>
+        </div>
       );
     case "borderOutline":
       return <BorderOutline cca2={target.cca2} />;
     case "continent":
-      return <Badge>{target.continent}</Badge>;
+      return (
+        <span
+          style={{
+            border: `1px solid ${COLORS.accent}`,
+            color: COLORS.accent,
+            fontSize: 11,
+            letterSpacing: "0.04em",
+            padding: "4px 10px",
+            display: "inline-block",
+          }}
+        >
+          {target.continent}
+        </span>
+      );
     case "population":
-      return <Text fw={700}>{target.population.toLocaleString()}</Text>;
+      return <span style={{ fontWeight: 700, fontSize: 16 }}>{target.population.toLocaleString()}</span>;
     case "language":
-      return <Text fw={700}>{target.languages.join(", ")}</Text>;
+      return <span style={{ fontWeight: 700, fontSize: 16 }}>{target.languages.join(", ")}</span>;
     case "fullFlag":
       return (
-        <Image src={target.flagUrl} alt="Full flag" w={200} h={120} fit="contain" />
+        <img
+          src={target.flagUrl}
+          alt="Full flag"
+          style={{ width: 200, height: 120, objectFit: "contain", border: `1px solid ${COLORS.border}` }}
+        />
       );
   }
 }
 
 export function HintPanel({ hints, target }: { hints: Hint[]; target: Country }) {
   return (
-    <Group gap="xl" align="flex-start" wrap="wrap">
+    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start", fontFamily: FONT_FAMILY }}>
       {hints.map((hint, i) => (
-        <Stack key={i} gap={4} align="flex-start">
-          <Text size="xs" c="dimmed">
+        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" }}>
+          <span style={{ fontSize: 11, color: COLORS.textDimmed }}>
             Clue {i + 1} — {LABELS[hint.type]}
-          </Text>
+          </span>
           <HintValue hint={hint} target={target} />
-        </Stack>
+        </div>
       ))}
-    </Group>
+    </div>
   );
 }

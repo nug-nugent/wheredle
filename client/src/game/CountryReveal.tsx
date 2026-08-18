@@ -1,40 +1,38 @@
-import { Badge, Group, Image, Stack, Text } from "@mantine/core";
 import type { Country } from "../data/country";
+import { COLORS, FONT_FAMILY } from "../theme";
 
 export function CountryReveal({ country }: { country: Country }) {
   return (
-    <Group gap="lg" align="flex-start" wrap="wrap">
-      <Image
+    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start", fontFamily: FONT_FAMILY }}>
+      <img
         src={country.flagUrl}
         alt={`Flag of ${country.name}`}
-        w={240}
-        h={144}
-        fit="contain"
+        style={{ width: 240, height: 144, objectFit: "contain", border: `1px solid ${COLORS.border}` }}
       />
-      <Stack gap={4}>
-        <Text size="xl" fw={700}>
-          {country.name}
-        </Text>
-        <Badge w="fit-content">{country.continent}</Badge>
-        <Text size="sm">
-          <Text span fw={600}>
-            Capital:
-          </Text>{" "}
-          {country.capital ?? "—"}
-        </Text>
-        <Text size="sm">
-          <Text span fw={600}>
-            Population:
-          </Text>{" "}
-          {country.population.toLocaleString()}
-        </Text>
-        <Text size="sm">
-          <Text span fw={600}>
-            Language(s):
-          </Text>{" "}
-          {country.languages.join(", ")}
-        </Text>
-      </Stack>
-    </Group>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        <span style={{ fontSize: 20, fontWeight: 800 }}>{country.name}</span>
+        <span
+          style={{
+            border: `1px solid ${COLORS.accent}`,
+            color: COLORS.accent,
+            fontSize: 11,
+            letterSpacing: "0.04em",
+            padding: "4px 10px",
+            width: "fit-content",
+          }}
+        >
+          {country.continent}
+        </span>
+        <span style={{ fontSize: 13 }}>
+          <strong>Capital:</strong> {country.capital ?? "—"}
+        </span>
+        <span style={{ fontSize: 13 }}>
+          <strong>Population:</strong> {country.population.toLocaleString()}
+        </span>
+        <span style={{ fontSize: 13 }}>
+          <strong>Language(s):</strong> {country.languages.join(", ")}
+        </span>
+      </div>
+    </div>
   );
 }

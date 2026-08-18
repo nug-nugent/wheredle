@@ -1,4 +1,4 @@
-import type { GuessFeedback, Tertile } from "./engine";
+import type { GuessFeedback, Tertile, TileFlag } from "./engine";
 
 export const TERTILE_LABEL: Record<Tertile, string> = {
   bottom: "Bottom third",
@@ -9,73 +9,72 @@ export const TERTILE_LABEL: Record<Tertile, string> = {
 export interface CategoryDef {
   key: string;
   header: string;
-  match: (f: GuessFeedback) => boolean;
+  flag: (f: GuessFeedback) => TileFlag;
   label: (f: GuessFeedback) => string;
 }
 
-// Single source of truth for the non-language columns: both the guess table
-// and the confirmed-facts panel read from this, so a category disappears
-// from the table exactly when it appears in the confirmed panel.
+// Single source of truth for the tile categories: both the guess list and
+// the confirmed rail read from this. Language isn't here — a country can
+// speak several languages with a meaningful "family" partial match between
+// them, so it gets its own chip list rather than a single tile. Currency
+// can also be multi-valued, but with no partial-credit tier worth showing,
+// so it stays a plain tile like continent or government.
 export const CATEGORIES: CategoryDef[] = [
   {
     key: "continent",
     header: "Continent",
-    match: (f) => f.sameContinent,
+    flag: (f) => (f.sameContinent ? "correct" : "wrong"),
     label: (f) => f.country.continent,
   },
   {
     key: "population",
     header: "Population",
-    match: (f) => f.samePopulationTertile,
+    flag: (f) => f.populationDirection,
     label: (f) => TERTILE_LABEL[f.populationTertile],
   },
   {
     key: "area",
     header: "Land Area",
-    match: (f) => f.sameAreaTertile,
+    flag: (f) => f.areaDirection,
     label: (f) => TERTILE_LABEL[f.areaTertile],
   },
   {
     key: "nameLength",
     header: "Name Length",
-    match: (f) => f.sameNameLengthTertile,
+    flag: (f) => f.nameLengthDirection,
     label: (f) => TERTILE_LABEL[f.nameLengthTertile],
   },
   {
     key: "flagColours",
     header: "Flag Colours",
-    match: (f) => f.sameFlagColorCount,
+    flag: (f) => f.flagColorDirection,
     label: (f) => String(f.country.flagColorCount),
   },
   {
     key: "borders",
     header: "Borders",
-    match: (f) => f.sameBorderCount,
+    flag: (f) => f.borderDirection,
     label: (f) => String(f.country.borderCount),
   },
   {
     key: "religion",
     header: "Religion",
-    match: (f) => f.sameReligion,
+    flag: (f) => (f.sameReligion ? "correct" : "wrong"),
     label: (f) => f.country.religion ?? "No majority",
   },
   {
     key: "government",
     header: "Government",
-    match: (f) => f.sameGovernmentType,
+    flag: (f) => (f.sameGovernmentType ? "correct" : "wrong"),
     label: (f) => f.country.governmentType ?? "Unknown",
   },
   {
     key: "currency",
     header: "Currency",
-    match: (f) => f.sameCurrency,
+    flag: (f) => (f.sameCurrency ? "correct" : "wrong"),
     label: (f) => f.country.currencies.join(", ") || "Unknown",
   },
 ];
-
-export function isLanguageConfirmed(f: GuessFeedback): boolean {
-  return f.languageMatch.sharedDepth === f.languageMatch.lineage.length;
-}
 
 export interface ConfirmedFact {
   key: string;
@@ -87,13 +86,20 @@ export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
   const facts: ConfirmedFact[] = [];
 
   for (const category of CATEGORIES) {
-    const matched = guesses.find((f) => category.match(f));
+    const matched = guesses.find((f) => category.flag(f) === "correct");
     if (matched) facts.push({ key: category.key, header: category.header, label: category.label(matched) });
   }
 
-  const languageMatch = guesses.find(isLanguageConfirmed);
+  const languageMatch = guesses.find((f) => f.languageChips.some((c) => c.state === "correct"));
   if (languageMatch) {
-    facts.push({ key: "language", header: "Language", label: languageMatch.languageMatch.language });
+    facts.push({
+      key: "language",
+      header: "Language",
+      label: languageMatch.languageChips
+        .filter((c) => c.state === "correct")
+        .map((c) => c.name)
+        .join(", "),
+    });
   }
 
   return facts;

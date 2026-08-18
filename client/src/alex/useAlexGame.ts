@@ -14,7 +14,6 @@ export function useAlexGame() {
   // A guess that's been computed but not yet folded into `state` — it sits
   // here while the reveal ceremony plays, then commitGuess applies it.
   const [pendingGuess, setPendingGuess] = useState<GuessFeedback | null>(null);
-  const [lastGuess, setLastGuess] = useState<GuessFeedback | null>(null);
 
   const guess = useCallback(
     (country: Country) => {
@@ -27,15 +26,13 @@ export function useAlexGame() {
 
   const commitGuess = useCallback((feedback: GuessFeedback) => {
     setState((s) => applyGuessFeedback(s, feedback));
-    setLastGuess(feedback);
     setPendingGuess(null);
   }, []);
 
   const newGame = useCallback(() => {
     setState(startAlexGame(pickRandomCountry()));
     setPendingGuess(null);
-    setLastGuess(null);
   }, []);
 
-  return { state, pendingGuess, lastGuess, guess, commitGuess, newGame };
+  return { state, pendingGuess, guess, commitGuess, newGame };
 }

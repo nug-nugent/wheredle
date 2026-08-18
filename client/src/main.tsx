@@ -8,6 +8,8 @@ import App from "./App.tsx";
 const isAlexPath = window.location.pathname.replace(/\/+$/, "").endsWith("/alex");
 const Page = isAlexPath ? AlexApp : App;
 
+document.title = isAlexPath ? "Wheredle - Alex mode" : "Wheredle";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MantineProvider defaultColorScheme="auto">

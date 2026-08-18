@@ -1,62 +1,108 @@
 import { useState } from "react";
-import { Autocomplete, Button, Group } from "@mantine/core";
-import { countries, type Country } from "../data/country";
-
-const DIACRITIC_MARKS = /[̀-ͯ]/g;
-
-function normalize(value: string): string {
-  return value.normalize("NFD").replace(DIACRITIC_MARKS, "").toLowerCase().trim();
-}
-
-const MIN_SEARCH_LENGTH = 3;
-
-const NAMES = countries.map((c) => c.name);
-const BY_NORMALIZED_NAME = new Map(countries.map((c) => [normalize(c.name), c]));
+import { Autocomplete } from "@mantine/core";
+import type { Country } from "../data/country";
+import { COLORS, FONT_FAMILY } from "../theme";
+import { COUNTRY_NAMES, findCountryByName, MIN_SEARCH_LENGTH, normalizeCountryName } from "./countryMatch";
 
 export function GuessInput({
   onGuess,
   guessedNames,
+  disabled,
 }: {
   onGuess: (country: Country) => void;
   guessedNames?: ReadonlySet<string>;
+  disabled?: boolean;
 }) {
   const [value, setValue] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const matched = BY_NORMALIZED_NAME.get(normalize(value));
-  const alreadyGuessed = matched ? (guessedNames?.has(matched.name) ?? false) : false;
+  const handleChange = (next: string) => {
+    setValue(next);
+    setError(null);
+  };
 
   const submit = () => {
-    if (!matched || alreadyGuessed) return;
+    if (disabled) return;
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    const matched = findCountryByName(trimmed);
+    if (!matched) {
+      setError("Not a recognised country.");
+      return;
+    }
+    if (guessedNames?.has(matched.name)) {
+      setError("Already guessed.");
+      return;
+    }
     onGuess(matched);
     setValue("");
+    setError(null);
   };
 
   return (
-    <Group gap="sm">
+    // flexGrow: 1 so this row actually claims the toolbar's spare width —
+    // left at "auto" it shrink-wraps to a size too narrow to fit the
+    // button, wrapping it onto its own line even with room to spare. The
+    // error text uses flex-basis: 100% to drop to its own line within this
+    // same row instead.
+    <div style={{ display: "flex", flexGrow: 1, gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}>
       <Autocomplete
+        autoFocus
         placeholder="Guess a country..."
-        data={NAMES}
+        data={COUNTRY_NAMES}
         value={value}
-        onChange={setValue}
+        onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key === "Enter") submit();
         }}
         filter={({ options, search }) => {
           if (search.trim().length < MIN_SEARCH_LENGTH) return [];
-          const query = normalize(search);
+          const query = normalizeCountryName(search);
           return options.filter(
             (option) =>
               "label" in option &&
-              normalize(option.label).includes(query) &&
+              normalizeCountryName(option.label).includes(query) &&
               !guessedNames?.has(option.label)
           );
         }}
-        error={alreadyGuessed ? "Already guessed" : undefined}
-        w={280}
+        disabled={disabled}
+        radius={0}
+        styles={{
+          input: {
+            fontFamily: FONT_FAMILY,
+            fontSize: 14,
+            minHeight: 40,
+            background: COLORS.inputBg,
+            border: `1px solid ${COLORS.border}`,
+            color: COLORS.text,
+          },
+        }}
+        style={{ flex: "1 1 220px", maxWidth: 460 }}
       />
-      <Button onClick={submit} disabled={!matched || alreadyGuessed}>
+      <button
+        onClick={submit}
+        disabled={disabled}
+        style={{
+          fontFamily: FONT_FAMILY,
+          fontWeight: 800,
+          fontSize: 14,
+          background: COLORS.accent,
+          color: COLORS.surface,
+          border: `1px solid ${COLORS.accent}`,
+          padding: "10px 22px",
+          cursor: disabled ? "default" : "pointer",
+          opacity: disabled ? 0.45 : 1,
+        }}
+      >
         Guess
-      </Button>
-    </Group>
+      </button>
+      {error && (
+        <span
+          style={{ flexBasis: "100%", fontSize: 12, color: COLORS.accentHover, fontFamily: FONT_FAMILY }}
+        >
+          {error}
+        </span>
+      )}
+    </div>
   );
 }

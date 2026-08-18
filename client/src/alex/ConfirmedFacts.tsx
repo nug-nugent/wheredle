@@ -1,20 +1,78 @@
-import { Group, Stack, Text } from "@mantine/core";
 import type { ConfirmedFact } from "./categories";
-import { FactCard } from "./FactCard";
+import { COLORS, FONT_FAMILY } from "../theme";
 
-export function ConfirmedFacts({ facts }: { facts: ConfirmedFact[] }) {
-  if (facts.length === 0) return null;
+// Renders the same list two ways: a vertical rail on desktop, a horizontal
+// scrolling strip on mobile — see the two usages in AlexApp.
+export function ConfirmedFacts({
+  facts,
+  direction = "column",
+}: {
+  facts: ConfirmedFact[];
+  direction?: "column" | "row";
+}) {
+  if (facts.length === 0) {
+    return direction === "column" ? (
+      <div
+        style={{
+          border: `1px dashed ${COLORS.borderDashed}`,
+          padding: 16,
+          fontSize: 12,
+          color: COLORS.textFaint,
+          fontFamily: FONT_FAMILY,
+        }}
+      >
+        Nothing confirmed yet.
+      </div>
+    ) : (
+      <div style={{ fontSize: 11, color: COLORS.textFaint, fontFamily: FONT_FAMILY }}>Nothing confirmed yet.</div>
+    );
+  }
 
   return (
-    <Stack gap={6}>
-      <Text size="xs" c="dimmed">
-        Confirmed
-      </Text>
-      <Group gap="sm">
-        {facts.map((fact) => (
-          <FactCard key={fact.key} header={fact.header} label={fact.label} state="match" />
-        ))}
-      </Group>
-    </Stack>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: direction,
+        gap: 8,
+        overflowX: direction === "row" ? "auto" : undefined,
+      }}
+    >
+      {facts.map((fact) => (
+        <div
+          key={fact.key}
+          style={{
+            background: COLORS.correctBg,
+            padding: direction === "row" ? "8px 10px" : "10px 12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: direction === "row" ? 2 : 3,
+            flex: "none",
+            minWidth: direction === "row" ? 96 : undefined,
+            fontFamily: FONT_FAMILY,
+          }}
+        >
+          <span
+            style={{
+              fontSize: direction === "row" ? 9 : 10,
+              letterSpacing: "0.07em",
+              textTransform: "uppercase",
+              color: COLORS.correctLabel,
+            }}
+          >
+            {fact.header}
+          </span>
+          <span
+            style={{
+              fontSize: direction === "row" ? 12 : 14,
+              fontWeight: 800,
+              color: COLORS.correctValue,
+              whiteSpace: direction === "row" ? "nowrap" : undefined,
+            }}
+          >
+            {fact.label}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
