@@ -1,5 +1,5 @@
-import { Button, Group, Text } from "@mantine/core";
 import type { ChoosableHintType } from "./engine";
+import { COLORS, FONT_FAMILY } from "../theme";
 
 const LABELS: Record<ChoosableHintType, string> = {
   continent: "Continent",
@@ -15,15 +15,26 @@ export function ChoicePrompt({
   onChoose: (hint: ChoosableHintType) => void;
 }) {
   return (
-    <Group gap="sm" align="center">
-      <Text size="sm" c="dimmed">
-        Pick your next hint:
-      </Text>
+    <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", fontFamily: FONT_FAMILY }}>
+      <span style={{ fontSize: 13, color: COLORS.textDimmed }}>Pick your next hint:</span>
       {options.map((opt) => (
-        <Button key={opt} variant="light" onClick={() => onChoose(opt)}>
+        <button
+          key={opt}
+          onClick={() => onChoose(opt)}
+          style={{
+            fontFamily: "inherit",
+            fontWeight: 600,
+            fontSize: 13,
+            border: `1px solid ${COLORS.border}`,
+            background: COLORS.inputBg,
+            color: COLORS.text,
+            padding: "8px 14px",
+            cursor: "pointer",
+          }}
+        >
           {LABELS[opt]}
-        </Button>
+        </button>
       ))}
-    </Group>
+    </div>
   );
 }

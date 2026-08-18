@@ -1,22 +1,41 @@
-import { Stack, Text } from "@mantine/core";
 import type { GuessFeedback } from "./engine";
-import { GuessFactCards } from "./GuessFactCards";
+import { GuessHistoryRow } from "./GuessHistoryRow";
+import { LatestGuessCard } from "./LatestGuessCard";
+import { COLORS, FONT_FAMILY } from "../theme";
 
-// Every past guess shows every category, including ones already confirmed
-// elsewhere — a guess can be right on some categories and wrong on others
-// (a country can share one language of several, say), so hiding confirmed
-// categories here would hide that nuance.
-export function GuessHistory({ guesses }: { guesses: GuessFeedback[] }) {
+// The most recent guess (in-flight or just-settled) is always shown in
+// full; everything before it collapses to a dot-summary row you can expand.
+export function GuessHistory({
+  guesses,
+  pendingGuess,
+  onRevealComplete,
+}: {
+  guesses: GuessFeedback[];
+  pendingGuess?: GuessFeedback | null;
+  onRevealComplete?: (feedback: GuessFeedback) => void;
+}) {
+  const latest = pendingGuess ?? guesses[0];
+
+  if (!latest) {
+    return (
+      <div style={{ fontSize: 13, color: COLORS.textFaint, padding: "24px 4px", fontFamily: FONT_FAMILY }}>
+        No guesses yet — start above.
+      </div>
+    );
+  }
+
+  const rest = pendingGuess ? guesses : guesses.slice(1);
+
   return (
-    <Stack gap="md">
-      {guesses.map((feedback) => (
-        <Stack gap={6} key={feedback.country.cca3}>
-          <Text size="xs" c="dimmed">
-            {feedback.country.name}
-          </Text>
-          <GuessFactCards feedback={feedback} />
-        </Stack>
+    <div>
+      <LatestGuessCard
+        feedback={latest}
+        revealing={latest === pendingGuess}
+        onRevealComplete={() => pendingGuess && onRevealComplete?.(pendingGuess)}
+      />
+      {rest.map((feedback) => (
+        <GuessHistoryRow key={feedback.country.cca3} feedback={feedback} />
       ))}
-    </Stack>
+    </div>
   );
 }
