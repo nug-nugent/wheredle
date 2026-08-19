@@ -1,13 +1,16 @@
 import type { Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
+import { FlagImage } from "./FlagImage";
 
 export function CountryReveal({ country }: { country: Country }) {
   return (
     <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start", fontFamily: FONT_FAMILY }}>
-      <img
-        src={country.flagUrl}
+      <FlagImage
+        flagUrl={country.flagUrl}
         alt={`Flag of ${country.name}`}
-        style={{ width: 240, height: 144, objectFit: "contain", border: `1px solid ${COLORS.border}` }}
+        maxWidth={240}
+        maxHeight={144}
+        borderColor={COLORS.border}
       />
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         <span style={{ fontSize: 20, fontWeight: 800 }}>{country.name}</span>

@@ -2,6 +2,7 @@ import type { Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { BorderOutline } from "./BorderOutline";
 import type { Hint } from "./engine";
+import { FlagImage } from "./FlagImage";
 import { FlagOverview } from "./FlagOverview";
 import { FlagSegment } from "./FlagSegment";
 
@@ -49,10 +50,12 @@ function HintValue({ hint, target }: { hint: Hint; target: Country }) {
       return <span style={{ fontWeight: 700, fontSize: 16 }}>{target.languages.join(", ")}</span>;
     case "fullFlag":
       return (
-        <img
-          src={target.flagUrl}
+        <FlagImage
+          flagUrl={target.flagUrl}
           alt="Full flag"
-          style={{ width: 200, height: 120, objectFit: "contain", border: `1px solid ${COLORS.border}` }}
+          maxWidth={200}
+          maxHeight={120}
+          borderColor={COLORS.border}
         />
       );
   }
