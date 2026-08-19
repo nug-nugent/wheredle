@@ -9,7 +9,7 @@ const REVEAL_INTERVAL_MS = 200;
 // One slot per tile, plus one for the language box.
 const REVEAL_SLOT_COUNT = CATEGORIES.length + 1;
 
-function chipTone(state: LanguageChipState) {
+export function chipTone(state: LanguageChipState) {
   return state === "correct" ? "correct" : state === "family" ? "partial" : "wrong";
 }
 
