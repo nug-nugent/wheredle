@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
 import { NavMenu } from "../nav/NavMenu";
@@ -37,11 +37,37 @@ const ALEX_STYLES = `
     flex-wrap: wrap;
   }
   .alex-history { padding: 24px 28px; }
+  /* The strip's heading doubles as its disclosure control, so the whole
+     width of it is the tap target rather than just the chevron. */
+  .alex-strip-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 0 0 8px;
+    border: none;
+    background: transparent;
+    color: ${COLORS.textDimmed};
+    font-family: inherit;
+    cursor: pointer;
+  }
   .alex-rail { display: flex; }
   .alex-strip { display: none; }
   @media (max-width: 767px) {
     .alex-rail { display: none; }
     .alex-strip { display: block; }
+    /* Pinned open, the strip claims a third of the viewport from the bottom
+       up. The shell above it is flex, so the guess history gives up the space
+       and scrolls in what's left; the facts scroll inside the strip rather
+       than the page, which never scrolls. */
+    .alex-strip-tall {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh / 3);
+      height: calc(100dvh / 3);
+    }
+    .alex-strip-tall .alex-strip-body { flex: 1; min-height: 0; overflow-y: auto; }
     /* Title, guess count and menu stay on one row at phone widths — the
        nav never wraps, it just tightens. */
     .alex-nav { padding: 12px 16px; gap: 10px; }
@@ -70,6 +96,10 @@ export default function AlexApp() {
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
   const historyRef = useRef<HTMLDivElement>(null);
+  // Deliberately not persisted: pinning the strip open is a per-moment "let
+  // me see the lot" gesture rather than a setting, and the game state itself
+  // only lives for the session anyway.
+  const [knowledgePinned, setKnowledgePinned] = useState(false);
 
   // The reveal is prepended to a pane the player has usually scrolled down
   // by the last guess, so send them back to the top to meet it.
@@ -202,9 +232,11 @@ export default function AlexApp() {
         </div>
       </div>
 
-      {/* mobile knowledge strip */}
+      {/* mobile knowledge strip — one scrolling row by default; pinned, it
+          takes a third of the screen and the facts wrap into a grid, so a
+          player with a lot known can read more of it without swiping */}
       <div
-        className="alex-strip alex-fixed-row"
+        className={`alex-strip alex-fixed-row${knowledgePinned ? " alex-strip-tall" : ""}`}
         style={{
           borderTop: `2px solid ${COLORS.border}`,
           background: COLORS.surface,
@@ -212,19 +244,33 @@ export default function AlexApp() {
           padding: "10px 16px 14px",
         }}
       >
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: COLORS.textDimmed,
-            marginBottom: 8,
-          }}
+        <button
+          type="button"
+          className="alex-strip-toggle alex-fixed-row"
+          onClick={() => setKnowledgePinned((pinned) => !pinned)}
+          aria-expanded={knowledgePinned}
+          aria-controls="alex-knowledge"
         >
-          What you know
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            What you know
+          </span>
+          <svg
+            width="14"
+            height="9"
+            viewBox="0 0 14 9"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+            focusable="false"
+            style={{ transform: knowledgePinned ? "rotate(180deg)" : undefined, transition: "transform 120ms ease" }}
+          >
+            <path d="M1 7.5 7 1.5l6 6" />
+          </svg>
+        </button>
+        <div id="alex-knowledge" className="alex-strip-body">
+          <KnownFacts facts={knownFacts} direction={knowledgePinned ? "grid" : "row"} />
         </div>
-        <KnownFacts facts={knownFacts} direction="row" />
       </div>
     </div>
   );
