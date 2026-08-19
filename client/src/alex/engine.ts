@@ -9,8 +9,10 @@ export type Tertile = "bottom" | "middle" | "top";
 
 // A tile's visual state: "correct" is an exact match, "wrong" is an
 // unrelated miss, and "up"/"down" point toward the target for the
-// categories where "closer" has a direction (population, area, name
-// length, flag colours, borders).
+// categories with an exact-value comparison (flag colours, borders).
+// Population, area, and name length only ever produce "correct"/"wrong",
+// since their "correct" is a coarser tertile match rather than exact
+// equality — see tertileFlag in this file.
 export type TileFlag = "correct" | "wrong" | "up" | "down";
 
 export type LanguageChipState = "correct" | "family" | "wrong";
@@ -64,9 +66,20 @@ export const NAME_LENGTH_TERTILE_RANGES = nameLengthTertiles.ranges;
 
 // "up" means the target's value is higher than the guess (dial it up);
 // "down" means the reverse. Only meaningful once we know it's not correct.
+// Only used for flag colours and borders, where "correct" is exact equality
+// — so revealing which side of the guessed value the target sits on is a
+// proportionate hint. Population, area, and name length use tertile buckets
+// instead (see tertileFlag below): a wrong guess there only rules out the
+// guessed country's own tertile, which doesn't always resolve to a single
+// direction (ruling out the middle tertile leaves a gap on both sides), so
+// those categories don't get an up/down hint at all.
 function direction(guessedValue: number, targetValue: number, correct: boolean): TileFlag {
   if (correct) return "correct";
   return guessedValue < targetValue ? "up" : "down";
+}
+
+function tertileFlag(sameTertile: boolean): TileFlag {
+  return sameTertile ? "correct" : "wrong";
 }
 
 // "family" is a broader match than our usual lineage-depth comparison:
@@ -143,13 +156,13 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
     sameContinent: guessed.continent === target.continent,
     populationTertile: populationTertileOf(guessed),
     samePopulationTertile,
-    populationDirection: direction(guessed.population, target.population, samePopulationTertile),
+    populationDirection: tertileFlag(samePopulationTertile),
     areaTertile: areaTertileOf(guessed),
     sameAreaTertile,
-    areaDirection: direction(guessed.area, target.area, sameAreaTertile),
+    areaDirection: tertileFlag(sameAreaTertile),
     nameLengthTertile: nameLengthTertileOf(guessed),
     sameNameLengthTertile,
-    nameLengthDirection: direction(guessed.name.length, target.name.length, sameNameLengthTertile),
+    nameLengthDirection: tertileFlag(sameNameLengthTertile),
     sameFlagColorCount,
     flagColorDirection: direction(guessed.flagColorCount, target.flagColorCount, sameFlagColorCount),
     sameBorderCount,
