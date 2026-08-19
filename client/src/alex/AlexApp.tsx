@@ -2,10 +2,11 @@ import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
 import { ShareScoreButton } from "../share/ShareScoreButton";
 import { COLORS, FONT_FAMILY } from "../theme";
-import { getConfirmedFacts } from "./categories";
+import { getConfirmedFacts, getRemainingMysteries } from "./categories";
 import { ConfirmedFacts } from "./ConfirmedFacts";
 import { MAX_GUESSES } from "./engine";
 import { GuessHistory } from "./GuessHistory";
+import { RemainingMysteries } from "./RemainingMysteries";
 import { buildAlexShare } from "./share";
 import { useAlexGame } from "./useAlexGame";
 
@@ -30,6 +31,7 @@ export default function AlexApp() {
   const { state, pendingGuess, guess, commitGuess, newGame } = useAlexGame();
   const guessCountLabel = `${state.guesses.length}/${MAX_GUESSES}`;
   const confirmedFacts = getConfirmedFacts(state.guesses);
+  const remainingMysteries = getRemainingMysteries(state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
 
@@ -135,6 +137,7 @@ export default function AlexApp() {
           <div
             style={{
               fontSize: 11,
+              fontWeight: 700,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               color: COLORS.textDimmed,
@@ -160,6 +163,7 @@ export default function AlexApp() {
           <div
             style={{
               fontSize: 11,
+              fontWeight: 700,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               color: COLORS.textDimmed,
@@ -170,6 +174,23 @@ export default function AlexApp() {
           </div>
           <div style={{ fontSize: 12, color: COLORS.textFaint, marginBottom: 16 }}>Attributes you've locked in.</div>
           <ConfirmedFacts facts={confirmedFacts} direction="column" />
+
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: COLORS.textDimmed,
+              margin: "24px 0 6px",
+            }}
+          >
+            Remaining mysteries
+          </div>
+          <div style={{ fontSize: 12, color: COLORS.textFaint, marginBottom: 16 }}>
+            Bounds narrowed from your closer/further guesses.
+          </div>
+          <RemainingMysteries facts={remainingMysteries} direction="column" />
         </div>
       </div>
 
@@ -186,6 +207,7 @@ export default function AlexApp() {
         <div
           style={{
             fontSize: 10,
+            fontWeight: 700,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
             color: COLORS.textDimmed,
@@ -195,6 +217,20 @@ export default function AlexApp() {
           Confirmed
         </div>
         <ConfirmedFacts facts={confirmedFacts} direction="row" />
+
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: COLORS.textDimmed,
+            margin: "12px 0 8px",
+          }}
+        >
+          Remaining mysteries
+        </div>
+        <RemainingMysteries facts={remainingMysteries} direction="row" />
       </div>
     </div>
   );

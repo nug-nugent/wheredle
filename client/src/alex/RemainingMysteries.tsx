@@ -2,9 +2,10 @@ import type { ConfirmedFact } from "./categories";
 import { FactCard } from "./FactCard";
 import { COLORS, FONT_FAMILY } from "../theme";
 
-// Renders the same list two ways: a vertical rail on desktop, a horizontal
-// scrolling strip on mobile — see the two usages in AlexApp.
-export function ConfirmedFacts({
+// Bounds narrowed from "up"/"down" guesses on attributes that aren't
+// confirmed yet — e.g. "< 5" once a 5-border guess has come back "down".
+// Same column/row split as ConfirmedFacts — see the two usages in AlexApp.
+export function RemainingMysteries({
   facts,
   direction = "column",
 }: {
@@ -22,10 +23,10 @@ export function ConfirmedFacts({
           fontFamily: FONT_FAMILY,
         }}
       >
-        Nothing confirmed yet.
+        No bounds narrowed down yet.
       </div>
     ) : (
-      <div style={{ fontSize: 11, color: COLORS.textFaint, fontFamily: FONT_FAMILY }}>Nothing confirmed yet.</div>
+      <div style={{ fontSize: 11, color: COLORS.textFaint, fontFamily: FONT_FAMILY }}>No bounds narrowed down yet.</div>
     );
   }
 
@@ -39,7 +40,7 @@ export function ConfirmedFacts({
       }}
     >
       {facts.map((fact) => (
-        <FactCard key={fact.key} header={fact.header} label={fact.label} layout={direction} tone="correct" />
+        <FactCard key={fact.key} header={fact.header} label={fact.label} layout={direction} tone="direction" />
       ))}
     </div>
   );

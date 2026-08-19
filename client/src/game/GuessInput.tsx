@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Autocomplete } from "@mantine/core";
 import type { Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
@@ -14,28 +14,38 @@ export function GuessInput({
   disabled?: boolean;
 }) {
   const [value, setValue] = useState("");
+  const [selected, setSelected] = useState<Country | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Selecting an option triggers our onChange too (Mantine syncs the input
+  // value to the picked label) — this ref tells that follow-up onChange not
+  // to wipe out the selection it's the one that caused.
+  const justSelectedRef = useRef(false);
 
   const handleChange = (next: string) => {
     setValue(next);
     setError(null);
+    if (justSelectedRef.current) {
+      justSelectedRef.current = false;
+    } else {
+      setSelected(null);
+    }
+  };
+
+  const handleOptionSubmit = (name: string) => {
+    justSelectedRef.current = true;
+    setSelected(findCountryByName(name) ?? null);
+    setError(null);
   };
 
   const submit = () => {
-    if (disabled) return;
-    const trimmed = value.trim();
-    if (!trimmed) return;
-    const matched = findCountryByName(trimmed);
-    if (!matched) {
-      setError("Not a recognised country.");
-      return;
-    }
-    if (guessedNames?.has(matched.name)) {
+    if (disabled || !selected) return;
+    if (guessedNames?.has(selected.name)) {
       setError("Already guessed.");
       return;
     }
-    onGuess(matched);
+    onGuess(selected);
     setValue("");
+    setSelected(null);
     setError(null);
   };
 
@@ -52,6 +62,7 @@ export function GuessInput({
         data={COUNTRY_NAMES}
         value={value}
         onChange={handleChange}
+        onOptionSubmit={handleOptionSubmit}
         onKeyDown={(e) => {
           if (e.key === "Enter") submit();
         }}
@@ -81,7 +92,7 @@ export function GuessInput({
       />
       <button
         onClick={submit}
-        disabled={disabled}
+        disabled={disabled || !selected}
         style={{
           fontFamily: FONT_FAMILY,
           fontWeight: 800,
@@ -90,8 +101,8 @@ export function GuessInput({
           color: COLORS.surface,
           border: `1px solid ${COLORS.accent}`,
           padding: "10px 22px",
-          cursor: disabled ? "default" : "pointer",
-          opacity: disabled ? 0.45 : 1,
+          cursor: disabled || !selected ? "default" : "pointer",
+          opacity: disabled || !selected ? 0.45 : 1,
         }}
       >
         Guess
