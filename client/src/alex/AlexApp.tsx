@@ -110,14 +110,17 @@ export default function AlexApp() {
         </div>
       </div>
 
-      {/* toolbar */}
-      <div className="alex-toolbar alex-fixed-row">
-        <GuessInput
-          onGuess={guess}
-          guessedNames={new Set(state.guesses.map((g) => g.country.name))}
-          disabled={inputDisabled}
-        />
-      </div>
+      {/* toolbar — gone once the game is over rather than left sitting there
+          disabled, since a dead control still costs a phone a whole row */}
+      {!finished && (
+        <div className="alex-toolbar alex-fixed-row">
+          <GuessInput
+            onGuess={guess}
+            guessedNames={new Set(state.guesses.map((g) => g.country.name))}
+            disabled={inputDisabled}
+          />
+        </div>
+      )}
 
       {/* body */}
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
