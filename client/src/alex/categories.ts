@@ -82,7 +82,7 @@ export const CATEGORIES: CategoryDef[] = [
     key: "borders",
     header: "Borders",
     flag: (f) => f.borderDirection,
-    label: (f) => String(f.country.borderCount),
+    label: (f) => TERTILE_LABEL[f.borderTertile],
     formatBound: String,
     tertile: { of: (f) => f.borderTertile, ranges: BORDER_TERTILE_RANGES },
   },
@@ -114,12 +114,33 @@ export interface ConfirmedFact {
 
 // Categories whose tertile match can be pinned down to a concrete numeric
 // range, so the confirmed rail can say "6-7 letters" rather than just
-// repeating "Top third".
-const CONFIRMED_RANGE_LABEL: Partial<Record<string, (f: GuessFeedback) => string>> = {
-  population: (f) => formatRange(f.populationTertile, POPULATION_TERTILE_RANGES, formatCompactNumber),
-  area: (f) => `${formatRange(f.areaTertile, AREA_TERTILE_RANGES, formatCompactNumber)} km²`,
-  nameLength: (f) => `${formatRange(f.nameLengthTertile, NAME_LENGTH_TERTILE_RANGES, String)} letters`,
-  borders: (f) => formatRange(f.borderTertile, BORDER_TERTILE_RANGES, String),
+// repeating "Top third" — or, if some correct guess happens to share the
+// target's exact value (common for name length and border count, which
+// have few possible values and lots of ties), the single precise number
+// instead of the range.
+const CONFIRMED_LABEL: Partial<Record<string, (matched: GuessFeedback, guesses: GuessFeedback[]) => string>> = {
+  population: (matched, guesses) => {
+    const exact = guesses.find((f) => f.samePopulationValue);
+    return exact
+      ? formatCompactNumber(exact.country.population)
+      : formatRange(matched.populationTertile, POPULATION_TERTILE_RANGES, formatCompactNumber);
+  },
+  area: (matched, guesses) => {
+    const exact = guesses.find((f) => f.sameAreaValue);
+    const value = exact
+      ? formatCompactNumber(exact.country.area)
+      : formatRange(matched.areaTertile, AREA_TERTILE_RANGES, formatCompactNumber);
+    return `${value} km²`;
+  },
+  nameLength: (matched, guesses) => {
+    const exact = guesses.find((f) => f.sameNameLengthValue);
+    const value = exact ? String(exact.country.name.length) : formatRange(matched.nameLengthTertile, NAME_LENGTH_TERTILE_RANGES, String);
+    return `${value} letters`;
+  },
+  borders: (matched, guesses) => {
+    const exact = guesses.find((f) => f.sameBorderCount);
+    return exact ? String(exact.country.borderCount) : formatRange(matched.borderTertile, BORDER_TERTILE_RANGES, String);
+  },
 };
 
 export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
@@ -128,11 +149,11 @@ export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
   for (const category of CATEGORIES) {
     const matched = guesses.find((f) => category.flag(f) === "correct");
     if (!matched) continue;
-    const rangeLabel = CONFIRMED_RANGE_LABEL[category.key];
+    const labelFn = CONFIRMED_LABEL[category.key];
     facts.push({
       key: category.key,
       header: category.header,
-      label: rangeLabel ? rangeLabel(matched) : category.label(matched),
+      label: labelFn ? labelFn(matched, guesses) : category.label(matched),
     });
   }
 
@@ -155,9 +176,9 @@ const TERTILE_ORDER: Tertile[] = ["bottom", "middle", "top"];
 
 // For a tertile-bucketed category, a wrong guess only rules out the guessed
 // country's own tertile — it doesn't say which side of it the target is on.
-// Ruling out the bottom or top tertile leaves a single-sided bound (the
-// remaining two tertiles are contiguous), but ruling out the middle tertile
-// leaves a gap on both sides, so the bound has to be stated as an "or".
+// A single wrong guess therefore isn't enough to state a bound: only once
+// two of the three tertiles have been eliminated does the third pin the
+// target down to a concrete range worth showing.
 function tertileMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): string | undefined {
   if (!category.tertile) return undefined;
   const { of, ranges } = category.tertile;
@@ -168,14 +189,9 @@ function tertileMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): s
     if (category.flag(g) === "wrong") eliminated.add(of(g));
   }
   const remaining = TERTILE_ORDER.filter((t) => !eliminated.has(t));
-  if (remaining.length === 3) return undefined;
+  if (remaining.length !== 1) return undefined;
 
-  if (remaining.length === 1) return formatRange(remaining[0], ranges, bound);
-
-  const excluded = TERTILE_ORDER.find((t) => eliminated.has(t))!;
-  if (excluded === "bottom") return `> ${bound(ranges.bottom[1])}`;
-  if (excluded === "top") return `< ${bound(ranges.top[0])}`;
-  return `< ${bound(ranges.middle[0])} or > ${bound(ranges.middle[1])}`;
+  return formatRange(remaining[0], ranges, bound);
 }
 
 export function getRemainingMysteries(guesses: GuessFeedback[]): ConfirmedFact[] {

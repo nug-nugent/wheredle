@@ -37,13 +37,19 @@ export function GuessInput({
     setError(null);
   };
 
+  // A dropdown pick sets `selected` directly; typing the full name and
+  // hitting Enter/Guess without opening the dropdown never does, so fall
+  // back to an exact (normalized) name match against the typed value.
+  const matchedCountry = selected ?? findCountryByName(value);
+
   const submit = () => {
-    if (disabled || !selected) return;
-    if (guessedNames?.has(selected.name)) {
+    const country = matchedCountry;
+    if (disabled || !country) return;
+    if (guessedNames?.has(country.name)) {
       setError("Already guessed.");
       return;
     }
-    onGuess(selected);
+    onGuess(country);
     setValue("");
     setSelected(null);
     setError(null);
@@ -92,7 +98,7 @@ export function GuessInput({
       />
       <button
         onClick={submit}
-        disabled={disabled || !selected}
+        disabled={disabled || !matchedCountry}
         style={{
           fontFamily: FONT_FAMILY,
           fontWeight: 800,
@@ -101,8 +107,8 @@ export function GuessInput({
           color: COLORS.surface,
           border: `1px solid ${COLORS.accent}`,
           padding: "10px 22px",
-          cursor: disabled || !selected ? "default" : "pointer",
-          opacity: disabled || !selected ? 0.45 : 1,
+          cursor: disabled || !matchedCountry ? "default" : "pointer",
+          opacity: disabled || !matchedCountry ? 0.45 : 1,
         }}
       >
         Guess

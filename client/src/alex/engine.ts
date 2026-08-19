@@ -127,15 +127,25 @@ export interface GuessFeedback {
   sameContinent: boolean;
   populationTertile: Tertile;
   samePopulationTertile: boolean;
+  // Exact equality, not just same tertile — lets the Confirmed rail show a
+  // precise value instead of the tertile's full range on the rare occasion
+  // a guess happens to share the target's exact number (common for name
+  // length and border count, which have few possible values and lots of
+  // ties; astronomically unlikely for population/area, but harmless to
+  // check the same way).
+  samePopulationValue: boolean;
   populationDirection: TileFlag;
   areaTertile: Tertile;
   sameAreaTertile: boolean;
+  sameAreaValue: boolean;
   areaDirection: TileFlag;
   nameLengthTertile: Tertile;
   sameNameLengthTertile: boolean;
+  sameNameLengthValue: boolean;
   nameLengthDirection: TileFlag;
   borderTertile: Tertile;
   sameBorderTertile: boolean;
+  sameBorderCount: boolean;
   borderDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
@@ -177,15 +187,19 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
     sameContinent: guessed.continent === target.continent,
     populationTertile: populationTertileOf(guessed),
     samePopulationTertile,
+    samePopulationValue: guessed.population === target.population,
     populationDirection: tertileFlag(samePopulationTertile),
     areaTertile: areaTertileOf(guessed),
     sameAreaTertile,
+    sameAreaValue: guessed.area === target.area,
     areaDirection: tertileFlag(sameAreaTertile),
     nameLengthTertile: nameLengthTertileOf(guessed),
     sameNameLengthTertile,
+    sameNameLengthValue: guessed.name.length === target.name.length,
     nameLengthDirection: tertileFlag(sameNameLengthTertile),
     borderTertile: borderTertileOf(guessed),
     sameBorderTertile,
+    sameBorderCount: guessed.borderCount === target.borderCount,
     borderDirection: tertileFlag(sameBorderTertile),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
