@@ -94,7 +94,11 @@ export function GuessInput({
             color: COLORS.text,
           },
         }}
-        style={{ flex: "1 1 220px", maxWidth: 460 }}
+        // Wrapping is decided on the flex basis rather than the shrunk
+        // width, so a basis wide enough to look right on desktop is what
+        // pushed the button onto its own line on a phone. 150 keeps the
+        // two on one row down to 320px and grows back out above that.
+        style={{ flex: "1 1 150px", maxWidth: 460 }}
       />
       <button
         onClick={submit}
@@ -106,7 +110,8 @@ export function GuessInput({
           background: COLORS.accent,
           color: COLORS.surface,
           border: `1px solid ${COLORS.accent}`,
-          padding: "10px 22px",
+          padding: "10px 20px",
+          minHeight: 40,
           cursor: disabled || !matchedCountry ? "default" : "pointer",
           opacity: disabled || !matchedCountry ? 0.45 : 1,
         }}

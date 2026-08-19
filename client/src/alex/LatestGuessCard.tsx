@@ -53,9 +53,9 @@ export function LatestGuessCard({
   }, [feedback, revealing]);
 
   return (
-    <div style={{ border: `1px solid ${COLORS.border}`, padding: 16, marginBottom: 16, fontFamily: FONT_FAMILY }}>
-      <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 12 }}>{feedback.country.name}</div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+    <div style={{ border: `1px solid ${COLORS.border}`, padding: 12, marginBottom: 12, fontFamily: FONT_FAMILY }}>
+      <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8 }}>{feedback.country.name}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
         {CATEGORIES.map((category, i) => (
           <Tile
             key={category.key}
@@ -68,11 +68,11 @@ export function LatestGuessCard({
         <div
           style={{
             border: `1px solid ${COLORS.border}`,
-            padding: "10px 12px",
+            padding: "6px 9px",
             display: "flex",
             flexDirection: "column",
-            gap: 6,
-            minWidth: 200,
+            gap: 4,
+            minWidth: 176,
           }}
         >
           <span
