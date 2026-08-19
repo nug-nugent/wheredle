@@ -29,14 +29,23 @@ export interface CategoryDef {
   formatBound?: (n: number) => string;
   unit?: string;
   // Only set for the tertile-bucketed categories (population, area, name
-  // length, borders). A wrong guess only rules out the
-  // guessed country's own tertile, which the "Remaining mysteries" rail
-  // turns into a bound, or a two-sided gap if the eliminated tertile is the
-  // middle one (see getRemainingMysteries).
+  // length, borders). A wrong guess rules out the guessed country's own
+  // tertile; getKnownFacts turns one eliminated tertile into an exclusion
+  // and two into a certainty (see eliminatedTertiles).
   tertile?: {
     of: (f: GuessFeedback) => Tertile;
     ranges: Record<Tertile, [number, number]>;
   };
+  // The guessed country's values for this attribute, for the flat
+  // (non-tertile) categories where a wrong guess rules them out. Only set
+  // where the domain is small enough that an exclusion actually narrows the
+  // field: continent (5 values), religion (7), government (23). Currency and
+  // language are left out — their domains run to hundreds of values, most of
+  // them held by a single country, so "not Kenyan shilling" says no more
+  // than the guess list already does while growing without bound. Returns []
+  // where the guessed country has no value to rule out, so a null religion
+  // doesn't surface as "not No majority".
+  excluded?: (f: GuessFeedback) => string[];
 }
 
 // Single source of truth for the tile categories: both the guess list and
@@ -51,6 +60,7 @@ export const CATEGORIES: CategoryDef[] = [
     header: "Continent",
     flag: (f) => (f.sameContinent ? "correct" : "wrong"),
     label: (f) => f.country.continent,
+    excluded: (f) => [f.country.continent],
   },
   {
     key: "population",
@@ -91,12 +101,14 @@ export const CATEGORIES: CategoryDef[] = [
     header: "Religion",
     flag: (f) => (f.sameReligion ? "correct" : "wrong"),
     label: (f) => f.country.religion ?? "No majority",
+    excluded: (f) => (f.country.religion ? [f.country.religion] : []),
   },
   {
     key: "government",
     header: "Government",
     flag: (f) => (f.sameGovernmentType ? "correct" : "wrong"),
     label: (f) => f.country.governmentType ?? "Unknown",
+    excluded: (f) => (f.country.governmentType ? [f.country.governmentType] : []),
   },
   {
     key: "currency",
@@ -106,18 +118,25 @@ export const CATEGORIES: CategoryDef[] = [
   },
 ];
 
-export interface ConfirmedFact {
+// "is" — a positive fact about the target, whether matched outright or
+// deduced. "isnt" — a value or range ruled out. Both are certainties: every
+// piece of feedback in this game is a hard constraint, so the split is about
+// positive vs negative knowledge, never about confidence.
+export type FactKind = "is" | "isnt";
+
+export interface KnownFact {
   key: string;
   header: string;
   label: string;
+  kind: FactKind;
 }
 
 // Categories whose tertile match can be pinned down to a concrete numeric
-// range, so the confirmed rail can say "6-7 letters" rather than just
-// repeating "Top third" — or, if some correct guess happens to share the
-// target's exact value (common for name length and border count, which
-// have few possible values and lots of ties), the single precise number
-// instead of the range.
+// range, so the rail can say "6-7" rather than just repeating "Top third" —
+// or, if some correct guess happens to share the target's exact value
+// (common for name length and border count, which have few possible values
+// and lots of ties), the single precise number instead of the range. Units
+// are appended by withUnit, not baked in here.
 const CONFIRMED_LABEL: Partial<Record<string, (matched: GuessFeedback, guesses: GuessFeedback[]) => string>> = {
   population: (matched, guesses) => {
     const exact = guesses.find((f) => f.samePopulationValue);
@@ -127,15 +146,13 @@ const CONFIRMED_LABEL: Partial<Record<string, (matched: GuessFeedback, guesses: 
   },
   area: (matched, guesses) => {
     const exact = guesses.find((f) => f.sameAreaValue);
-    const value = exact
+    return exact
       ? formatCompactNumber(exact.country.area)
       : formatRange(matched.areaTertile, AREA_TERTILE_RANGES, formatCompactNumber);
-    return `${value} km²`;
   },
   nameLength: (matched, guesses) => {
     const exact = guesses.find((f) => f.sameNameLengthValue);
-    const value = exact ? String(exact.country.name.length) : formatRange(matched.nameLengthTertile, NAME_LENGTH_TERTILE_RANGES, String);
-    return `${value} letters`;
+    return exact ? String(exact.country.name.length) : formatRange(matched.nameLengthTertile, NAME_LENGTH_TERTILE_RANGES, String);
   },
   borders: (matched, guesses) => {
     const exact = guesses.find((f) => f.sameBorderCount);
@@ -143,69 +160,103 @@ const CONFIRMED_LABEL: Partial<Record<string, (matched: GuessFeedback, guesses: 
   },
 };
 
-export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
-  const facts: ConfirmedFact[] = [];
+const TERTILE_ORDER: Tertile[] = ["bottom", "middle", "top"];
+
+function withUnit(category: CategoryDef, value: string): string {
+  return category.unit ? `${value} ${category.unit}` : value;
+}
+
+// The tertiles a wrong guess has ruled out. The target's own tertile can
+// never land in here — a guess is flagged wrong precisely when its tertile
+// differs from the target's — so if only one tertile survives, it *is* the
+// target's, known as certainly as if a guess had matched it outright.
+function eliminatedTertiles(category: CategoryDef, guesses: GuessFeedback[]): Set<Tertile> {
+  const eliminated = new Set<Tertile>();
+  if (!category.tertile) return eliminated;
+  for (const g of guesses) {
+    if (category.flag(g) === "wrong") eliminated.add(category.tertile.of(g));
+  }
+  return eliminated;
+}
+
+// Everything the player has established, in one list: positives first so the
+// rail opens with substance, then exclusions. Note there's no separate
+// "narrowed down" tier — a tertile pinned down by eliminating the other two
+// carries exactly the same certainty as a direct match, so it joins the
+// positives rather than being hedged into a category of its own.
+export function getKnownFacts(guesses: GuessFeedback[]): KnownFact[] {
+  const positives: KnownFact[] = [];
+  const negatives: KnownFact[] = [];
 
   for (const category of CATEGORIES) {
     const matched = guesses.find((f) => category.flag(f) === "correct");
-    if (!matched) continue;
-    const labelFn = CONFIRMED_LABEL[category.key];
-    facts.push({
-      key: category.key,
-      header: category.header,
-      label: labelFn ? labelFn(matched, guesses) : category.label(matched),
-    });
+    if (matched) {
+      const labelFn = CONFIRMED_LABEL[category.key];
+      positives.push({
+        key: category.key,
+        header: category.header,
+        label: withUnit(category, labelFn ? labelFn(matched, guesses) : category.label(matched)),
+        kind: "is",
+      });
+      continue;
+    }
+
+    if (category.tertile) {
+      const { ranges } = category.tertile;
+      const bound = category.formatBound ?? String;
+      const eliminated = eliminatedTertiles(category, guesses);
+      const remaining = TERTILE_ORDER.filter((t) => !eliminated.has(t));
+
+      if (remaining.length === 1) {
+        positives.push({
+          key: category.key,
+          header: category.header,
+          label: withUnit(category, formatRange(remaining[0], ranges, bound)),
+          kind: "is",
+        });
+      } else if (eliminated.size > 0) {
+        const ruledOut = TERTILE_ORDER.filter((t) => eliminated.has(t)).map((t) => formatRange(t, ranges, bound));
+        negatives.push({
+          key: category.key,
+          header: category.header,
+          label: withUnit(category, `not ${ruledOut.join(", ")}`),
+          kind: "isnt",
+        });
+      }
+      continue;
+    }
+
+    if (category.excluded) {
+      const ruledOut: string[] = [];
+      for (const g of guesses) {
+        if (category.flag(g) === "correct") continue;
+        for (const value of category.excluded(g)) {
+          if (!ruledOut.includes(value)) ruledOut.push(value);
+        }
+      }
+      if (ruledOut.length > 0) {
+        negatives.push({
+          key: category.key,
+          header: category.header,
+          label: `not ${ruledOut.join(", ")}`,
+          kind: "isnt",
+        });
+      }
+    }
   }
 
-  const languageMatch = guesses.find((f) => f.languageChips.some((c) => c.state === "correct"));
-  if (languageMatch) {
-    facts.push({
-      key: "language",
-      header: "Language",
-      label: languageMatch.languageChips
-        .filter((c) => c.state === "correct")
-        .map((c) => c.name)
-        .join(", "),
-    });
-  }
-
-  return facts;
-}
-
-const TERTILE_ORDER: Tertile[] = ["bottom", "middle", "top"];
-
-// For a tertile-bucketed category, a wrong guess only rules out the guessed
-// country's own tertile — it doesn't say which side of it the target is on.
-// A single wrong guess therefore isn't enough to state a bound: only once
-// two of the three tertiles have been eliminated does the third pin the
-// target down to a concrete range worth showing.
-function tertileMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): string | undefined {
-  if (!category.tertile) return undefined;
-  const { of, ranges } = category.tertile;
-  const bound = category.formatBound ?? String;
-
-  const eliminated = new Set<Tertile>();
+  // Confirmed languages are gathered across every guess, not just the first
+  // one to land a hit: a target speaking both French and German can have
+  // them confirmed by two separate guesses.
+  const confirmedLanguages: string[] = [];
   for (const g of guesses) {
-    if (category.flag(g) === "wrong") eliminated.add(of(g));
+    for (const chip of g.languageChips) {
+      if (chip.state === "correct" && !confirmedLanguages.includes(chip.name)) confirmedLanguages.push(chip.name);
+    }
   }
-  const remaining = TERTILE_ORDER.filter((t) => !eliminated.has(t));
-  if (remaining.length !== 1) return undefined;
-
-  return formatRange(remaining[0], ranges, bound);
-}
-
-export function getRemainingMysteries(guesses: GuessFeedback[]): ConfirmedFact[] {
-  const confirmedKeys = new Set(getConfirmedFacts(guesses).map((f) => f.key));
-  const mysteries: ConfirmedFact[] = [];
-
-  for (const category of CATEGORIES) {
-    if (confirmedKeys.has(category.key)) continue;
-
-    const range = tertileMysteryLabel(category, guesses);
-    if (range === undefined) continue;
-
-    mysteries.push({ key: category.key, header: category.header, label: category.unit ? `${range} ${category.unit}` : range });
+  if (confirmedLanguages.length > 0) {
+    positives.push({ key: "language", header: "Languages", label: confirmedLanguages.join(", "), kind: "is" });
   }
 
-  return mysteries;
+  return [...positives, ...negatives];
 }

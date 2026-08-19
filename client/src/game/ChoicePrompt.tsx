@@ -4,7 +4,7 @@ import { COLORS, FONT_FAMILY } from "../theme";
 const LABELS: Record<ChoosableHintType, string> = {
   continent: "Continent",
   population: "Population",
-  language: "Language",
+  language: "Languages",
 };
 
 export function ChoicePrompt({

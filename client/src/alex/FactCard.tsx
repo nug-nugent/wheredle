@@ -1,13 +1,15 @@
 import { COLORS, FONT_FAMILY } from "../theme";
 
-// Shared by ConfirmedFacts (locked-in attributes) and RemainingMysteries
-// (bounds narrowed from eliminated tertiles) — same card shape, different
-// tone so the two rails read as distinct at a glance.
-export type FactTone = "correct" | "direction";
+// One card shape for the whole knowledge rail: green for what the country
+// *is*, and the guess tiles' own "ruled out" grey for what it *isn't*, so
+// the two read as positive and negative knowledge rather than as certain and
+// provisional. Red is deliberately avoided — it's the brand accent used for
+// chrome, and nothing on this rail is ever less than certain.
+export type FactTone = "correct" | "excluded";
 
 const TONE_STYLE: Record<FactTone, { bg: string; border?: string; label: string; value: string }> = {
   correct: { bg: COLORS.correctBg, label: COLORS.correctLabel, value: COLORS.correctValue },
-  direction: { bg: COLORS.directionBg, border: COLORS.directionBorder, label: COLORS.directionLabel, value: COLORS.directionValue },
+  excluded: { bg: COLORS.wrongBg, border: COLORS.wrongBorder, label: COLORS.wrongLabel, value: COLORS.wrongValue },
 };
 
 export function FactCard({

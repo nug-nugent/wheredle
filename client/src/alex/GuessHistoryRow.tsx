@@ -63,7 +63,7 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
             <span
               style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}
             >
-              Language
+              Languages
             </span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
               {feedback.languageChips.map((c) => (
