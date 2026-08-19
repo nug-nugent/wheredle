@@ -36,12 +36,10 @@ export const COLORS = {
   wrongValue: "#605d5d",
   wrongIcon: "#9b9797",
 
-  directionBg: "#f8f4f4",
-  directionBorder: "#ffc4b8",
-  directionLabel: "#ae1800",
-  directionValue: "#201e1d",
-  directionIcon: "#ae1800",
-
+  // Partial credit, reserved for language family matches — the one place a
+  // single value can be halfway right. The knowledge rail doesn't use it:
+  // every fact there is certain, so it borrows the wrong* greys to say
+  // "ruled out" instead of inventing a hedged tone.
   partialBg: "#ffe0d9",
   partialBorder: "#ffc4b8",
   partialLabel: "#7c1405",

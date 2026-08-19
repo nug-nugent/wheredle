@@ -2,11 +2,10 @@ import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
 import { ShareScoreButton } from "../share/ShareScoreButton";
 import { COLORS, FONT_FAMILY } from "../theme";
-import { getConfirmedFacts, getRemainingMysteries } from "./categories";
-import { ConfirmedFacts } from "./ConfirmedFacts";
+import { getKnownFacts } from "./categories";
 import { MAX_GUESSES } from "./engine";
 import { GuessHistory } from "./GuessHistory";
-import { RemainingMysteries } from "./RemainingMysteries";
+import { KnownFacts } from "./KnownFacts";
 import { buildAlexShare } from "./share";
 import { useAlexGame } from "./useAlexGame";
 
@@ -28,8 +27,7 @@ const ALEX_STYLES = `
 export default function AlexApp() {
   const { state, pendingGuess, guess, commitGuess, newGame } = useAlexGame();
   const guessCountLabel = `${state.guesses.length}/${MAX_GUESSES}`;
-  const confirmedFacts = getConfirmedFacts(state.guesses);
-  const remainingMysteries = getRemainingMysteries(state.guesses);
+  const knownFacts = getKnownFacts(state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
 
@@ -165,27 +163,13 @@ export default function AlexApp() {
               marginBottom: 6,
             }}
           >
-            Confirmed
+            What you know
           </div>
-          <ConfirmedFacts facts={confirmedFacts} direction="column" />
-
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: COLORS.textDimmed,
-              margin: "24px 0 6px",
-            }}
-          >
-            Narrowed down
-          </div>
-          <RemainingMysteries facts={remainingMysteries} direction="column" />
+          <KnownFacts facts={knownFacts} direction="column" />
         </div>
       </div>
 
-      {/* mobile confirmed strip */}
+      {/* mobile knowledge strip */}
       <div
         className="alex-strip"
         style={{
@@ -205,23 +189,9 @@ export default function AlexApp() {
             marginBottom: 8,
           }}
         >
-          Confirmed
+          What you know
         </div>
-        <ConfirmedFacts facts={confirmedFacts} direction="row" />
-
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: COLORS.textDimmed,
-            margin: "12px 0 8px",
-          }}
-        >
-          Narrowed down
-        </div>
-        <RemainingMysteries facts={remainingMysteries} direction="row" />
+        <KnownFacts facts={knownFacts} direction="row" />
       </div>
     </div>
   );
