@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { CATEGORIES } from "./categories";
+import { Chip } from "./Chip";
+import { chipTone } from "./LatestGuessCard";
 import type { GuessFeedback } from "./engine";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { TileGrid } from "./TileGrid";
 
 // One dot per tile, plus one for language — a compact summary of a settled
-// guess, click to expand into the full tile grid. (Language doesn't get its
-// own detail here, only in the latest card — the dot is the only trace of
-// it for older guesses.)
+// guess, click to expand into the full tile grid plus language chips.
 function dotColors(feedback: GuessFeedback): string[] {
   const tileDots = CATEGORIES.map((c) => (c.flag(feedback) === "correct" ? COLORS.correctBg : COLORS.wrongBorder));
 
@@ -50,6 +50,27 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
       {expanded && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, padding: "0 4px 16px" }}>
           <TileGrid feedback={feedback} />
+          <div
+            style={{
+              border: `1px solid ${COLORS.border}`,
+              padding: "10px 12px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+              minWidth: 200,
+            }}
+          >
+            <span
+              style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}
+            >
+              Language
+            </span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {feedback.languageChips.map((c) => (
+                <Chip key={c.name} name={c.name} tone={chipTone(c.state)} />
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
