@@ -11,7 +11,6 @@ export interface Country {
   languages: string[];
   currencies: string[];
   flagUrl: string;
-  flagColorCount: number;
   religion: string | null; // null = no clear majority (e.g. Japan, Czechia)
   governmentType: string | null; // null = no data (e.g. Montenegro, South Sudan)
   borderCount: number;

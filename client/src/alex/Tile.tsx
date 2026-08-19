@@ -6,11 +6,9 @@ export type TileState = TileFlag | "pending";
 const ICON_PATH: Record<TileFlag, string> = {
   correct: "M20 6 9 17l-5-5",
   wrong: "M18 6 6 18M6 6l12 12",
-  up: "M12 19V5M5 12l7-7 7 7",
-  down: "M12 5v14M19 12l-7 7-7-7",
 };
 
-const ICON_STROKE_WIDTH: Record<TileFlag, number> = { correct: 3.5, wrong: 3, up: 3, down: 3 };
+const ICON_STROKE_WIDTH: Record<TileFlag, number> = { correct: 3.5, wrong: 3 };
 
 const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string; value: string; icon: string }> = {
   correct: {
@@ -27,20 +25,6 @@ const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string;
     value: COLORS.wrongValue,
     icon: COLORS.wrongIcon,
   },
-  up: {
-    bg: COLORS.directionBg,
-    border: COLORS.directionBorder,
-    label: COLORS.directionLabel,
-    value: COLORS.directionValue,
-    icon: COLORS.directionIcon,
-  },
-  down: {
-    bg: COLORS.directionBg,
-    border: COLORS.directionBorder,
-    label: COLORS.directionLabel,
-    value: COLORS.directionValue,
-    icon: COLORS.directionIcon,
-  },
   pending: {
     bg: COLORS.inputBg,
     border: COLORS.borderFaint,
@@ -50,12 +34,7 @@ const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string;
   },
 };
 
-export function Tile({ label, value, state: rawState }: { label: string; value: string; state: TileState }) {
-  // Cards never show a directional hint — a wrong guess is just wrong here,
-  // even for the categories (flag colours, borders) where the underlying
-  // flag can be "up"/"down". That real direction still feeds the "Remaining
-  // mysteries" bound text; it's only the tile icon that flattens it away.
-  const state: TileState = rawState === "up" || rawState === "down" ? "wrong" : rawState;
+export function Tile({ label, value, state }: { label: string; value: string; state: TileState }) {
   const c = TILE_STYLE[state];
   return (
     <div

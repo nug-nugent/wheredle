@@ -1,7 +1,7 @@
 import { COLORS, FONT_FAMILY } from "../theme";
 
 // Shared by ConfirmedFacts (locked-in attributes) and RemainingMysteries
-// (bounds narrowed from "up"/"down" guesses) — same card shape, different
+// (bounds narrowed from eliminated tertiles) — same card shape, different
 // tone so the two rails read as distinct at a glance.
 export type FactTone = "correct" | "direction";
 

@@ -5,10 +5,6 @@
 //  - name / continent / languages / capital / borders / currencies: mledoze/countries (dist/countries.json)
 //  - population / religion / government type: samayo/country-json
 //  - flag images: hjnilsson/country-flags SVGs, served via jsDelivr CDN by cca2 code
-//  - flagColors: flag-colors.json in this directory — NOT refetched here. It's a
-//    precomputed pixel-based colour count per flag (see that file's own notes for
-//    methodology) that needs a browser Canvas to regenerate, so it's checked in
-//    as a static lookup by cca3 rather than fetched live like everything else.
 //
 // mledoze and the samayo datasets key countries by slightly different common
 // names in a handful of cases (accents, alternate spellings). The two
@@ -17,13 +13,12 @@
 // naming between its own files (e.g. population's file says "Cabo Verde",
 // religion's says "Cape Verde").
 
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = path.join(__dirname, "../src/data/countries.json");
-const FLAG_COLORS_PATH = path.join(__dirname, "flag-colors.json");
 
 const MLEDOZE_URL =
   "https://raw.githubusercontent.com/mledoze/countries/master/dist/countries.json";
@@ -76,12 +71,11 @@ function flagUrl(cca2) {
 }
 
 async function main() {
-  const [countries, population, religion, government, flagColors] = await Promise.all([
+  const [countries, population, religion, government] = await Promise.all([
     fetch(MLEDOZE_URL).then((r) => r.json()),
     fetch(POPULATION_URL).then((r) => r.json()),
     fetch(RELIGION_URL).then((r) => r.json()),
     fetch(GOVERNMENT_URL).then((r) => r.json()),
-    readFile(FLAG_COLORS_PATH, "utf-8").then(JSON.parse),
   ]);
 
   const popByName = new Map(
@@ -115,11 +109,6 @@ async function main() {
     const governmentLookupName = GOVERNMENT_NAME_OVERRIDES[commonName] ?? commonName;
     const governmentType = governmentByName.get(governmentLookupName.toLowerCase()) ?? null;
 
-    const flagColorCount = flagColors[c.cca3];
-    if (flagColorCount === undefined) {
-      throw new Error(`No flag-colors.json entry for ${c.cca3} (${commonName})`);
-    }
-
     result.push({
       cca2: c.cca2,
       cca3: c.cca3,
@@ -131,7 +120,6 @@ async function main() {
       languages: Object.values(c.languages ?? {}),
       currencies: Object.values(c.currencies ?? {}).map((cur) => cur.name),
       flagUrl: flagUrl(c.cca2),
-      flagColorCount,
       religion: religionValue,
       governmentType,
       borderCount: (c.borders ?? []).length,

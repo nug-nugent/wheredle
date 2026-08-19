@@ -18,8 +18,8 @@ Two game modes live side by side, both reading from the same country dataset:
   then the full flag as the final guess. See `client/src/game/`.
 - **`/alex`** — an alternate, Wordle-style mode with no upfront clues: guess a
   country, get back a table of how similar it was to the answer across
-  continent, population, land area, name length, flag colour count, border
-  count, religion, government type, currency, and a full language-family
+  continent, population, land area, name length, border count, religion,
+  government type, currency, and a full language-family
   breakdown. Categories that get confirmed by a match move into a separate
   "Confirmed" summary so the guess table narrows as you go, rather than
   staying maxed out at 11 columns for the whole game. See `client/src/alex/`.
@@ -45,15 +45,6 @@ samayo/country-json) and merges them by country name, which requires a couple of
 NAME_OVERRIDES maps since the source repos don't always agree on naming for
 the same country. The script's own comments explain which override applies
 to which field and why.
-
-One field doesn't come from that script: `flagColorCount` is precomputed in
-`client/scripts/flag-colors.json` and merged in as a static lookup. It's a
-pixel-based colour count per flag (render to canvas, count colours covering
-≥2% of the image, filtering out anti-aliasing and small emblem detail) —
-regenerating it needs a browser Canvas, which a plain Node script doesn't
-have, so it's checked in rather than fetched live. See the comment block at
-the top of `fetch-countries.mjs` for the full methodology if the flag set
-ever needs updating.
 
 A few known data gaps, left as-is rather than hand-patched (consistent with
 how the rest of the dataset is sourced, not worth a one-off fix):

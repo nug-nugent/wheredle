@@ -1,6 +1,10 @@
-import type { Country } from "../data/country";
 import type { GuessFeedback, Tertile, TileFlag } from "./engine";
-import { AREA_TERTILE_RANGES, NAME_LENGTH_TERTILE_RANGES, POPULATION_TERTILE_RANGES } from "./engine";
+import {
+  AREA_TERTILE_RANGES,
+  BORDER_TERTILE_RANGES,
+  NAME_LENGTH_TERTILE_RANGES,
+  POPULATION_TERTILE_RANGES,
+} from "./engine";
 
 export const TERTILE_LABEL: Record<Tertile, string> = {
   bottom: "Bottom third",
@@ -22,16 +26,11 @@ export interface CategoryDef {
   header: string;
   flag: (f: GuessFeedback) => TileFlag;
   label: (f: GuessFeedback) => string;
-  // Only set for the exact-value categories (flag colours, borders). An
-  // "up"/"down" guess against one of these pins the target above/below a
-  // real number, which the "Remaining mysteries" rail turns into a bound
-  // like "borders < 5".
-  getValue?: (c: Country) => number;
   formatBound?: (n: number) => string;
   unit?: string;
   // Only set for the tertile-bucketed categories (population, area, name
-  // length). These never produce "up"/"down" — a wrong guess only rules out
-  // the guessed country's own tertile, which the "Remaining mysteries" rail
+  // length, borders). A wrong guess only rules out the
+  // guessed country's own tertile, which the "Remaining mysteries" rail
   // turns into a bound, or a two-sided gap if the eliminated tertile is the
   // middle one (see getRemainingMysteries).
   tertile?: {
@@ -80,20 +79,12 @@ export const CATEGORIES: CategoryDef[] = [
     tertile: { of: (f) => f.nameLengthTertile, ranges: NAME_LENGTH_TERTILE_RANGES },
   },
   {
-    key: "flagColours",
-    header: "Flag Colours",
-    flag: (f) => f.flagColorDirection,
-    label: (f) => String(f.country.flagColorCount),
-    getValue: (c) => c.flagColorCount,
-    formatBound: String,
-  },
-  {
     key: "borders",
     header: "Borders",
     flag: (f) => f.borderDirection,
     label: (f) => String(f.country.borderCount),
-    getValue: (c) => c.borderCount,
     formatBound: String,
+    tertile: { of: (f) => f.borderTertile, ranges: BORDER_TERTILE_RANGES },
   },
   {
     key: "religion",
@@ -128,6 +119,7 @@ const CONFIRMED_RANGE_LABEL: Partial<Record<string, (f: GuessFeedback) => string
   population: (f) => formatRange(f.populationTertile, POPULATION_TERTILE_RANGES, formatCompactNumber),
   area: (f) => `${formatRange(f.areaTertile, AREA_TERTILE_RANGES, formatCompactNumber)} km²`,
   nameLength: (f) => `${formatRange(f.nameLengthTertile, NAME_LENGTH_TERTILE_RANGES, String)} letters`,
+  borders: (f) => formatRange(f.borderTertile, BORDER_TERTILE_RANGES, String),
 };
 
 export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
@@ -186,32 +178,6 @@ function tertileMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): s
   return `< ${bound(ranges.middle[0])} or > ${bound(ranges.middle[1])}`;
 }
 
-// For an exact-value category, "up"/"down" guesses each pin the target
-// above or below a real number — the tightest of those (highest "up"
-// floor, lowest "down" ceiling) is the narrowest range we can state with
-// certainty, e.g. "< 5" once a 5-border guess has come back "down".
-function exactValueMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): string | undefined {
-  if (!category.getValue || !category.formatBound) return undefined;
-  const getValue = category.getValue;
-  const bound = category.formatBound;
-
-  let floor: number | undefined;
-  let ceiling: number | undefined;
-  for (const g of guesses) {
-    const value = getValue(g.country);
-    const dir = category.flag(g);
-    if (dir === "up") floor = floor === undefined ? value : Math.max(floor, value);
-    else if (dir === "down") ceiling = ceiling === undefined ? value : Math.min(ceiling, value);
-  }
-  if (floor === undefined && ceiling === undefined) return undefined;
-
-  return floor !== undefined && ceiling !== undefined
-    ? `${bound(floor)}–${bound(ceiling)}`
-    : floor !== undefined
-      ? `> ${bound(floor)}`
-      : `< ${bound(ceiling!)}`;
-}
-
 export function getRemainingMysteries(guesses: GuessFeedback[]): ConfirmedFact[] {
   const confirmedKeys = new Set(getConfirmedFacts(guesses).map((f) => f.key));
   const mysteries: ConfirmedFact[] = [];
@@ -219,7 +185,7 @@ export function getRemainingMysteries(guesses: GuessFeedback[]): ConfirmedFact[]
   for (const category of CATEGORIES) {
     if (confirmedKeys.has(category.key)) continue;
 
-    const range = tertileMysteryLabel(category, guesses) ?? exactValueMysteryLabel(category, guesses);
+    const range = tertileMysteryLabel(category, guesses);
     if (range === undefined) continue;
 
     mysteries.push({ key: category.key, header: category.header, label: category.unit ? `${range} ${category.unit}` : range });
