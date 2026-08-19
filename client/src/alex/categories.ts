@@ -161,7 +161,7 @@ export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
   if (languageMatch) {
     facts.push({
       key: "language",
-      header: "Language",
+      header: "Languages",
       label: languageMatch.languageChips
         .filter((c) => c.state === "correct")
         .map((c) => c.name)
