@@ -2,9 +2,10 @@ import type { ConfirmedFact } from "./categories";
 import { FactCard } from "./FactCard";
 import { COLORS, FONT_FAMILY } from "../theme";
 
-// Bounds narrowed from "up"/"down" guesses on attributes that aren't
-// confirmed yet — e.g. "< 5" once a 5-border guess has come back "down".
-// Same column/row split as ConfirmedFacts — see the two usages in AlexApp.
+// Bounds narrowed from eliminated tertiles on attributes that aren't
+// confirmed yet — e.g. "< 5" once the bottom two border-count tertiles have
+// both come back "wrong". Same column/row split as ConfirmedFacts — see the
+// two usages in AlexApp.
 export function RemainingMysteries({
   facts,
   direction = "column",
