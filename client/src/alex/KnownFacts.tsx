@@ -7,18 +7,23 @@ import { COLORS, FONT_FAMILY } from "../theme";
 // the target, positives (green) above exclusions (grey). How a fact was
 // learnt deliberately isn't encoded — a tertile pinned down by eliminating
 // the other two is as certain as one matched outright, and the distinction
-// wouldn't change the player's next guess. Renders the same list two ways: a
-// vertical rail on desktop, a horizontal scrolling strip on mobile — see the
-// two usages in AlexApp.
+// wouldn't change the player's next guess. Renders the same list three ways:
+// a vertical rail on desktop, a horizontal scrolling strip on mobile, and a
+// wrapping grid when that strip is pinned open to a third of the screen —
+// see the usages in AlexApp.
 export function KnownFacts({
   facts,
   direction = "column",
 }: {
   facts: KnownFact[];
-  direction?: "column" | "row";
+  direction?: "column" | "row" | "grid";
 }) {
   if (facts.length === 0) {
-    return direction === "column" ? (
+    // Both the rail and the pinned-open strip have room for the full dashed
+    // placeholder; only the one-line strip has to make do with a bare line.
+    return direction === "row" ? (
+      <div style={{ fontSize: 11, color: COLORS.textFaint, fontFamily: FONT_FAMILY }}>Nothing known yet.</div>
+    ) : (
       <div
         style={{
           border: `1px dashed ${COLORS.borderDashed}`,
@@ -30,8 +35,6 @@ export function KnownFacts({
       >
         Nothing known yet — take a guess.
       </div>
-    ) : (
-      <div style={{ fontSize: 11, color: COLORS.textFaint, fontFamily: FONT_FAMILY }}>Nothing known yet.</div>
     );
   }
 
@@ -40,13 +43,20 @@ export function KnownFacts({
       key={fact.key}
       header={fact.header}
       label={fact.label}
-      layout={direction}
+      layout={direction === "column" ? "column" : "row"}
       tone={fact.kind === "is" ? "correct" : "excluded"}
     />
   ));
 
   if (direction === "column") {
     return <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>{cards}</div>;
+  }
+
+  // Pinned open, the strip's cards keep their compact shape but wrap instead
+  // of running off the edge: several rows of facts read at a glance, which is
+  // the whole point of giving the panel the extra height.
+  if (direction === "grid") {
+    return <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignContent: "flex-start" }}>{cards}</div>;
   }
 
   return <FactStrip>{cards}</FactStrip>;
