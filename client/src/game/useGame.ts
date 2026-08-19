@@ -1,5 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { countries, type Country } from "../data/country";
+import { loadState, saveState } from "../storage";
 import {
   chooseHint as chooseHintImpl,
   pendingChoice,
@@ -9,12 +10,24 @@ import {
   type GameState,
 } from "./engine";
 
+const STORAGE_KEY = "wheredle:game";
+
 export function pickRandomCountry(): Country {
   return countries[Math.floor(Math.random() * countries.length)];
 }
 
+function initialState(): GameState {
+  const stored = loadState<GameState>(STORAGE_KEY);
+  if (stored && countries.some((c) => c.cca3 === stored.target.cca3)) return stored;
+  return startGame(pickRandomCountry());
+}
+
 export function useGame() {
-  const [state, setState] = useState<GameState>(() => startGame(pickRandomCountry()));
+  const [state, setState] = useState<GameState>(initialState);
+
+  useEffect(() => {
+    saveState(STORAGE_KEY, state);
+  }, [state]);
 
   const guess = useCallback(
     (country: Country) => {
