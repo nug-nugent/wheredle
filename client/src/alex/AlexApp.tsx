@@ -113,16 +113,6 @@ export default function AlexApp() {
           guessedNames={new Set(state.guesses.map((g) => g.country.name))}
           disabled={inputDisabled}
         />
-        {state.status === "won" && (
-          <div style={{ fontSize: 13, fontWeight: 800, color: COLORS.accent }}>
-            Solved in {guessCountLabel} — the country was {state.target.name}.
-          </div>
-        )}
-        {state.status === "lost" && (
-          <div style={{ fontSize: 13, fontWeight: 800, color: COLORS.accentHover }}>
-            Out of guesses — it was {state.target.name}.
-          </div>
-        )}
       </div>
 
       {/* body */}
@@ -139,6 +129,23 @@ export default function AlexApp() {
                 borderBottom: `2px solid ${COLORS.border}`,
               }}
             >
+              {/* The outcome is said once, here. The reveal below already
+                  names the country, so the old toolbar line saying it again
+                  a few pixels away was pure repetition. */}
+              <div
+                style={{
+                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.wrongBorder}`,
+                  color: state.status === "won" ? COLORS.accent : COLORS.wrongLabel,
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: "0.04em",
+                  padding: "6px 14px",
+                  width: "fit-content",
+                  marginBottom: 16,
+                }}
+              >
+                {state.status === "won" ? `Solved in ${guessCountLabel}` : "Out of guesses"}
+              </div>
               <CountryReveal country={state.target} />
               <div style={{ marginTop: 12 }}>
                 <ShareScoreButton gameLabel="Wheredle: Alex Mode" {...buildAlexShare(state)} />
