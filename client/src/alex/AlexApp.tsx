@@ -1,5 +1,6 @@
 import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
+import { NavMenu } from "../nav/NavMenu";
 import { ShareScoreButton } from "../share/ShareScoreButton";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { getKnownFacts } from "./categories";
@@ -11,11 +12,38 @@ import { useAlexGame } from "./useAlexGame";
 
 // Scoped to `.alex-root` so none of this leaks into classic Wheredle.
 const ALEX_STYLES = `
+  .alex-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 28px;
+    border-bottom: 2px solid ${COLORS.border};
+  }
+  .alex-nav-title { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+  .alex-nav-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .alex-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 28px;
+    border-bottom: 2px solid ${COLORS.border};
+    flex-wrap: wrap;
+  }
+  .alex-history { padding: 24px 28px; }
   .alex-rail { display: flex; }
   .alex-strip { display: none; }
   @media (max-width: 767px) {
     .alex-rail { display: none; }
     .alex-strip { display: block; }
+    /* Title, guess count and menu stay on one row at phone widths — the
+       nav never wraps, it just tightens. */
+    .alex-nav { padding: 12px 16px; gap: 10px; }
+    .alex-nav-title { font-size: 20px; }
+    .alex-nav-right { gap: 10px; }
+    /* Narrower gutters buy the guess field enough width to keep its
+       button alongside it rather than on a second row. */
+    .alex-toolbar { padding: 12px 16px; gap: 12px; }
+    .alex-history { padding: 16px; }
   }
   .alex-root ::selection { background: rgba(236,48,19,0.3); }
   .alex-root a { color: ${COLORS.accent}; }
@@ -46,18 +74,9 @@ export default function AlexApp() {
       <style>{ALEX_STYLES}</style>
 
       {/* nav */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          padding: "16px 28px",
-          borderBottom: `2px solid ${COLORS.border}`,
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ fontWeight: 800, fontSize: 22, letterSpacing: "-0.02em" }}>WHEREDLE</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginLeft: "auto" }}>
+      <div className="alex-nav">
+        <div className="alex-nav-title">WHEREDLE</div>
+        <div className="alex-nav-right">
           <div
             style={{
               border: `1px solid ${COLORS.accent}`,
@@ -65,39 +84,17 @@ export default function AlexApp() {
               fontSize: 11,
               letterSpacing: "0.04em",
               padding: "5px 12px",
+              whiteSpace: "nowrap",
             }}
           >
             GUESS {guessCountLabel}
           </div>
-          <button
-            onClick={newGame}
-            style={{
-              fontFamily: "inherit",
-              fontWeight: 800,
-              fontSize: 13,
-              border: `1px solid ${COLORS.border}`,
-              background: "transparent",
-              color: COLORS.text,
-              padding: "9px 16px",
-              cursor: "pointer",
-            }}
-          >
-            New game
-          </button>
+          <NavMenu onNewGame={newGame} />
         </div>
       </div>
 
       {/* toolbar */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          padding: "16px 28px",
-          borderBottom: `2px solid ${COLORS.border}`,
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="alex-toolbar">
         <GuessInput
           onGuess={guess}
           guessedNames={new Set(state.guesses.map((g) => g.country.name))}
@@ -126,7 +123,7 @@ export default function AlexApp() {
 
       {/* body */}
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-        <div style={{ flex: 1, overflowY: "auto", padding: "24px 28px" }}>
+        <div className="alex-history" style={{ flex: 1, overflowY: "auto" }}>
           <div
             style={{
               fontSize: 11,
