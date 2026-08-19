@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
 import { NavMenu } from "../nav/NavMenu";
@@ -12,6 +13,12 @@ import { useAlexGame } from "./useAlexGame";
 
 // Scoped to `.alex-root` so none of this leaks into classic Wheredle.
 const ALEX_STYLES = `
+  /* The page itself never scrolls: the shell is exactly one viewport tall
+     (dvh so a phone's collapsing URL bar doesn't crop it), the nav,
+     toolbar and knowledge strip hold their height, and the guess history
+     in the middle takes whatever is left and scrolls inside it. */
+  .alex-root { height: 100vh; height: 100dvh; overflow: hidden; }
+  .alex-fixed-row { flex: none; }
   .alex-nav {
     display: flex;
     align-items: center;
@@ -58,12 +65,18 @@ export default function AlexApp() {
   const knownFacts = getKnownFacts(state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  // The reveal is prepended to a pane the player has usually scrolled down
+  // by the last guess, so send them back to the top to meet it.
+  useEffect(() => {
+    if (finished) historyRef.current?.scrollTo({ top: 0 });
+  }, [finished]);
 
   return (
     <div
       className="alex-root"
       style={{
-        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         background: COLORS.surface,
@@ -74,7 +87,7 @@ export default function AlexApp() {
       <style>{ALEX_STYLES}</style>
 
       {/* nav */}
-      <div className="alex-nav">
+      <div className="alex-nav alex-fixed-row">
         <div className="alex-nav-title">WHEREDLE</div>
         <div className="alex-nav-right">
           <div
@@ -94,7 +107,7 @@ export default function AlexApp() {
       </div>
 
       {/* toolbar */}
-      <div className="alex-toolbar">
+      <div className="alex-toolbar alex-fixed-row">
         <GuessInput
           onGuess={guess}
           guessedNames={new Set(state.guesses.map((g) => g.country.name))}
@@ -112,18 +125,26 @@ export default function AlexApp() {
         )}
       </div>
 
-      {finished && (
-        <div style={{ padding: "20px 28px", borderBottom: `2px solid ${COLORS.border}` }}>
-          <CountryReveal country={state.target} />
-          <div style={{ marginTop: 12 }}>
-            <ShareScoreButton gameLabel="Wheredle: Alex Mode" {...buildAlexShare(state)} />
-          </div>
-        </div>
-      )}
-
       {/* body */}
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-        <div className="alex-history" style={{ flex: 1, overflowY: "auto" }}>
+        <div ref={historyRef} className="alex-history" style={{ flex: 1, minWidth: 0, overflowY: "auto" }}>
+          {/* The reveal scrolls with the guesses rather than sitting in fixed
+              chrome: it's tall enough (flag, facts, share button) to leave a
+              phone with barely a sliver of history underneath it. */}
+          {finished && (
+            <div
+              style={{
+                marginBottom: 20,
+                paddingBottom: 20,
+                borderBottom: `2px solid ${COLORS.border}`,
+              }}
+            >
+              <CountryReveal country={state.target} />
+              <div style={{ marginTop: 12 }}>
+                <ShareScoreButton gameLabel="Wheredle: Alex Mode" {...buildAlexShare(state)} />
+              </div>
+            </div>
+          )}
           <div
             style={{
               fontSize: 11,
@@ -168,7 +189,7 @@ export default function AlexApp() {
 
       {/* mobile knowledge strip */}
       <div
-        className="alex-strip"
+        className="alex-strip alex-fixed-row"
         style={{
           borderTop: `2px solid ${COLORS.border}`,
           background: COLORS.surface,
