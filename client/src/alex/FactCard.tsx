@@ -29,10 +29,10 @@ export function FactCard({
       style={{
         background: c.bg,
         border: c.border ? `1px solid ${c.border}` : undefined,
-        padding: layout === "row" ? "8px 10px" : "10px 12px",
+        padding: layout === "row" ? "6px 9px" : "7px 10px",
         display: "flex",
         flexDirection: "column",
-        gap: layout === "row" ? 2 : 3,
+        gap: layout === "row" ? 1 : 2,
         flex: "none",
         minWidth: layout === "row" ? 96 : undefined,
         fontFamily: FONT_FAMILY,

@@ -41,11 +41,11 @@ export function Tile({ label, value, state }: { label: string; value: string; st
       style={{
         border: `1px solid ${c.border}`,
         background: c.bg,
-        padding: "10px 12px",
+        padding: "6px 9px",
         display: "flex",
         flexDirection: "column",
-        gap: 4,
-        minWidth: 128,
+        gap: 1,
+        minWidth: 112,
         fontFamily: FONT_FAMILY,
       }}
     >

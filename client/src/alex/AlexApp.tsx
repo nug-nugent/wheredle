@@ -51,6 +51,10 @@ const ALEX_STYLES = `
        button alongside it rather than on a second row. */
     .alex-toolbar { padding: 12px 16px; gap: 12px; }
     .alex-history { padding: 16px; }
+    /* The nav's GUESS n/6 chip is a few pixels away and says the same
+       thing; on desktop the heading still earns its place labelling this
+       column against the rail's "What you know". */
+    .alex-history-heading { display: none; }
   }
   .alex-root ::selection { background: rgba(236,48,19,0.3); }
   .alex-root a { color: ${COLORS.accent}; }
@@ -153,13 +157,14 @@ export default function AlexApp() {
             </div>
           )}
           <div
+            className="alex-history-heading"
             style={{
               fontSize: 11,
               fontWeight: 700,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               color: COLORS.textDimmed,
-              marginBottom: 14,
+              marginBottom: 10,
             }}
           >
             Guesses ({guessCountLabel})

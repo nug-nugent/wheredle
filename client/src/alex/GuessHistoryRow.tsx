@@ -27,7 +27,7 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
     <div style={{ borderBottom: `1px solid ${COLORS.borderFaint}`, fontFamily: FONT_FAMILY }}>
       <div
         onClick={() => setExpanded((e) => !e)}
-        style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 4px", cursor: "pointer" }}
+        style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 4px", cursor: "pointer" }}
       >
         <div style={{ fontWeight: 600, fontSize: 14, minWidth: 170 }}>{feedback.country.name}</div>
         <div style={{ display: "flex", gap: 3 }}>
@@ -48,16 +48,16 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
         </svg>
       </div>
       {expanded && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, padding: "0 4px 16px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, padding: "0 4px 12px" }}>
           <TileGrid feedback={feedback} />
           <div
             style={{
               border: `1px solid ${COLORS.border}`,
-              padding: "10px 12px",
+              padding: "6px 9px",
               display: "flex",
               flexDirection: "column",
-              gap: 6,
-              minWidth: 200,
+              gap: 4,
+              minWidth: 176,
             }}
           >
             <span
