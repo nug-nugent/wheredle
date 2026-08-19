@@ -77,9 +77,9 @@ const ALEX_STYLES = `
        button alongside it rather than on a second row. */
     .alex-toolbar { padding: 12px 16px; gap: 12px; }
     .alex-history { padding: 16px; }
-    /* The nav's GUESS n/6 chip is a few pixels away and says the same
-       thing; on desktop the heading still earns its place labelling this
-       column against the rail's "What you know". */
+    /* The nav's guesses-remaining chip is a few pixels away and says the
+       same thing; on desktop the heading still earns its place labelling
+       this column against the rail's "What you know". */
     .alex-history-heading { display: none; }
   }
   .alex-root ::selection { background: rgba(236,48,19,0.3); }
@@ -91,7 +91,11 @@ const ALEX_STYLES = `
 
 export default function AlexApp() {
   const { state, pendingGuess, guess, commitGuess, newGame } = useAlexGame();
-  const guessCountLabel = `${state.guesses.length}/${MAX_GUESSES}`;
+  // Players track "how much rope have I got left", not "which guess is this",
+  // so the chip counts down rather than reporting a position in a sequence.
+  const guessesRemaining = Math.max(MAX_GUESSES - state.guesses.length, 0);
+  const remainingLabel = `${guessesRemaining} ${guessesRemaining === 1 ? "guess" : "guesses"} remaining`;
+  const guessesUsedLabel = `${state.guesses.length} ${state.guesses.length === 1 ? "guess" : "guesses"}`;
   const knownFacts = getKnownFacts(state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
@@ -124,18 +128,22 @@ export default function AlexApp() {
       <div className="alex-nav alex-fixed-row">
         <div className="alex-nav-title">WHEREDLE</div>
         <div className="alex-nav-right">
-          <div
-            style={{
-              border: `1px solid ${COLORS.accent}`,
-              color: COLORS.accent,
-              fontSize: 11,
-              letterSpacing: "0.04em",
-              padding: "5px 12px",
-              whiteSpace: "nowrap",
-            }}
-          >
-            GUESS {guessCountLabel}
-          </div>
+          {/* A countdown has nothing to say once the game is over — the
+              reveal below carries the outcome instead. */}
+          {!finished && (
+            <div
+              style={{
+                border: `1px solid ${COLORS.accent}`,
+                color: COLORS.accent,
+                fontSize: 11,
+                letterSpacing: "0.04em",
+                padding: "5px 12px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {remainingLabel.toUpperCase()}
+            </div>
+          )}
           <NavMenu onNewGame={newGame} />
         </div>
       </div>
@@ -181,7 +189,7 @@ export default function AlexApp() {
                   marginBottom: 16,
                 }}
               >
-                {state.status === "won" ? `Solved in ${guessCountLabel}` : "Out of guesses"}
+                {state.status === "won" ? `Solved in ${guessesUsedLabel}` : "Out of guesses"}
               </div>
               <CountryReveal country={state.target} />
               <div style={{ marginTop: 12 }}>
@@ -200,7 +208,7 @@ export default function AlexApp() {
               marginBottom: 10,
             }}
           >
-            Guesses ({guessCountLabel})
+            Guesses ({state.guesses.length})
           </div>
           <GuessHistory guesses={state.guesses} pendingGuess={pendingGuess} onRevealComplete={commitGuess} />
         </div>
