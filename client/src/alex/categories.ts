@@ -1,4 +1,4 @@
-import type { GuessFeedback, Tertile, TileFlag } from "./engine";
+import type { GuessFeedback, LanguageChip, Tertile, TileFlag } from "./engine";
 import {
   AREA_TERTILE_RANGES,
   BORDER_TERTILE_RANGES,
@@ -256,6 +256,31 @@ export function getKnownFacts(guesses: GuessFeedback[]): KnownFact[] {
   }
   if (confirmedLanguages.length > 0) {
     positives.push({ key: "language", header: "Languages", label: confirmedLanguages.join(", "), kind: "is" });
+  }
+
+  // The deepest ancestry established without naming a language outright.
+  // A partial chip says the target speaks *something* in this branch that
+  // hasn't been pinned down yet, which is real, certain narrowing and the
+  // one piece of language knowledge that accumulates across guesses without
+  // ever appearing above. Exact matches are excluded deliberately: their
+  // lineage is fully implied by the Languages fact, so including them would
+  // only pad the rail — but a target speaking both French and German still
+  // gets "Indo-European → Germanic" from a Dutch guess after French is
+  // confirmed, because that points at the language still outstanding.
+  let deepest: LanguageChip | undefined;
+  for (const g of guesses) {
+    for (const chip of g.languageChips) {
+      if (chip.state !== "family") continue;
+      if (!deepest || chip.sharedDepth > deepest.sharedDepth) deepest = chip;
+    }
+  }
+  if (deepest) {
+    positives.push({
+      key: "languageFamily",
+      header: "Language family",
+      label: deepest.lineage.slice(0, deepest.sharedDepth).join(" → "),
+      kind: "is",
+    });
   }
 
   return [...positives, ...negatives];

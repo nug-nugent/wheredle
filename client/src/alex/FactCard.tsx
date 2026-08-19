@@ -1,15 +1,16 @@
 import { COLORS, FONT_FAMILY } from "../theme";
 
 // One card shape for the whole knowledge rail: green for what the country
-// *is*, and the guess tiles' own "ruled out" grey for what it *isn't*, so
-// the two read as positive and negative knowledge rather than as certain and
-// provisional. Red is deliberately avoided — it's the brand accent used for
-// chrome, and nothing on this rail is ever less than certain.
+// *is*, and a neutral grey for what it *isn't*, so the two read as positive
+// and negative knowledge rather than as certain and provisional. Red is
+// deliberately avoided here even though the guess tiles use it for a miss —
+// an exclusion is something the player has established, not somewhere they
+// went wrong.
 export type FactTone = "correct" | "excluded";
 
 const TONE_STYLE: Record<FactTone, { bg: string; border?: string; label: string; value: string }> = {
   correct: { bg: COLORS.correctBg, label: COLORS.correctLabel, value: COLORS.correctValue },
-  excluded: { bg: COLORS.wrongBg, border: COLORS.wrongBorder, label: COLORS.wrongLabel, value: COLORS.wrongValue },
+  excluded: { bg: COLORS.mutedBg, border: COLORS.mutedBorder, label: COLORS.mutedLabel, value: COLORS.mutedValue },
 };
 
 export function FactCard({
