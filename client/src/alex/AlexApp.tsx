@@ -14,11 +14,9 @@ import { useAlexGame } from "./useAlexGame";
 const ALEX_STYLES = `
   .alex-rail { display: flex; }
   .alex-strip { display: none; }
-  .alex-tagline { display: block; }
   @media (max-width: 767px) {
     .alex-rail { display: none; }
     .alex-strip { display: block; }
-    .alex-tagline { display: none; }
   }
   .alex-root ::selection { background: rgba(236,48,19,0.3); }
   .alex-root a { color: ${COLORS.accent}; }
@@ -61,9 +59,6 @@ export default function AlexApp() {
         }}
       >
         <div style={{ fontWeight: 800, fontSize: 22, letterSpacing: "-0.02em" }}>WHEREDLE</div>
-        <div className="alex-tagline" style={{ fontSize: 13, color: COLORS.textDimmed, flex: 1, minWidth: 120 }}>
-          Guess the country. No clues up front.
-        </div>
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginLeft: "auto" }}>
           <div
             style={{
@@ -172,7 +167,6 @@ export default function AlexApp() {
           >
             Confirmed
           </div>
-          <div style={{ fontSize: 12, color: COLORS.textFaint, marginBottom: 16 }}>Attributes you've locked in.</div>
           <ConfirmedFacts facts={confirmedFacts} direction="column" />
 
           <div
@@ -185,10 +179,7 @@ export default function AlexApp() {
               margin: "24px 0 6px",
             }}
           >
-            Remaining mysteries
-          </div>
-          <div style={{ fontSize: 12, color: COLORS.textFaint, marginBottom: 16 }}>
-            Bounds narrowed from your closer/further guesses.
+            Narrowed down
           </div>
           <RemainingMysteries facts={remainingMysteries} direction="column" />
         </div>
@@ -228,7 +219,7 @@ export default function AlexApp() {
             margin: "12px 0 8px",
           }}
         >
-          Remaining mysteries
+          Narrowed down
         </div>
         <RemainingMysteries facts={remainingMysteries} direction="row" />
       </div>
