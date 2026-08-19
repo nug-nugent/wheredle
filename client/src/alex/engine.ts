@@ -19,25 +19,48 @@ export interface LanguageChip {
   state: LanguageChipState;
 }
 
-function buildTertileClassifier(getValue: (c: Country) => number): (c: Country) => Tertile {
+// The min/max raw value found within each tertile bucket, so the UI can
+// tell the player "6-7 letters" instead of just "top third".
+export type TertileRanges = Record<Tertile, [number, number]>;
+
+function buildTertileClassifier(
+  getValue: (c: Country) => number
+): { classify: (c: Country) => Tertile; ranges: TertileRanges } {
   const sorted = [...countries].sort((a, b) => getValue(a) - getValue(b));
   const tertileSize = Math.ceil(sorted.length / 3);
-  const byCca3 = new Map<string, Tertile>(
-    sorted.map((c, i) => [
-      c.cca3,
-      i < tertileSize ? "bottom" : i < tertileSize * 2 ? "middle" : "top",
-    ])
-  );
-  return (country) => {
-    const tertile = byCca3.get(country.cca3);
-    if (!tertile) throw new Error(`No tertile for ${country.cca3}`);
-    return tertile;
+  const byCca3 = new Map<string, Tertile>();
+  const buckets: Record<Tertile, number[]> = { bottom: [], middle: [], top: [] };
+  sorted.forEach((c, i) => {
+    const tertile: Tertile = i < tertileSize ? "bottom" : i < tertileSize * 2 ? "middle" : "top";
+    byCca3.set(c.cca3, tertile);
+    buckets[tertile].push(getValue(c));
+  });
+  const ranges = {
+    bottom: [Math.min(...buckets.bottom), Math.max(...buckets.bottom)],
+    middle: [Math.min(...buckets.middle), Math.max(...buckets.middle)],
+    top: [Math.min(...buckets.top), Math.max(...buckets.top)],
+  } as TertileRanges;
+  return {
+    classify: (country) => {
+      const tertile = byCca3.get(country.cca3);
+      if (!tertile) throw new Error(`No tertile for ${country.cca3}`);
+      return tertile;
+    },
+    ranges,
   };
 }
 
-const populationTertileOf = buildTertileClassifier((c) => c.population);
-const areaTertileOf = buildTertileClassifier((c) => c.area);
-const nameLengthTertileOf = buildTertileClassifier((c) => c.name.length);
+const populationTertiles = buildTertileClassifier((c) => c.population);
+const areaTertiles = buildTertileClassifier((c) => c.area);
+const nameLengthTertiles = buildTertileClassifier((c) => c.name.length);
+
+const populationTertileOf = populationTertiles.classify;
+const areaTertileOf = areaTertiles.classify;
+const nameLengthTertileOf = nameLengthTertiles.classify;
+
+export const POPULATION_TERTILE_RANGES = populationTertiles.ranges;
+export const AREA_TERTILE_RANGES = areaTertiles.ranges;
+export const NAME_LENGTH_TERTILE_RANGES = nameLengthTertiles.ranges;
 
 // "up" means the target's value is higher than the guess (dial it up);
 // "down" means the reverse. Only meaningful once we know it's not correct.
