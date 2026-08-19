@@ -171,8 +171,8 @@ export default function AlexApp() {
                   a few pixels away was pure repetition. */}
               <div
                 style={{
-                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.wrongBorder}`,
-                  color: state.status === "won" ? COLORS.accent : COLORS.wrongLabel,
+                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.mutedBorder}`,
+                  color: state.status === "won" ? COLORS.accent : COLORS.mutedLabel,
                   fontSize: 12,
                   fontWeight: 800,
                   letterSpacing: "0.04em",

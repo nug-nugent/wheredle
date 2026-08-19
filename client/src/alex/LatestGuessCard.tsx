@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { CATEGORIES } from "./categories";
-import { Chip } from "./Chip";
-import type { GuessFeedback, LanguageChipState } from "./engine";
+import type { GuessFeedback } from "./engine";
+import { LanguageBox } from "./LanguageBox";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { Tile } from "./Tile";
 
 const REVEAL_INTERVAL_MS = 200;
 // One slot per tile, plus one for the language box.
 const REVEAL_SLOT_COUNT = CATEGORIES.length + 1;
-
-export function chipTone(state: LanguageChipState) {
-  return state === "correct" ? "correct" : state === "family" ? "partial" : "wrong";
-}
 
 // The most recent guess: always shown in full (tiles + language chips),
 // rather than collapsed to a dot summary like older guesses. `revealing`
@@ -65,26 +61,7 @@ export function LatestGuessCard({
           />
         ))}
 
-        <div
-          style={{
-            border: `1px solid ${COLORS.border}`,
-            padding: "6px 9px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 4,
-            minWidth: 176,
-          }}
-        >
-          <span
-            style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}
-          >
-            Languages
-          </span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {revealCount > CATEGORIES.length &&
-              feedback.languageChips.map((c) => <Chip key={c.name} name={c.name} tone={chipTone(c.state)} />)}
-          </div>
-        </div>
+        <LanguageBox chips={feedback.languageChips} revealed={revealCount > CATEGORIES.length} />
       </div>
     </div>
   );

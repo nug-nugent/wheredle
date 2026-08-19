@@ -1,5 +1,5 @@
 import { countries, type Country } from "../data/country";
-import { languageLineage } from "./languageFamily";
+import { languageLineage, sharedLineageDepth } from "./languageFamily";
 
 // Every numeric category (population, land area, name length, border count)
 // is bucketed into thirds by rank (not raw value), so "top third" has a
@@ -17,6 +17,18 @@ export type TileFlag = "correct" | "wrong";
 export type LanguageChipState = "correct" | "family" | "wrong";
 export interface LanguageChip {
   name: string;
+  // Broadest family down to the language itself; empty for a language the
+  // taxonomy doesn't cover, which can still match exactly by name.
+  lineage: string[];
+  // How many levels of `lineage` are shared with the closest of the
+  // target's languages: 0 for no relation at all, lineage.length when the
+  // target speaks this language too. This is what separates a sibling
+  // branch from a root five millennia back — `state` alone can't, since
+  // both are merely "family".
+  sharedDepth: number;
+  // The narrowest family shared with the target, i.e. lineage[sharedDepth - 1].
+  // Undefined when nothing is shared.
+  sharedAncestor?: string;
   state: LanguageChipState;
 }
 
@@ -105,20 +117,31 @@ function tertileFlag(sameTertile: boolean): TileFlag {
   return sameTertile ? "correct" : "wrong";
 }
 
-// "family" is a broader match than our usual lineage-depth comparison:
-// just whether the guessed language's broadest ancestor (lineage[0])
-// matches any of the target's — enough to colour a chip, not to rank it.
-function languageChipState(guessedLanguage: string, targetLanguages: string[]): LanguageChipState {
-  if (targetLanguages.includes(guessedLanguage)) return "correct";
+// One guessed language measured against every language the target speaks,
+// keeping the closest relationship found. "family" means any shared
+// ancestry at all — the same threshold as before — but the chip now also
+// carries how deep that sharing runs, so the UI can rank near misses
+// instead of painting Dutch and Hindi identically against an English
+// target.
+function languageChip(guessedLanguage: string, targetLanguages: string[]): LanguageChip {
+  const lineage = languageLineage(guessedLanguage) ?? [];
 
-  const guessedLineage = languageLineage(guessedLanguage);
-  if (guessedLineage) {
-    for (const target of targetLanguages) {
-      const targetLineage = languageLineage(target);
-      if (targetLineage && targetLineage[0] === guessedLineage[0]) return "family";
-    }
+  let sharedDepth = 0;
+  for (const target of targetLanguages) {
+    sharedDepth = Math.max(sharedDepth, sharedLineageDepth(guessedLanguage, target));
   }
-  return "wrong";
+
+  // Name equality is the source of truth for an exact match, not the
+  // taxonomy: a language missing from the table still matches itself.
+  const exact = targetLanguages.includes(guessedLanguage);
+
+  return {
+    name: guessedLanguage,
+    lineage,
+    sharedDepth,
+    sharedAncestor: sharedDepth > 0 ? lineage[sharedDepth - 1] : undefined,
+    state: exact ? "correct" : sharedDepth > 0 ? "family" : "wrong",
+  };
 }
 
 export interface GuessFeedback {
@@ -206,10 +229,7 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
     sameCurrency:
       guessed.currencies.length > 0 &&
       guessed.currencies.some((c) => target.currencies.includes(c)),
-    languageChips: guessed.languages.map((name) => ({
-      name,
-      state: languageChipState(name, target.languages),
-    })),
+    languageChips: guessed.languages.map((name) => languageChip(name, target.languages)),
   };
 }
 

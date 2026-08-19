@@ -52,8 +52,8 @@ export default function App() {
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <span
                 style={{
-                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.wrongBorder}`,
-                  color: state.status === "won" ? COLORS.accent : COLORS.wrongLabel,
+                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.mutedBorder}`,
+                  color: state.status === "won" ? COLORS.accent : COLORS.mutedLabel,
                   fontSize: 12,
                   fontWeight: 800,
                   letterSpacing: "0.04em",

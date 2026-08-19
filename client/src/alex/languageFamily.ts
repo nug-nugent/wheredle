@@ -228,3 +228,21 @@ const LANGUAGE_LINEAGE: Record<string, string[]> = {
 export function languageLineage(language: string): string[] | undefined {
   return LANGUAGE_LINEAGE[language];
 }
+
+// How many levels two languages share, counting down from the broadest
+// family: the length of their lineages' longest common prefix. 0 means no
+// relation this taxonomy knows of (including either language being missing
+// from it altogether); the full lineage length means they're the same
+// language. This is what lets a chip say how *closely* it missed, rather
+// than just that the two are related somewhere.
+export function sharedLineageDepth(a: string, b: string): number {
+  const lineageA = LANGUAGE_LINEAGE[a];
+  const lineageB = LANGUAGE_LINEAGE[b];
+  if (!lineageA || !lineageB) return 0;
+
+  let depth = 0;
+  while (depth < lineageA.length && depth < lineageB.length && lineageA[depth] === lineageB[depth]) {
+    depth++;
+  }
+  return depth;
+}

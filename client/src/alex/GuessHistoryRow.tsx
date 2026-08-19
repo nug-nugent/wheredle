@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { CATEGORIES } from "./categories";
-import { Chip } from "./Chip";
-import { chipTone } from "./LatestGuessCard";
 import type { GuessFeedback } from "./engine";
+import { LanguageBox } from "./LanguageBox";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { TileGrid } from "./TileGrid";
 
@@ -16,7 +15,7 @@ function dotColors(feedback: GuessFeedback): string[] {
 
   return [
     ...tileDots,
-    languageConfirmed ? COLORS.correctBg : languagePartial ? COLORS.partialBorder : COLORS.wrongBorder,
+    languageConfirmed ? COLORS.correctBg : languagePartial ? COLORS.partialSolid : COLORS.wrongBorder,
   ];
 }
 
@@ -50,27 +49,7 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
       {expanded && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, padding: "0 4px 12px" }}>
           <TileGrid feedback={feedback} />
-          <div
-            style={{
-              border: `1px solid ${COLORS.border}`,
-              padding: "6px 9px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
-              minWidth: 176,
-            }}
-          >
-            <span
-              style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}
-            >
-              Languages
-            </span>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {feedback.languageChips.map((c) => (
-                <Chip key={c.name} name={c.name} tone={chipTone(c.state)} />
-              ))}
-            </div>
-          </div>
+          <LanguageBox chips={feedback.languageChips} />
         </div>
       )}
     </div>
