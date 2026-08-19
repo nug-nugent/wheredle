@@ -50,7 +50,12 @@ const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string;
   },
 };
 
-export function Tile({ label, value, state }: { label: string; value: string; state: TileState }) {
+export function Tile({ label, value, state: rawState }: { label: string; value: string; state: TileState }) {
+  // Cards never show a directional hint — a wrong guess is just wrong here,
+  // even for the categories (flag colours, borders) where the underlying
+  // flag can be "up"/"down". That real direction still feeds the "Remaining
+  // mysteries" bound text; it's only the tile icon that flattens it away.
+  const state: TileState = rawState === "up" || rawState === "down" ? "wrong" : rawState;
   const c = TILE_STYLE[state];
   return (
     <div

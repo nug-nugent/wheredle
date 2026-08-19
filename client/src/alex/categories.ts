@@ -22,13 +22,22 @@ export interface CategoryDef {
   header: string;
   flag: (f: GuessFeedback) => TileFlag;
   label: (f: GuessFeedback) => string;
-  // Only set for categories with an orderable raw value (population, area,
-  // name length, flag colours, borders). An "up"/"down" guess against one of
-  // these pins the target between/above/below real numbers, which the
-  // "Remaining mysteries" rail turns into a bound like "borders < 5".
+  // Only set for the exact-value categories (flag colours, borders). An
+  // "up"/"down" guess against one of these pins the target above/below a
+  // real number, which the "Remaining mysteries" rail turns into a bound
+  // like "borders < 5".
   getValue?: (c: Country) => number;
   formatBound?: (n: number) => string;
   unit?: string;
+  // Only set for the tertile-bucketed categories (population, area, name
+  // length). These never produce "up"/"down" — a wrong guess only rules out
+  // the guessed country's own tertile, which the "Remaining mysteries" rail
+  // turns into a bound, or a two-sided gap if the eliminated tertile is the
+  // middle one (see getRemainingMysteries).
+  tertile?: {
+    of: (f: GuessFeedback) => Tertile;
+    ranges: Record<Tertile, [number, number]>;
+  };
 }
 
 // Single source of truth for the tile categories: both the guess list and
@@ -49,26 +58,26 @@ export const CATEGORIES: CategoryDef[] = [
     header: "Population",
     flag: (f) => f.populationDirection,
     label: (f) => TERTILE_LABEL[f.populationTertile],
-    getValue: (c) => c.population,
     formatBound: formatCompactNumber,
+    tertile: { of: (f) => f.populationTertile, ranges: POPULATION_TERTILE_RANGES },
   },
   {
     key: "area",
     header: "Land Area",
     flag: (f) => f.areaDirection,
     label: (f) => TERTILE_LABEL[f.areaTertile],
-    getValue: (c) => c.area,
     formatBound: formatCompactNumber,
     unit: "km²",
+    tertile: { of: (f) => f.areaTertile, ranges: AREA_TERTILE_RANGES },
   },
   {
     key: "nameLength",
     header: "Name Length",
     flag: (f) => f.nameLengthDirection,
     label: (f) => TERTILE_LABEL[f.nameLengthTertile],
-    getValue: (c) => c.name.length,
     formatBound: String,
     unit: "letters",
+    tertile: { of: (f) => f.nameLengthTertile, ranges: NAME_LENGTH_TERTILE_RANGES },
   },
   {
     key: "flagColours",
@@ -150,34 +159,68 @@ export function getConfirmedFacts(guesses: GuessFeedback[]): ConfirmedFact[] {
   return facts;
 }
 
-// For a category that isn't confirmed yet, "up"/"down" guesses each pin the
-// target above or below a real number — the tightest of those (highest
-// "up" floor, lowest "down" ceiling) is the narrowest range we can state
-// with certainty, e.g. "< 5" once a 5-border guess has come back "down".
+const TERTILE_ORDER: Tertile[] = ["bottom", "middle", "top"];
+
+// For a tertile-bucketed category, a wrong guess only rules out the guessed
+// country's own tertile — it doesn't say which side of it the target is on.
+// Ruling out the bottom or top tertile leaves a single-sided bound (the
+// remaining two tertiles are contiguous), but ruling out the middle tertile
+// leaves a gap on both sides, so the bound has to be stated as an "or".
+function tertileMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): string | undefined {
+  if (!category.tertile) return undefined;
+  const { of, ranges } = category.tertile;
+  const bound = category.formatBound ?? String;
+
+  const eliminated = new Set<Tertile>();
+  for (const g of guesses) {
+    if (category.flag(g) === "wrong") eliminated.add(of(g));
+  }
+  const remaining = TERTILE_ORDER.filter((t) => !eliminated.has(t));
+  if (remaining.length === 3) return undefined;
+
+  if (remaining.length === 1) return formatRange(remaining[0], ranges, bound);
+
+  const excluded = TERTILE_ORDER.find((t) => eliminated.has(t))!;
+  if (excluded === "bottom") return `> ${bound(ranges.bottom[1])}`;
+  if (excluded === "top") return `< ${bound(ranges.top[0])}`;
+  return `< ${bound(ranges.middle[0])} or > ${bound(ranges.middle[1])}`;
+}
+
+// For an exact-value category, "up"/"down" guesses each pin the target
+// above or below a real number — the tightest of those (highest "up"
+// floor, lowest "down" ceiling) is the narrowest range we can state with
+// certainty, e.g. "< 5" once a 5-border guess has come back "down".
+function exactValueMysteryLabel(category: CategoryDef, guesses: GuessFeedback[]): string | undefined {
+  if (!category.getValue || !category.formatBound) return undefined;
+  const getValue = category.getValue;
+  const bound = category.formatBound;
+
+  let floor: number | undefined;
+  let ceiling: number | undefined;
+  for (const g of guesses) {
+    const value = getValue(g.country);
+    const dir = category.flag(g);
+    if (dir === "up") floor = floor === undefined ? value : Math.max(floor, value);
+    else if (dir === "down") ceiling = ceiling === undefined ? value : Math.min(ceiling, value);
+  }
+  if (floor === undefined && ceiling === undefined) return undefined;
+
+  return floor !== undefined && ceiling !== undefined
+    ? `${bound(floor)}–${bound(ceiling)}`
+    : floor !== undefined
+      ? `> ${bound(floor)}`
+      : `< ${bound(ceiling!)}`;
+}
+
 export function getRemainingMysteries(guesses: GuessFeedback[]): ConfirmedFact[] {
   const confirmedKeys = new Set(getConfirmedFacts(guesses).map((f) => f.key));
   const mysteries: ConfirmedFact[] = [];
 
   for (const category of CATEGORIES) {
-    if (confirmedKeys.has(category.key) || !category.getValue || !category.formatBound) continue;
+    if (confirmedKeys.has(category.key)) continue;
 
-    let floor: number | undefined;
-    let ceiling: number | undefined;
-    for (const g of guesses) {
-      const value = category.getValue(g.country);
-      const dir = category.flag(g);
-      if (dir === "up") floor = floor === undefined ? value : Math.max(floor, value);
-      else if (dir === "down") ceiling = ceiling === undefined ? value : Math.min(ceiling, value);
-    }
-    if (floor === undefined && ceiling === undefined) continue;
-
-    const bound = category.formatBound;
-    const range =
-      floor !== undefined && ceiling !== undefined
-        ? `${bound(floor)}–${bound(ceiling)}`
-        : floor !== undefined
-          ? `> ${bound(floor)}`
-          : `< ${bound(ceiling!)}`;
+    const range = tertileMysteryLabel(category, guesses) ?? exactValueMysteryLabel(category, guesses);
+    if (range === undefined) continue;
 
     mysteries.push({ key: category.key, header: category.header, label: category.unit ? `${range} ${category.unit}` : range });
   }
