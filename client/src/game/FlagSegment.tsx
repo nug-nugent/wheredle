@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { COLORS } from "../theme";
 import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
 
 export function FlagSegment({
@@ -19,8 +20,7 @@ export function FlagSegment({
         width: FLAG_CROP_SIZE.width,
         height: FLAG_CROP_SIZE.height,
         overflow: "hidden",
-        borderRadius: 8,
-        border: "1px solid var(--mantine-color-default-border)",
+        border: `1px solid ${COLORS.border}`,
       }}
     >
       <img

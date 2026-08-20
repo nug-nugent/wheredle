@@ -1,5 +1,5 @@
-import { Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { COLORS, FONT_FAMILY } from "../theme";
 
 const OUTLINE_BOX_SIZE = 150;
 const MAX_RETRIES = 2;
@@ -35,8 +35,7 @@ export function BorderOutline({ cca2 }: { cca2: string }) {
       style={{
         width: OUTLINE_BOX_SIZE,
         height: OUTLINE_BOX_SIZE,
-        borderRadius: 8,
-        border: "1px solid var(--mantine-color-default-border)",
+        border: `1px solid ${COLORS.border}`,
         // A fixed light background regardless of colour scheme — the
         // silhouette is a dark shape and would vanish against a dark theme.
         backgroundColor: "#fff",
@@ -46,9 +45,17 @@ export function BorderOutline({ cca2 }: { cca2: string }) {
       }}
     >
       {failed ? (
-        <Text size="xs" c="dark.4" ta="center" px="xs">
+        <span
+          style={{
+            fontFamily: FONT_FAMILY,
+            fontSize: 12,
+            color: COLORS.mutedLabel,
+            textAlign: "center",
+            padding: "0 10px",
+          }}
+        >
           Outline unavailable
-        </Text>
+        </span>
       ) : (
         // Keyed by attempt so a retry re-mounts the img and re-triggers the
         // network request rather than reusing the failed one.

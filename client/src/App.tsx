@@ -1,126 +1,60 @@
-import { GlobeLogo } from "./GlobeLogo";
+import { useEffect, useRef } from "react";
 import { ChoicePrompt } from "./game/ChoicePrompt";
-import { CountryReveal } from "./game/CountryReveal";
 import { MAX_GUESSES } from "./game/engine";
 import { GuessInput } from "./game/GuessInput";
+import { GuessRail } from "./game/GuessRail";
 import { HintPanel } from "./game/HintPanel";
 import { buildWheredleShare } from "./game/share";
 import { useGame } from "./game/useGame";
-import { ShareScoreButton } from "./share/ShareScoreButton";
-import { COLORS, FONT_FAMILY } from "./theme";
+import { AppShell, MainHeading } from "./shell/AppShell";
+import { GameOverPanel } from "./shell/GameOverPanel";
+import { GuessCountdown } from "./shell/GuessCountdown";
 
 export default function App() {
   const { state, guess, chooseHint, newGame, choiceOptions } = useGame();
+  const finished = state.status !== "playing";
+  const cluesRef = useRef<HTMLDivElement>(null);
+
+  // The reveal is prepended to a column the player has usually scrolled
+  // down by the last clue, so send them back to the top to meet it.
+  useEffect(() => {
+    if (finished) cluesRef.current?.scrollTo({ top: 0 });
+  }, [finished]);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: COLORS.page,
-        color: COLORS.text,
-        fontFamily: FONT_FAMILY,
-        padding: "48px 24px",
-        boxSizing: "border-box",
+    <AppShell
+      onNewGame={newGame}
+      mainRef={cluesRef}
+      // A countdown has nothing to say once the game is over — the reveal
+      // below carries the outcome instead.
+      status={!finished && <GuessCountdown used={state.guesses.length} max={MAX_GUESSES} />}
+      // The toolbar is the one row the player acts in, and the game asks for
+      // exactly one thing at a time: pick the next clue, or guess. Choosing
+      // blocks guessing in the engine, so the two never need to share it.
+      toolbar={
+        !finished &&
+        (choiceOptions ? (
+          <ChoicePrompt options={choiceOptions} onChoose={chooseHint} />
+        ) : (
+          <GuessInput onGuess={guess} guessedNames={new Set(state.guesses.map((g) => g.country.name))} />
+        ))
+      }
+      rail={{
+        heading: "Your guesses",
+        render: (layout) => <GuessRail guesses={state.guesses} layout={layout} />,
       }}
     >
-      <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <GlobeLogo size={32} />
-          <div style={{ fontWeight: 800, fontSize: 28, letterSpacing: "-0.02em" }}>WHEREDLE</div>
-        </div>
-
-        <div
-          style={{
-            background: COLORS.surface,
-            border: `1px solid ${COLORS.border}`,
-            padding: 24,
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-          }}
-        >
-          {state.status === "playing" && <HintPanel hints={state.hints} target={state.target} />}
-
-          {state.status === "playing" && choiceOptions && (
-            <ChoicePrompt options={choiceOptions} onChoose={chooseHint} />
-          )}
-
-          {state.status === "playing" && !choiceOptions && (
-            <GuessInput
-              onGuess={guess}
-              guessedNames={new Set(state.guesses.map((g) => g.country.name))}
-            />
-          )}
-
-          {state.status !== "playing" && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <span
-                style={{
-                  border: `1px solid ${state.status === "won" ? COLORS.accent : COLORS.mutedBorder}`,
-                  color: state.status === "won" ? COLORS.accent : COLORS.mutedLabel,
-                  fontSize: 12,
-                  fontWeight: 800,
-                  letterSpacing: "0.04em",
-                  padding: "6px 14px",
-                  width: "fit-content",
-                }}
-              >
-                {state.status === "won" ? "Correct!" : "Out of guesses"}
-              </span>
-              <CountryReveal country={state.target} />
-              <ShareScoreButton gameLabel="Wheredle" {...buildWheredleShare(state)} />
-            </div>
-          )}
-
-          {state.guesses.length > 0 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              <span
-                style={{
-                  fontSize: 11,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: COLORS.textDimmed,
-                }}
-              >
-                Guesses ({state.guesses.length}/{MAX_GUESSES})
-              </span>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {state.guesses.map((g, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 600,
-                      padding: "4px 10px",
-                      background: g.correct ? COLORS.correctBg : COLORS.wrongBg,
-                      color: g.correct ? COLORS.correctValue : COLORS.wrongValue,
-                    }}
-                  >
-                    {g.country.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <button
-            onClick={newGame}
-            style={{
-              fontFamily: "inherit",
-              fontWeight: 800,
-              fontSize: 13,
-              border: `1px solid ${COLORS.border}`,
-              background: "transparent",
-              color: COLORS.text,
-              padding: "9px 16px",
-              cursor: "pointer",
-              width: "fit-content",
-            }}
-          >
-            New game
-          </button>
-        </div>
-      </div>
-    </div>
+      {finished && (
+        <GameOverPanel
+          won={state.status === "won"}
+          guessCount={state.guesses.length}
+          country={state.target}
+          gameLabel="Wheredle"
+          share={buildWheredleShare(state)}
+        />
+      )}
+      <MainHeading>Clues ({state.hints.length})</MainHeading>
+      <HintPanel hints={state.hints} target={state.target} />
+    </AppShell>
   );
 }

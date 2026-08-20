@@ -1,15 +1,18 @@
 import { COLORS, FONT_FAMILY } from "../theme";
 
-// One card shape for the whole knowledge rail: green for what the country
-// *is*, and a neutral grey for what it *isn't*, so the two read as positive
-// and negative knowledge rather than as certain and provisional. Red is
-// deliberately avoided here even though the guess tiles use it for a miss —
-// an exclusion is something the player has established, not somewhere they
-// went wrong.
-export type FactTone = "correct" | "excluded";
+// One card shape for both rails: green for something established as true,
+// red for a guess that missed, and a neutral grey for something ruled out.
+//
+// The grey is the point of the third tone. Alex mode's rail is mostly
+// exclusions — things the player has established, not places they went
+// wrong — and dressing those in red would say the opposite. Red stays for
+// an actual miss, which is what classic mode's rail of past guesses is
+// full of.
+export type FactTone = "correct" | "wrong" | "excluded";
 
 const TONE_STYLE: Record<FactTone, { bg: string; border?: string; label: string; value: string }> = {
   correct: { bg: COLORS.correctBg, label: COLORS.correctLabel, value: COLORS.correctValue },
+  wrong: { bg: COLORS.wrongBg, label: COLORS.wrongLabel, value: COLORS.wrongValue },
   excluded: { bg: COLORS.mutedBg, border: COLORS.mutedBorder, label: COLORS.mutedLabel, value: COLORS.mutedValue },
 };
 
