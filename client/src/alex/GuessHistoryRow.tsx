@@ -1,23 +1,18 @@
 import { useState } from "react";
-import { CATEGORIES } from "./categories";
 import type { GuessFeedback } from "./engine";
+import { guessSquares, type SquareState } from "./guessSquares";
 import { LanguageBox } from "./LanguageBox";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { TileGrid } from "./TileGrid";
 
 // One dot per tile, plus one for language — a compact summary of a settled
-// guess, click to expand into the full tile grid plus language chips.
-function dotColors(feedback: GuessFeedback): string[] {
-  const tileDots = CATEGORIES.map((c) => (c.flag(feedback) === "correct" ? COLORS.correctBg : COLORS.wrongBorder));
-
-  const languageConfirmed = feedback.languageChips.some((c) => c.state === "correct");
-  const languagePartial = feedback.languageChips.some((c) => c.state === "family");
-
-  return [
-    ...tileDots,
-    languageConfirmed ? COLORS.correctBg : languagePartial ? COLORS.partialSolid : COLORS.wrongBorder,
-  ];
-}
+// guess, click to expand into the full tile grid plus language chips. The
+// same squares are what a shared score grid is built from.
+const DOT_COLOR: Record<SquareState, string> = {
+  correct: COLORS.correctBg,
+  partial: COLORS.partialSolid,
+  wrong: COLORS.wrongBorder,
+};
 
 export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
   const [expanded, setExpanded] = useState(false);
@@ -30,8 +25,8 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
       >
         <div style={{ fontWeight: 600, fontSize: 14, minWidth: 170 }}>{feedback.country.name}</div>
         <div style={{ display: "flex", gap: 3 }}>
-          {dotColors(feedback).map((color, i) => (
-            <span key={i} style={{ width: 8, height: 8, background: color, flex: "none" }} />
+          {guessSquares(feedback).map((state, i) => (
+            <span key={i} style={{ width: 8, height: 8, background: DOT_COLOR[state], flex: "none" }} />
           ))}
         </div>
         <svg

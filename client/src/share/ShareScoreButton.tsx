@@ -7,7 +7,7 @@ export interface ShareScoreProps {
   gameLabel: string;
   /** e.g. "4/7" or "Solved in 6" */
   resultLabel: string;
-  /** One emoji string per guess, oldest first — the Wordle-style score grid. */
+  /** One emoji row per guess, oldest first — the Wordle-style score grid. */
   rows: string[];
 }
 
@@ -19,23 +19,56 @@ function buildShareText({ gameLabel, resultLabel, rows }: ShareScoreProps): stri
   return [`${gameLabel} ${resultLabel}`, "", ...rows, "", currentUrl()].join("\n");
 }
 
+const BUTTON_STYLE = {
+  fontFamily: FONT_FAMILY,
+  fontWeight: 800,
+  fontSize: 14,
+  background: COLORS.accent,
+  color: COLORS.surface,
+  border: `1px solid ${COLORS.accent}`,
+  padding: "10px 20px",
+  cursor: "pointer",
+} as const;
+
 export function ShareScoreButton(props: ShareScoreProps) {
   const [copied, setCopied] = useState(false);
   const copiedTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const shareText = buildShareText(props);
+  const payload = { title: props.gameLabel, text: shareText };
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(shareText);
+    try {
+      await navigator.clipboard.writeText(shareText);
+    } catch {
+      // Clipboard access denied or unavailable — say nothing rather than
+      // claim a copy that didn't happen.
+      return;
+    }
     clearTimeout(copiedTimeout.current);
     setCopied(true);
     copiedTimeout.current = setTimeout(() => setCopied(false), 2000);
   };
 
+  // Where the platform has a share sheet — every mobile browser, and most
+  // desktop ones — that sheet is the share UI: it lists whatever the player
+  // actually messages their friends on, which our own menu never could.
+  // navigator.share needs the click's transient activation, so it has to be
+  // the first thing the handler does, before any await.
   const nativeShare = () => {
-    // Fire-and-forget: a rejected promise here just means the user
-    // dismissed the OS share sheet, which needs no handling.
-    void navigator.share({ title: props.gameLabel, text: shareText });
+    navigator.share(payload).catch((error: DOMException) => {
+      // AbortError means the player dismissed the sheet — nothing to do.
+      // Anything else means the sheet never opened, so fall back to a copy.
+      if (error.name !== "AbortError") void copyToClipboard();
+    });
   };
+
+  if (typeof navigator.share === "function" && (navigator.canShare?.(payload) ?? true)) {
+    return (
+      <button type="button" style={BUTTON_STYLE} onClick={nativeShare}>
+        {copied ? "Copied to clipboard!" : "Share your score"}
+      </button>
+    );
+  }
 
   return (
     <Menu
@@ -49,18 +82,7 @@ export function ShareScoreButton(props: ShareScoreProps) {
       }}
     >
       <Menu.Target>
-        <button
-          style={{
-            fontFamily: FONT_FAMILY,
-            fontWeight: 800,
-            fontSize: 14,
-            background: COLORS.accent,
-            color: COLORS.surface,
-            border: `1px solid ${COLORS.accent}`,
-            padding: "10px 20px",
-            cursor: "pointer",
-          }}
-        >
+        <button type="button" style={BUTTON_STYLE}>
           Share your score
         </button>
       </Menu.Target>
@@ -90,11 +112,6 @@ export function ShareScoreButton(props: ShareScoreProps) {
         >
           Email
         </Menu.Item>
-        {typeof navigator.share === "function" && (
-          <Menu.Item leftSection="📤" onClick={nativeShare}>
-            More options…
-          </Menu.Item>
-        )}
       </Menu.Dropdown>
     </Menu>
   );
