@@ -27,6 +27,10 @@ function factsFor(country: Country): { label: string; value: string }[] {
     { label: "Currency", value: country.currencies.join(", ") || "Unknown" },
     { label: "Religion", value: country.religion ?? "No clear majority" },
     { label: "Government", value: country.governmentType ?? "Not recorded" },
+    {
+      label: "HDI",
+      value: country.hdiEstimated ? `${country.hdi.toFixed(3)} (estimated — no official figure)` : country.hdi.toFixed(3),
+    },
   ];
 }
 

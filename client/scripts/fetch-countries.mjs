@@ -5,6 +5,15 @@
 //  - name / continent / languages / capital / borders / currencies: mledoze/countries (dist/countries.json)
 //  - population / religion / government type: samayo/country-json
 //  - flag images: hjnilsson/country-flags SVGs, served via jsDelivr CDN by cca2 code
+//  - hdi: NOT machine-fetched. There's no maintained JSON source for it, so
+//    it was hand-curated from the UNDP 2025 Human Development Report (via
+//    Wikipedia's sourced table, cross-checked against the UNDP's own
+//    statistical annex). Monaco has a real published figure the UNDP just
+//    doesn't fold into its ranking; North Korea and Vatican City have no
+//    figure at all, official or unofficial, so those two carry a rough
+//    placeholder flagged with hdiEstimated: true. This script preserves
+//    whatever hdi/hdiEstimated the existing file has by name rather than
+//    dropping them, since a re-fetch has no source to regenerate them from.
 //
 // mledoze and the samayo datasets key countries by slightly different common
 // names in a handful of cases (accents, alternate spellings). The two
@@ -13,7 +22,7 @@
 // naming between its own files (e.g. population's file says "Cabo Verde",
 // religion's says "Cape Verde").
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -71,6 +80,11 @@ function flagUrl(cca2) {
 }
 
 async function main() {
+  const existing = JSON.parse(await readFile(OUT_PATH, "utf-8"));
+  const hdiByName = new Map(
+    existing.map((c) => [c.name, { hdi: c.hdi, hdiEstimated: c.hdiEstimated }])
+  );
+
   const [countries, population, religion, government] = await Promise.all([
     fetch(MLEDOZE_URL).then((r) => r.json()),
     fetch(POPULATION_URL).then((r) => r.json()),
@@ -109,6 +123,13 @@ async function main() {
     const governmentLookupName = GOVERNMENT_NAME_OVERRIDES[commonName] ?? commonName;
     const governmentType = governmentByName.get(governmentLookupName.toLowerCase()) ?? null;
 
+    const hdi = hdiByName.get(commonName);
+    if (hdi === undefined) {
+      throw new Error(
+        `No hdi entry for "${commonName}" in the existing file — add one by hand, see the hdi note at the top of this script.`
+      );
+    }
+
     result.push({
       cca2: c.cca2,
       cca3: c.cca3,
@@ -123,6 +144,8 @@ async function main() {
       religion: religionValue,
       governmentType,
       borderCount: (c.borders ?? []).length,
+      hdi: hdi.hdi,
+      ...(hdi.hdiEstimated ? { hdiEstimated: hdi.hdiEstimated } : {}),
     });
   }
 

@@ -18,7 +18,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/af.svg",
     "religion": "Islam",
     "governmentType": "Islamic Emirate",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.496
   },
   {
     "cca2": "AL",
@@ -37,7 +38,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/al.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.81
   },
   {
     "cca2": "DZ",
@@ -56,7 +58,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dz.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.763
   },
   {
     "cca2": "AD",
@@ -75,7 +78,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ad.svg",
     "religion": "Christianity",
     "governmentType": "Parliamentary Coprincipality",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.913
   },
   {
     "cca2": "AO",
@@ -94,7 +98,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ao.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.616
   },
   {
     "cca2": "AG",
@@ -113,7 +118,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ag.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.851
   },
   {
     "cca2": "AR",
@@ -133,7 +139,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ar.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.865
   },
   {
     "cca2": "AM",
@@ -152,7 +159,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/am.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.811
   },
   {
     "cca2": "AU",
@@ -171,7 +179,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/au.svg",
     "religion": "Christianity",
     "governmentType": "Federation Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.958
   },
   {
     "cca2": "AT",
@@ -190,7 +199,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/at.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.93
   },
   {
     "cca2": "AZ",
@@ -210,7 +220,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/az.svg",
     "religion": "Islam",
     "governmentType": "Federal Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.789
   },
   {
     "cca2": "BS",
@@ -230,7 +241,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bs.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.82
   },
   {
     "cca2": "BH",
@@ -249,7 +261,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bh.svg",
     "religion": "Islam",
     "governmentType": "Monarchy (Emirate)",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.899
   },
   {
     "cca2": "BD",
@@ -268,7 +281,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bd.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.685
   },
   {
     "cca2": "BB",
@@ -287,7 +301,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bb.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.811
   },
   {
     "cca2": "BY",
@@ -307,7 +322,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/by.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.824
   },
   {
     "cca2": "BE",
@@ -328,7 +344,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/be.svg",
     "religion": "Christianity",
     "governmentType": "Federation Constitutional Monarchy",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.951
   },
   {
     "cca2": "BZ",
@@ -349,7 +366,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bz.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.721
   },
   {
     "cca2": "BJ",
@@ -368,7 +386,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bj.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.515
   },
   {
     "cca2": "BT",
@@ -388,7 +407,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bt.svg",
     "religion": "Buddhism",
     "governmentType": "Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.698
   },
   {
     "cca2": "BO",
@@ -410,7 +430,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bo.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.733
   },
   {
     "cca2": "BA",
@@ -431,7 +452,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ba.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.804
   },
   {
     "cca2": "BW",
@@ -451,7 +473,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bw.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.731
   },
   {
     "cca2": "BR",
@@ -470,7 +493,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/br.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 10
+    "borderCount": 10,
+    "hdi": 0.786
   },
   {
     "cca2": "BN",
@@ -490,7 +514,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bn.svg",
     "religion": "Islam",
     "governmentType": "Monarchy (Sultanate)",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.837
   },
   {
     "cca2": "BG",
@@ -509,7 +534,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bg.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.845
   },
   {
     "cca2": "BF",
@@ -528,7 +554,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bf.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.459
   },
   {
     "cca2": "BI",
@@ -548,7 +575,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bi.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.439
   },
   {
     "cca2": "KH",
@@ -568,7 +596,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kh.svg",
     "religion": "Buddhism",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.606
   },
   {
     "cca2": "CM",
@@ -588,7 +617,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cm.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.588
   },
   {
     "cca2": "CA",
@@ -608,7 +638,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ca.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy, Federation",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.939
   },
   {
     "cca2": "CV",
@@ -627,7 +658,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cv.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.668
   },
   {
     "cca2": "CF",
@@ -647,7 +679,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cf.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.414
   },
   {
     "cca2": "TD",
@@ -667,7 +700,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/td.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.416
   },
   {
     "cca2": "CL",
@@ -686,7 +720,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cl.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.878
   },
   {
     "cca2": "CN",
@@ -705,7 +740,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cn.svg",
     "religion": null,
     "governmentType": "People's Republic",
-    "borderCount": 16
+    "borderCount": 16,
+    "hdi": 0.797
   },
   {
     "cca2": "CO",
@@ -724,7 +760,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/co.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.788
   },
   {
     "cca2": "KM",
@@ -745,7 +782,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/km.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.603
   },
   {
     "cca2": "CG",
@@ -766,7 +804,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cg.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.649
   },
   {
     "cca2": "CR",
@@ -785,7 +824,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.833
   },
   {
     "cca2": "HR",
@@ -804,7 +844,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.889
   },
   {
     "cca2": "CU",
@@ -824,7 +865,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cu.svg",
     "religion": "Christianity",
     "governmentType": "Socialistic Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.762
   },
   {
     "cca2": "CY",
@@ -844,7 +886,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cy.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.913
   },
   {
     "cca2": "CZ",
@@ -864,7 +907,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cz.svg",
     "religion": null,
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.915
   },
   {
     "cca2": "DK",
@@ -883,7 +927,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dk.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.962
   },
   {
     "cca2": "DJ",
@@ -903,7 +948,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dj.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.513
   },
   {
     "cca2": "DM",
@@ -922,7 +968,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/dm.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.761
   },
   {
     "cca2": "DO",
@@ -941,7 +988,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/do.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.776
   },
   {
     "cca2": "CD",
@@ -964,7 +1012,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cd.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 9
+    "borderCount": 9,
+    "hdi": 0.522
   },
   {
     "cca2": "EC",
@@ -983,7 +1032,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ec.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.777
   },
   {
     "cca2": "EG",
@@ -1002,7 +1052,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/eg.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.754
   },
   {
     "cca2": "SV",
@@ -1021,7 +1072,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sv.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.678
   },
   {
     "cca2": "GQ",
@@ -1042,7 +1094,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gq.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.674
   },
   {
     "cca2": "ER",
@@ -1063,7 +1116,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/er.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.503
   },
   {
     "cca2": "EE",
@@ -1082,7 +1136,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ee.svg",
     "religion": null,
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.905
   },
   {
     "cca2": "SZ",
@@ -1103,7 +1158,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sz.svg",
     "religion": "Christianity",
     "governmentType": "Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.695
   },
   {
     "cca2": "ET",
@@ -1122,7 +1178,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/et.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.497
   },
   {
     "cca2": "FJ",
@@ -1143,7 +1200,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fj.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.731
   },
   {
     "cca2": "FI",
@@ -1163,7 +1221,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fi.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.948
   },
   {
     "cca2": "FR",
@@ -1182,7 +1241,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.92
   },
   {
     "cca2": "GA",
@@ -1201,7 +1261,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ga.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.733
   },
   {
     "cca2": "GM",
@@ -1220,7 +1281,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gm.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.524
   },
   {
     "cca2": "GE",
@@ -1239,7 +1301,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ge.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.844
   },
   {
     "cca2": "DE",
@@ -1258,7 +1321,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/de.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 9
+    "borderCount": 9,
+    "hdi": 0.959
   },
   {
     "cca2": "GH",
@@ -1277,7 +1341,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gh.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.628
   },
   {
     "cca2": "GR",
@@ -1296,7 +1361,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.908
   },
   {
     "cca2": "GD",
@@ -1315,7 +1381,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gd.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.791
   },
   {
     "cca2": "GT",
@@ -1334,7 +1401,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gt.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.662
   },
   {
     "cca2": "GN",
@@ -1353,7 +1421,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gn.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.5
   },
   {
     "cca2": "GW",
@@ -1373,7 +1442,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gw.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.514
   },
   {
     "cca2": "GY",
@@ -1392,7 +1462,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gy.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.776
   },
   {
     "cca2": "HT",
@@ -1412,7 +1483,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ht.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.554
   },
   {
     "cca2": "HN",
@@ -1431,7 +1503,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hn.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.645
   },
   {
     "cca2": "HU",
@@ -1450,7 +1523,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/hu.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.87
   },
   {
     "cca2": "IS",
@@ -1469,7 +1543,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/is.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.972
   },
   {
     "cca2": "IN",
@@ -1490,7 +1565,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/in.svg",
     "religion": "Hinduism",
     "governmentType": "Federal Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.685
   },
   {
     "cca2": "ID",
@@ -1509,7 +1585,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/id.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.728
   },
   {
     "cca2": "IR",
@@ -1528,7 +1605,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ir.svg",
     "religion": "Islam",
     "governmentType": "Islamic Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.799
   },
   {
     "cca2": "IQ",
@@ -1549,7 +1627,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/iq.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.695
   },
   {
     "cca2": "IE",
@@ -1569,7 +1648,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ie.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.949
   },
   {
     "cca2": "IL",
@@ -1589,7 +1669,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/il.svg",
     "religion": "Judaism",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.919
   },
   {
     "cca2": "IT",
@@ -1608,7 +1689,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/it.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.915
   },
   {
     "cca2": "CI",
@@ -1627,7 +1709,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ci.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.582
   },
   {
     "cca2": "JM",
@@ -1647,7 +1730,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jm.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.72
   },
   {
     "cca2": "JP",
@@ -1666,7 +1750,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jp.svg",
     "religion": null,
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.925
   },
   {
     "cca2": "JO",
@@ -1685,7 +1770,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/jo.svg",
     "religion": "Islam",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.754
   },
   {
     "cca2": "KZ",
@@ -1705,7 +1791,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kz.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.837
   },
   {
     "cca2": "KE",
@@ -1725,7 +1812,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ke.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.628
   },
   {
     "cca2": "KI",
@@ -1746,7 +1834,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ki.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.644
   },
   {
     "cca2": "KW",
@@ -1765,7 +1854,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kw.svg",
     "religion": "Islam",
     "governmentType": "Constitutional Monarchy (Emirate)",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.852
   },
   {
     "cca2": "KG",
@@ -1785,7 +1875,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kg.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.72
   },
   {
     "cca2": "LA",
@@ -1804,7 +1895,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/la.svg",
     "religion": "Buddhism",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.617
   },
   {
     "cca2": "LV",
@@ -1823,7 +1915,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lv.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.889
   },
   {
     "cca2": "LB",
@@ -1843,7 +1936,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lb.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.752
   },
   {
     "cca2": "LS",
@@ -1864,7 +1958,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ls.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.55
   },
   {
     "cca2": "LR",
@@ -1883,7 +1978,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.51
   },
   {
     "cca2": "LY",
@@ -1902,7 +1998,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ly.svg",
     "religion": "Islam",
     "governmentType": "Socialistic State",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.721
   },
   {
     "cca2": "LI",
@@ -1921,7 +2018,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/li.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.938
   },
   {
     "cca2": "LT",
@@ -1940,7 +2038,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lt.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.895
   },
   {
     "cca2": "LU",
@@ -1961,7 +2060,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lu.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.922
   },
   {
     "cca2": "MG",
@@ -1981,7 +2081,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mg.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.487
   },
   {
     "cca2": "MW",
@@ -2001,7 +2102,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mw.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.517
   },
   {
     "cca2": "MY",
@@ -2021,7 +2123,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/my.svg",
     "religion": "Islam",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.819
   },
   {
     "cca2": "MV",
@@ -2040,7 +2143,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mv.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.766
   },
   {
     "cca2": "ML",
@@ -2059,7 +2163,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ml.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.419
   },
   {
     "cca2": "MT",
@@ -2079,7 +2184,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mt.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.924
   },
   {
     "cca2": "MH",
@@ -2099,7 +2205,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mh.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.733
   },
   {
     "cca2": "MR",
@@ -2118,7 +2225,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mr.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.563
   },
   {
     "cca2": "MU",
@@ -2139,7 +2247,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mu.svg",
     "religion": "Hinduism",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.806
   },
   {
     "cca2": "MX",
@@ -2158,7 +2267,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mx.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.789
   },
   {
     "cca2": "FM",
@@ -2175,7 +2285,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/fm.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.615
   },
   {
     "cca2": "MD",
@@ -2194,7 +2305,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/md.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.785
   },
   {
     "cca2": "MC",
@@ -2213,7 +2325,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mc.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.914
   },
   {
     "cca2": "MN",
@@ -2232,7 +2345,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mn.svg",
     "religion": "Buddhism",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.747
   },
   {
     "cca2": "ME",
@@ -2251,7 +2365,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/me.svg",
     "religion": "Christianity",
     "governmentType": null,
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.862
   },
   {
     "cca2": "MA",
@@ -2271,7 +2386,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ma.svg",
     "religion": "Islam",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.71
   },
   {
     "cca2": "MZ",
@@ -2290,7 +2406,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mz.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.493
   },
   {
     "cca2": "MM",
@@ -2309,7 +2426,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mm.svg",
     "religion": "Buddhism",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.609
   },
   {
     "cca2": "NA",
@@ -2337,7 +2455,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/na.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.665
   },
   {
     "cca2": "NR",
@@ -2357,7 +2476,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.703
   },
   {
     "cca2": "NP",
@@ -2376,7 +2496,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/np.svg",
     "religion": "Hinduism",
     "governmentType": "Federal parliamentary republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.622
   },
   {
     "cca2": "NL",
@@ -2395,7 +2516,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nl.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.955
   },
   {
     "cca2": "NZ",
@@ -2416,7 +2538,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/nz.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.938
   },
   {
     "cca2": "NI",
@@ -2435,7 +2558,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ni.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.706
   },
   {
     "cca2": "NE",
@@ -2454,7 +2578,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ne.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.419
   },
   {
     "cca2": "NG",
@@ -2473,7 +2598,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ng.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.56
   },
   {
     "cca2": "KP",
@@ -2492,7 +2618,9 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kp.svg",
     "religion": null,
     "governmentType": "Socialistic Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.55,
+    "hdiEstimated": true
   },
   {
     "cca2": "MK",
@@ -2511,7 +2639,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mk.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.815
   },
   {
     "cca2": "NO",
@@ -2532,7 +2661,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/no.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.97
   },
   {
     "cca2": "OM",
@@ -2551,7 +2681,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/om.svg",
     "religion": "Islam",
     "governmentType": "Monarchy (Sultanate)",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.858
   },
   {
     "cca2": "PK",
@@ -2571,7 +2702,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pk.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.544
   },
   {
     "cca2": "PW",
@@ -2591,7 +2723,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pw.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.786
   },
   {
     "cca2": "PA",
@@ -2611,7 +2744,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pa.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.839
   },
   {
     "cca2": "PG",
@@ -2632,7 +2766,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pg.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.576
   },
   {
     "cca2": "PY",
@@ -2652,7 +2787,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/py.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.756
   },
   {
     "cca2": "PE",
@@ -2673,7 +2809,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pe.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.794
   },
   {
     "cca2": "PH",
@@ -2693,7 +2830,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ph.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.72
   },
   {
     "cca2": "PL",
@@ -2712,7 +2850,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pl.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.906
   },
   {
     "cca2": "PT",
@@ -2731,7 +2870,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pt.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.89
   },
   {
     "cca2": "QA",
@@ -2750,7 +2890,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/qa.svg",
     "religion": "Islam",
     "governmentType": "Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.886
   },
   {
     "cca2": "RO",
@@ -2769,7 +2910,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ro.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.845
   },
   {
     "cca2": "RU",
@@ -2788,7 +2930,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ru.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 14
+    "borderCount": 14,
+    "hdi": 0.832
   },
   {
     "cca2": "RW",
@@ -2809,7 +2952,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/rw.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.578
   },
   {
     "cca2": "KN",
@@ -2828,7 +2972,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kn.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.84
   },
   {
     "cca2": "LC",
@@ -2847,7 +2992,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lc.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.748
   },
   {
     "cca2": "VC",
@@ -2866,7 +3012,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vc.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.798
   },
   {
     "cca2": "WS",
@@ -2886,7 +3033,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ws.svg",
     "religion": "Christianity",
     "governmentType": "Parliamentary Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.708
   },
   {
     "cca2": "SM",
@@ -2905,7 +3053,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sm.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.915
   },
   {
     "cca2": "ST",
@@ -2924,7 +3073,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/st.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.637
   },
   {
     "cca2": "SA",
@@ -2943,7 +3093,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sa.svg",
     "religion": "Islam",
     "governmentType": "Monarchy",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.9
   },
   {
     "cca2": "SN",
@@ -2962,7 +3113,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sn.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.53
   },
   {
     "cca2": "RS",
@@ -2981,7 +3133,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/rs.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.833
   },
   {
     "cca2": "SC",
@@ -3002,7 +3155,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sc.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.848
   },
   {
     "cca2": "SL",
@@ -3021,7 +3175,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sl.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.467
   },
   {
     "cca2": "SG",
@@ -3043,7 +3198,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sg.svg",
     "religion": "Buddhism",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.946
   },
   {
     "cca2": "SK",
@@ -3062,7 +3218,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sk.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.88
   },
   {
     "cca2": "SI",
@@ -3081,7 +3238,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/si.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.931
   },
   {
     "cca2": "SB",
@@ -3100,7 +3258,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sb.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.584
   },
   {
     "cca2": "SO",
@@ -3120,7 +3279,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/so.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.404
   },
   {
     "cca2": "ZA",
@@ -3149,7 +3309,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/za.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.741
   },
   {
     "cca2": "KR",
@@ -3168,7 +3329,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kr.svg",
     "religion": null,
     "governmentType": "Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.937
   },
   {
     "cca2": "SS",
@@ -3187,7 +3349,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ss.svg",
     "religion": "Christianity",
     "governmentType": null,
-    "borderCount": 6
+    "borderCount": 6,
+    "hdi": 0.388
   },
   {
     "cca2": "ES",
@@ -3206,7 +3369,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/es.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.918
   },
   {
     "cca2": "LK",
@@ -3226,7 +3390,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lk.svg",
     "religion": "Buddhism",
     "governmentType": "Unitary Semi-Presidential Republic",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.776
   },
   {
     "cca2": "SD",
@@ -3246,7 +3411,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sd.svg",
     "religion": "Islam",
     "governmentType": "Islamic Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.511
   },
   {
     "cca2": "SR",
@@ -3265,7 +3431,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sr.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.722
   },
   {
     "cca2": "SE",
@@ -3284,7 +3451,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/se.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.959
   },
   {
     "cca2": "CH",
@@ -3306,7 +3474,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ch.svg",
     "religion": "Christianity",
     "governmentType": "Federation",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.97
   },
   {
     "cca2": "SY",
@@ -3325,7 +3494,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sy.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.564
   },
   {
     "cca2": "TJ",
@@ -3345,7 +3515,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tj.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.691
   },
   {
     "cca2": "TZ",
@@ -3365,7 +3536,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tz.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.555
   },
   {
     "cca2": "TH",
@@ -3384,7 +3556,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/th.svg",
     "religion": "Buddhism",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.798
   },
   {
     "cca2": "TL",
@@ -3404,7 +3577,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tl.svg",
     "religion": "Christianity",
     "governmentType": "Administrated by the UN",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.634
   },
   {
     "cca2": "TG",
@@ -3423,7 +3597,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tg.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.571
   },
   {
     "cca2": "TO",
@@ -3443,7 +3618,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/to.svg",
     "religion": "Christianity",
     "governmentType": "Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.769
   },
   {
     "cca2": "TT",
@@ -3462,7 +3638,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tt.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.807
   },
   {
     "cca2": "TN",
@@ -3481,7 +3658,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tn.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.746
   },
   {
     "cca2": "TR",
@@ -3500,7 +3678,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tr.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.853
   },
   {
     "cca2": "TM",
@@ -3520,7 +3699,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tm.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.764
   },
   {
     "cca2": "TV",
@@ -3541,7 +3721,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tv.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.689
   },
   {
     "cca2": "UG",
@@ -3561,7 +3742,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ug.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.582
   },
   {
     "cca2": "UA",
@@ -3580,7 +3762,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ua.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 7
+    "borderCount": 7,
+    "hdi": 0.779
   },
   {
     "cca2": "AE",
@@ -3599,7 +3782,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ae.svg",
     "religion": "Islam",
     "governmentType": "Emirate Federation",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.94
   },
   {
     "cca2": "GB",
@@ -3618,7 +3802,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/gb.svg",
     "religion": "Christianity",
     "governmentType": "Constitutional Monarchy",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.946
   },
   {
     "cca2": "US",
@@ -3637,7 +3822,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/us.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.938
   },
   {
     "cca2": "UY",
@@ -3656,7 +3842,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/uy.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.862
   },
   {
     "cca2": "UZ",
@@ -3676,7 +3863,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/uz.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 5
+    "borderCount": 5,
+    "hdi": 0.74
   },
   {
     "cca2": "VU",
@@ -3697,7 +3885,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vu.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 0
+    "borderCount": 0,
+    "hdi": 0.621
   },
   {
     "cca2": "VA",
@@ -3717,7 +3906,9 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/va.svg",
     "religion": "Christianity",
     "governmentType": "Independent Church State",
-    "borderCount": 1
+    "borderCount": 1,
+    "hdi": 0.85,
+    "hdiEstimated": true
   },
   {
     "cca2": "VE",
@@ -3736,7 +3927,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ve.svg",
     "religion": "Christianity",
     "governmentType": "Federal Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.709
   },
   {
     "cca2": "VN",
@@ -3755,7 +3947,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vn.svg",
     "religion": "Folk Religions",
     "governmentType": "Socialistic Republic",
-    "borderCount": 3
+    "borderCount": 3,
+    "hdi": 0.766
   },
   {
     "cca2": "YE",
@@ -3774,7 +3967,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ye.svg",
     "religion": "Islam",
     "governmentType": "Republic",
-    "borderCount": 2
+    "borderCount": 2,
+    "hdi": 0.47
   },
   {
     "cca2": "ZM",
@@ -3793,7 +3987,8 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/zm.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 8
+    "borderCount": 8,
+    "hdi": 0.595
   },
   {
     "cca2": "ZW",
@@ -3834,6 +4029,7 @@
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/zw.svg",
     "religion": "Christianity",
     "governmentType": "Republic",
-    "borderCount": 4
+    "borderCount": 4,
+    "hdi": 0.598
   }
 ]

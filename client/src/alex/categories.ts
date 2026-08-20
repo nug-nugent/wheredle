@@ -2,9 +2,14 @@ import type { GuessFeedback, LanguageChip, Tertile, TileFlag } from "./engine";
 import {
   AREA_TERTILE_RANGES,
   BORDER_TERTILE_RANGES,
+  HDI_TERTILE_RANGES,
   NAME_LENGTH_TERTILE_RANGES,
   POPULATION_TERTILE_RANGES,
 } from "./engine";
+
+function formatHdi(n: number): string {
+  return n.toFixed(3);
+}
 
 export const TERTILE_LABEL: Record<Tertile, string> = {
   bottom: "Bottom third",
@@ -97,6 +102,14 @@ export const CATEGORIES: CategoryDef[] = [
     tertile: { of: (f) => f.borderTertile, ranges: BORDER_TERTILE_RANGES },
   },
   {
+    key: "hdi",
+    header: "Human Development Index",
+    flag: (f) => f.hdiDirection,
+    label: (f) => TERTILE_LABEL[f.hdiTertile],
+    formatBound: formatHdi,
+    tertile: { of: (f) => f.hdiTertile, ranges: HDI_TERTILE_RANGES },
+  },
+  {
     key: "religion",
     header: "Religion",
     flag: (f) => (f.sameReligion ? "correct" : "wrong"),
@@ -157,6 +170,10 @@ const CONFIRMED_LABEL: Partial<Record<string, (matched: GuessFeedback, guesses: 
   borders: (matched, guesses) => {
     const exact = guesses.find((f) => f.sameBorderCount);
     return exact ? String(exact.country.borderCount) : formatRange(matched.borderTertile, BORDER_TERTILE_RANGES, String);
+  },
+  hdi: (matched, guesses) => {
+    const exact = guesses.find((f) => f.sameHdiValue);
+    return exact ? formatHdi(exact.country.hdi) : formatRange(matched.hdiTertile, HDI_TERTILE_RANGES, formatHdi);
   },
 };
 

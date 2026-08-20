@@ -96,16 +96,19 @@ const populationTertiles = buildTertileClassifier((c) => c.population);
 const areaTertiles = buildTertileClassifier((c) => c.area);
 const nameLengthTertiles = buildTertileClassifier((c) => c.name.length);
 const borderTertiles = buildTertileClassifier((c) => c.borderCount);
+const hdiTertiles = buildTertileClassifier((c) => c.hdi);
 
 const populationTertileOf = populationTertiles.classify;
 const areaTertileOf = areaTertiles.classify;
 const nameLengthTertileOf = nameLengthTertiles.classify;
 const borderTertileOf = borderTertiles.classify;
+const hdiTertileOf = hdiTertiles.classify;
 
 export const POPULATION_TERTILE_RANGES = populationTertiles.ranges;
 export const AREA_TERTILE_RANGES = areaTertiles.ranges;
 export const NAME_LENGTH_TERTILE_RANGES = nameLengthTertiles.ranges;
 export const BORDER_TERTILE_RANGES = borderTertiles.ranges;
+export const HDI_TERTILE_RANGES = hdiTertiles.ranges;
 
 // A wrong guess only rules out the guessed country's own tertile — it
 // doesn't say which side of it the target is on. That's deliberate: ruling
@@ -170,6 +173,10 @@ export interface GuessFeedback {
   sameBorderTertile: boolean;
   sameBorderCount: boolean;
   borderDirection: TileFlag;
+  hdiTertile: Tertile;
+  sameHdiTertile: boolean;
+  sameHdiValue: boolean;
+  hdiDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
   // Currency is treated as a single-valued attribute, like continent or
@@ -203,6 +210,7 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
   const sameAreaTertile = areaTertileOf(guessed) === areaTertileOf(target);
   const sameNameLengthTertile = nameLengthTertileOf(guessed) === nameLengthTertileOf(target);
   const sameBorderTertile = borderTertileOf(guessed) === borderTertileOf(target);
+  const sameHdiTertile = hdiTertileOf(guessed) === hdiTertileOf(target);
 
   return {
     country: guessed,
@@ -224,6 +232,10 @@ export function computeGuessFeedback(state: AlexGameState, guessed: Country): Gu
     sameBorderTertile,
     sameBorderCount: guessed.borderCount === target.borderCount,
     borderDirection: tertileFlag(sameBorderTertile),
+    hdiTertile: hdiTertileOf(guessed),
+    sameHdiTertile,
+    sameHdiValue: guessed.hdi === target.hdi,
+    hdiDirection: tertileFlag(sameHdiTertile),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
     sameCurrency:
