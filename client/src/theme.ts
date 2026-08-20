@@ -83,3 +83,15 @@ export function partialTint(strength: number): { bg: string; color: string; sub:
     sub: COLORS.partialLabel,
   };
 }
+
+// The guesses-remaining countdown runs the same traffic light as the guess
+// feedback, only stretched over the game rather than over one guess: full
+// green with everything still to play for, through the partials' amber, to
+// red on the last guess. Mixed between correctBg and wrongBg, which are one
+// OKLCH point with only the hue turned, so every step keeps their lightness
+// and chroma and the final guess lands exactly on the accent the chip wore
+// before it had a ramp. `urgency` runs 0→1 from the first guess to the last.
+export function countdownTint(urgency: number): string {
+  const percent = Math.round(Math.min(Math.max(urgency, 0), 1) * 100);
+  return `color-mix(in oklch, ${COLORS.correctBg}, ${COLORS.wrongBg} ${percent}%)`;
+}
