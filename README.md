@@ -36,6 +36,14 @@ Two game modes live side by side, both reading from the same country dataset:
   ("Alex" is just whoever originally asked for this variant — the name has no
   functional meaning, it's not a build flag or user role.)
 
+Both modes share the guess box (`client/src/game/GuessInput.tsx`). It matches
+alternate names as well as the dataset's own — official long forms, former
+names, abbreviations, a few endonyms — and tolerates a typo or two, so
+"Ivory Coast", "Burma", "DRC" and "phillipines" all find their country. The
+alias list (`client/src/game/countryAliases.ts`) is hand-maintained, unlike
+the dataset it keys into; the ranking and typo tolerance live in
+`client/src/game/countryMatch.ts`.
+
 There's no routing library — `client/src/main.tsx` just switches on
 `window.location.pathname` between the two, since it's only ever these two
 static pages.

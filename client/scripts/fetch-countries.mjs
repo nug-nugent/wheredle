@@ -75,6 +75,14 @@ const GOVERNMENT_NAME_OVERRIDES = {
   "Vatican City": "Holy See (Vatican City State)",
 };
 
+// mledoze's common name isn't always the one the game wants to show. These
+// renames apply to the written-out name only — the lookups above still key
+// off mledoze's own spelling, and so do the override maps.
+const DISPLAY_NAME_OVERRIDES = {
+  "Cape Verde": "Cabo Verde",
+  "Ivory Coast": "Côte d'Ivoire",
+};
+
 function flagUrl(cca2) {
   return `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/${cca2.toLowerCase()}.svg`;
 }
@@ -123,17 +131,20 @@ async function main() {
     const governmentLookupName = GOVERNMENT_NAME_OVERRIDES[commonName] ?? commonName;
     const governmentType = governmentByName.get(governmentLookupName.toLowerCase()) ?? null;
 
-    const hdi = hdiByName.get(commonName);
+    // The existing file is keyed by display name, since that's what it was
+    // written with — look hdi up under the rename, not mledoze's spelling.
+    const name = DISPLAY_NAME_OVERRIDES[commonName] ?? commonName;
+    const hdi = hdiByName.get(name);
     if (hdi === undefined) {
       throw new Error(
-        `No hdi entry for "${commonName}" in the existing file — add one by hand, see the hdi note at the top of this script.`
+        `No hdi entry for "${name}" in the existing file — add one by hand, see the hdi note at the top of this script.`
       );
     }
 
     result.push({
       cca2: c.cca2,
       cca3: c.cca3,
-      name: commonName,
+      name,
       continent: c.region,
       capital: c.capital?.[0] ?? null,
       population: pop,

@@ -579,6 +579,26 @@
     "hdi": 0.439
   },
   {
+    "cca2": "CV",
+    "cca3": "CPV",
+    "name": "Cabo Verde",
+    "continent": "Africa",
+    "capital": "Praia",
+    "population": 555987,
+    "area": 4033,
+    "languages": [
+      "Portuguese"
+    ],
+    "currencies": [
+      "Cape Verdean escudo"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cv.svg",
+    "religion": "Christianity",
+    "governmentType": "Republic",
+    "borderCount": 0,
+    "hdi": 0.668
+  },
+  {
     "cca2": "KH",
     "cca3": "KHM",
     "name": "Cambodia",
@@ -640,26 +660,6 @@
     "governmentType": "Constitutional Monarchy, Federation",
     "borderCount": 1,
     "hdi": 0.939
-  },
-  {
-    "cca2": "CV",
-    "cca3": "CPV",
-    "name": "Cape Verde",
-    "continent": "Africa",
-    "capital": "Praia",
-    "population": 555987,
-    "area": 4033,
-    "languages": [
-      "Portuguese"
-    ],
-    "currencies": [
-      "Cape Verdean escudo"
-    ],
-    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cv.svg",
-    "religion": "Christianity",
-    "governmentType": "Republic",
-    "borderCount": 0,
-    "hdi": 0.668
   },
   {
     "cca2": "CF",
@@ -826,6 +826,26 @@
     "governmentType": "Republic",
     "borderCount": 2,
     "hdi": 0.833
+  },
+  {
+    "cca2": "CI",
+    "cca3": "CIV",
+    "name": "Côte d'Ivoire",
+    "continent": "Africa",
+    "capital": "Yamoussoukro",
+    "population": 25069229,
+    "area": 322463,
+    "languages": [
+      "French"
+    ],
+    "currencies": [
+      "West African CFA franc"
+    ],
+    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ci.svg",
+    "religion": "Islam",
+    "governmentType": "Republic",
+    "borderCount": 5,
+    "hdi": 0.582
   },
   {
     "cca2": "HR",
@@ -1691,26 +1711,6 @@
     "governmentType": "Republic",
     "borderCount": 6,
     "hdi": 0.915
-  },
-  {
-    "cca2": "CI",
-    "cca3": "CIV",
-    "name": "Ivory Coast",
-    "continent": "Africa",
-    "capital": "Yamoussoukro",
-    "population": 25069229,
-    "area": 322463,
-    "languages": [
-      "French"
-    ],
-    "currencies": [
-      "West African CFA franc"
-    ],
-    "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ci.svg",
-    "religion": "Islam",
-    "governmentType": "Republic",
-    "borderCount": 5,
-    "hdi": 0.582
   },
   {
     "cca2": "JM",
