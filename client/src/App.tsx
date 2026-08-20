@@ -1,3 +1,4 @@
+import { GlobeLogo } from "./GlobeLogo";
 import { ChoicePrompt } from "./game/ChoicePrompt";
 import { CountryReveal } from "./game/CountryReveal";
 import { MAX_GUESSES } from "./game/engine";
@@ -23,7 +24,10 @@ export default function App() {
       }}
     >
       <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-        <div style={{ fontWeight: 800, fontSize: 28, letterSpacing: "-0.02em" }}>WHEREDLE</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <GlobeLogo size={32} />
+          <div style={{ fontWeight: 800, fontSize: 28, letterSpacing: "-0.02em" }}>WHEREDLE</div>
+        </div>
 
         <div
           style={{

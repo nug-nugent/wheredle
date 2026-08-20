@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
+import { GlobeLogo } from "../GlobeLogo";
 import { NavMenu } from "../nav/NavMenu";
 import { ShareScoreButton } from "../share/ShareScoreButton";
 import { COLORS, countdownTint, FONT_FAMILY } from "../theme";
@@ -97,7 +98,7 @@ export default function AlexApp() {
   const lastGuess = guessesRemaining === 1;
   // At one left there is nothing useful to count, so the chip names the
   // moment instead of measuring it.
-  const remainingLabel = lastGuess ? "final guess" : `${guessesRemaining} guesses remaining`;
+  const remainingLabel = lastGuess ? "final guess" : `${guessesRemaining} guesses left`;
   // The chip's colour is the countdown said a second way: green while the
   // rope is long, red once it has run out, so a glance registers the state
   // before the words are read. The final guess also goes bold, since that is
@@ -135,7 +136,10 @@ export default function AlexApp() {
 
       {/* nav */}
       <div className="alex-nav alex-fixed-row">
-        <div className="alex-nav-title">WHEREDLE</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <GlobeLogo size={26} />
+          <div className="alex-nav-title">WHEREDLE</div>
+        </div>
         <div className="alex-nav-right">
           {/* A countdown has nothing to say once the game is over — the
               reveal below carries the outcome instead. */}
