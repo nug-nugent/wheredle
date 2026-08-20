@@ -7,6 +7,10 @@ const LABELS: Record<ChoosableHintType, string> = {
   language: "Languages",
 };
 
+// Takes the guess field's place in the toolbar while the game is waiting on
+// a clue to be picked, so it matches that row's height — the toolbar keeps
+// its size as the game switches between asking for one and asking for the
+// other, rather than jolting the column below it up and down.
 export function ChoicePrompt({
   options,
   onChoose,
@@ -16,7 +20,7 @@ export function ChoicePrompt({
 }) {
   return (
     <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", fontFamily: FONT_FAMILY }}>
-      <span style={{ fontSize: 13, color: COLORS.textDimmed }}>Pick your next hint:</span>
+      <span style={{ fontSize: 13, color: COLORS.textDimmed }}>Pick your next clue:</span>
       {options.map((opt) => (
         <button
           key={opt}
@@ -24,11 +28,12 @@ export function ChoicePrompt({
           style={{
             fontFamily: "inherit",
             fontWeight: 600,
-            fontSize: 13,
+            fontSize: 14,
             border: `1px solid ${COLORS.border}`,
             background: COLORS.inputBg,
             color: COLORS.text,
-            padding: "8px 14px",
+            padding: "8px 16px",
+            minHeight: 40,
             cursor: "pointer",
           }}
         >

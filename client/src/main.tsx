@@ -12,7 +12,11 @@ document.title = isAlexPath ? "Wheredle - Alex mode" : "Wheredle";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider defaultColorScheme="auto">
+    {/* The game palette is a fixed light one (see theme.ts), so Mantine's
+        own chrome — the autocomplete dropdown, the menus — is pinned to
+        light too rather than turning dark inside a light app on a machine
+        set to dark mode. */}
+    <MantineProvider forceColorScheme="light">
       <Page />
     </MantineProvider>
   </StrictMode>

@@ -10,12 +10,22 @@ is client-side and ephemeral — nothing is persisted, no accounts, no
 leaderboards. That's the natural next step once the core game feel is
 settled, not something in progress now.
 
+Both modes are built in one shell (`client/src/shell/`) — a nav with the
+wordmark, a guesses-left countdown and the menu; one toolbar row for
+whatever the player acts on next; then a scrolling main column with a rail
+of standing knowledge beside it, which becomes a strip along the bottom on a
+phone. Only what goes in those slots differs per mode, so the two read as
+one product rather than as two sketches of one. The palette and type they
+share live in `client/src/theme.ts`.
+
 Two game modes live side by side, both reading from the same country dataset:
 
-- **`/`** — the main game. Six fixed questions in sequence: a letter in the
-  country's name, a zoomed segment of its flag, then the player's choice of
-  continent / population / language (in any order) until all three are used,
-  then the full flag as the final guess. See `client/src/game/`.
+- **`/`** — the main game. Clues reveal in sequence: a letter in the
+  country's name, a zoomed segment of its flag, its border outline, then the
+  player's choice of continent / population / language (in any order) until
+  all three are used, then the full flag as the final guess. The main column
+  is the clue stack, newest first, and the rail is the countries already
+  spent. See `client/src/game/`.
 - **`/alex`** — an alternate, Wordle-style mode with no upfront clues: guess a
   country, get back a table of how similar it was to the answer across
   continent, population, land area, name length, border count, religion,

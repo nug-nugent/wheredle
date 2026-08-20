@@ -19,7 +19,7 @@ const LABELS: Record<Hint["type"], string> = {
 function HintValue({ hint, target }: { hint: Hint; target: Country }) {
   switch (hint.type) {
     case "letter":
-      return <span style={{ fontWeight: 700, fontSize: 16 }}>{hint.letter}</span>;
+      return <span style={{ fontWeight: 800, fontSize: 18 }}>{hint.letter}</span>;
     case "flagSegment":
       return (
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -45,9 +45,9 @@ function HintValue({ hint, target }: { hint: Hint; target: Country }) {
         </span>
       );
     case "population":
-      return <span style={{ fontWeight: 700, fontSize: 16 }}>{target.population.toLocaleString()}</span>;
+      return <span style={{ fontWeight: 800, fontSize: 18 }}>{target.population.toLocaleString("en-GB")}</span>;
     case "language":
-      return <span style={{ fontWeight: 700, fontSize: 16 }}>{target.languages.join(", ")}</span>;
+      return <span style={{ fontWeight: 800, fontSize: 18 }}>{target.languages.join(", ")}</span>;
     case "fullFlag":
       return (
         <FlagImage
@@ -61,17 +61,44 @@ function HintValue({ hint, target }: { hint: Hint; target: Country }) {
   }
 }
 
+// The clues so far, newest first: the one just earned is the reason the
+// player is looking at this column at all, so it sits at the top in a card
+// of its own and the ones already read fall in below it, each ruled off.
+// It's the shape Alex mode's guess history takes, for the same reason — but
+// no clue ever collapses, since unlike a spent guess every one of them is
+// still live information.
 export function HintPanel({ hints, target }: { hints: Hint[]; target: Country }) {
+  const numbered = hints.map((hint, i) => ({ hint, number: i + 1 })).reverse();
+
   return (
-    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", alignItems: "flex-start", fontFamily: FONT_FAMILY }}>
-      {hints.map((hint, i) => (
-        <div key={i} style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-start" }}>
-          <span style={{ fontSize: 11, color: COLORS.textDimmed }}>
-            Clue {i + 1} — {LABELS[hint.type]}
-          </span>
-          <HintValue hint={hint} target={target} />
-        </div>
-      ))}
+    <div style={{ fontFamily: FONT_FAMILY }}>
+      {numbered.map(({ hint, number }, i) => {
+        const latest = i === 0;
+        return (
+          <div
+            key={number}
+            style={
+              latest
+                ? { border: `1px solid ${COLORS.border}`, padding: 12, marginBottom: 12 }
+                : { borderBottom: `1px solid ${COLORS.borderFaint}`, padding: "10px 4px" }
+            }
+          >
+            <div
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                color: COLORS.textDimmed,
+                marginBottom: 6,
+              }}
+            >
+              Clue {number} — {LABELS[hint.type]}
+            </div>
+            <HintValue hint={hint} target={target} />
+          </div>
+        );
+      })}
     </div>
   );
 }

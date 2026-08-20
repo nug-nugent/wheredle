@@ -1,7 +1,10 @@
 import type { CSSProperties } from "react";
+import { COLORS } from "../theme";
 import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
 
-const HIGHLIGHT_COLOR = "var(--mantine-color-blue-6)";
+// The window is the one thing on the page pointing at something, and
+// the palette has exactly one colour for that job.
+const HIGHLIGHT_COLOR = COLORS.accent;
 
 // The whole flag greyed out, with a small window cut into it showing the
 // real flag pixels for the region FlagSegment crops to — everything outside
@@ -27,8 +30,7 @@ export function FlagOverview({
         position: "relative",
         width: FLAG_CROP_SIZE.width,
         height: FLAG_CROP_SIZE.height,
-        borderRadius: 8,
-        backgroundColor: "var(--mantine-color-gray-4)",
+        backgroundColor: COLORS.mutedBorder,
         overflow: "hidden",
       }}
     >
