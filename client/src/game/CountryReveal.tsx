@@ -5,11 +5,12 @@ import { FlagImage } from "./FlagImage";
 
 const formatNumber = (n: number) => n.toLocaleString("en-GB");
 
-// Every attribute the game reasons about, so the reveal settles all of them
-// rather than only the handful it used to show. Nulls in the data mean
-// genuinely different things per field (no capital, no clear religious
-// majority, no government type recorded), so each says so in its own words
-// instead of a shared dash.
+// The attributes worth settling once the country is known. Name length is
+// deliberately absent: it is a guessing aid, not a fact anyone wants read
+// back to them beside the answer. Nulls in the data mean genuinely
+// different things per field (no capital, no clear religious majority, no
+// government type recorded), so each says so in its own words instead of a
+// shared dash.
 function factsFor(country: Country): { label: string; value: string }[] {
   return [
     { label: "Capital", value: country.capital ?? "None" },
@@ -22,7 +23,6 @@ function factsFor(country: Country): { label: string; value: string }[] {
           ? "None"
           : `${country.borderCount} ${country.borderCount === 1 ? "country" : "countries"}`,
     },
-    { label: "Name length", value: `${country.name.length} letters` },
     { label: "Language(s)", value: country.languages.join(", ") || "Unknown" },
     { label: "Currency", value: country.currencies.join(", ") || "Unknown" },
     { label: "Religion", value: country.religion ?? "No clear majority" },
