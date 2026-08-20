@@ -1,8 +1,14 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Autocomplete } from "@mantine/core";
 import type { Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
-import { COUNTRY_NAMES, findCountryByName, MIN_SEARCH_LENGTH, normalizeCountryName } from "./countryMatch";
+import { findCountryByName, searchCountries } from "./countryMatch";
+
+interface CountryOption {
+  value: string;
+  label: string;
+  alias: string | null;
+}
 
 export function GuessInput({
   onGuess,
@@ -20,6 +26,14 @@ export function GuessInput({
   // value to the picked label) — this ref tells that follow-up onChange not
   // to wipe out the selection it's the one that caused.
   const justSelectedRef = useRef(false);
+
+  const options: CountryOption[] = useMemo(
+    () =>
+      searchCountries(value)
+        .filter((match) => !guessedNames?.has(match.country.name))
+        .map((match) => ({ value: match.country.name, label: match.country.name, alias: match.alias })),
+    [value, guessedNames]
+  );
 
   const handleChange = (next: string) => {
     setValue(next);
@@ -39,7 +53,7 @@ export function GuessInput({
 
   // A dropdown pick sets `selected` directly; typing the full name and
   // hitting Enter/Guess without opening the dropdown never does, so fall
-  // back to an exact (normalized) name match against the typed value.
+  // back to a whole-name (or whole-alias) match against the typed value.
   const matchedCountry = selected ?? findCountryByName(value);
 
   const submit = () => {
@@ -65,21 +79,24 @@ export function GuessInput({
       <Autocomplete
         autoFocus
         placeholder="Guess a country..."
-        data={COUNTRY_NAMES}
+        data={options}
         value={value}
         onChange={handleChange}
         onOptionSubmit={handleOptionSubmit}
         onKeyDown={(e) => {
           if (e.key === "Enter") submit();
         }}
-        filter={({ options, search }) => {
-          if (search.trim().length < MIN_SEARCH_LENGTH) return [];
-          const query = normalizeCountryName(search);
-          return options.filter(
-            (option) =>
-              "label" in option &&
-              normalizeCountryName(option.label).includes(query) &&
-              !guessedNames?.has(option.label)
+        // `options` is already the ranked, de-duplicated result set; the
+        // default filter would drop the fuzzy and alias hits, since neither
+        // contains what was typed.
+        filter={({ options }) => options}
+        renderOption={({ option }) => {
+          const alias = (option as CountryOption).alias;
+          return (
+            <span>
+              {option.value}
+              {alias && <span style={{ opacity: 0.55 }}> - {alias}</span>}
+            </span>
           );
         }}
         disabled={disabled}
@@ -93,6 +110,7 @@ export function GuessInput({
             border: `1px solid ${COLORS.border}`,
             color: COLORS.text,
           },
+          option: { fontFamily: FONT_FAMILY, fontSize: 14 },
         }}
         // Wrapping is decided on the flex basis rather than the shrunk
         // width, so a basis wide enough to look right on desktop is what
