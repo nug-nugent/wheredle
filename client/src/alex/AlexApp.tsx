@@ -3,7 +3,7 @@ import { CountryReveal } from "../game/CountryReveal";
 import { GuessInput } from "../game/GuessInput";
 import { NavMenu } from "../nav/NavMenu";
 import { ShareScoreButton } from "../share/ShareScoreButton";
-import { COLORS, FONT_FAMILY } from "../theme";
+import { COLORS, countdownTint, FONT_FAMILY } from "../theme";
 import { getKnownFacts } from "./categories";
 import { MAX_GUESSES } from "./engine";
 import { GuessHistory } from "./GuessHistory";
@@ -94,7 +94,16 @@ export default function AlexApp() {
   // Players track "how much rope have I got left", not "which guess is this",
   // so the chip counts down rather than reporting a position in a sequence.
   const guessesRemaining = Math.max(MAX_GUESSES - state.guesses.length, 0);
-  const remainingLabel = `${guessesRemaining} ${guessesRemaining === 1 ? "guess" : "guesses"} remaining`;
+  const lastGuess = guessesRemaining === 1;
+  // At one left there is nothing useful to count, so the chip names the
+  // moment instead of measuring it.
+  const remainingLabel = lastGuess ? "final guess" : `${guessesRemaining} guesses remaining`;
+  // The chip's colour is the countdown said a second way: green while the
+  // rope is long, red once it has run out, so a glance registers the state
+  // before the words are read. The final guess also goes bold, since that is
+  // the one step where the count changes what a player should do.
+  const urgency = (MAX_GUESSES - guessesRemaining) / (MAX_GUESSES - 1);
+  const remainingColour = countdownTint(urgency);
   const guessesUsedLabel = `${state.guesses.length} ${state.guesses.length === 1 ? "guess" : "guesses"}`;
   const knownFacts = getKnownFacts(state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
@@ -133,9 +142,10 @@ export default function AlexApp() {
           {!finished && (
             <div
               style={{
-                border: `1px solid ${COLORS.accent}`,
-                color: COLORS.accent,
+                border: `1px solid ${remainingColour}`,
+                color: remainingColour,
                 fontSize: 11,
+                fontWeight: lastGuess ? 800 : 400,
                 letterSpacing: "0.04em",
                 padding: "5px 12px",
                 whiteSpace: "nowrap",
