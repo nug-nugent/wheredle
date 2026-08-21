@@ -24,9 +24,15 @@ export function GuessCountdown({ used, max }: { used: number; max: number }) {
         letterSpacing: "0.04em",
         padding: "5px 12px",
         whiteSpace: "nowrap",
+        transition: "color 240ms ease, border-color 240ms ease",
+        animation: lastGuess ? "guess-countdown-pulse 1.1s ease-out infinite" : undefined,
       }}
     >
-      {label.toUpperCase()}
+      {/* Keyed on remaining so the label remounts, and its pop animation
+          replays, on every guess — not just the final one. */}
+      <span key={remaining} style={{ display: "inline-block", animation: "guess-countdown-pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
+        {label.toUpperCase()}
+      </span>
     </div>
   );
 }

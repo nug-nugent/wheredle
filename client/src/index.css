@@ -21,3 +21,30 @@ body {
 #root {
   min-height: 100dvh;
 }
+
+/* GuessCountdown: the label pops each time the count changes, so a guess
+   registers as an event rather than a silent re-render. The pulse colour
+   mirrors COLORS.wrongBg in theme.ts — keep them in sync if that ramp ever
+   moves. */
+@keyframes guess-countdown-pop {
+  from {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.92);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes guess-countdown-pulse {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in oklch, oklch(61.12% 0.2252 31.45deg), transparent 45%);
+  }
+  to {
+    box-shadow: 0 0 0 6px color-mix(in oklch, oklch(61.12% 0.2252 31.45deg), transparent 100%);
+  }
+}
