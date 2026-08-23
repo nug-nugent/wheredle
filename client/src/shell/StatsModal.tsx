@@ -39,7 +39,7 @@ export function StatsModal({
       <div style={{ fontSize: 12, color: COLORS.textDimmed }}>{gameLabel}</div>
       <StatsPanel stats={stats} />
       <div style={{ fontSize: 11, color: COLORS.textDimmed, marginTop: 18 }}>
-        Each mode keeps its own record — practice games count towards neither.
+        Each mode keeps its own record. Practice games count towards neither.
       </div>
     </Modal>
   );
