@@ -5,13 +5,15 @@ import { GuessInput } from "./game/GuessInput";
 import { GuessRail } from "./game/GuessRail";
 import { HintPanel } from "./game/HintPanel";
 import { buildWheredleShare } from "./game/share";
+import { puzzleNumber } from "./daily";
 import { useGame } from "./game/useGame";
 import { AppShell, MainHeading } from "./shell/AppShell";
 import { GameOverPanel } from "./shell/GameOverPanel";
 import { GuessCountdown } from "./shell/GuessCountdown";
+import { PracticeChip } from "./shell/PracticeChip";
 
 export default function App() {
-  const { state, guess, chooseHint, newGame, choiceOptions } = useGame();
+  const { state, day, stats, isPractice, guess, chooseHint, newPractice, exitPractice, choiceOptions } = useGame();
   const finished = state.status !== "playing";
   const cluesRef = useRef<HTMLDivElement>(null);
 
@@ -23,11 +25,17 @@ export default function App() {
 
   return (
     <AppShell
-      onNewGame={newGame}
+      onNewPractice={newPractice}
+      onExitPractice={isPractice ? exitPractice : undefined}
       mainRef={cluesRef}
       // A countdown has nothing to say once the game is over — the reveal
-      // below carries the outcome instead.
-      status={!finished && <GuessCountdown used={state.guesses.length} max={MAX_GUESSES} />}
+      // below carries the outcome instead. Which game you're in still does.
+      status={
+        <>
+          {isPractice && <PracticeChip />}
+          {!finished && <GuessCountdown used={state.guesses.length} max={MAX_GUESSES} />}
+        </>
+      }
       // The toolbar is the one row the player acts in, and the game asks for
       // exactly one thing at a time: pick the next clue, or guess. Choosing
       // blocks guessing in the engine, so the two never need to share it.
@@ -49,7 +57,8 @@ export default function App() {
           won={state.status === "won"}
           guessCount={state.guesses.length}
           country={state.target}
-          gameLabel="Wheredle"
+          gameLabel={isPractice ? "Wheredle (practice)" : "Wheredle"}
+          daily={isPractice ? null : { puzzleNumber: puzzleNumber(day), stats }}
           share={buildWheredleShare(state)}
         />
       )}

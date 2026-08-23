@@ -1,4 +1,5 @@
 import type { Country } from "../data/country";
+import { rng } from "../daily";
 import { FLAG_ZOOM } from "./flagLayout";
 import { pickFlagSegmentFocal } from "./flagSampler";
 
@@ -37,6 +38,11 @@ export interface GuessRecord {
 
 export interface GameState {
   target: Country;
+  // What the puzzle's incidental choices — which letter, which crop of the
+  // flag — are derived from, so they come out the same for every player on a
+  // given day. Stored with the game rather than recomputed, so a board in
+  // progress can't shift under a player at midnight.
+  seed: string;
   hints: Hint[];
   guesses: GuessRecord[];
   status: "playing" | "won" | "lost";
@@ -47,29 +53,33 @@ export type NextHintPlan =
   | { kind: "choice"; options: ChoosableHintType[] }
   | { kind: "done" };
 
-function randomLetter(name: string): string {
+function pickLetter(name: string, random: () => number): string {
   const letters = Array.from(new Set(name.toUpperCase().replace(/[^A-Z]/g, "")));
-  return letters[Math.floor(Math.random() * letters.length)];
+  return letters[Math.floor(random() * letters.length)];
 }
 
-function buildHint(type: Exclude<HintType, "flagSegment">, target: Country): Hint {
+// Each random choice draws from its own stream, named after the hint it
+// feeds, rather than sharing one generator. Otherwise the letter a player
+// sees would depend on whether the flag image had finished loading first.
+function buildHint(type: Exclude<HintType, "flagSegment">, target: Country, seed: string): Hint {
   switch (type) {
     case "letter":
-      return { type: "letter", letter: randomLetter(target.name) };
+      return { type: "letter", letter: pickLetter(target.name, rng(`${seed}:letter`)) };
     default:
       return { type };
   }
 }
 
-async function buildFlagSegmentHint(target: Country): Promise<Hint> {
-  const { focalX, focalY } = await pickFlagSegmentFocal(target.flagUrl, FLAG_ZOOM);
+async function buildFlagSegmentHint(target: Country, seed: string): Promise<Hint> {
+  const { focalX, focalY } = await pickFlagSegmentFocal(target.flagUrl, FLAG_ZOOM, rng(`${seed}:flagSegment`));
   return { type: "flagSegment", focalX, focalY };
 }
 
-export function startGame(target: Country): GameState {
+export function startGame(target: Country, seed: string): GameState {
   return {
     target,
-    hints: [buildHint("letter", target)],
+    seed,
+    hints: [buildHint("letter", target, seed)],
     guesses: [],
     status: "playing",
   };
@@ -106,7 +116,7 @@ export function pendingChoice(state: GameState): ChoosableHintType[] | null {
 export function chooseHint(state: GameState, hint: ChoosableHintType): GameState {
   const plan = planNextHint(state);
   if (plan.kind !== "choice" || !plan.options.includes(hint)) return state;
-  return { ...state, hints: [...state.hints, buildHint(hint, state.target)] };
+  return { ...state, hints: [...state.hints, buildHint(hint, state.target, state.seed)] };
 }
 
 export async function submitGuess(state: GameState, guessed: Country): Promise<GameState> {
@@ -123,8 +133,8 @@ export async function submitGuess(state: GameState, guessed: Country): Promise<G
   if (plan.kind === "auto") {
     const hint =
       plan.hint === "flagSegment"
-        ? await buildFlagSegmentHint(state.target)
-        : buildHint(plan.hint, state.target);
+        ? await buildFlagSegmentHint(state.target, state.seed)
+        : buildHint(plan.hint, state.target, state.seed);
     return { ...state, guesses, hints: [...state.hints, hint] };
   }
   return { ...state, guesses };

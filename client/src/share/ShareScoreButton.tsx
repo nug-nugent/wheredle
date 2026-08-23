@@ -5,6 +5,8 @@ import { COLORS, FONT_FAMILY } from "../theme";
 export interface ShareScoreProps {
   /** e.g. "Wheredle" or "Wheredle: Alex Mode" */
   gameLabel: string;
+  /** Which day's puzzle, so two grids can be compared. Omitted for practice. */
+  puzzleNumber?: number;
   /** e.g. "4/7" or "Solved in 6" */
   resultLabel: string;
   /** One emoji row per guess, oldest first — the Wordle-style score grid. */
@@ -49,9 +51,14 @@ export function ShareScoreButton(props: ShareScoreProps) {
     copiedTimeout.current = setTimeout(() => setCopied(false), 2000);
   };
 
-  // Where the platform has a share sheet — every mobile browser, and most
-  // desktop ones — that sheet is the share UI: it lists whatever the player
-  // actually messages their friends on, which our own menu never could.
+  // The share sheet is offered from inside the menu rather than as the
+  // button itself. It used to be the button wherever navigator.share
+  // existed, which reads better on a phone — but desktop Edge advertises
+  // the API, resolves the promise, and never opens anything, so the button
+  // silently did nothing. There is no capability query that tells the two
+  // apart, and a share button that might do nothing is worse than one that
+  // costs a tap. Everything in this menu gives visible feedback.
+  //
   // navigator.share needs the click's transient activation, so it has to be
   // the first thing the handler does, before any await.
   const nativeShare = () => {
@@ -62,13 +69,7 @@ export function ShareScoreButton(props: ShareScoreProps) {
     });
   };
 
-  if (typeof navigator.share === "function" && (navigator.canShare?.(payload) ?? true)) {
-    return (
-      <button type="button" style={BUTTON_STYLE} onClick={nativeShare}>
-        {copied ? "Copied to clipboard!" : "Share your score"}
-      </button>
-    );
-  }
+  const canNativeShare = typeof navigator.share === "function" && (navigator.canShare?.(payload) ?? true);
 
   return (
     <Menu
@@ -83,10 +84,15 @@ export function ShareScoreButton(props: ShareScoreProps) {
     >
       <Menu.Target>
         <button type="button" style={BUTTON_STYLE}>
-          Share your score
+          {copied ? "Copied to clipboard!" : "Share your score"}
         </button>
       </Menu.Target>
       <Menu.Dropdown>
+        {canNativeShare && (
+          <Menu.Item leftSection="📤" onClick={nativeShare}>
+            Share…
+          </Menu.Item>
+        )}
         <Menu.Item
           leftSection="📋"
           closeMenuOnClick={false}

@@ -1,3 +1,4 @@
+import type { CategoryDef } from "./categories";
 import type { GuessFeedback } from "./engine";
 import { GuessHistoryRow } from "./GuessHistoryRow";
 import { LatestGuessCard } from "./LatestGuessCard";
@@ -6,10 +7,12 @@ import { LatestGuessCard } from "./LatestGuessCard";
 // full; everything before it collapses to a dot-summary row you can expand.
 export function GuessHistory({
   guesses,
+  categories,
   pendingGuess,
   onRevealComplete,
 }: {
   guesses: GuessFeedback[];
+  categories: CategoryDef[];
   pendingGuess?: GuessFeedback | null;
   onRevealComplete?: (feedback: GuessFeedback) => void;
 }) {
@@ -25,11 +28,12 @@ export function GuessHistory({
     <div>
       <LatestGuessCard
         feedback={latest}
+        categories={categories}
         revealing={latest === pendingGuess}
         onRevealComplete={() => pendingGuess && onRevealComplete?.(pendingGuess)}
       />
       {rest.map((feedback) => (
-        <GuessHistoryRow key={feedback.country.cca3} feedback={feedback} />
+        <GuessHistoryRow key={feedback.country.cca3} feedback={feedback} categories={categories} />
       ))}
     </div>
   );

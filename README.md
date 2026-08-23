@@ -5,10 +5,46 @@ sequence of hints, trying to guess it in as few attempts as possible.
 
 ## What's here
 
-A React + Vite + Mantine frontend (`client/`), no backend yet. All game state
-is client-side and ephemeral — nothing is persisted, no accounts, no
-leaderboards. That's the natural next step once the core game feel is
-settled, not something in progress now.
+A React + Vite + Mantine frontend (`client/`), no backend — deliberately.
+Both modes set the same puzzle for everyone each day, worked out from the
+date rather than fetched, so there is nothing to host. Progress and a
+player's record — games played, win rate, average guesses, current and best
+streak — are kept
+in the browser (`client/src/storage.ts`, `client/src/stats.ts`); there are no
+accounts and no leaderboards, which are the only parts that would actually
+need a server. Both are stored under a version stamp as one serialisable
+blob, so if accounts ever do happen, syncing a streak is an upload rather
+than a migration.
+
+The day model lives in `client/src/daily.ts`: a fixed epoch, a day number
+that rolls over at **local** midnight, and a seeded hash. Everything a
+puzzle needs to be the same for two strangers comes from there — the answer
+(`client/src/dailyTarget.ts`), which letter the first clue reveals, where
+the flag crop is taken, and which categories /alex deals. Selection is done
+by ranking candidates on a hash of the day and the candidate's own stable
+key, rather than by shuffling a list, so adding a country or a category
+disturbs as little of the existing sequence as possible.
+
+The menu's "practice game" runs a random puzzle alongside the daily one
+without disturbing it — a separate board in session storage, marked in the
+nav, labelled as practice in anything shared from it, and left out of the
+streak, which is meant to measure turning up each day.
+
+Finishing the day's game reveals the countdown to the next puzzle, a share
+grid headed with the puzzle number so two grids can be compared, and a
+Statistics button opening the record for that mode
+(`client/src/shell/StatsModal.tsx`). The record lives behind a button rather
+than inline because the end-of-game panel already carries an outcome badge,
+the country in full, a share button and a countdown before the player
+reaches their own guesses. The two modes are counted separately — different
+guess limits and different boards, so a combined streak would mean nothing —
+and practice games count towards neither, which is why the button only
+appears on a finished daily game.
+Sharing is a menu rather than a single button: desktop Edge advertises
+`navigator.share`, resolves the promise and never opens anything, and there
+is no capability query that tells that apart from a working share sheet, so
+the sheet is offered as one option among copy, WhatsApp and email rather
+than being the button itself.
 
 Both modes are built in one shell (`client/src/shell/`) — a nav with the
 wordmark, a guesses-left countdown and the menu; one toolbar row for
@@ -31,8 +67,27 @@ Two game modes live side by side, both reading from the same country dataset:
   continent, population, land area, name length, border count, religion,
   government type, currency, and a full language-family
   breakdown. Categories that get confirmed by a match move into a separate
-  "Confirmed" summary so the guess table narrows as you go, rather than
-  staying maxed out at 11 columns for the whole game. See `client/src/alex/`.
+  "Confirmed" summary so the guess table narrows as you go. Only six of the
+  ten categories are dealt on any given day — continent and name length
+  always, plus four drawn for the day — which is what keeps the table
+  readable rather than maxed out for the whole game. Language is one of the
+  categories drawn, not a fixture beside them. See `client/src/alex/`.
+
+  The board is drawn to fit the answer, not the other way round
+  (`client/src/alex/dailyBoard.ts`). Six categories are few enough that many
+  combinations leave whole clumps of countries scoring identically against
+  every possible guess — unwinnable, not merely hard — so the day picks its
+  answer first and then walks alternative draws until it finds a board that
+  can single that answer out. Ten countries no board can ever separate from
+  another (Antigua and Barbuda and Saint Kitts and Nevis among them) are
+  kept out of the daily rotation entirely; they still turn up as guesses and
+  in practice games.
+
+  `npm run check:daily` is what backs that claim. It replays two years of
+  draws through the real game modules and reports how often a day's answer
+  is one its board can't identify, plus how much the best opening guess
+  narrows the field. It exits non-zero if any day is unwinnable, so a change
+  to the categories or the dataset that quietly breaks the draw shows up.
   ("Alex" is just whoever originally asked for this variant — the name has no
   functional meaning, it's not a build flag or user role.)
 

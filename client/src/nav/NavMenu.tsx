@@ -3,11 +3,20 @@ import { COLORS, FONT_FAMILY } from "../theme";
 
 /**
  * The nav's overflow menu — where chrome lives when it doesn't earn a
- * permanent slot in the header. Right now that's only "New game", which
- * retires once the daily seed lands; the rules and links across to the
+ * permanent slot in the header. Now that the puzzle is a daily one, that's
+ * the way in and out of practice games; the rules and links across to the
  * other mode are the expected next tenants.
+ *
+ * `onExitPractice` is only passed while a practice game is what's on screen,
+ * so it doubles as the flag for which way round the menu should read.
  */
-export function NavMenu({ onNewGame }: { onNewGame: () => void }) {
+export function NavMenu({
+  onNewPractice,
+  onExitPractice,
+}: {
+  onNewPractice: () => void;
+  onExitPractice?: () => void;
+}) {
   return (
     <Menu
       shadow="md"
@@ -53,7 +62,8 @@ export function NavMenu({ onNewGame }: { onNewGame: () => void }) {
         </button>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item onClick={onNewGame}>New game</Menu.Item>
+        {onExitPractice && <Menu.Item onClick={onExitPractice}>Back to today's puzzle</Menu.Item>}
+        <Menu.Item onClick={onNewPractice}>{onExitPractice ? "New practice game" : "Practice game"}</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

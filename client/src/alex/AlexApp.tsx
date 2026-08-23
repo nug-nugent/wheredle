@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { AppShell, MainHeading } from "../shell/AppShell";
 import { GameOverPanel } from "../shell/GameOverPanel";
 import { GuessCountdown } from "../shell/GuessCountdown";
+import { PracticeChip } from "../shell/PracticeChip";
+import { puzzleNumber } from "../daily";
 import { GuessInput } from "../game/GuessInput";
 import { getKnownFacts } from "./categories";
+import { categoriesFromKeys } from "./dailyBoard";
 import { MAX_GUESSES } from "./engine";
 import { GuessHistory } from "./GuessHistory";
 import { KnownFacts } from "./KnownFacts";
@@ -11,8 +14,11 @@ import { buildAlexShare } from "./share";
 import { useAlexGame } from "./useAlexGame";
 
 export default function AlexApp() {
-  const { state, pendingGuess, guess, commitGuess, newGame } = useAlexGame();
-  const knownFacts = getKnownFacts(state.guesses);
+  const { state, day, stats, isPractice, pendingGuess, guess, commitGuess, newPractice, exitPractice } = useAlexGame();
+  // The board this game was dealt, read back from the game itself rather than
+  // redrawn, so it can't shift under a game in progress.
+  const categories = categoriesFromKeys(state.categoryKeys);
+  const knownFacts = getKnownFacts(categories, state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
   const historyRef = useRef<HTMLDivElement>(null);
@@ -25,11 +31,17 @@ export default function AlexApp() {
 
   return (
     <AppShell
-      onNewGame={newGame}
+      onNewPractice={newPractice}
+      onExitPractice={isPractice ? exitPractice : undefined}
       mainRef={historyRef}
       // A countdown has nothing to say once the game is over — the reveal
-      // below carries the outcome instead.
-      status={!finished && <GuessCountdown used={state.guesses.length} max={MAX_GUESSES} />}
+      // below carries the outcome instead. Which game you're in still does.
+      status={
+        <>
+          {isPractice && <PracticeChip />}
+          {!finished && <GuessCountdown used={state.guesses.length} max={MAX_GUESSES} />}
+        </>
+      }
       toolbar={
         !finished && (
           <GuessInput
@@ -52,12 +64,18 @@ export default function AlexApp() {
           won={state.status === "won"}
           guessCount={state.guesses.length}
           country={state.target}
-          gameLabel="Wheredle: Alex Mode"
-          share={buildAlexShare(state)}
+          gameLabel={isPractice ? "Wheredle: Alex Mode (practice)" : "Wheredle: Alex Mode"}
+          daily={isPractice ? null : { puzzleNumber: puzzleNumber(day), stats }}
+          share={buildAlexShare(state, categories)}
         />
       )}
       <MainHeading>Guesses ({state.guesses.length})</MainHeading>
-      <GuessHistory guesses={state.guesses} pendingGuess={pendingGuess} onRevealComplete={commitGuess} />
+      <GuessHistory
+        guesses={state.guesses}
+        categories={categories}
+        pendingGuess={pendingGuess}
+        onRevealComplete={commitGuess}
+      />
     </AppShell>
   );
 }

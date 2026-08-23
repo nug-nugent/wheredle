@@ -1,20 +1,26 @@
 import { useState } from "react";
-import type { GuessFeedback } from "./engine";
-import { guessSquares, type SquareState } from "./guessSquares";
-import { LanguageBox } from "./LanguageBox";
+import type { CategoryDef } from "./categories";
+import type { GuessFeedback, SquareState } from "./engine";
+import { guessSquares } from "./guessSquares";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { TileGrid } from "./TileGrid";
 
-// One dot per tile, plus one for language — a compact summary of a settled
-// guess, click to expand into the full tile grid plus language chips. The
-// same squares are what a shared score grid is built from.
+// One dot per category on the day's board — a compact summary of a settled
+// guess, click to expand into the full grid. The same squares are what a
+// shared score grid is built from.
 const DOT_COLOR: Record<SquareState, string> = {
   correct: COLORS.correctBg,
   partial: COLORS.partialSolid,
   wrong: COLORS.wrongBorder,
 };
 
-export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
+export function GuessHistoryRow({
+  feedback,
+  categories,
+}: {
+  feedback: GuessFeedback;
+  categories: CategoryDef[];
+}) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -25,7 +31,7 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
       >
         <div style={{ fontWeight: 600, fontSize: 14, minWidth: 170 }}>{feedback.country.name}</div>
         <div style={{ display: "flex", gap: 3 }}>
-          {guessSquares(feedback).map((state, i) => (
+          {guessSquares(feedback, categories).map((state, i) => (
             <span key={i} style={{ width: 8, height: 8, background: DOT_COLOR[state], flex: "none" }} />
           ))}
         </div>
@@ -43,8 +49,7 @@ export function GuessHistoryRow({ feedback }: { feedback: GuessFeedback }) {
       </div>
       {expanded && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, padding: "0 4px 12px" }}>
-          <TileGrid feedback={feedback} />
-          <LanguageBox chips={feedback.languageChips} />
+          <TileGrid feedback={feedback} categories={categories} />
         </div>
       )}
     </div>
