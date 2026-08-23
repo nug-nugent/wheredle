@@ -1,4 +1,5 @@
 import { Modal } from "@mantine/core";
+import { GuessDistribution } from "./GuessDistribution";
 import type { Stats } from "../stats";
 import { StatsPanel } from "./StatsPanel";
 import { COLORS, FONT_FAMILY } from "../theme";
@@ -16,11 +17,16 @@ export function StatsModal({
   onClose,
   gameLabel,
   stats,
+  maxGuesses,
+  latest,
 }: {
   opened: boolean;
   onClose: () => void;
   gameLabel: string;
   stats: Stats;
+  maxGuesses: number;
+  /** The game just finished, marked on the chart. */
+  latest: { won: boolean; guessCount: number } | null;
 }) {
   return (
     <Modal
@@ -38,8 +44,9 @@ export function StatsModal({
     >
       <div style={{ fontSize: 12, color: COLORS.textDimmed }}>{gameLabel}</div>
       <StatsPanel stats={stats} />
+      <GuessDistribution stats={stats} maxGuesses={maxGuesses} latest={latest} />
       <div style={{ fontSize: 11, color: COLORS.textDimmed, marginTop: 18 }}>
-        Each mode keeps its own record — practice games count towards neither.
+        Each mode keeps its own record. Practice games count towards neither.
       </div>
     </Modal>
   );

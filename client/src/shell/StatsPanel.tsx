@@ -12,11 +12,11 @@ function Figure({ value, label }: { value: string; label: string }) {
   );
 }
 
-// The numbers a daily player actually tracks. The full guess distribution is
-// recorded too but isn't drawn: a handful of games renders as a shape, and a
-// shape reads as a distribution when it's really noise. Its average is the
-// part that stays honest at three games, so that's what's shown — an em dash
-// until there's a solved game to average.
+// The numbers a daily player actually tracks, above the chart that shows the
+// same games spread out. The average is here rather than under the bars
+// because it's the one figure that stays meaningful at three games, where the
+// bars are still mostly a shape — an em dash until there's a solved game to
+// average.
 export function StatsPanel({ stats }: { stats: Stats }) {
   const winRate = stats.played === 0 ? 0 : Math.round((stats.wins / stats.played) * 100);
   const average = averageGuesses(stats);

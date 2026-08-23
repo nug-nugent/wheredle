@@ -65,6 +65,7 @@ export default function AlexApp() {
           won={state.status === "won"}
           guessCount={state.guesses.length}
           country={state.target}
+          maxGuesses={MAX_GUESSES}
           gameLabel={isPractice ? "Wheredle: Alex Mode (practice)" : "Wheredle: Alex Mode"}
           daily={isPractice ? null : { puzzleNumber: puzzleNumber(day), stats }}
           share={buildAlexShare(state, categories)}
