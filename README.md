@@ -40,11 +40,15 @@ reaches their own guesses. The two modes are counted separately — different
 guess limits and different boards, so a combined streak would mean nothing —
 and practice games count towards neither, which is why the button only
 appears on a finished daily game.
-Sharing is a menu rather than a single button: desktop Edge advertises
-`navigator.share`, resolves the promise and never opens anything, and there
-is no capability query that tells that apart from a working share sheet, so
-the sheet is offered as one option among copy, WhatsApp and email rather
-than being the button itself.
+The number also sits under the wordmark while the puzzle is being played.
+
+Sharing uses the platform's share sheet where there is one — one tap, since
+that sheet lists whatever the player actually messages their friends on.
+Desktop Edge advertises `navigator.share`, resolves the promise and never
+opens anything, and no capability query tells that apart from a working
+sheet, so it is caught afterwards instead: a resolve too fast for a sheet to
+have been opened and picked from falls back to a clipboard copy. Browsers
+without the API get a menu of copy, WhatsApp and email.
 
 Both modes are built in one shell (`client/src/shell/`) — a nav with the
 wordmark, a guesses-left countdown and the menu; one toolbar row for

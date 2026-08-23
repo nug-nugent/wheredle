@@ -17,8 +17,24 @@ function currentUrl(): string {
   return `${window.location.origin}${window.location.pathname}`;
 }
 
-function buildShareText({ gameLabel, resultLabel, rows }: ShareScoreProps): string {
-  return [`${gameLabel} ${resultLabel}`, "", ...rows, "", currentUrl()].join("\n");
+// "Wheredle: Alex Mode #12 Solved in 5". The puzzle number is what makes two
+// grids comparable — without it a shared score says nothing about which day
+// it was won on. Practice games have no number and so quote none.
+function headline({ gameLabel, puzzleNumber, resultLabel }: ShareScoreProps): string {
+  return puzzleNumber === undefined
+    ? `${gameLabel} ${resultLabel}`
+    : `${gameLabel} #${puzzleNumber} ${resultLabel}`;
+}
+
+function buildShareText(props: ShareScoreProps): string {
+  return [headline(props), "", ...props.rows, "", currentUrl()].join("\n");
+}
+
+// What a share sheet shows as the item's name, and what some targets surface
+// instead of the body — so it carries the number too, rather than leaving a
+// shared score with no way to tell which day it was.
+function shareTitle({ gameLabel, puzzleNumber }: ShareScoreProps): string {
+  return puzzleNumber === undefined ? gameLabel : `${gameLabel} #${puzzleNumber}`;
 }
 
 const BUTTON_STYLE = {
@@ -36,40 +52,77 @@ export function ShareScoreButton(props: ShareScoreProps) {
   const [copied, setCopied] = useState(false);
   const copiedTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const shareText = buildShareText(props);
-  const payload = { title: props.gameLabel, text: shareText };
+  const payload = { title: shareTitle(props), text: shareText };
 
-  const copyToClipboard = async () => {
+  // A share sheet can't open and be picked from in this long, so a resolve
+  // this fast means nothing opened at all — see nativeShare.
+  const INSTANT_RESOLVE_MS = 300;
+
+  const copyToClipboard = async (): Promise<boolean> => {
     try {
       await navigator.clipboard.writeText(shareText);
+      return true;
     } catch {
-      // Clipboard access denied or unavailable — say nothing rather than
-      // claim a copy that didn't happen.
-      return;
+      // Denied or unavailable. The caller says nothing rather than claiming a
+      // copy that didn't happen.
+      return false;
     }
+  };
+
+  const flagCopied = () => {
     clearTimeout(copiedTimeout.current);
     setCopied(true);
     copiedTimeout.current = setTimeout(() => setCopied(false), 2000);
   };
 
-  // The share sheet is offered from inside the menu rather than as the
-  // button itself. It used to be the button wherever navigator.share
-  // existed, which reads better on a phone — but desktop Edge advertises
-  // the API, resolves the promise, and never opens anything, so the button
-  // silently did nothing. There is no capability query that tells the two
-  // apart, and a share button that might do nothing is worse than one that
-  // costs a tap. Everything in this menu gives visible feedback.
+  const copyFromMenu = async () => {
+    if (await copyToClipboard()) flagCopied();
+  };
+
+  // Where the platform has a share sheet — every mobile browser, and most
+  // desktop ones — that sheet is the share UI: it lists whatever the player
+  // actually messages their friends on, which our own menu never could. So
+  // it stays the button, one tap, as it was.
   //
-  // navigator.share needs the click's transient activation, so it has to be
-  // the first thing the handler does, before any await.
+  // Desktop Edge is the exception that makes this fiddly: it advertises the
+  // API, resolves the promise, and never opens anything, so the button used
+  // to do nothing at all. There's no capability query that tells that apart
+  // from a working sheet, so it's caught after the fact — an instant resolve
+  // means no sheet appeared, and the player gets the copy instead.
+  //
+  // The copy is started *before* the share and never awaited first, because
+  // both need the click's transient activation and neither gets it back once
+  // a promise has been awaited. On a phone it costs a clipboard write nobody
+  // sees; everywhere else it's the difference between a fallback and none.
   const nativeShare = () => {
-    navigator.share(payload).catch((error: DOMException) => {
-      // AbortError means the player dismissed the sheet — nothing to do.
-      // Anything else means the sheet never opened, so fall back to a copy.
-      if (error.name !== "AbortError") void copyToClipboard();
-    });
+    const copying = copyToClipboard();
+    const startedAt = Date.now();
+
+    const fallBackToCopy = async () => {
+      if (await copying) flagCopied();
+    };
+
+    navigator.share(payload).then(
+      () => {
+        if (Date.now() - startedAt < INSTANT_RESOLVE_MS) void fallBackToCopy();
+      },
+      (error: DOMException) => {
+        // AbortError means the player dismissed the sheet — nothing to do.
+        // Anything else means the sheet never opened.
+        if (error.name !== "AbortError") void fallBackToCopy();
+      }
+    );
   };
 
   const canNativeShare = typeof navigator.share === "function" && (navigator.canShare?.(payload) ?? true);
+
+  if (canNativeShare) {
+    return (
+      <button type="button" style={BUTTON_STYLE} onClick={nativeShare}>
+        {copied ? "Copied to clipboard!" : "Share your score"}
+      </button>
+    );
+  }
 
   return (
     <Menu
@@ -88,15 +141,10 @@ export function ShareScoreButton(props: ShareScoreProps) {
         </button>
       </Menu.Target>
       <Menu.Dropdown>
-        {canNativeShare && (
-          <Menu.Item leftSection="📤" onClick={nativeShare}>
-            Share…
-          </Menu.Item>
-        )}
         <Menu.Item
           leftSection="📋"
           closeMenuOnClick={false}
-          onClick={() => void copyToClipboard()}
+          onClick={() => void copyFromMenu()}
         >
           {copied ? "Copied to clipboard!" : "Copy to clipboard"}
         </Menu.Item>
