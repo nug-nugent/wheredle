@@ -106,9 +106,16 @@ alias list (`client/src/game/countryAliases.ts`) is hand-maintained, unlike
 the dataset it keys into; the ranking and typo tolerance live in
 `client/src/game/countryMatch.ts`.
 
-There's no routing library — `client/src/main.tsx` just switches on
-`window.location.pathname` between the two, since it's only ever these two
-static pages.
+There's no routing library — `client/src/mode.ts` reads the mode off
+`window.location.pathname` once, and `client/src/main.tsx` switches on it,
+since it's only ever these two static pages. The deploy copies `index.html`
+to `404.html`, which is what lets Pages serve `/alex` at all.
+
+The rest of the menu is text: how to play (the rules of whichever mode you're
+in), more games, and about — one modal frame in `client/src/about/` with a
+panel per view, rendered from `NavMenu` rather than per mode, so both modes
+get them without either knowing about it. The other games are listed in
+`client/src/data/games.ts`, hand-maintained unlike the dataset beside it.
 
 ## Data
 

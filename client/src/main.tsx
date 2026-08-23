@@ -5,11 +5,11 @@ import "@mantine/core/styles.css";
 import "./index.css";
 import AlexApp from "./alex/AlexApp.tsx";
 import App from "./App.tsx";
+import { MODE, PAGE_TITLE } from "./mode.ts";
 
-const isAlexPath = window.location.pathname.replace(/\/+$/, "").endsWith("/alex");
-const Page = isAlexPath ? AlexApp : App;
+const Page = MODE === "alex" ? AlexApp : App;
 
-document.title = isAlexPath ? "Wheredle - Alex mode" : "Wheredle";
+document.title = PAGE_TITLE[MODE];
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
