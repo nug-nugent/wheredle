@@ -33,7 +33,10 @@ streak, which is meant to measure turning up each day.
 Finishing the day's game reveals the countdown to the next puzzle, a share
 grid headed with the puzzle number so two grids can be compared, and a
 Statistics button opening the record for that mode
-(`client/src/shell/StatsModal.tsx`). The record lives behind a button rather
+(`client/src/shell/StatsModal.tsx`) — the headline figures plus a bar per
+guess count, with the game just finished picked out and a final bar for games
+lost, so the chart accounts for every game played rather than only the won
+ones. The record lives behind a button rather
 than inline because the end-of-game panel already carries an outcome badge,
 the country in full, a share button and a countdown before the player
 reaches their own guesses. The two modes are counted separately — different

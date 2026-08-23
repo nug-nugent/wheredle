@@ -36,6 +36,7 @@ export function GameOverPanel({
   guessCount,
   country,
   gameLabel,
+  maxGuesses,
   daily,
   share,
 }: {
@@ -43,6 +44,7 @@ export function GameOverPanel({
   guessCount: number;
   country: Country;
   gameLabel: string;
+  maxGuesses: number;
   daily: { puzzleNumber: number; stats: Stats } | null;
   share: Omit<ShareScoreProps, "gameLabel" | "puzzleNumber">;
 }) {
@@ -82,6 +84,8 @@ export function GameOverPanel({
             onClose={() => setStatsOpen(false)}
             gameLabel={gameLabel}
             stats={daily.stats}
+            maxGuesses={maxGuesses}
+            latest={{ won, guessCount }}
           />
         </>
       )}
