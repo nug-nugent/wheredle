@@ -23,6 +23,10 @@ const SHELL_STYLES = `
     border-bottom: 2px solid ${COLORS.border};
   }
   .shell-nav-title { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+  /* The edition line, sat under the wordmark like an issue number. Quiet
+     enough that the wordmark still reads as the title, present enough that a
+     player can quote it when comparing scores. */
+  .shell-nav-number { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; line-height: 1; }
   .shell-nav-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
   .shell-toolbar {
     display: flex;
@@ -116,6 +120,7 @@ export function MainHeading({ children }: { children: ReactNode }) {
 
 export function AppShell({
   status,
+  puzzleNumber,
   onNewPractice,
   onExitPractice,
   toolbar,
@@ -125,6 +130,8 @@ export function AppShell({
 }: {
   /** The nav's right-hand chip — a countdown while there is a game to play. */
   status?: ReactNode;
+  /** Which day's puzzle this is. Omitted for practice games, which are no day's. */
+  puzzleNumber?: number;
   onNewPractice: () => void;
   /** Passed only while a practice game is on screen. */
   onExitPractice?: () => void;
@@ -160,7 +167,14 @@ export function AppShell({
       <div className="shell-nav shell-fixed-row">
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <GlobeLogo size={26} />
-          <div className="shell-nav-title">WHEREDLE</div>
+          <div>
+            <div className="shell-nav-title">WHEREDLE</div>
+            {puzzleNumber !== undefined && (
+              <div className="shell-nav-number" style={{ color: COLORS.textDimmed }}>
+                NO. {puzzleNumber}
+              </div>
+            )}
+          </div>
         </div>
         <div className="shell-nav-right">
           {status}

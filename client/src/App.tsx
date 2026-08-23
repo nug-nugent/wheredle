@@ -25,6 +25,7 @@ export default function App() {
 
   return (
     <AppShell
+      puzzleNumber={isPractice ? undefined : puzzleNumber(day)}
       onNewPractice={newPractice}
       onExitPractice={isPractice ? exitPractice : undefined}
       mainRef={cluesRef}
