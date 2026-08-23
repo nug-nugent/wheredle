@@ -26,6 +26,12 @@ jobs:
           cache-dependency-path: client/package-lock.json
       - run: npm ci
         working-directory: client
+      # Before the build, so a dataset refresh or a change to the category
+      # list that leaves some day's answer impossible to deduce stops here
+      # rather than shipping. Exits non-zero on any unwinnable day.
+      - name: Check every daily board can identify its answer
+        run: npm run check:daily
+        working-directory: client
       - run: npm run build
         working-directory: client
       - run: cp dist/index.html dist/404.html

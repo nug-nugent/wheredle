@@ -116,7 +116,8 @@ export function MainHeading({ children }: { children: ReactNode }) {
 
 export function AppShell({
   status,
-  onNewGame,
+  onNewPractice,
+  onExitPractice,
   toolbar,
   mainRef,
   rail,
@@ -124,7 +125,9 @@ export function AppShell({
 }: {
   /** The nav's right-hand chip — a countdown while there is a game to play. */
   status?: ReactNode;
-  onNewGame: () => void;
+  onNewPractice: () => void;
+  /** Passed only while a practice game is on screen. */
+  onExitPractice?: () => void;
   /**
    * The one row a player acts in. Pass nothing once the game is over rather
    * than a disabled control, since a dead one still costs a phone a row.
@@ -161,7 +164,7 @@ export function AppShell({
         </div>
         <div className="shell-nav-right">
           {status}
-          <NavMenu onNewGame={onNewGame} />
+          <NavMenu onNewPractice={onNewPractice} onExitPractice={onExitPractice} />
         </div>
       </div>
 

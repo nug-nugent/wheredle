@@ -14,6 +14,13 @@ export type Tertile = "bottom" | "middle" | "top";
 // unrelated miss — see tertileFlag in this file.
 export type TileFlag = "correct" | "wrong";
 
+// How a category scored one guess, for the per-guess summary behind both
+// the history row's dots and the share grid's emoji. Wider than TileFlag
+// because a category can carry a halfway state — language does, matching a
+// family without naming the language outright — even though the categories
+// that render as tiles never use it.
+export type SquareState = TileFlag | "partial";
+
 export type LanguageChipState = "correct" | "family" | "wrong";
 export interface LanguageChip {
   name: string;
@@ -192,20 +199,22 @@ export const MAX_GUESSES = 6;
 
 export interface AlexGameState {
   target: Country;
+  // The categories this board was drawn with, stored rather than recomputed
+  // so a deploy that adds or removes one can't rearrange a game in progress,
+  // and a finished result still says what it was scored against.
+  categoryKeys: string[];
   guesses: GuessFeedback[];
   status: "playing" | "won" | "lost";
 }
 
-export function pickRandomCountry(): Country {
-  return countries[Math.floor(Math.random() * countries.length)];
+export function startAlexGame(target: Country, categoryKeys: string[]): AlexGameState {
+  return { target, categoryKeys, guesses: [], status: "playing" };
 }
 
-export function startAlexGame(target: Country): AlexGameState {
-  return { target, guesses: [], status: "playing" };
-}
-
-export function computeGuessFeedback(state: AlexGameState, guessed: Country): GuessFeedback {
-  const target = state.target;
+// Takes the target rather than the game state: what a guess scores depends
+// only on the country it's measured against, which is what lets the daily
+// draw work out what a board can tell apart before there's a game at all.
+export function computeGuessFeedback(target: Country, guessed: Country): GuessFeedback {
   const samePopulationTertile = populationTertileOf(guessed) === populationTertileOf(target);
   const sameAreaTertile = areaTertileOf(guessed) === areaTertileOf(target);
   const sameNameLengthTertile = nameLengthTertileOf(guessed) === nameLengthTertileOf(target);

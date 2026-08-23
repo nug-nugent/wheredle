@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "data:fetch": "node scripts/fetch-countries.mjs"
+    "data:fetch": "node scripts/fetch-countries.mjs",
+    "check:daily": "node scripts/check-daily.mjs"
   },
   "dependencies": {
     "@mantine/core": "^9.5.1",

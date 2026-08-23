@@ -1,6 +1,10 @@
-// Picks a random focal point for the flag-segment crop, retrying until the
-// cropped region isn't just blank/near-white — an all-white crop gives the
-// player nothing to go on.
+// Picks a focal point for the flag-segment crop, retrying until the cropped
+// region isn't just blank/near-white — an all-white crop gives the player
+// nothing to go on.
+//
+// The randomness is supplied by the caller rather than taken from
+// Math.random, so a day's crop is the same one for everyone: two players
+// comparing a shared grid should have been looking at the same picture.
 
 const WHITE_THRESHOLD = 245;
 const MAX_ATTEMPTS = 25;
@@ -58,26 +62,27 @@ function isBlank(sample: FlagSample, x0: number, y0: number, w: number, h: numbe
   return true;
 }
 
-function randomPoint() {
-  return { focalX: Math.random() * 100, focalY: Math.random() * 100 };
+function randomPoint(random: () => number) {
+  return { focalX: random() * 100, focalY: random() * 100 };
 }
 
 export async function pickFlagSegmentFocal(
   flagUrl: string,
-  zoom: number
+  zoom: number,
+  random: () => number
 ): Promise<{ focalX: number; focalY: number }> {
   let sample: FlagSample;
   try {
     sample = await loadFlagSample(flagUrl);
   } catch {
-    return randomPoint();
+    return randomPoint(random);
   }
 
   const cropWFrac = 1 / zoom;
   const cropHFrac = 1 / zoom;
 
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-    const { focalX, focalY } = randomPoint();
+    const { focalX, focalY } = randomPoint(random);
     const x0 = (focalX / 100) * (1 - cropWFrac) * sample.width;
     const y0 = (focalY / 100) * (1 - cropHFrac) * sample.height;
     const w = cropWFrac * sample.width;
@@ -87,5 +92,5 @@ export async function pickFlagSegmentFocal(
     }
   }
 
-  return randomPoint();
+  return randomPoint(random);
 }
