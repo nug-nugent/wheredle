@@ -17,9 +17,15 @@ export const ROTATING_SLOTS = 4;
 const MAX_ROTATING_TERTILES = 2;
 
 // How many boards a day will try before giving up and showing everything.
-// Only ever exhausted for a target no board can single out, and those are
-// kept out of the daily pool in the first place.
-const MAX_DRAWS = 24;
+//
+// Not merely a safety net: a target with few workable boards can exhaust
+// this even though one exists. Nicaragua is the tightest case in the current
+// data, singled out by only 3 of the ~50 legal draws — at 24 attempts its
+// day missed all three and fell back to showing all ten categories, which is
+// a legible board but a startling one next to every other day's six. 64
+// clears it with room to spare, and costs nothing on the days that find a
+// board on the first attempt, which is nearly all of them.
+const MAX_DRAWS = 64;
 
 // One draw from the rotating pool, in CATEGORIES order rather than draw
 // order, so the board reads the same way every day and the chips cell —
@@ -83,11 +89,16 @@ function singlesOut(target: Country, categories: CategoryDef[]): boolean {
 // the target out.
 //
 // A country the *full* set can't separate from another is beyond rescue: if
-// no category distinguishes them, no selection of categories will either. Ten
-// countries are in that position (Antigua and Barbuda and Saint Kitts and
-// Nevis among them), and they're dropped from the daily pool rather than set
-// as answers nobody could find. They still appear as guesses, and in practice
-// games.
+// no category distinguishes them, no selection of categories will either.
+// Twelve countries are in that position, and they're dropped from the daily
+// pool rather than set as answers nobody could find. They still appear as
+// guesses, and in practice games.
+//
+// They come in look-alike pairs and clusters: Benin and Togo, Mali and
+// Niger, and eight Caribbean and Atlantic island states. Retiring the
+// currency category cost two of these — it was a poor column to play
+// against, but a currency held by exactly one country did occasionally tell
+// two otherwise identical neighbours apart.
 export const DAILY_TARGET_POOL: Country[] = (() => {
   const seen = new Map<string, number>();
   for (const country of countries) {

@@ -5,6 +5,13 @@ export interface Country {
   cca3: string;
   name: string;
   continent: string;
+  // Köppen-Geiger main groups (A–E) covering at least a sixth of the
+  // country's land, in A–E order, never empty. Multi-valued because most
+  // large countries genuinely span several — China has four — and naming
+  // only the largest would put a falsehood on a board whose every tile is
+  // meant to be a hard fact. See scripts/climate.mjs for the derivation and
+  // the threshold behind "at least a sixth".
+  climateZones: string[];
   capital: string | null;
   population: number;
   area: number; // km²
@@ -19,6 +26,24 @@ export interface Country {
   // publishes an HDI for — their value is a rough unofficial estimate rather
   // than a reported figure, and the UI marks it as such.
   hdiEstimated?: true;
+}
+
+// The data stores Köppen's letters; nobody wants to be told their country
+// is "D". Lives here rather than with the Alex categories because the
+// end-of-game reveal names them too, and that is shared by both modes.
+export const CLIMATE_ZONES = ["A", "B", "C", "D", "E"];
+export const CLIMATE_ZONE_LABEL: Record<string, string> = {
+  A: "Tropical",
+  B: "Arid",
+  C: "Temperate",
+  D: "Continental",
+  E: "Polar",
+};
+
+export function climateLabel(zones: string[]): string {
+  return CLIMATE_ZONES.filter((z) => zones.includes(z))
+    .map((z) => CLIMATE_ZONE_LABEL[z] ?? z)
+    .join(", ");
 }
 
 export const countries: Country[] = raw as Country[];
