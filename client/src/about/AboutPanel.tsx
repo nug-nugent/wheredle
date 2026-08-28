@@ -35,6 +35,10 @@ export function AboutPanel() {
           majority religion and government type from{" "}
           <ExternalLink href="https://github.com/samayo/country-json">samayo/country-json</ExternalLink>; the flags
           from <ExternalLink href="https://github.com/hjnilsson/country-flags">hjnilsson/country-flags</ExternalLink>.
+          Climate zones are worked out here, by crossing a{" "}
+          <ExternalLink href="https://koeppen-geiger.vu-wien.ac.at/">Köppen-Geiger climate grid</ExternalLink>{" "}
+          (Kottek et al. 2006; Rubel & Kottek 2010) with country outlines from{" "}
+          <ExternalLink href="https://www.naturalearthdata.com/">Natural Earth</ExternalLink>.
           Human Development Index figures are hand-curated from the UNDP's{" "}
           <ExternalLink href="https://hdr.undp.org/">2025 Human Development Report</ExternalLink>, since no maintained
           machine-readable source for them exists.

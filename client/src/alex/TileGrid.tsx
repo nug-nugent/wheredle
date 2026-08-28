@@ -35,6 +35,7 @@ export function TileGrid({
             key={category.key}
             label={category.header}
             value={revealed ? category.label(feedback) : ""}
+            detail={revealed ? category.detail?.(feedback) : undefined}
             state={revealed ? category.square(feedback) : "pending"}
           />
         );

@@ -186,12 +186,12 @@ export interface GuessFeedback {
   hdiDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
-  // Currency is treated as a single-valued attribute, like continent or
-  // government: correct if any of the guessed country's currencies is also
-  // one of the target's. Multi-currency countries are rare enough (a dozen
-  // or so in the dataset) that this doesn't need per-currency chip credit
-  // the way language does.
-  sameCurrency: boolean;
+  // True when the two countries share any climate zone at all. Unlike every
+  // other tile, a hit here doesn't say *which* zone was shared — a guess
+  // spanning four of them proves only that one of the four is the target's.
+  // The narrowing that a hit is worth gets worked out across the whole guess
+  // list instead; see the climate category in categories.ts.
+  sameClimate: boolean;
   languageChips: LanguageChip[];
 }
 
@@ -247,9 +247,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     hdiDirection: tertileFlag(sameHdiTertile),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
-    sameCurrency:
-      guessed.currencies.length > 0 &&
-      guessed.currencies.some((c) => target.currencies.includes(c)),
+    sameClimate: guessed.climateZones.some((z) => target.climateZones.includes(z)),
     languageChips: guessed.languages.map((name) => languageChip(name, target.languages)),
   };
 }

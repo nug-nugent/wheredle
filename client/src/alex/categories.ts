@@ -1,3 +1,4 @@
+import { CLIMATE_ZONES, CLIMATE_ZONE_LABEL, countries, type Country } from "../data/country";
 import type { GuessFeedback, LanguageChip, SquareState, Tertile, TertileRanges, TileFlag } from "./engine";
 import {
   AREA_TERTILE_RANGES,
@@ -86,6 +87,13 @@ export type CategoryDef =
       // with no halfway state to paint.
       square: (f: GuessFeedback) => TileFlag;
       label: (f: GuessFeedback) => string;
+      // A second, subordinate line, for a label that can't stand on its own.
+      // Only the tertile categories set it: every other tile names something
+      // concrete about the guessed country — "Asia", "Republic", "Arid" —
+      // while "Top third" names a bucket without saying where it starts or
+      // ends. See tertileCategory for why the string it returns has to match
+      // the rail's wording exactly.
+      detail?: (f: GuessFeedback) => string;
     })
   | (CategoryCommon & {
       cell: "chips";
@@ -93,6 +101,43 @@ export type CategoryDef =
     });
 
 const TERTILE_ORDER: Tertile[] = ["bottom", "middle", "top"];
+
+// The `value` for a category scored by overlap, where a guess counts as
+// right for sharing *any* one of the target's values rather than matching
+// them all. Climate is the only one now; currency was the other, and the
+// example below is the board it went wrong on before it was dropped.
+//
+// Listing the values themselves would be wrong here, and subtly so. `value`
+// exists to answer "could any guess ever tell these two countries apart",
+// and for an overlap category two different lists don't guarantee that.
+// Nauru held the Australian dollar; Tuvalu held the Australian and the
+// Tuvaluan. The lists differ, so the draw believed a board could separate
+// them — but the only country carrying a Tuvaluan dollar was Tuvalu, which
+// carried the Australian one too, so every guess that hit one hit the
+// other. Day 390 duly set a puzzle no amount of play could solve.
+//
+// What actually settles it is how a country answers each guess that could
+// be made, so that's what this returns: one bit per distinct value-set in
+// the data, saying whether this country overlaps it. Two countries agree
+// here exactly when no guess can separate them, which is what the daily
+// draw needs to know.
+//
+// Climate's zone lists would survive the naive treatment today — every zone
+// is held alone by some country, so any two zone-sets are separable — but
+// that's a property of the data rather than of the rules, and it would go
+// quietly wrong the day the data shifted.
+function overlapSignature(setOf: (c: Country) => string[]): (values: string[]) => string {
+  // Keyed by JSON, for the reason dailyBoard's fingerprint gives: no
+  // separator character can be trusted not to appear inside a value, since
+  // the names being joined are real-world ones.
+  const distinct = new Map<string, string[]>();
+  for (const country of countries) {
+    const sorted = [...setOf(country)].sort();
+    distinct.set(JSON.stringify(sorted), sorted);
+  }
+  const guessable = [...distinct.keys()].sort().map((key) => distinct.get(key)!);
+  return (values) => guessable.map((g) => (g.some((v) => values.includes(v)) ? "1" : "0")).join("");
+}
 
 // A category whose values bucket into thirds. A wrong guess rules out the
 // guessed country's own tertile, so one eliminated tertile becomes an
@@ -123,6 +168,11 @@ function tertileCategory(config: {
     cell: "tile",
     square,
     label: (f) => TERTILE_LABEL[of(f)],
+    // Deliberately built the same way as the rail's range, by the same
+    // helpers and with the same unit: the point of showing it here is that
+    // the player can see it's the same thing being talked about, which a
+    // reworded or reformatted version would undo.
+    detail: (f) => withUnit(unit, formatRange(of(f), ranges, formatBound)),
     value: (f) => of(f),
     facts: (guesses) => {
       const matched = guesses.find((g) => square(g) === "correct");
@@ -204,6 +254,105 @@ function flatCategory(config: {
   };
 }
 
+// A category whose value is a *set*, scored by overlap: a guess is right
+// when it shares any one of the target's values. Climate is the only one —
+// most countries have a single zone, but the large and varied ones honestly
+// span several, and calling China temperate to make it fit a single tile
+// would put a falsehood on a board where every tile is a hard fact.
+//
+// Overlap makes the two outcomes asymmetric, which is why this can't be a
+// flatCategory:
+//
+//  - A miss is strong. No overlap means *every* value the guess holds is
+//    absent from the target, so all of them are ruled out at once — a
+//    missed guess on China eliminates four of the five zones in one move.
+//  - A hit is a disjunction. It says at least one of the guess's values is
+//    the target's without saying which, so on its own it confirms nothing
+//    unless the guess had only one value to offer.
+//
+// So hits are read against the exclusions rather than alone: once misses
+// have ruled out all but one of a hit's values, the survivor is certain.
+// That's the same reasoning as a tertile pinned down by eliminating the
+// other two, and it lands in the same place — among the positives, with no
+// hedging.
+//
+// Hits are also worth checking one at a time rather than intersected.
+// Guessing Iceland (polar) and then Canada (continental and polar) proves
+// only what Iceland already did, because Canada's hit is satisfied by the
+// polar the target is known to have — it is no evidence about continental
+// at all. Every hit that *does* collapse to one value contributes it, so
+// confirmed values accumulate across the guess list the way languages do.
+function setCategory(config: {
+  key: string;
+  header: string;
+  daily: DailySlot;
+  // Every value the category can take, in the order they should read. Used
+  // to order the rail's lists, and to spot the case where exclusions alone
+  // have left exactly one value standing.
+  domain: string[];
+  // Taken from the country rather than the feedback, because the signature
+  // below has to read every country's values, not just a guessed one's.
+  of: (country: Country) => string[];
+  match: (f: GuessFeedback) => boolean;
+  label: (value: string) => string;
+}): CategoryDef {
+  const { key, header, daily, domain, of, match, label } = config;
+  const values = (f: GuessFeedback) => of(f.country);
+  const signature = overlapSignature(of);
+  const inDomainOrder = (vs: string[]) => domain.filter((v) => vs.includes(v));
+  const list = (vs: string[]) => inDomainOrder(vs).map(label).join(", ");
+
+  return {
+    key,
+    header,
+    daily,
+    // Not a kind of its own: the only thing reading this is the daily
+    // draw's cap on numeric columns, and for that purpose a set category
+    // counts as flat — it asks the same sort of question religion does.
+    kind: "flat",
+    cell: "tile",
+    square: (f) => (match(f) ? "correct" : "wrong"),
+    label: (f) => list(values(f)),
+    value: (f) => signature(values(f)),
+    facts: (guesses) => {
+      const ruledOut: string[] = [];
+      for (const g of guesses) {
+        if (match(g)) continue;
+        for (const v of values(g)) if (!ruledOut.includes(v)) ruledOut.push(v);
+      }
+
+      const confirmed: string[] = [];
+      const confirm = (v: string) => {
+        if (!confirmed.includes(v)) confirmed.push(v);
+      };
+
+      // Exclusions alone can settle it: the target always holds at least one
+      // value, so if every value but one has been ruled out, that one is the
+      // target's whether or not any guess ever hit.
+      const standing = domain.filter((v) => !ruledOut.includes(v));
+      if (standing.length === 1) confirm(standing[0]);
+
+      for (const g of guesses) {
+        if (!match(g)) continue;
+        const possible = values(g).filter((v) => !ruledOut.includes(v));
+        if (possible.length === 1) confirm(possible[0]);
+      }
+
+      const facts: KnownFact[] = [];
+      if (confirmed.length > 0) {
+        facts.push({ key, header, label: list(confirmed), kind: "is" });
+      }
+      // Both facts can stand at once — unlike a flat category, knowing one
+      // of the target's zones doesn't finish the column — so the exclusion
+      // needs a key of its own to sit beside the positive in the rail.
+      if (ruledOut.length > 0) {
+        facts.push({ key: `${key}Excluded`, header, label: `not ${list(ruledOut)}`, kind: "isnt" });
+      }
+      return facts;
+    },
+  };
+}
+
 // Language is the one attribute with a halfway state: a guess can share a
 // family with something the target speaks without naming it outright. It's
 // also multi-valued, so it draws a list of chips rather than a single tile.
@@ -271,6 +420,14 @@ function languageCategory(): CategoryDef {
   };
 }
 
+// Currency was one of these and isn't any more. With 146 currencies, 132 of
+// them held by a single country, its tile came out red for 97.6% of all
+// guesses — and since exclusions were switched off for it (a domain that
+// size makes "not the Kenyan shilling" worthless), a miss taught nothing
+// either. It was a dead column occupying one of six slots. It survives in
+// the end-of-game reveal, which is where a fact that's interesting to read
+// but useless to deduce from belongs.
+//
 // Every category the game knows about. A day's board is drawn from this by
 // the daily seeding — the "always" entries plus a pick of the rotating ones
 // — so the order here is only the order they draw in, free to change without
@@ -283,6 +440,15 @@ export const CATEGORIES: CategoryDef[] = [
     match: (f) => f.sameContinent,
     label: (f) => f.country.continent,
     excluded: (f) => [f.country.continent],
+  }),
+  setCategory({
+    key: "climate",
+    header: "Climate",
+    daily: "rotating",
+    domain: CLIMATE_ZONES,
+    of: (country) => country.climateZones,
+    match: (f) => f.sameClimate,
+    label: (zone) => CLIMATE_ZONE_LABEL[zone] ?? zone,
   }),
   tertileCategory({
     key: "population",
@@ -351,13 +517,6 @@ export const CATEGORIES: CategoryDef[] = [
     match: (f) => f.sameGovernmentType,
     label: (f) => f.country.governmentType ?? "Unknown",
     excluded: (f) => (f.country.governmentType ? [f.country.governmentType] : []),
-  }),
-  flatCategory({
-    key: "currency",
-    header: "Currency",
-    daily: "rotating",
-    match: (f) => f.sameCurrency,
-    label: (f) => f.country.currencies.join(", ") || "Unknown",
   }),
   languageCategory(),
 ];

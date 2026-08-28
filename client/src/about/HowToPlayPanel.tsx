@@ -51,13 +51,18 @@ function AlexRules() {
           Guess any country and the board scores it against the answer, column by column: green where that column
           matches the answer, red where it doesn't. Six columns a day. Continent and name length are always among them;
           the other four are drawn from population, land area, land borders, HDI, majority religion, government type,
-          currency and language, so a day of religion and government plays nothing like a day of numbers.
+          climate and language, so a day of religion and government plays nothing like a day of numbers.
         </Prose>
         <Prose>
           The numeric columns are bucketed into thirds by rank rather than compared outright, so a green one means
           "same third as the answer" and names the range it covers. Language is the one column that can come out
           halfway: amber where a language shares a family with one the answer speaks, deepening the closer the
           relation.
+        </Prose>
+        <Prose>
+          Climate lists every zone covering a decent share of a country, so most have one but a big, varied one can
+          have four. It goes green when your guess shares any zone with the answer - which means a green tile there
+          says less than a red one, since red rules out every zone your guess had at once.
         </Prose>
         <Prose>
           Anything a guess pins down for good moves out of the table and into what you know, so the board narrows as

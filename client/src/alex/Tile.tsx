@@ -34,7 +34,24 @@ const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string;
   },
 };
 
-export function Tile({ label, value, state }: { label: string; value: string; state: TileState }) {
+// `detail` is a subordinate second line for a value that doesn't stand on
+// its own. Only the tertile categories pass one: "Top third" says nothing
+// about where that third begins or ends, and the answer was previously only
+// available over in the knowledge rail — which states it in numbers, so
+// nothing visibly tied the two together. Carrying the same string here is
+// what makes the connection, so keep it identical to the rail's wording
+// rather than reformatting it.
+export function Tile({
+  label,
+  value,
+  detail,
+  state,
+}: {
+  label: string;
+  value: string;
+  detail?: string;
+  state: TileState;
+}) {
   const c = TILE_STYLE[state];
   return (
     <div
@@ -60,6 +77,7 @@ export function Tile({ label, value, state }: { label: string; value: string; st
         )}
       </div>
       <span style={{ fontSize: 14, fontWeight: 800, color: c.value }}>{value || " "}</span>
+      {detail && <span style={{ fontSize: 11, fontWeight: 600, color: c.label }}>{detail}</span>}
     </div>
   );
 }

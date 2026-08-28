@@ -5,6 +5,10 @@
 //  - name / continent / languages / capital / borders / currencies: mledoze/countries (dist/countries.json)
 //  - population / religion / government type: samayo/country-json
 //  - flag images: hjnilsson/country-flags SVGs, served via jsDelivr CDN by cca2 code
+//  - climateZones: derived, not fetched — see climate.mjs, which crosses a
+//    Köppen-Geiger grid with country outlines. It's the slow part of a
+//    re-fetch (a minute or so) because it's real geometry rather than a
+//    lookup.
 //  - hdi: NOT machine-fetched. There's no maintained JSON source for it, so
 //    it was hand-curated from the UNDP 2025 Human Development Report (via
 //    Wikipedia's sourced table, cross-checked against the UNDP's own
@@ -25,6 +29,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+
+import { deriveClimateZones } from "./climate.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = path.join(__dirname, "../src/data/countries.json");
@@ -111,6 +117,7 @@ async function main() {
   );
 
   const result = [];
+  const climateInputs = [];
   const missing = [];
 
   for (const c of countries) {
@@ -141,11 +148,18 @@ async function main() {
       );
     }
 
+    // Filled in below, once every country is known: the derivation walks a
+    // global grid once and hands back the lot, rather than being asked
+    // country by country. Assigning to the key later leaves it in this
+    // position, which keeps the written file's field order stable.
+    climateInputs.push({ cca3: c.cca3, name, latlng: c.latlng });
+
     result.push({
       cca2: c.cca2,
       cca3: c.cca3,
       name,
       continent: c.region,
+      climateZones: null,
       capital: c.capital?.[0] ?? null,
       population: pop,
       area: c.area,
@@ -159,6 +173,9 @@ async function main() {
       ...(hdi.hdiEstimated ? { hdiEstimated: hdi.hdiEstimated } : {}),
     });
   }
+
+  const climateZones = await deriveClimateZones(climateInputs);
+  for (const country of result) country.climateZones = climateZones.get(country.cca3);
 
   result.sort((a, b) => a.name.localeCompare(b.name));
 

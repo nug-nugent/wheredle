@@ -17,11 +17,13 @@ export default function App() {
   const finished = state.status !== "playing";
   const cluesRef = useRef<HTMLDivElement>(null);
 
-  // The reveal is prepended to a column the player has usually scrolled
-  // down by the last clue, so send them back to the top to meet it.
+  // Both the clue a guess unlocks and the end-of-game reveal are prepended to
+  // a column the player has usually scrolled down, so send them back to the
+  // top to meet whichever has just arrived.
+  const guessCount = state.guesses.length;
   useEffect(() => {
-    if (finished) cluesRef.current?.scrollTo({ top: 0 });
-  }, [finished]);
+    cluesRef.current?.scrollTo({ top: 0 });
+  }, [guessCount, finished]);
 
   return (
     <AppShell

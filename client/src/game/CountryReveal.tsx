@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import type { Country } from "../data/country";
+import { climateLabel, type Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { FlagImage } from "./FlagImage";
 
@@ -23,7 +23,11 @@ function factsFor(country: Country): { label: string; value: string }[] {
           ? "None"
           : `${country.borderCount} ${country.borderCount === 1 ? "country" : "countries"}`,
     },
+    { label: "Climate", value: climateLabel(country.climateZones) },
     { label: "Language(s)", value: country.languages.join(", ") || "Unknown" },
+    // Currency isn't a board category — it was dropped as one for being
+    // almost never a match — but it's still worth reading beside the answer,
+    // which is exactly what this list is for.
     { label: "Currency", value: country.currencies.join(", ") || "Unknown" },
     { label: "Religion", value: country.religion ?? "No clear majority" },
     { label: "Government", value: country.governmentType ?? "Not recorded" },
