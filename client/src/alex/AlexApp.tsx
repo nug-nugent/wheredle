@@ -23,11 +23,20 @@ export default function AlexApp() {
   const finished = state.status === "won" || state.status === "lost";
   const historyRef = useRef<HTMLDivElement>(null);
 
-  // The reveal is prepended to a pane the player has usually scrolled down
-  // by the last guess, so send them back to the top to meet it.
+  // Both a new guess and the end-of-game reveal are prepended to a pane the
+  // player has usually scrolled down, so send them back to the top to meet
+  // whichever has just arrived.
+  //
+  // The pending guess is counted, not just the committed ones, so this fires
+  // the moment a guess is submitted rather than after its reveal ceremony —
+  // otherwise the ceremony plays off the bottom of a phone screen and the
+  // scroll arrives once it's already over. Counting it this way also means
+  // the commit that follows doesn't scroll a second time, since the total is
+  // unchanged when the guess moves from pending to committed.
+  const guessCount = state.guesses.length + (pendingGuess ? 1 : 0);
   useEffect(() => {
-    if (finished) historyRef.current?.scrollTo({ top: 0 });
-  }, [finished]);
+    historyRef.current?.scrollTo({ top: 0 });
+  }, [guessCount, finished]);
 
   return (
     <AppShell
