@@ -39,9 +39,10 @@ export const COLORS = {
   wrongValue: "#fff5f2",
   wrongIcon: "#fff5f2",
 
-  // Partial credit, reserved for language family matches — the one place a
-  // single value can be halfway right, and so the amber between the green
-  // and the red. Unlike its neighbours it stays a tinted background with
+  // Partial credit: a language family match, or a climate that shares a zone
+  // with the answer without being the same set — the two places a value can
+  // be halfway right, and so the amber between the green and the red. Unlike
+  // its neighbours it stays a tinted background with
   // dark text rather than going solid, which is what makes "halfway" read
   // as halfway at a glance.
   //
