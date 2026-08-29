@@ -17,7 +17,12 @@ export function buildAlexShare(
   const rows = [...state.guesses]
     .reverse()
     .map((feedback) => guessSquares(feedback, categories).map((s) => SQUARE[s]).join(""));
+  // X for a loss, as every game of this shape writes it, and as the main
+  // game already did. Counting the guesses instead made a lost game share as
+  // "6/6" — which reads like a win on the last guess, and is the one score
+  // the game can't actually produce that way, since a sixth correct guess
+  // shares as "Solved in 6".
   const resultLabel =
-    state.status === "won" ? `Solved in ${state.guesses.length}` : `${state.guesses.length}/${MAX_GUESSES}`;
+    state.status === "won" ? `Solved in ${state.guesses.length}` : `X/${MAX_GUESSES}`;
   return { resultLabel, rows };
 }
