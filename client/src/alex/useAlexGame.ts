@@ -45,10 +45,29 @@ function startPractice(): AlexGameState {
 // one's.
 function resume(stored: AlexGameState | null): AlexGameState | null {
   if (!stored) return null;
-  if (!countries.some((c) => c.cca3 === stored.target.cca3)) return null;
   // A save from before the board was recorded, or one whose categories have
   // all since been renamed, has nothing to draw.
-  return stored.categoryKeys?.length ? stored : null;
+  if (!stored.categoryKeys?.length) return null;
+
+  // Nothing derived is trusted from the save — only which countries were
+  // involved. A game is stored as whole Country objects and whole
+  // GuessFeedback objects, both of which go stale the moment either shape
+  // changes: adding climateZones to the dataset, and then splitting
+  // sameClimate into climateMatch, each shipped a build that crashed on
+  // resume reading a field the saved copy predated. Rebuilding from the
+  // codes makes the save immune to both, and recovers a game in progress
+  // rather than discarding it the way a version bump would.
+  const target = countries.find((c) => c.cca3 === stored.target?.cca3);
+  if (!target) return null;
+
+  const guessed = (stored.guesses ?? []).map((g) => countries.find((c) => c.cca3 === g.country?.cca3));
+  if (guessed.some((c) => c === undefined)) return null;
+
+  return {
+    ...stored,
+    target,
+    guesses: guessed.map((c) => computeGuessFeedback(target, c!)),
+  };
 }
 
 export function useAlexGame() {
