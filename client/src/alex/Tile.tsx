@@ -1,14 +1,19 @@
 import { COLORS, FONT_FAMILY } from "../theme";
-import type { TileFlag } from "./engine";
+import type { SquareState } from "./engine";
 
-export type TileState = TileFlag | "pending";
+// Tiles carry the same three states the share grid does. Amber arrived
+// with climate: a guess sharing a zone with the answer without matching
+// its whole set is halfway right, and painting that green made a fully
+// green row stop meaning what players read it as meaning.
+export type TileState = SquareState | "pending";
 
-const ICON_PATH: Record<TileFlag, string> = {
+const ICON_PATH: Record<SquareState, string> = {
   correct: "M20 6 9 17l-5-5",
   wrong: "M18 6 6 18M6 6l12 12",
+  partial: "M5 12h14",
 };
 
-const ICON_STROKE_WIDTH: Record<TileFlag, number> = { correct: 3.5, wrong: 3 };
+const ICON_STROKE_WIDTH: Record<SquareState, number> = { correct: 3.5, wrong: 3, partial: 3.5 };
 
 const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string; value: string; icon: string }> = {
   correct: {
@@ -24,6 +29,13 @@ const TILE_STYLE: Record<TileState, { bg: string; border: string; label: string;
     label: COLORS.wrongLabel,
     value: COLORS.wrongValue,
     icon: COLORS.wrongIcon,
+  },
+  partial: {
+    bg: COLORS.partialBgStrong,
+    border: COLORS.partialSolid,
+    label: COLORS.partialLabel,
+    value: COLORS.partialValue,
+    icon: COLORS.partialValue,
   },
   pending: {
     bg: COLORS.inputBg,

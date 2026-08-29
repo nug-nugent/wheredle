@@ -25,6 +25,7 @@ export function LatestGuessCard({
   // its turn in the ceremony like any other rather than trailing it.
   const slotCount = categories.length;
   const [revealCount, setRevealCount] = useState(revealing ? 0 : slotCount);
+  const allMatched = categories.every((c) => c.square(feedback) === "correct");
 
   useEffect(() => {
     if (!revealing) {
@@ -56,6 +57,29 @@ export function LatestGuessCard({
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
         <TileGrid feedback={feedback} categories={categories} revealCount={revealCount} />
       </div>
+      {/* Every column can match without the guess being the answer: the
+          board shows six categories, and plenty of countries agree on all
+          six. Players read a full row of green as a win, so a row that
+          isn't one has to say so itself — otherwise the game looks broken,
+          sitting there asking for another guess with nothing left to give.
+          Held back until the reveal has finished so it doesn't pre-empt the
+          last tile. */}
+      {revealCount >= slotCount && allMatched && !feedback.correct && (
+        <div
+          style={{
+            marginTop: 10,
+            border: `1px solid ${COLORS.mutedBorder}`,
+            background: COLORS.mutedBg,
+            color: COLORS.mutedValue,
+            padding: "8px 10px",
+            fontSize: 12.5,
+            lineHeight: 1.45,
+          }}
+        >
+          Every column matches, but this isn&rsquo;t the answer — another country shares all of them. What you know
+          still holds; you need a different country that fits it.
+        </div>
+      )}
     </div>
   );
 }

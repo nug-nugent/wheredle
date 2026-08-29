@@ -21,6 +21,22 @@ export type TileFlag = "correct" | "wrong";
 // that render as tiles never use it.
 export type SquareState = TileFlag | "partial";
 
+// How a guess scored on a multi-valued attribute: it holds precisely the
+// target's values, some of them, or none. Climate is the only one. The
+// three-way split matters because scoring a shared value as a plain hit made
+// a fully green row mean less than players read it as meaning — a country
+// that is only tropical scores green against one that is tropical and
+// temperate, so every column could match without the guess being the answer.
+export type SetMatch = "exact" | "shared" | "none";
+
+function setMatch(guessed: string[], target: string[]): SetMatch {
+  if (!guessed.some((v) => target.includes(v))) return "none";
+  // Both lists are duplicate-free and drawn from the same domain, so equal
+  // length plus containment is set equality.
+  const identical = guessed.length === target.length && guessed.every((v) => target.includes(v));
+  return identical ? "exact" : "shared";
+}
+
 export type LanguageChipState = "correct" | "family" | "wrong";
 export interface LanguageChip {
   name: string;
@@ -186,12 +202,12 @@ export interface GuessFeedback {
   hdiDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
-  // True when the two countries share any climate zone at all. Unlike every
-  // other tile, a hit here doesn't say *which* zone was shared — a guess
-  // spanning four of them proves only that one of the four is the target's.
-  // The narrowing that a hit is worth gets worked out across the whole guess
-  // list instead; see the climate category in categories.ts.
-  sameClimate: boolean;
+  // Exact when the two countries have precisely the same zones, shared when
+  // they merely overlap. A shared hit doesn't say *which* zone was shared —
+  // a guess spanning four of them proves only that one of the four is the
+  // target's — so the narrowing it's worth gets worked out across the whole
+  // guess list; see the climate category in categories.ts.
+  climateMatch: SetMatch;
   languageChips: LanguageChip[];
 }
 
@@ -247,7 +263,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     hdiDirection: tertileFlag(sameHdiTertile),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
-    sameClimate: guessed.climateZones.some((z) => target.climateZones.includes(z)),
+    climateMatch: setMatch(guessed.climateZones, target.climateZones),
     languageChips: guessed.languages.map((name) => languageChip(name, target.languages)),
   };
 }

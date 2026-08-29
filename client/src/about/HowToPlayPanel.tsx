@@ -55,14 +55,14 @@ function AlexRules() {
         </Prose>
         <Prose>
           The numeric columns are bucketed into thirds by rank rather than compared outright, so a green one means
-          "same third as the answer" and names the range it covers. Language is the one column that can come out
-          halfway: amber where a language shares a family with one the answer speaks, deepening the closer the
-          relation.
+          "same third as the answer" and names the range it covers. Two columns can come out halfway, in amber:
+          language, where a language shares a family with one the answer speaks, deepening the closer the relation;
+          and climate, below.
         </Prose>
         <Prose>
           Climate lists every zone covering a decent share of a country, so most have one but a big, varied one can
-          have four. It goes green when your guess shares any zone with the answer - which means a green tile there
-          says less than a red one, since red rules out every zone your guess had at once.
+          have four. Green means your guess has exactly the answer's zones; amber means it shares one without
+          matching the set; red means it shares none, which rules out every zone your guess had in one go.
         </Prose>
         <Prose>
           Anything a guess pins down for good moves out of the table and into what you know, so the board narrows as
