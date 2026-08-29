@@ -11,6 +11,7 @@ import {
   submitGuess as submitGuessImpl,
   type ChoosableHintType,
   type GameState,
+  type GuessRecord,
 } from "./engine";
 
 const MODE = "wheredle";
@@ -29,7 +30,24 @@ function startDaily(day: number): GameState {
 function resume(stored: GameState | null): GameState | null {
   if (!stored) return null;
   if (!stored.seed) return null;
-  return countries.some((c) => c.cca3 === stored.target.cca3) ? stored : null;
+
+  // The countries are re-read from the dataset rather than trusted from the
+  // save, which holds whole Country objects and so goes stale whenever one
+  // gains a field — adding climateZones shipped a build where winning a
+  // resumed game blanked the screen, because the reveal read a field the
+  // saved copy predated. The clues aren't rebuilt: they're derived from the
+  // seed, and stored precisely so they can't shift mid-game.
+  const target = countries.find((c) => c.cca3 === stored.target?.cca3);
+  if (!target) return null;
+
+  const guesses: GuessRecord[] = [];
+  for (const guess of stored.guesses ?? []) {
+    const country = countries.find((c) => c.cca3 === guess.country?.cca3);
+    if (!country) return null;
+    guesses.push({ ...guess, country });
+  }
+
+  return { ...stored, target, guesses };
 }
 
 function initialState(day: number): GameState {

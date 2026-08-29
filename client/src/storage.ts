@@ -5,14 +5,17 @@ const isBrowser = typeof window !== "undefined";
 // than migrated — a day's half-finished board isn't worth the migration
 // code.
 //
-// Note what counts as the shape changing: a saved game holds whole Country
-// objects rather than just their codes, so adding a field to countries.json
-// changes this shape too. A game stored before the field existed resumes
-// with a country that lacks it, and the first code to read that field throws
-// — which is exactly what version 2 is for. Adding climate zones without
-// bumping this shipped a build where Alex couldn't accept a guess at all and
-// the main game went blank the moment you won, both from reading
-// `climateZones` off a country saved before it had one.
+// It no longer has to be bumped for a dataset or feedback field, which is
+// what it kept being needed for and kept not getting: a save holds whole
+// Country and GuessFeedback objects, so adding climateZones broke resuming,
+// and splitting sameClimate into climateMatch broke it again a day later.
+// Both hooks' resume() now rebuild everything derived from the country codes
+// alone, so a save repairs itself instead of crashing, and a player keeps
+// the board they were on rather than losing it to a bump.
+//
+// What still needs a bump is a change those rebuilds can't absorb — the
+// envelope itself, or a field that isn't recoverable from the codes, like
+// categoryKeys meaning something different.
 const GAME_VERSION = 2;
 
 // The record's shape is independent of the game's, and it's the half worth
