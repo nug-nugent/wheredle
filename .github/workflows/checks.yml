@@ -1,0 +1,48 @@
+name: Checks
+
+# The deploy workflow gates on these too, but it only runs on a push to main
+# — which is to say after a merge, when a bad change is already on the branch
+# everyone reads and the only thing left to do is revert it. This runs the
+# same gates on the pull request instead, so a change that would break the
+# build or ship an unplayable puzzle is caught while it's still a proposal.
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+        working-directory: client
+
+      - run: npm run lint
+        working-directory: client
+
+      # Typechecks as well as bundles — `build` is `tsc -b && vite build` —
+      # so this is the compile gate too.
+      - run: npm run build
+        working-directory: client
+
+      # Replays 730 days and fails if any day's board can't single out its own
+      # answer. That's an unwinnable puzzle, which a player experiences as the
+      # game being broken, and it's reachable by editing the category list or
+      # regenerating the dataset.
+      - name: Check every daily board can identify its answer
+        run: npm run check:daily
+        working-directory: client
+
+      # Fails if a game saved by an older build wouldn't survive this one.
+      # Players carry saves written by whatever was deployed when they last
+      # played, and a save holds whole Country and GuessFeedback objects, so
+      # changing either is a compatibility change however local it looks —
+      # twice it has taken the game down. See the save contract in CLAUDE.md.
+      - name: Check a save from an older build still resumes
+        run: npm run check:saves
+        working-directory: client

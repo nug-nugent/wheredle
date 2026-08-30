@@ -48,9 +48,16 @@ described above, so it would have caught either before it shipped.
 
 Add a case to it whenever a saved shape changes in a genuinely new way.
 
+It runs on every pull request and again before the deploy, so it can't be
+skipped — but run it locally anyway. The feedback is seconds rather than the
+minutes CI takes to tell you the same thing.
+
 ## Run the daily check after touching a category or the dataset
 
-Both check scripts are cheap; run them together after any change to the
+Both check scripts run in CI — on the pull request via
+`.github/workflows/checks.yml`, and again before the build in
+`deploy.yml`, so a failure stops the deploy rather than shipping. Both are
+cheap; run them together after any change to the
 dataset, the categories, or anything a save touches.
 
 ```bash

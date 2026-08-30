@@ -32,6 +32,15 @@ jobs:
       - name: Check every daily board can identify its answer
         run: npm run check:daily
         working-directory: client
+      # Alongside it, and for the same reason. There's no backend, so players
+      # carry games saved by whichever build was deployed when they last
+      # played; a save holds whole Country and GuessFeedback objects, and
+      # changing either has twice shipped a build that crashed on resume.
+      # Exits non-zero if a save written by an older build wouldn't survive
+      # this one.
+      - name: Check a save from an older build still resumes
+        run: npm run check:saves
+        working-directory: client
       - run: npm run build
         working-directory: client
       - run: cp dist/index.html dist/404.html
