@@ -45,7 +45,7 @@ export function GameOverPanel({
   country: Country;
   gameLabel: string;
   maxGuesses: number;
-  daily: { puzzleNumber: number; stats: Stats } | null;
+  daily: { day: number; puzzleNumber: number; stats: Stats } | null;
   share: Omit<ShareScoreProps, "gameLabel" | "puzzleNumber">;
 }) {
   const [statsOpen, setStatsOpen] = useState(false);
@@ -78,7 +78,7 @@ export function GameOverPanel({
       </div>
       {daily && (
         <>
-          <NextPuzzleCountdown />
+          <NextPuzzleCountdown day={daily.day} />
           <StatsModal
             opened={statsOpen}
             onClose={() => setStatsOpen(false)}
