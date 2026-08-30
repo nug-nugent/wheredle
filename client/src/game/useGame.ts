@@ -27,7 +27,8 @@ function startDaily(day: number): GameState {
 // a regenerated countries.json can drop one out from under a game in
 // progress — and carries the seed its clues were built from. Whether it's
 // still today's is loadDaily's business, not this one's.
-function resume(stored: GameState | null): GameState | null {
+// Exported for scripts/check-saves.mjs — see the note on Alex's resume().
+export function resume(stored: GameState | null): GameState | null {
   if (!stored) return null;
   if (!stored.seed) return null;
 

@@ -34,11 +34,24 @@ If you add or change a field on `Country`, `GuessFeedback`, `AlexGameState`,
    `STATS_VERSION` is separate and should almost never move: bumping it
    wipes every player's streak.
 
-Before shipping any such change, write a save in the *previous* build's shape
-into `localStorage`, load the page, and check it resumes. That takes a minute
-and would have caught all three.
+There is a check for exactly this, and it is the thing to run:
+
+```bash
+cd client && npm run check:saves
+```
+
+It builds a real game, degrades the serialised copy the ways a deploy
+degrades one — a dataset field gone, a feedback field renamed, a guess
+hollowed out to nothing but its country — and asserts `resume()` rebuilds an
+answer identical to one computed fresh. It fails on both of the changes
+described above, so it would have caught either before it shipped.
+
+Add a case to it whenever a saved shape changes in a genuinely new way.
 
 ## Run the daily check after touching a category or the dataset
+
+Both check scripts are cheap; run them together after any change to the
+dataset, the categories, or anything a save touches.
 
 ```bash
 cd client && npm run check:daily
