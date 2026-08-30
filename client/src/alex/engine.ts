@@ -170,6 +170,11 @@ function languageChip(guessedLanguage: string, targetLanguages: string[]): Langu
   };
 }
 
+// PERSISTED, inside AlexGameState. Every field here is derived from a target
+// and a guessed country, so useAlexGame's resume() recomputes the lot rather
+// than reading it back — which is what stops a change to this type breaking
+// games saved by the previous build, as splitting sameClimate into
+// climateMatch once did. See the save contract in CLAUDE.md.
 export interface GuessFeedback {
   country: Country;
   correct: boolean;
@@ -213,6 +218,10 @@ export interface GuessFeedback {
 
 export const MAX_GUESSES = 6;
 
+// PERSISTED — this is the blob itself. `categoryKeys` is the field a rebuild
+// can't recover, since nothing else records which board a game was dealt, so
+// renaming a category key silently drops that column from every game in
+// progress. That's the kind of change GAME_VERSION is still for.
 export interface AlexGameState {
   target: Country;
   // The categories this board was drawn with, stored rather than recomputed

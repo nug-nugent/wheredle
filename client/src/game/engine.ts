@@ -36,6 +36,10 @@ export interface GuessRecord {
   correct: boolean;
 }
 
+// PERSISTED. useGame's resume() re-reads the countries from the dataset, but
+// `hints` and `seed` are kept as stored on purpose — the clues are derived
+// from the seed precisely so a board in progress can't shift under a player
+// at midnight. See the save contract in CLAUDE.md.
 export interface GameState {
   target: Country;
   // What the puzzle's incidental choices — which letter, which crop of the

@@ -16,6 +16,18 @@ need a server. Both are stored under a version stamp as one serialisable
 blob, so if accounts ever do happen, syncing a streak is an upload rather
 than a migration.
 
+Because there is no server, those saves are written by whichever build of the
+code was deployed when the player last touched the game — which may be an
+older one than the code now reading them. That makes every type reachable
+from a saved game a compatibility surface, including ones that look purely
+internal: a saved game holds whole `Country` and `GuessFeedback` objects, so
+adding a field to the dataset or renaming one on a guess is a storage change.
+Two such changes took the game down in three different ways before the resume
+path was rewritten to stop trusting saves. It now keeps only the country codes and rebuilds
+everything derived against current code, so a stale save repairs itself
+rather than crashing, and a player keeps the board they were on. The rules
+for changing any of it are in `CLAUDE.md`.
+
 The day model lives in `client/src/daily.ts`: a fixed epoch, a day number
 that rolls over at **local** midnight, and a seeded hash. Everything a
 puzzle needs to be the same for two strangers comes from there — the answer

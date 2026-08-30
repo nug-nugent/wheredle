@@ -1,5 +1,10 @@
 import raw from "./countries.json";
 
+// PERSISTED. Saved games hold whole Country objects, so a save written by an
+// older build contains an older version of this type — adding a field here is
+// a storage change, however local it looks. Both resume() functions rebuild
+// countries from their codes so a stale save repairs itself; see the save
+// contract in CLAUDE.md before changing that.
 export interface Country {
   cca2: string;
   cca3: string;
