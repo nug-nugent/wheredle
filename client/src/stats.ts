@@ -1,5 +1,9 @@
 import { loadStats, saveStats } from "./storage";
 
+// PERSISTED, and the one blob worth protecting: it's a player's whole record,
+// with no server copy to restore it from. Guarded by STATS_VERSION, which is
+// deliberately separate from GAME_VERSION — bumping it wipes every streak.
+// See the save contract in CLAUDE.md.
 export interface Stats {
   played: number;
   wins: number;
