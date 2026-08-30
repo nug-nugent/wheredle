@@ -43,7 +43,10 @@ function startPractice(): AlexGameState {
 // a regenerated countries.json can drop one out from under a game in
 // progress. Whether it's still today's is loadDaily's business, not this
 // one's.
-function resume(stored: AlexGameState | null): AlexGameState | null {
+// Exported for scripts/check-saves.mjs, which feeds it saves degraded the
+// ways real deploys have degraded them and asserts it rebuilds rather than
+// passing the stale copy through. Nothing else outside this file calls it.
+export function resume(stored: AlexGameState | null): AlexGameState | null {
   if (!stored) return null;
   // A save from before the board was recorded, or one whose categories have
   // all since been renamed, has nothing to draw.
