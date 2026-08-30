@@ -62,7 +62,7 @@ export default function App() {
           country={state.target}
           maxGuesses={MAX_GUESSES}
           gameLabel={isPractice ? "Wheredle (practice)" : "Wheredle"}
-          daily={isPractice ? null : { puzzleNumber: puzzleNumber(day), stats }}
+          daily={isPractice ? null : { day, puzzleNumber: puzzleNumber(day), stats }}
           share={buildWheredleShare(state)}
         />
       )}
