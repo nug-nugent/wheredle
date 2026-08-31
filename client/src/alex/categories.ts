@@ -92,8 +92,9 @@ export type CategoryDef =
       // concrete about the guessed country — "Asia", "Republic", "Arid" —
       // while "Top third" names a bucket without saying where it starts or
       // ends. See tertileCategory for why the string it returns has to match
-      // the rail's wording exactly.
-      detail?: (f: GuessFeedback) => string;
+      // the rail's wording exactly, and why it drops away on the guesses
+      // whose main label is already exact.
+      detail?: (f: GuessFeedback) => string | undefined;
     })
   | (CategoryCommon & {
       cell: "chips";
@@ -131,6 +132,8 @@ function tertileCategory(config: {
 }): CategoryDef {
   const { key, header, daily, square, of, ranges, formatBound, unit, exactValue } = config;
 
+  const pinnedBy = (f: GuessFeedback): number | null => (exactValue ? exactValue(f) : null);
+
   return {
     key,
     header,
@@ -138,12 +141,21 @@ function tertileCategory(config: {
     kind: "tertile",
     cell: "tile",
     square,
-    label: (f) => TERTILE_LABEL[of(f)],
+    // A guess that happens to hold the target's exact value says so — "6
+    // letters", not "Bottom third". It's the same fact stated precisely, and
+    // it's already what the rail says, so hiding it behind the bucket would
+    // have the two disagree about how much the player knows.
+    label: (f) => {
+      const pinned = pinnedBy(f);
+      return pinned !== null ? withUnit(unit, formatBound(pinned)) : TERTILE_LABEL[of(f)];
+    },
     // Deliberately built the same way as the rail's range, by the same
     // helpers and with the same unit: the point of showing it here is that
     // the player can see it's the same thing being talked about, which a
-    // reworded or reformatted version would undo.
-    detail: (f) => withUnit(unit, formatRange(of(f), ranges, formatBound)),
+    // reworded or reformatted version would undo. It goes away entirely once
+    // the label above is exact — the range exists to say where an unnamed
+    // third begins, and there's no unnamed third left to place.
+    detail: (f) => (pinnedBy(f) !== null ? undefined : withUnit(unit, formatRange(of(f), ranges, formatBound))),
     value: (f) => of(f),
     facts: (guesses) => {
       const matched = guesses.find((g) => square(g) === "correct");
