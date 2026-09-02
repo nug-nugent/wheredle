@@ -49,16 +49,17 @@ function AlexRules() {
       <Section heading="The board">
         <Prose>
           Guess any country and the board scores it against the answer, column by column: green where that column
-          matches the answer, red where it doesn't. Six columns a day. Continent and name length are always among them;
-          the other four are drawn from population, land area, land borders, HDI, majority religion, government type,
-          climate and language, so a day of religion and government plays nothing like a day of numbers.
+          matches the answer, red where it doesn't, and amber where it lands somewhere between the two. Six columns a
+          day. Continent and name length are always among them; the other four are drawn from population, land area,
+          land borders, HDI, majority religion, government type, climate and language, so a day of religion and
+          government plays nothing like a day of numbers.
         </Prose>
         <Prose>
           The numeric columns are bucketed into thirds by rank rather than compared outright, so a green one means
-          "same third as the answer" and names the range it covers. Name length counts letters, not characters — spaces,
-          hyphens and apostrophes aren't counted, so New Zealand is 10 rather than 11. Two columns can come out
-          halfway, in amber: language, where a language shares a family with one the answer speaks, deepening the
-          closer the relation; and climate, below.
+          "same third as the answer" and names the range it covers. Name length counts letters, not characters —
+          spaces, hyphens and apostrophes aren't counted, so New Zealand is 10 rather than 11. Only two columns ever
+          come out amber: language, where a language shares a family with one the answer speaks, deepening the closer
+          the relation; and climate, below.
         </Prose>
         <Prose>
           Climate lists every zone covering a decent share of a country, so most have one but a big, varied one can
