@@ -302,6 +302,25 @@ function setCategory(config: {
     cell: "tile",
     square: (f) => SET_MATCH_SQUARE[match(f)],
     label: (f) => list(values(f)),
+    // Amber is the one tile whose colour doesn't say what it found. Green
+    // and red both speak for the whole label — every zone listed is the
+    // target's, or none of them is — while amber means somewhere in that
+    // list is a hit, and the tile as it stood left the player to work out
+    // which without saying it was a disjunction at all.
+    //
+    // A guess offering a single zone has no disjunction to resolve: that
+    // zone is the target's, and since the sets still differ the target holds
+    // at least one more. That is the same reading the rail already takes
+    // from such a guess — an amber narrowed to one possible zone is
+    // confirmed there — so this states it on the tile rather than waiting
+    // for the player to find it in the rail. With more than one zone offered
+    // it stays a disjunction, and the honest phrasing is the weak one: at
+    // least one, with no claim about the rest, since a guess whose zones are
+    // a subset of the target's shares all of them and still scores amber.
+    detail: (f) => {
+      if (match(f) !== "shared") return undefined;
+      return values(f).length === 1 ? "Answer has this, plus more" : "Answer has at least one of these";
+    },
     // The set itself, which is enough precisely because green means an
     // exact match: guessing any country carrying a given set scores green
     // against that set and nothing else, so two countries with different
