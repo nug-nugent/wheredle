@@ -5,7 +5,7 @@
       "name": "wheredle-client",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "client"],
-      "port": 5003,
+      "port": 5317,
       "autoPort": true
     }
   ]

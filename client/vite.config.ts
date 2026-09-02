@@ -6,6 +6,6 @@ export default defineConfig({
   base: '/wheredle/',
   plugins: [react()],
   server: {
-    port: 5003,
+    port: 5317,
   },
 })
