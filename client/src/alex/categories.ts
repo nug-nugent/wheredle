@@ -31,6 +31,17 @@ function withUnit(unit: string | undefined, value: string): string {
   return unit ? `${value} ${unit}` : value;
 }
 
+// "not X, not Y" rather than one "not" in front of a list. Repeating the
+// word is clumsier to read and worth it anyway: a bare list after a single
+// "not" reads as a correction — "not Portuguese, French" lands as "it isn't
+// Portuguese, it's French!" — which is the exact opposite of what the rail
+// means, and it goes wrong precisely where the values are adjectives, which
+// languages, continents and religions all are. Every exclusion in the rail
+// comes through here so the four categories can't drift apart on it.
+function notList(values: string[]): string {
+  return values.map((v) => `not ${v}`).join(", ");
+}
+
 // "is" — a positive fact about the target, whether matched outright or
 // deduced. "isnt" — a value or range ruled out. Both are certainties: every
 // piece of feedback in this game is a hard constraint, so the split is about
@@ -185,7 +196,7 @@ function tertileCategory(config: {
       }
       if (eliminated.size > 0) {
         const ruledOut = TERTILE_ORDER.filter((t) => eliminated.has(t)).map((t) => formatRange(t, ranges, formatBound));
-        return [{ key, header, label: withUnit(unit, `not ${ruledOut.join(", ")}`), kind: "isnt" }];
+        return [{ key, header, label: withUnit(unit, notList(ruledOut)), kind: "isnt" }];
       }
       return [];
     },
@@ -232,7 +243,7 @@ function flatCategory(config: {
           if (!ruledOut.includes(value)) ruledOut.push(value);
         }
       }
-      return ruledOut.length > 0 ? [{ key, header, label: `not ${ruledOut.join(", ")}`, kind: "isnt" }] : [];
+      return ruledOut.length > 0 ? [{ key, header, label: notList(ruledOut), kind: "isnt" }] : [];
     },
   };
 }
@@ -370,7 +381,7 @@ function setCategory(config: {
       // of the target's zones doesn't finish the column — so the exclusion
       // needs a key of its own to sit beside the positive in the rail.
       if (ruledOut.length > 0) {
-        facts.push({ key: `${key}Excluded`, header, label: `not ${list(ruledOut)}`, kind: "isnt" });
+        facts.push({ key: `${key}Excluded`, header, label: notList(inDomainOrder(ruledOut).map(label)), kind: "isnt" });
       }
       return facts;
     },
@@ -436,6 +447,41 @@ function languageCategory(): CategoryDef {
           header: "Language family",
           label: deepest.lineage.slice(0, deepest.sharedDepth).join(" → "),
           kind: "is",
+        });
+      }
+
+      // Every language a guess offered and didn't land is ruled out, whether
+      // the chip came back red or amber: `correct` is set by name equality
+      // against the target's own list, so anything else means the target
+      // doesn't speak it. The amber ones are the reason this fact has to
+      // exist. A Portuguese chip that scores family says two things — the
+      // target is somewhere in Romance, and it is not Portuguese — and only
+      // the first was being written down, leaving the player to hold the
+      // other half in their head across six guesses.
+      //
+      // This is the opposite call to the one currency got, and the domains
+      // are the reason. Both run to ~140 values mostly held by a single
+      // country, but nobody guesses a country for its Kenyan shilling,
+      // whereas the languages that actually turn up in guesses are the wide
+      // ones: ruling out English drops 59 countries in a stroke, French 31,
+      // Arabic 24, Spanish 21. "Not French, not Portuguese" is a real
+      // narrowing of the field; "not the Kenyan shilling" never was.
+      const ruledOut: string[] = [];
+      for (const g of guesses) {
+        for (const chip of g.languageChips) {
+          if (chip.state !== "correct" && !ruledOut.includes(chip.name)) ruledOut.push(chip.name);
+        }
+      }
+      // Sits alongside the positives rather than replacing them: knowing one
+      // of the target's languages never closes the column, since it can speak
+      // others, so a confirmed language and a list of exclusions are both
+      // live at once and need separate keys to share the rail.
+      if (ruledOut.length > 0) {
+        facts.push({
+          key: "languageExcluded",
+          header: "Languages",
+          label: notList(ruledOut),
+          kind: "isnt",
         });
       }
 
