@@ -1,4 +1,4 @@
-import { countries, type Country } from "../data/country";
+import { countries, letterCount, type Country } from "../data/country";
 import { languageLineage, sharedLineageDepth } from "./languageFamily";
 
 // Every numeric category (population, land area, name length, border count)
@@ -117,7 +117,7 @@ function buildTertileClassifier(
 
 const populationTertiles = buildTertileClassifier((c) => c.population);
 const areaTertiles = buildTertileClassifier((c) => c.area);
-const nameLengthTertiles = buildTertileClassifier((c) => c.name.length);
+const nameLengthTertiles = buildTertileClassifier((c) => letterCount(c.name));
 const borderTertiles = buildTertileClassifier((c) => c.borderCount);
 const hdiTertiles = buildTertileClassifier((c) => c.hdi);
 
@@ -260,7 +260,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     areaDirection: tertileFlag(sameAreaTertile),
     nameLengthTertile: nameLengthTertileOf(guessed),
     sameNameLengthTertile,
-    sameNameLengthValue: guessed.name.length === target.name.length,
+    sameNameLengthValue: letterCount(guessed.name) === letterCount(target.name),
     nameLengthDirection: tertileFlag(sameNameLengthTertile),
     borderTertile: borderTertileOf(guessed),
     sameBorderTertile,

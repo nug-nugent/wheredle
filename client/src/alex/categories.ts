@@ -1,4 +1,4 @@
-import { CLIMATE_ZONES, CLIMATE_ZONE_LABEL, type Country } from "../data/country";
+import { CLIMATE_ZONES, CLIMATE_ZONE_LABEL, letterCount, type Country } from "../data/country";
 import type { GuessFeedback, LanguageChip, SetMatch, SquareState, Tertile, TertileRanges } from "./engine";
 import {
   AREA_TERTILE_RANGES,
@@ -485,7 +485,7 @@ export const CATEGORIES: CategoryDef[] = [
     ranges: NAME_LENGTH_TERTILE_RANGES,
     formatBound: String,
     unit: "letters",
-    exactValue: (f) => (f.sameNameLengthValue ? f.country.name.length : null),
+    exactValue: (f) => (f.sameNameLengthValue ? letterCount(f.country.name) : null),
   }),
   tertileCategory({
     key: "borders",

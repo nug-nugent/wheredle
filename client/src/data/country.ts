@@ -51,4 +51,15 @@ export function climateLabel(zones: string[]): string {
     .join(", ");
 }
 
+// The board's "name length" is a count of letters, not of characters: the
+// spaces, hyphens and apostrophes in "New Zealand", "Guinea-Bissau" and
+// "Côte d'Ivoire" aren't letters, and a player counting on their fingers
+// won't count them. Accented letters are letters, though, so "São Tomé and
+// Príncipe" loses only its three spaces: 18, not 21. Deliberately not a
+// field on Country — it's derived from the name, and a derived field on a
+// persisted type is exactly what the save contract in CLAUDE.md warns about.
+export function letterCount(name: string): number {
+  return (name.match(/\p{L}/gu) ?? []).length;
+}
+
 export const countries: Country[] = raw as Country[];
