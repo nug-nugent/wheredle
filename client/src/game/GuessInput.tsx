@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Autocomplete } from "@mantine/core";
 import type { Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
@@ -26,6 +26,29 @@ export function GuessInput({
   // value to the picked label) — this ref tells that follow-up onChange not
   // to wipe out the selection it's the one that caused.
   const justSelectedRef = useRef(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  // Typing the next guess is always the player's next move, so the caret
+  // belongs here rather than wherever the last one left it: on the Guess
+  // button after a click, or nowhere at all in Alex mode, where the input is
+  // disabled for the reveal and drops focus to the body when it goes.
+  //
+  // Focus is only taken back when nothing else has claimed it, since the
+  // reveal runs long enough for the player to have opened the info or stats
+  // modal in the meantime, and an input that yanks the caret out from under
+  // a dialog is worse than one that waits.
+  const focusInput = () => {
+    const active = document.activeElement;
+    if (active && active !== document.body && !rootRef.current?.contains(active)) return;
+    inputRef.current?.focus();
+  };
+
+  // Fires on mount — the start of a game, or the return from a clue choice —
+  // and again each time a reveal hands the input back.
+  useEffect(() => {
+    if (!disabled) focusInput();
+  }, [disabled]);
 
   const options: CountryOption[] = useMemo(
     () =>
@@ -67,6 +90,7 @@ export function GuessInput({
     setValue("");
     setSelected(null);
     setError(null);
+    focusInput();
   };
 
   return (
@@ -75,9 +99,12 @@ export function GuessInput({
     // button, wrapping it onto its own line even with room to spare. The
     // error text uses flex-basis: 100% to drop to its own line within this
     // same row instead.
-    <div style={{ display: "flex", flexGrow: 1, gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}>
+    <div
+      ref={rootRef}
+      style={{ display: "flex", flexGrow: 1, gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}
+    >
       <Autocomplete
-        autoFocus
+        ref={inputRef}
         placeholder="Guess a country..."
         data={options}
         value={value}
