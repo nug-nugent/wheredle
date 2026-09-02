@@ -89,7 +89,13 @@ function RailStrip({ children }: { children: ReactNode }) {
 
   return (
     <div style={{ position: "relative" }}>
-      <div ref={scrollerRef} style={{ display: "flex", gap: 8, overflowX: "auto" }}>
+      {/* Cards keep the height their own content needs rather than
+          stretching to the tallest. A wrapping label makes one card several
+          lines deep — Alex's language exclusions run to four on a phone —
+          and stretched neighbours turn that into a band of half-empty
+          blocks. Tops aligned, heights ragged, reads as a list of facts of
+          different lengths, which is what it is. */}
+      <div ref={scrollerRef} style={{ display: "flex", alignItems: "flex-start", gap: 8, overflowX: "auto" }}>
         {children}
       </div>
       {more.left && <ScrollChevron side="left" onClick={() => nudge(-1)} />}

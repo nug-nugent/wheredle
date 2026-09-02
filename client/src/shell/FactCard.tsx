@@ -39,6 +39,16 @@ export function FactCard({
         gap: layout === "row" ? 1 : 2,
         flex: "none",
         minWidth: layout === "row" ? 96 : undefined,
+        // Never wider than one screenful of the rail it sits in. The strip
+        // is a horizontal scroller, so without this a card simply grows to
+        // its content and a long label makes a card you scroll *through* —
+        // and its header leaves the screen while you're still reading its
+        // value. 100% resolves against the flex container's visible width,
+        // not the scrolled width, which is what makes it the right bound
+        // and why there's no magic number here. Alex's language exclusions
+        // are what reach it: "not Chibarwe, not English, not Kalanga, …"
+        // runs to three times a phone's width after a Zimbabwe guess.
+        maxWidth: layout === "row" ? "100%" : undefined,
         fontFamily: FONT_FAMILY,
       }}
     >
@@ -57,7 +67,6 @@ export function FactCard({
           fontSize: layout === "row" ? 12 : 14,
           fontWeight: 800,
           color: c.value,
-          whiteSpace: layout === "row" ? "nowrap" : undefined,
         }}
       >
         {label}
