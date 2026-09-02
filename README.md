@@ -158,7 +158,7 @@ npm install
 npm run dev
 ```
 
-Dev server runs on **port 5003** (set explicitly in `client/vite.config.ts`
-and `.claude/launch.json` — the default Vite port was already in use by
-something else on the machine this was built on, so 5003 was picked instead
-of the usual 5173).
+Dev server runs on **port 5317** (set explicitly in `client/vite.config.ts`
+and `.claude/launch.json`). Vite's own default, 5173, was already taken on
+the machine this was built on; so, later, was the 5003 that replaced it —
+hence the third and deliberately unremarkable number.

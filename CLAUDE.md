@@ -87,9 +87,9 @@ assuming it's local.
 
 ## Verify in the browser, not by reasoning
 
-The dev server is `npm run dev` in `client/` on port 5003, and the app is
+The dev server is `npm run dev` in `client/` on port 5317, and the app is
 served under the `/wheredle/` base path, so the modes live at
-`localhost:5003/wheredle/` and `localhost:5003/wheredle/alex`. Bare `/alex`
+`localhost:5317/wheredle/` and `localhost:5317/wheredle/alex`. Bare `/alex`
 gets you Vite's "configured with a public base URL" notice, not the game.
 Guesses,
 reveals and resumed saves are all easy to drive from the console and hard to
