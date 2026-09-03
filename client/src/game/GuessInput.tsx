@@ -26,6 +26,21 @@ export function GuessInput({
   // value to the picked label) — this ref tells that follow-up onChange not
   // to wipe out the selection it's the one that caused.
   const justSelectedRef = useRef(false);
+  // One Enter is handled twice. Ours runs first, because Mantine's combobox
+  // calls the target's own onKeyDown before its own; it submits the guess
+  // and empties the box. Then Mantine's runs, sees a highlighted option in
+  // the open dropdown — arrowing down is enough to highlight one — and
+  // "picks" it, which syncs the input back to that country's name. The
+  // guess had gone in, but the box still read "Panama" afterwards, and
+  // `selected` still pointed at it, so the Guess button stayed lit and a
+  // second Enter answered "Already guessed."
+  //
+  // So a submitted guess deafens the input to the echo that follows it.
+  // The pick arrives synchronously, in the rest of this same event, and
+  // the flag is dropped on the next tick whether it was used or not — it
+  // must never outlive the keypress that set it, or it would swallow the
+  // player's next keystroke.
+  const justSubmittedRef = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +74,7 @@ export function GuessInput({
   );
 
   const handleChange = (next: string) => {
+    if (justSubmittedRef.current) return;
     setValue(next);
     setError(null);
     if (justSelectedRef.current) {
@@ -69,6 +85,7 @@ export function GuessInput({
   };
 
   const handleOptionSubmit = (name: string) => {
+    if (justSubmittedRef.current) return;
     justSelectedRef.current = true;
     setSelected(findCountryByName(name) ?? null);
     setError(null);
@@ -86,6 +103,10 @@ export function GuessInput({
       setError("Already guessed.");
       return;
     }
+    justSubmittedRef.current = true;
+    queueMicrotask(() => {
+      justSubmittedRef.current = false;
+    });
     onGuess(country);
     setValue("");
     setSelected(null);

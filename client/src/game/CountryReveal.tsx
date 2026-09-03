@@ -48,8 +48,10 @@ export function CountryReveal({ country }: { country: Country }) {
         maxHeight={144}
         borderColor={COLORS.border}
       />
+      {/* No name here: the result row above states it, at heading size and
+          beside the outcome, and printing it again a few pixels below the
+          flag is the repetition that row exists to avoid. */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 0 }}>
-        <span style={{ fontSize: 20, fontWeight: 800 }}>{country.name}</span>
         <span
           style={{
             border: `1px solid ${COLORS.accent}`,

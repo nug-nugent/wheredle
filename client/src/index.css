@@ -48,3 +48,33 @@ body {
     box-shadow: 0 0 0 6px color-mix(in oklch, oklch(61.12% 0.2252 31.45deg), transparent 100%);
   }
 }
+
+/* GameOverPanel: the tick, the country and the guess count drop onto the
+   page together on a win, so the result arrives as a moment rather than as
+   a re-render. Reduced motion gets them sitting where they land and no
+   fireworks either — see WinFireworks, which makes the same call in
+   JavaScript. */
+@keyframes win-result-land {
+  from {
+    transform: translateY(-14px) scale(0.9);
+    opacity: 0;
+  }
+  55% {
+    transform: translateY(0) scale(1.06);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes win-result-land {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

@@ -46,6 +46,11 @@ const BUTTON_STYLE = {
   border: `1px solid ${COLORS.accent}`,
   padding: "10px 20px",
   cursor: "pointer",
+  // Never squashed by a row running out of width: the row stacks its
+  // buttons instead, and a button that shrank would wrap its own label
+  // rather than let that happen.
+  flexShrink: 0,
+  whiteSpace: "nowrap",
 } as const;
 
 export function ShareScoreButton(props: ShareScoreProps) {
@@ -119,7 +124,7 @@ export function ShareScoreButton(props: ShareScoreProps) {
   if (canNativeShare) {
     return (
       <button type="button" style={BUTTON_STYLE} onClick={nativeShare}>
-        {copied ? "Copied to clipboard!" : "Share your score"}
+        {copied ? "Copied to clipboard!" : "Share score"}
       </button>
     );
   }
@@ -137,7 +142,7 @@ export function ShareScoreButton(props: ShareScoreProps) {
     >
       <Menu.Target>
         <button type="button" style={BUTTON_STYLE}>
-          {copied ? "Copied to clipboard!" : "Share your score"}
+          {copied ? "Copied to clipboard!" : "Share score"}
         </button>
       </Menu.Target>
       <Menu.Dropdown>
