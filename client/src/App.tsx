@@ -11,10 +11,12 @@ import { AppShell, MainHeading } from "./shell/AppShell";
 import { GameOverPanel } from "./shell/GameOverPanel";
 import { GuessCountdown } from "./shell/GuessCountdown";
 import { PracticeChip } from "./shell/PracticeChip";
+import { useJustWon } from "./shell/useJustWon";
 
 export default function App() {
   const { state, day, stats, isPractice, guess, chooseHint, newPractice, exitPractice, choiceOptions } = useGame();
   const finished = state.status !== "playing";
+  const justWon = useJustWon(state.status);
   const cluesRef = useRef<HTMLDivElement>(null);
 
   // Both the clue a guess unlocks and the end-of-game reveal are prepended to
@@ -63,6 +65,7 @@ export default function App() {
           maxGuesses={MAX_GUESSES}
           gameLabel={isPractice ? "Wheredle (practice)" : "Wheredle"}
           daily={isPractice ? null : { day, puzzleNumber: puzzleNumber(day), stats }}
+          celebrate={justWon}
           share={buildWheredleShare(state)}
         />
       )}

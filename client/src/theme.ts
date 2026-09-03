@@ -58,6 +58,12 @@ export const COLORS = {
   partialLabel: "oklch(40% 0.095 65deg)",
   partialValue: "oklch(32% 0.075 65deg)",
 
+  // Green as text rather than as a tile. correctBg is sized for a solid
+  // fill with white on it; set small and bold straight onto the page it
+  // reads thin, so the result row's guess count uses this darker green
+  // instead. Same colour, more of it.
+  correctText: "#2e7d32",
+
   // Neither hit nor miss: the knowledge rail's exclusions, which are
   // something the player has established rather than somewhere they went
   // wrong, and the end-of-game outcome badge, which needs to stay legible

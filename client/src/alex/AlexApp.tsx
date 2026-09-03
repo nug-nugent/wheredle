@@ -3,6 +3,7 @@ import { AppShell, MainHeading } from "../shell/AppShell";
 import { GameOverPanel } from "../shell/GameOverPanel";
 import { GuessCountdown } from "../shell/GuessCountdown";
 import { PracticeChip } from "../shell/PracticeChip";
+import { useJustWon } from "../shell/useJustWon";
 import { puzzleNumber } from "../daily";
 import { GuessInput } from "../game/GuessInput";
 import { getKnownFacts } from "./categories";
@@ -21,6 +22,9 @@ export default function AlexApp() {
   const knownFacts = getKnownFacts(categories, state.guesses);
   const inputDisabled = state.status !== "playing" || !!pendingGuess;
   const finished = state.status === "won" || state.status === "lost";
+  // Alex's status flips to "won" when the guess commits, which is after its
+  // tiles have finished turning — so the sparks land on a revealed board.
+  const justWon = useJustWon(state.status);
   const historyRef = useRef<HTMLDivElement>(null);
 
   // Both a new guess and the end-of-game reveal are prepended to a pane the
@@ -77,6 +81,7 @@ export default function AlexApp() {
           maxGuesses={MAX_GUESSES}
           gameLabel={isPractice ? "Wheredle: Alex Mode (practice)" : "Wheredle: Alex Mode"}
           daily={isPractice ? null : { day, puzzleNumber: puzzleNumber(day), stats }}
+          celebrate={justWon}
           share={buildAlexShare(state, categories)}
         />
       )}
