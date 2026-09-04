@@ -46,12 +46,34 @@ const BUTTON_STYLE = {
   border: `1px solid ${COLORS.accent}`,
   padding: "10px 20px",
   cursor: "pointer",
-  // Never squashed by a row running out of width: the row stacks its
-  // buttons instead, and a button that shrank would wrap its own label
-  // rather than let that happen.
-  flexShrink: 0,
   whiteSpace: "nowrap",
 } as const;
+
+// Confirming the copy used to swap in "Copied to clipboard!", 57px wider
+// than the label it replaced, so sharing shoved the Statistics button along
+// the row at the one moment the row is being looked at. Both labels now sit
+// in the same grid cell with the idle one hidden rather than removed, so the
+// button is permanently as wide as the wider of them and nothing moves.
+// That only stays cheap while the confirmation is short: "Copied!" is
+// narrower than "Share score", so the width reserved is the button's own.
+// The menu still says it in full, where there's a fixed 220px to say it in.
+const SHARE_LABEL = "Share score";
+const COPIED_LABEL = "Copied!";
+
+// Stacking the two labels leaves the button with no text of its own to be
+// named by, so it says its own name and the stack is decoration.
+function shareLabel(copied: boolean): string {
+  return copied ? COPIED_LABEL : SHARE_LABEL;
+}
+
+function ShareLabel({ copied }: { copied: boolean }) {
+  return (
+    <span style={{ display: "grid" }} aria-hidden="true">
+      <span style={{ gridArea: "1 / 1", visibility: copied ? "hidden" : undefined }}>{SHARE_LABEL}</span>
+      <span style={{ gridArea: "1 / 1", visibility: copied ? undefined : "hidden" }}>{COPIED_LABEL}</span>
+    </span>
+  );
+}
 
 export function ShareScoreButton(props: ShareScoreProps) {
   const [copied, setCopied] = useState(false);
@@ -123,8 +145,8 @@ export function ShareScoreButton(props: ShareScoreProps) {
 
   if (canNativeShare) {
     return (
-      <button type="button" style={BUTTON_STYLE} onClick={nativeShare}>
-        {copied ? "Copied to clipboard!" : "Share score"}
+      <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied)} onClick={nativeShare}>
+        <ShareLabel copied={copied} />
       </button>
     );
   }
@@ -141,8 +163,8 @@ export function ShareScoreButton(props: ShareScoreProps) {
       }}
     >
       <Menu.Target>
-        <button type="button" style={BUTTON_STYLE}>
-          {copied ? "Copied to clipboard!" : "Share score"}
+        <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied)}>
+          <ShareLabel copied={copied} />
         </button>
       </Menu.Target>
       <Menu.Dropdown>
