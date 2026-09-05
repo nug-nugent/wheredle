@@ -51,8 +51,8 @@ function AlexRules() {
           Guess any country and the board scores it against the answer, column by column: green where that column
           matches the answer, red where it doesn't, and amber where it lands somewhere between the two. Six columns a
           day. Continent and name length are always among them; the other four are drawn from population, land area,
-          land borders, HDI, majority religion, government type, climate and language, so a day of religion and
-          government plays nothing like a day of numbers.
+          land borders, population density, HDI, majority religion, government type, climate and language, so a day of
+          religion and government plays nothing like a day of numbers.
         </Prose>
         <Prose>
           The numeric columns are bucketed into thirds by rank rather than compared outright, so a green one means

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { climateLabel, type Country } from "../data/country";
+import { climateLabel, populationDensity, type Country } from "../data/country";
 import { COLORS, FONT_FAMILY } from "../theme";
 import { FlagImage } from "./FlagImage";
 
@@ -16,6 +16,10 @@ function factsFor(country: Country): { label: string; value: string }[] {
     { label: "Capital", value: country.capital ?? "None" },
     { label: "Population", value: formatNumber(country.population) },
     { label: "Land area", value: `${formatNumber(country.area)} km²` },
+    {
+      label: "Density",
+      value: `${formatNumber(Math.round(populationDensity(country)))} per km²`,
+    },
     {
       label: "Land borders",
       value:

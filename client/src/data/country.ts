@@ -62,4 +62,14 @@ export function letterCount(name: string): number {
   return (name.match(/\p{L}/gu) ?? []).length;
 }
 
+// People per km². Derived from two fields the dataset already carries rather
+// than stored beside them, for the same reason letterCount is: a field on
+// Country is a field in every saved game, and a derived one is the exact
+// hazard the save contract in CLAUDE.md is about. Every country has a
+// non-zero area, so there is no divide-by-zero to guard — Vatican City, the
+// smallest, is 0.44 km².
+export function populationDensity(country: Country): number {
+  return country.population / country.area;
+}
+
 export const countries: Country[] = raw as Country[];

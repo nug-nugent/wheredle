@@ -1,8 +1,15 @@
-import { CLIMATE_ZONES, CLIMATE_ZONE_LABEL, letterCount, type Country } from "../data/country";
+import {
+  CLIMATE_ZONES,
+  CLIMATE_ZONE_LABEL,
+  letterCount,
+  populationDensity,
+  type Country,
+} from "../data/country";
 import type { GuessFeedback, LanguageChip, SetMatch, SquareState, Tertile, TertileRanges } from "./engine";
 import {
   AREA_TERTILE_RANGES,
   BORDER_TERTILE_RANGES,
+  DENSITY_TERTILE_RANGES,
   HDI_TERTILE_RANGES,
   NAME_LENGTH_TERTILE_RANGES,
   POPULATION_TERTILE_RANGES,
@@ -10,6 +17,13 @@ import {
 
 function formatHdi(n: number): string {
   return n.toFixed(3);
+}
+
+// Density spans four orders of magnitude — Mongolia is about 2 people per
+// km², Monaco about 19,000 — so one format suits neither end. Below ten the
+// whole value is in the decimal; above it the decimal is noise.
+function formatDensity(n: number): string {
+  return n < 10 ? n.toFixed(1) : Math.round(n).toLocaleString("en-GB");
 }
 
 export const TERTILE_LABEL: Record<Tertile, string> = {
@@ -31,15 +45,28 @@ function withUnit(unit: string | undefined, value: string): string {
   return unit ? `${value} ${unit}` : value;
 }
 
+function sentenceCase(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function lowerFirst(value: string): string {
+  return value.charAt(0).toLowerCase() + value.slice(1);
+}
+
 // "not X, not Y" rather than one "not" in front of a list. Repeating the
 // word is clumsier to read and worth it anyway: a bare list after a single
 // "not" reads as a correction — "not Portuguese, French" lands as "it isn't
 // Portuguese, it's French!" — which is the exact opposite of what the rail
 // means, and it goes wrong precisely where the values are adjectives, which
 // languages, continents and religions all are. Every exclusion in the rail
-// comes through here so the four categories can't drift apart on it.
+// comes through here so the categories can't drift apart on it — the tertiles
+// included, which hand it a third with its bounds in brackets.
+//
+// Only the first "not" is capitalised. The label starts a card and reads as a
+// sentence, so a leading capital is right there; capitalising every "not" in
+// a list would not be.
 function notList(values: string[]): string {
-  return values.map((v) => `not ${v}`).join(", ");
+  return sentenceCase(values.map((v) => `not ${v}`).join(", "));
 }
 
 // "is" — a positive fact about the target, whether matched outright or
@@ -145,6 +172,18 @@ function tertileCategory(config: {
 
   const pinnedBy = (f: GuessFeedback): number | null => (exactValue ? exactValue(f) : null);
 
+  // The rail names the third as well as its bounds. A bare "134–19,150 per
+  // km²" is precise and still leaves the player to work out which third
+  // they have pinned — which is the one thing the tile beside it says in
+  // words. Naming both has the two agree, and makes the rail scannable
+  // against a board where every numeric tile reads "Top third".
+  //
+  // The third leads and the bounds sit in brackets behind it, so a positive
+  // and an exclusion are the same sentence with one word between them:
+  // "Top third (5–16)" against "Not top third (5–16)".
+  const namedRange = (tertile: Tertile): string =>
+    `${TERTILE_LABEL[tertile]} (${withUnit(unit, formatRange(tertile, ranges, formatBound))})`;
+
   return {
     key,
     header,
@@ -181,8 +220,12 @@ function tertileCategory(config: {
             }
           }
         }
-        const label = pinned !== null ? formatBound(pinned) : formatRange(of(matched), ranges, formatBound);
-        return [{ key, header, label: withUnit(unit, label), kind: "is" }];
+        // An exact value stays on its own: it is strictly more than the
+        // bucket says, so prefixing "Top third" to it would add back the
+        // vaguer statement the precise one replaced. Same reasoning as the
+        // tile, whose range detail drops away in exactly this case.
+        const label = pinned !== null ? withUnit(unit, formatBound(pinned)) : namedRange(of(matched));
+        return [{ key, header, label, kind: "is" }];
       }
 
       const eliminated = new Set<Tertile>();
@@ -192,11 +235,16 @@ function tertileCategory(config: {
       const remaining = TERTILE_ORDER.filter((t) => !eliminated.has(t));
 
       if (remaining.length === 1) {
-        return [{ key, header, label: withUnit(unit, formatRange(remaining[0], ranges, formatBound)), kind: "is" }];
+        return [{ key, header, label: namedRange(remaining[0]), kind: "is" }];
       }
       if (eliminated.size > 0) {
-        const ruledOut = TERTILE_ORDER.filter((t) => eliminated.has(t)).map((t) => formatRange(t, ranges, formatBound));
-        return [{ key, header, label: withUnit(unit, notList(ruledOut)), kind: "isnt" }];
+        // Exactly what a positive would say, lowercased for the middle of
+        // a sentence and handed to notList to negate, so the two cannot
+        // drift apart in wording. In practice this only ever names one
+        // third: eliminating two leaves a survivor, which the branch above
+        // states as a positive instead.
+        const ruledOut = TERTILE_ORDER.filter((t) => eliminated.has(t)).map((t) => lowerFirst(namedRange(t)));
+        return [{ key, header, label: notList(ruledOut), kind: "isnt" }];
       }
       return [];
     },
@@ -571,6 +619,25 @@ export const CATEGORIES: CategoryDef[] = [
     ranges: HDI_TERTILE_RANGES,
     formatBound: formatHdi,
     exactValue: (f) => (f.sameHdiValue ? f.country.hdi : null),
+  }),
+  // Population and land area are both already here, and density is neither
+  // of them: it is the one column that separates countries the other two
+  // agree on, which is why it earns a slot beside them rather than
+  // duplicating one. Singapore and Ireland share a population tertile and
+  // nothing else on the board says how differently they are packed.
+  tertileCategory({
+    key: "density",
+    header: "Population Density",
+    daily: "rotating",
+    square: (f) => f.densityDirection,
+    of: (f) => f.densityTertile,
+    ranges: DENSITY_TERTILE_RANGES,
+    formatBound: formatDensity,
+    unit: "per km²",
+    // Never fires between two different countries — it is a ratio of two
+    // large numbers — but it is checked the same way the other tertiles
+    // check theirs, and costs nothing.
+    exactValue: (f) => (f.sameDensityValue ? populationDensity(f.country) : null),
   }),
   flatCategory({
     key: "religion",
