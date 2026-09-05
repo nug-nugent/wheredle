@@ -1,4 +1,4 @@
-import { countries, letterCount, type Country } from "../data/country";
+import { countries, letterCount, populationDensity, type Country } from "../data/country";
 import { languageLineage, sharedLineageDepth } from "./languageFamily";
 
 // Every numeric category (population, land area, name length, border count)
@@ -120,18 +120,21 @@ const areaTertiles = buildTertileClassifier((c) => c.area);
 const nameLengthTertiles = buildTertileClassifier((c) => letterCount(c.name));
 const borderTertiles = buildTertileClassifier((c) => c.borderCount);
 const hdiTertiles = buildTertileClassifier((c) => c.hdi);
+const densityTertiles = buildTertileClassifier(populationDensity);
 
 const populationTertileOf = populationTertiles.classify;
 const areaTertileOf = areaTertiles.classify;
 const nameLengthTertileOf = nameLengthTertiles.classify;
 const borderTertileOf = borderTertiles.classify;
 const hdiTertileOf = hdiTertiles.classify;
+const densityTertileOf = densityTertiles.classify;
 
 export const POPULATION_TERTILE_RANGES = populationTertiles.ranges;
 export const AREA_TERTILE_RANGES = areaTertiles.ranges;
 export const NAME_LENGTH_TERTILE_RANGES = nameLengthTertiles.ranges;
 export const BORDER_TERTILE_RANGES = borderTertiles.ranges;
 export const HDI_TERTILE_RANGES = hdiTertiles.ranges;
+export const DENSITY_TERTILE_RANGES = densityTertiles.ranges;
 
 // A wrong guess only rules out the guessed country's own tertile — it
 // doesn't say which side of it the target is on. That's deliberate: ruling
@@ -205,6 +208,10 @@ export interface GuessFeedback {
   sameHdiTertile: boolean;
   sameHdiValue: boolean;
   hdiDirection: TileFlag;
+  densityTertile: Tertile;
+  sameDensityTertile: boolean;
+  sameDensityValue: boolean;
+  densityDirection: TileFlag;
   sameReligion: boolean;
   sameGovernmentType: boolean;
   // Exact when the two countries have precisely the same zones, shared when
@@ -245,6 +252,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
   const sameNameLengthTertile = nameLengthTertileOf(guessed) === nameLengthTertileOf(target);
   const sameBorderTertile = borderTertileOf(guessed) === borderTertileOf(target);
   const sameHdiTertile = hdiTertileOf(guessed) === hdiTertileOf(target);
+  const sameDensityTertile = densityTertileOf(guessed) === densityTertileOf(target);
 
   return {
     country: guessed,
@@ -270,6 +278,10 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     sameHdiTertile,
     sameHdiValue: guessed.hdi === target.hdi,
     hdiDirection: tertileFlag(sameHdiTertile),
+    densityTertile: densityTertileOf(guessed),
+    sameDensityTertile,
+    sameDensityValue: populationDensity(guessed) === populationDensity(target),
+    densityDirection: tertileFlag(sameDensityTertile),
     sameReligion: guessed.religion === target.religion,
     sameGovernmentType: guessed.governmentType === target.governmentType,
     climateMatch: setMatch(guessed.climateZones, target.climateZones),
