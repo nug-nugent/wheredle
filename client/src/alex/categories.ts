@@ -110,6 +110,14 @@ interface CategoryCommon {
   // board score identically against every guess anyone could make, so the
   // board can never tell them apart; the daily draw uses that to avoid
   // setting a puzzle with no findable answer.
+  //
+  // It may under-state what a column can see, and name length now does:
+  // it reports its third here while the board scores the exact count, so
+  // two countries the fingerprint calls identical may in fact be separable.
+  // That's the safe direction — the draw demands more of a board than the
+  // board has to give — and it's deliberate, because sharpening it would
+  // grow DAILY_TARGET_POOL and reshuffle what most days answer. See
+  // DAILY_TARGET_POOL in dailyBoard.ts.
   value: (f: GuessFeedback) => string;
   // What this column measures, in plain English — deliberately the half the
   // rules panel leaves out. HowToPlayPanel already explains how a column is
@@ -182,14 +190,27 @@ function tertileCategory(config: {
   // rather than merely landing in the same third; null when this guess
   // doesn't. Lets the rail say "6 letters" instead of "6–7 letters".
   exactValue?: (f: GuessFeedback) => number | null;
+  // The guessed country's own figure, whether or not it matched — for the
+  // one column that scores amber, where landing in the target's third on a
+  // different figure rules that figure out. Name length is the only one;
+  // see nameLengthFlag in engine.ts for why it's alone. Leave it unset and
+  // the column scores two ways as before and the rail never names a figure.
+  guessedValue?: (f: GuessFeedback) => number;
   explain: string;
   // Anything to add about the guessed country's own figure, beyond what
   // landing in a third means. Only HDI has one — see there.
   note?: (f: GuessFeedback) => string | undefined;
 }): CategoryDef {
-  const { key, header, daily, square, of, ranges, formatBound, unit, exactValue, explain, note } = config;
+  const { key, header, daily, square, of, ranges, formatBound, unit, exactValue, guessedValue, explain, note } =
+    config;
 
   const pinnedBy = (f: GuessFeedback): number | null => (exactValue ? exactValue(f) : null);
+
+  // The guessed country's own figure, written the way the rail writes every
+  // other figure in this column — same formatter, same unit — so "6 letters"
+  // ruled out reads as the same kind of thing as "6 letters" confirmed.
+  const figure = (f: GuessFeedback): string | undefined =>
+    guessedValue ? withUnit(unit, formatBound(guessedValue(f))) : undefined;
 
   // The rail names the third as well as its bounds. A bare "134–19,150 per
   // km²" is precise and still leaves the player to work out which third
@@ -232,11 +253,20 @@ function tertileCategory(config: {
     // "the same third", not "the same number", and players read a tick as
     // the latter. Red is worth a line for the opposite reason — it looks
     // like a dead end and is in fact the column's strongest result, since
-    // it strikes out a full third of the field in one go.
+    // it strikes out a full third of the field in one go. Amber, where a
+    // column has one, is the pair of them at once — the third confirmed and
+    // one figure inside it gone — so it names the figure it just removed.
     explainState: (f) => {
       const lines: string[] = [];
+      const ruledOut = figure(f);
       if (pinnedBy(f) !== null) {
         lines.push("This is the answer's own figure, not just the same third.");
+      } else if (square(f) === "partial") {
+        lines.push(
+          ruledOut
+            ? `The answer is in this third too, but it isn't ${ruledOut}.`
+            : "The answer is in this third too, but not on this figure."
+        );
       } else if (square(f) === "correct") {
         lines.push("The answer is in this third too: the same band, not the same figure.");
       } else {
@@ -247,7 +277,10 @@ function tertileCategory(config: {
       return lines;
     },
     facts: (guesses) => {
-      const matched = guesses.find((g) => square(g) === "correct");
+      // Amber counts as landing in the target's third — it is the same
+      // finding as green, minus the exact figure — so both settle the
+      // column's positive.
+      const matched = guesses.find((g) => square(g) !== "wrong");
       if (matched) {
         let pinned: number | null = null;
         if (exactValue) {
@@ -262,9 +295,30 @@ function tertileCategory(config: {
         // An exact value stays on its own: it is strictly more than the
         // bucket says, so prefixing "Top third" to it would add back the
         // vaguer statement the precise one replaced. Same reasoning as the
-        // tile, whose range detail drops away in exactly this case.
-        const label = pinned !== null ? withUnit(unit, formatBound(pinned)) : namedRange(of(matched));
-        return [{ key, header, label, kind: "is" }];
+        // tile, whose range detail drops away in exactly this case. It also
+        // makes the figures ruled out below redundant — the answer's own
+        // number is known, so which other numbers it isn't adds nothing.
+        if (pinned !== null) {
+          return [{ key, header, label: withUnit(unit, formatBound(pinned)), kind: "is" }];
+        }
+
+        const known: KnownFact[] = [{ key, header, label: namedRange(of(matched)), kind: "is" }];
+
+        // Every amber in the column took one figure out of that third. They
+        // go out under their own key rather than folded into the positive:
+        // the rail sorts positives above exclusions, and "Middle third (7–8
+        // letters)" with "Not 7 letters" a few cards down is the shape the
+        // rest of the rail already has. Sorted by value rather than by when
+        // they were guessed, so a list reads in the order a player would
+        // count them.
+        const excluded = guessedValue
+          ? [...new Set(guesses.filter((g) => square(g) === "partial").map(guessedValue))].sort((a, b) => a - b)
+          : [];
+        if (excluded.length > 0) {
+          const labels = excluded.map((v) => withUnit(unit, formatBound(v)));
+          known.push({ key: `${key}:figures`, header, label: notList(labels), kind: "isnt" });
+        }
+        return known;
       }
 
       const eliminated = new Set<Tertile>();
@@ -700,6 +754,10 @@ export const CATEGORIES: CategoryDef[] = [
     formatBound: String,
     unit: "letters",
     exactValue: (f) => (f.sameNameLengthValue ? letterCount(f.country.name) : null),
+    // The only column that supplies one: with a dozen letter counts in the
+    // whole dataset, a guess landing in the answer's third without matching
+    // it is common, and the count it just ruled out is worth saying.
+    guessedValue: (f) => letterCount(f.country.name),
   }),
   tertileCategory({
     key: "borders",
