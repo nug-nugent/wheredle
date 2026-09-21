@@ -26,8 +26,22 @@ export function TileGrid({
       {categories.map((category, i) => {
         const revealed = revealCount === undefined || i < revealCount;
 
+        // Both cells take the explanation the same way, and both drop it
+        // while the slot is still pending: a blank tile has no result to
+        // describe, and the header would otherwise invite a tap mid-reveal.
+        const explain = revealed ? category.explain : undefined;
+        const explainLines = revealed ? category.explainState?.(feedback) : undefined;
+
         if (category.cell === "chips") {
-          return <LanguageBox key={category.key} chips={feedback.languageChips} revealed={revealed} />;
+          return (
+            <LanguageBox
+              key={category.key}
+              chips={feedback.languageChips}
+              revealed={revealed}
+              explain={explain}
+              explainLines={explainLines}
+            />
+          );
         }
 
         return (
@@ -37,6 +51,8 @@ export function TileGrid({
             value={revealed ? category.label(feedback) : ""}
             detail={revealed ? category.detail?.(feedback) : undefined}
             state={revealed ? category.square(feedback) : "pending"}
+            explain={explain}
+            explainLines={explainLines}
           />
         );
       })}

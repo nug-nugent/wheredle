@@ -1,5 +1,6 @@
 import { COLORS, FONT_FAMILY } from "../theme";
 import type { SquareState } from "./engine";
+import { SlotHeader } from "./SlotHeader";
 
 // Tiles carry the same three states the share grid does. Amber arrived
 // with climate: a guess sharing a zone with the answer without matching
@@ -58,11 +59,17 @@ export function Tile({
   value,
   detail,
   state,
+  explain,
+  explainLines,
 }: {
   label: string;
   value: string;
   detail?: string;
   state: TileState;
+  /** What this column measures — see SlotHeader. Absent while the tile is
+   *  still pending, which leaves the header inert through the reveal. */
+  explain?: string;
+  explainLines?: string[];
 }) {
   const c = TILE_STYLE[state];
   return (
@@ -78,16 +85,19 @@ export function Tile({
         fontFamily: FONT_FAMILY,
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 6 }}>
-        <span style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: c.label }}>
-          {label}
-        </span>
-        {state !== "pending" && (
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth={ICON_STROKE_WIDTH[state]}>
-            <path d={ICON_PATH[state]} />
-          </svg>
-        )}
-      </div>
+      <SlotHeader
+        header={label}
+        explain={explain}
+        lines={explainLines}
+        color={c.label}
+        trailing={
+          state !== "pending" && (
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={c.icon} strokeWidth={ICON_STROKE_WIDTH[state]}>
+              <path d={ICON_PATH[state]} />
+            </svg>
+          )
+        }
+      />
       <span style={{ fontSize: 14, fontWeight: 800, color: c.value }}>{value || " "}</span>
       {detail && <span style={{ fontSize: 11, fontWeight: 600, color: c.label }}>{detail}</span>}
     </div>
