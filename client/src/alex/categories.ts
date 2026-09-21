@@ -111,6 +111,21 @@ interface CategoryCommon {
   // board can never tell them apart; the daily draw uses that to avoid
   // setting a puzzle with no findable answer.
   value: (f: GuessFeedback) => string;
+  // What this column measures, in plain English — deliberately the half the
+  // rules panel leaves out. HowToPlayPanel already explains how a column is
+  // *scored* (thirds by rank, climate's three-way match, what amber means);
+  // what nothing in the product said was what an HDI or a density actually
+  // is. So this names the measure and stays off the scoring, which would
+  // otherwise be stated in two places and drift.
+  explain: string;
+  // What this particular result means, where the colour alone doesn't say
+  // it. Returns lines rather than a string because a tile can have two
+  // things to add at once — an HDI tile is both "same third as the answer"
+  // and, for the two countries the UNDP doesn't publish, "that third was
+  // worked out from an estimate". Empty for the categories whose green and
+  // red speak for themselves: continent, religion and government are
+  // matched outright or not at all.
+  explainState?: (f: GuessFeedback) => string[];
 }
 
 // Single source of truth for a category: how it scores a guess, how it
@@ -167,8 +182,12 @@ function tertileCategory(config: {
   // rather than merely landing in the same third; null when this guess
   // doesn't. Lets the rail say "6 letters" instead of "6–7 letters".
   exactValue?: (f: GuessFeedback) => number | null;
+  explain: string;
+  // Anything to add about the guessed country's own figure, beyond what
+  // landing in a third means. Only HDI has one — see there.
+  note?: (f: GuessFeedback) => string | undefined;
 }): CategoryDef {
-  const { key, header, daily, square, of, ranges, formatBound, unit, exactValue } = config;
+  const { key, header, daily, square, of, ranges, formatBound, unit, exactValue, explain, note } = config;
 
   const pinnedBy = (f: GuessFeedback): number | null => (exactValue ? exactValue(f) : null);
 
@@ -207,6 +226,26 @@ function tertileCategory(config: {
     // third begins, and there's no unnamed third left to place.
     detail: (f) => (pinnedBy(f) !== null ? undefined : withUnit(unit, formatRange(of(f), ranges, formatBound))),
     value: (f) => of(f),
+    explain,
+    // Green on a bucketed column doesn't mean what green means anywhere
+    // else on the board, and that's the one thing worth saying here: it is
+    // "the same third", not "the same number", and players read a tick as
+    // the latter. Red is worth a line for the opposite reason — it looks
+    // like a dead end and is in fact the column's strongest result, since
+    // it strikes out a full third of the field in one go.
+    explainState: (f) => {
+      const lines: string[] = [];
+      if (pinnedBy(f) !== null) {
+        lines.push("This is the answer's own figure, not just the same third.");
+      } else if (square(f) === "correct") {
+        lines.push("The answer is in this third too: the same band, not the same figure.");
+      } else {
+        lines.push("The answer is in a different third, so this whole third is ruled out.");
+      }
+      const extra = note?.(f);
+      if (extra) lines.push(extra);
+      return lines;
+    },
     facts: (guesses) => {
       const matched = guesses.find((g) => square(g) === "correct");
       if (matched) {
@@ -266,8 +305,9 @@ function flatCategory(config: {
   // Returns [] where the guessed country has no value to rule out, so a null
   // religion doesn't surface as "not No majority".
   excluded?: (f: GuessFeedback) => string[];
+  explain: string;
 }): CategoryDef {
-  const { key, header, daily, match, label, excluded } = config;
+  const { key, header, daily, match, label, excluded, explain } = config;
 
   return {
     key,
@@ -278,6 +318,11 @@ function flatCategory(config: {
     square: (f) => (match(f) ? "correct" : "wrong"),
     label,
     value: label,
+    explain,
+    // No explainState: these match outright or not at all, so the tick and
+    // the cross already say everything a line here could. Adding "the answer
+    // isn't in Europe" under a red Europe tile would be the popover reading
+    // the tile back to the player.
     facts: (guesses) => {
       const matched = guesses.find(match);
       if (matched) return [{ key, header, label: label(matched), kind: "is" }];
@@ -344,8 +389,9 @@ function setCategory(config: {
   of: (country: Country) => string[];
   match: (f: GuessFeedback) => SetMatch;
   label: (value: string) => string;
+  explain: string;
 }): CategoryDef {
-  const { key, header, daily, domain, of, match, label } = config;
+  const { key, header, daily, domain, of, match, label, explain } = config;
   const values = (f: GuessFeedback) => of(f.country);
   const inDomainOrder = (vs: string[]) => domain.filter((v) => vs.includes(v));
   const list = (vs: string[]) => inDomainOrder(vs).map(label).join(", ");
@@ -389,6 +435,30 @@ function setCategory(config: {
     // Tuvalu the Australian and the Tuvaluan, and since only Tuvalu
     // carried a Tuvaluan dollar, no guess could ever separate them.
     value: (f) => inDomainOrder(values(f)).join("|"),
+    explain,
+    // The tile's `detail` already carries the amber disjunction, since that
+    // is the one a player has to act on mid-guess and shouldn't have to open
+    // anything to read. This restates it and adds the two the tile stays
+    // quiet about: green here is an exact set match rather than an overlap,
+    // which is the distinction the whole category exists for, and red is the
+    // board's single most productive result.
+    explainState: (f) => {
+      const zones = values(f).length;
+      switch (match(f)) {
+        case "exact":
+          return ["The answer's zones are exactly these — no more, no fewer."];
+        case "shared":
+          return zones === 1
+            ? ["The answer has this zone and at least one other besides."]
+            : ["At least one of these is the answer's, but the two sets aren't the same. Which one isn't said."];
+        case "none":
+          return [
+            zones === 1
+              ? "The answer doesn't have this zone."
+              : `The answer has none of these, which rules out all ${zones} at once.`,
+          ];
+      }
+    },
     facts: (guesses) => {
       const ruledOut: string[] = [];
       for (const g of guesses) {
@@ -456,6 +526,27 @@ function languageCategory(): CategoryDef {
     // Sorted, because two countries listing the same languages in a different
     // order are the same country as far as any guess can tell.
     value: (f) => [...f.country.languages].sort().join("|"),
+    explain:
+      "Every language the country recognises officially. This is the only column where one guess can " +
+      "score several ways at once, so the chips are coloured individually and the column takes the best of them.",
+    // Deliberately general where every other category's is specific, because
+    // this is the one slot whose state isn't a single thing: Canada against a
+    // French answer has French green and English amber, and the column scores
+    // green off the French. A line keyed on the column's own state would
+    // either talk about the hit and ignore the near-miss, or the reverse. So
+    // the per-chip half lives on the chip's own lineage ladder, where the
+    // amber that prompted the question is already what opens it, and this
+    // only points there.
+    explainState: (f) => {
+      const near = f.languageChips.filter((c) => c.state === "family");
+      if (near.length === 0) return [];
+      return [
+        near.length === 1
+          ? `${near[0].name} is amber: the answer speaks something in the same family, but not ${near[0].name} itself.`
+          : "An amber chip means the answer speaks something in that language's family, but not that language itself.",
+        "Tap an amber chip for the family tree, and how far up the two branches meet.",
+      ];
+    },
     facts: (guesses) => {
       const facts: KnownFact[] = [];
 
@@ -555,6 +646,8 @@ export const CATEGORIES: CategoryDef[] = [
     key: "continent",
     header: "Continent",
     daily: "always",
+    explain:
+      "Which of the five great land groupings the country is counted in: Africa, the Americas, Asia, Europe or Oceania.",
     match: (f) => f.sameContinent,
     label: (f) => f.country.continent,
     excluded: (f) => [f.country.continent],
@@ -563,6 +656,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "climate",
     header: "Climate",
     daily: "rotating",
+    explain:
+      "The broad Köppen zones - tropical, arid, temperate, continental, polar - covering a fair share of the " +
+      "country's land. Most have one; a big, varied country has several, and all of them are listed.",
     domain: CLIMATE_ZONES,
     of: (country) => country.climateZones,
     match: (f) => f.climateMatch,
@@ -572,6 +668,7 @@ export const CATEGORIES: CategoryDef[] = [
     key: "population",
     header: "Population",
     daily: "rotating",
+    explain: "How many people live there.",
     square: (f) => f.populationDirection,
     of: (f) => f.populationTertile,
     ranges: POPULATION_TERTILE_RANGES,
@@ -582,6 +679,7 @@ export const CATEGORIES: CategoryDef[] = [
     key: "area",
     header: "Land Area",
     daily: "rotating",
+    explain: "Total land area in square kilometres.",
     square: (f) => f.areaDirection,
     of: (f) => f.areaTertile,
     ranges: AREA_TERTILE_RANGES,
@@ -593,6 +691,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "nameLength",
     header: "Name Length",
     daily: "always",
+    explain:
+      "Letters in the country's common name. Spaces, hyphens and apostrophes aren't letters and aren't counted, " +
+      "so New Zealand is 10 and Côte d'Ivoire is 11. Accented letters are letters and do count.",
     square: (f) => f.nameLengthDirection,
     of: (f) => f.nameLengthTertile,
     ranges: NAME_LENGTH_TERTILE_RANGES,
@@ -604,6 +705,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "borders",
     header: "Borders",
     daily: "rotating",
+    explain:
+      "How many countries it shares a land border with. Islands have none, however many neighbours they have " +
+      "across the water.",
     square: (f) => f.borderDirection,
     of: (f) => f.borderTertile,
     ranges: BORDER_TERTILE_RANGES,
@@ -614,11 +718,25 @@ export const CATEGORIES: CategoryDef[] = [
     key: "hdi",
     header: "Human Development Index",
     daily: "rotating",
+    explain:
+      "The UN's summary of how well a country provides for the people in it: life expectancy, years of schooling " +
+      "and income per head, folded into a single figure between 0 and 1. Higher is better provided for. It says " +
+      "nothing about size, and nothing directly about wealth.",
     square: (f) => f.hdiDirection,
     of: (f) => f.hdiTertile,
     ranges: HDI_TERTILE_RANGES,
     formatBound: formatHdi,
     exactValue: (f) => (f.sameHdiValue ? f.country.hdi : null),
+    // North Korea and Vatican City, the only two the UNDP publishes no
+    // figure for. The end-of-game reveal has always marked their HDI as an
+    // estimate; the board scored a third off that estimate and said nothing,
+    // which is the one place on the board where a tile isn't quite the hard
+    // fact every other tile is. The scoring is unchanged — a guess has to
+    // sit somewhere — but the player is told what it sat on.
+    note: (f) =>
+      f.country.hdiEstimated
+        ? `The UN publishes no HDI for ${f.country.name}. This is an unofficial estimate, so the third it lands in is a best guess too.`
+        : undefined,
   }),
   // Population and land area are both already here, and density is neither
   // of them: it is the one column that separates countries the other two
@@ -629,6 +747,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "density",
     header: "Population Density",
     daily: "rotating",
+    explain:
+      "People per square kilometre: the population divided by the land area. It is the one column that separates " +
+      "two countries the population and area columns agree on; a crowded small country from an empty large one.",
     square: (f) => f.densityDirection,
     of: (f) => f.densityTertile,
     ranges: DENSITY_TERTILE_RANGES,
@@ -643,6 +764,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "religion",
     header: "Religion",
     daily: "rotating",
+    explain:
+      "The religion a majority of the population holds. Where no single one has a majority the column says so, and " +
+      "that is itself a value a guess can match.",
     match: (f) => f.sameReligion,
     label: (f) => f.country.religion ?? "No majority",
     excluded: (f) => (f.country.religion ? [f.country.religion] : []),
@@ -651,6 +775,9 @@ export const CATEGORIES: CategoryDef[] = [
     key: "government",
     header: "Government",
     daily: "rotating",
+    explain:
+      "How the state is constituted: republic, constitutional monarchy, federal republic and so on, 23 kinds " +
+      "across the dataset.",
     match: (f) => f.sameGovernmentType,
     label: (f) => f.country.governmentType ?? "Unknown",
     excluded: (f) => (f.country.governmentType ? [f.country.governmentType] : []),

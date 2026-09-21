@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Chip } from "./Chip";
 import { LanguageLineage } from "./LanguageLineage";
 import type { LanguageChip, LanguageChipState } from "./engine";
+import { SlotHeader } from "./SlotHeader";
 import { COLORS, FONT_FAMILY } from "../theme";
 
 function chipTone(state: LanguageChipState) {
@@ -27,7 +28,17 @@ function chipStrength(chip: LanguageChip): number {
 // the tallest item on its line and stretch every tile beside it into a
 // full-height slab. The ladder instead takes flexBasis 100%, which drops it
 // onto a line of its own underneath.
-export function LanguageBox({ chips, revealed = true }: { chips: LanguageChip[]; revealed?: boolean }) {
+export function LanguageBox({
+  chips,
+  revealed = true,
+  explain,
+  explainLines,
+}: {
+  chips: LanguageChip[];
+  revealed?: boolean;
+  explain?: string;
+  explainLines?: string[];
+}) {
   const [openLanguage, setOpenLanguage] = useState<string | null>(null);
   const open = chips.find((c) => c.name === openLanguage);
 
@@ -44,9 +55,7 @@ export function LanguageBox({ chips, revealed = true }: { chips: LanguageChip[];
           fontFamily: FONT_FAMILY,
         }}
       >
-        <span style={{ fontSize: 10, letterSpacing: "0.07em", textTransform: "uppercase", color: COLORS.textDimmed }}>
-          Languages
-        </span>
+        <SlotHeader header="Languages" explain={explain} lines={explainLines} color={COLORS.textDimmed} />
         {revealed && (
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
             {chips.map((c) => (
