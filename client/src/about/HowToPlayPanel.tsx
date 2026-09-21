@@ -56,10 +56,14 @@ function AlexRules() {
         </Prose>
         <Prose>
           The numeric columns are bucketed into thirds by rank rather than compared outright, so a green one means
-          "same third as the answer" and names the range it covers. Name length counts letters, not characters —
-          spaces, hyphens and apostrophes aren't counted, so New Zealand is 10 rather than 11. Only two columns ever
-          come out amber: language, where a language shares a family with one the answer speaks, deepening the closer
-          the relation; and climate, below.
+          "same third as the answer" and names the range it covers. Name length is the exception: green there means
+          the answer has exactly that many letters, and amber means the right third on the wrong count — which
+          strikes that count off too. It counts letters, not characters, so spaces, hyphens and apostrophes are not
+          counted and New Zealand is 10 rather than 11.
+        </Prose>
+        <Prose>
+          Two other columns come out amber: language, where a language shares a family with one the answer speaks,
+          deepening the closer the relation; and climate, below.
         </Prose>
         <Prose>
           Climate lists every zone covering a decent share of a country, so most have one but a big, varied one can

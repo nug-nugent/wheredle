@@ -3,7 +3,8 @@ import { MAX_GUESSES, type AlexGameState, type SquareState } from "./engine";
 import { guessSquares } from "./guessSquares";
 
 // The board's own traffic light, in emoji: green for a hit, amber for a
-// language-family partial, red for a miss. Red rather than the usual black
+// partial — a language family, a shared climate zone, the right name-length
+// third on the wrong count — red for a miss. Red rather than the usual black
 // because the shared grid is meant to be the history rows the player just
 // looked at, and a missed dot there is red.
 const SQUARE: Record<SquareState, string> = { correct: "🟩", partial: "🟨", wrong: "🟥" };

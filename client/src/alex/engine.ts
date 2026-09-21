@@ -10,15 +10,17 @@ import { languageLineage, sharedLineageDepth } from "./languageFamily";
 // single guess, which read as an unfair overreveal.
 export type Tertile = "bottom" | "middle" | "top";
 
-// A tile's visual state: "correct" is a same-tertile match, "wrong" is an
-// unrelated miss — see tertileFlag in this file.
+// A tile's visual state for the columns that score two ways: "correct" is a
+// same-tertile match, "wrong" is an unrelated miss — see tertileFlag in this
+// file.
 export type TileFlag = "correct" | "wrong";
 
 // How a category scored one guess, for the per-guess summary behind both
 // the history row's dots and the share grid's emoji. Wider than TileFlag
-// because a category can carry a halfway state — language does, matching a
-// family without naming the language outright — even though the categories
-// that render as tiles never use it.
+// because a category can carry a halfway state: language matches a family
+// without naming the language outright, climate shares a zone without
+// matching the set, and name length lands in the right third on the wrong
+// figure.
 export type SquareState = TileFlag | "partial";
 
 // How a guess scored on a multi-valued attribute: it holds precisely the
@@ -146,6 +148,25 @@ function tertileFlag(sameTertile: boolean): TileFlag {
   return sameTertile ? "correct" : "wrong";
 }
 
+// Name length is the one bucketed column a guess can realistically land
+// exactly, so it scores three ways rather than two. There are only about a
+// dozen letter counts in play and every guess carries one, which makes an
+// exact hit common enough to be worth a colour of its own; the other
+// bucketed columns have no use for the distinction, since two countries
+// never share a population to the person or an HDI to three decimals.
+//
+// Green is the exact figure, amber is the same third on a different figure,
+// red is a different third. That makes amber strictly weaker than the green
+// it replaced — the third, minus the one count the guess has just ruled out
+// — and it's the ruling-out that earns the split: a same-third guess used to
+// say "somewhere in 5-6 letters" and now says "6 letters", because the 5 is
+// gone. See the name length category in categories.ts for how the rail
+// states it.
+function nameLengthFlag(sameValue: boolean, sameTertile: boolean): SquareState {
+  if (sameValue) return "correct";
+  return sameTertile ? "partial" : "wrong";
+}
+
 // One guessed language measured against every language the target speaks,
 // keeping the closest relationship found. "family" means any shared
 // ancestry at all — the same threshold as before — but the chip now also
@@ -199,7 +220,9 @@ export interface GuessFeedback {
   nameLengthTertile: Tertile;
   sameNameLengthTertile: boolean;
   sameNameLengthValue: boolean;
-  nameLengthDirection: TileFlag;
+  // SquareState, not TileFlag: name length is the one bucketed column that
+  // can come out amber. See nameLengthFlag.
+  nameLengthDirection: SquareState;
   borderTertile: Tertile;
   sameBorderTertile: boolean;
   sameBorderCount: boolean;
@@ -250,6 +273,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
   const samePopulationTertile = populationTertileOf(guessed) === populationTertileOf(target);
   const sameAreaTertile = areaTertileOf(guessed) === areaTertileOf(target);
   const sameNameLengthTertile = nameLengthTertileOf(guessed) === nameLengthTertileOf(target);
+  const sameNameLengthValue = letterCount(guessed.name) === letterCount(target.name);
   const sameBorderTertile = borderTertileOf(guessed) === borderTertileOf(target);
   const sameHdiTertile = hdiTertileOf(guessed) === hdiTertileOf(target);
   const sameDensityTertile = densityTertileOf(guessed) === densityTertileOf(target);
@@ -268,8 +292,8 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     areaDirection: tertileFlag(sameAreaTertile),
     nameLengthTertile: nameLengthTertileOf(guessed),
     sameNameLengthTertile,
-    sameNameLengthValue: letterCount(guessed.name) === letterCount(target.name),
-    nameLengthDirection: tertileFlag(sameNameLengthTertile),
+    sameNameLengthValue,
+    nameLengthDirection: nameLengthFlag(sameNameLengthValue, sameNameLengthTertile),
     borderTertile: borderTertileOf(guessed),
     sameBorderTertile,
     sameBorderCount: guessed.borderCount === target.borderCount,

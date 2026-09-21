@@ -66,10 +66,13 @@ const PROFILES = new Map<string, Map<string, string>>(
   })
 );
 
-// What a board can see of a country. Two countries with the same fingerprint
-// score identically against every guess that could ever be made, so no amount
-// of play separates them — the board simply cannot ask the question that
-// tells them apart.
+// What a board can see of a country, erring towards seeing less. Two
+// countries with the same fingerprint score identically against every guess
+// that could ever be made — bar name length, which reports its third here
+// and its exact count on the board, so a matching fingerprint there is a
+// board that *might* still tell them apart. Erring this way is what keeps
+// the draw safe: it can reject a board that would have worked, and never
+// accept one that wouldn't.
 function fingerprint(country: Country, categories: CategoryDef[]): string {
   const values = PROFILES.get(country.cca3)!;
   // JSON rather than a joined string: no separator character could be
@@ -90,15 +93,22 @@ function singlesOut(target: Country, categories: CategoryDef[]): boolean {
 //
 // A country the *full* set can't separate from another is beyond rescue: if
 // no category distinguishes them, no selection of categories will either.
-// Twelve countries are in that position, and they're dropped from the daily
+// Six countries are in that position, and they're dropped from the daily
 // pool rather than set as answers nobody could find. They still appear as
 // guesses, and in practice games.
 //
-// They come in look-alike pairs and clusters: Benin and Togo, Mali and
-// Niger, and eight Caribbean and Atlantic island states. Retiring the
-// currency category cost two of these — it was a poor column to play
-// against, but a currency held by exactly one country did occasionally tell
-// two otherwise identical neighbours apart.
+// They come in look-alike pairs and clusters: Mali and Niger, and four
+// Caribbean island states. Retiring the currency category cost two of these
+// — it was a poor column to play against, but a currency held by exactly one
+// country did occasionally tell two otherwise identical neighbours apart.
+//
+// Note all six survive only because the fingerprint reads name length as a
+// third rather than as the count the board actually scores; sharpen it and
+// every one of them separates, and the pool goes 188 → 194. That's a change
+// worth making on its own terms rather than as a side effect, because the
+// pool's length is what dailyTarget derives both the cycle and the index
+// from — six more countries reshuffles most days' answers. See `value` in
+// categories.ts.
 export const DAILY_TARGET_POOL: Country[] = (() => {
   const seen = new Map<string, number>();
   for (const country of countries) {
