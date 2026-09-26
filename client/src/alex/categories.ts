@@ -1,6 +1,7 @@
 import {
   CLIMATE_ZONES,
   CLIMATE_ZONE_LABEL,
+  governmentKind,
   letterCount,
   populationDensity,
   type Country,
@@ -834,11 +835,15 @@ export const CATEGORIES: CategoryDef[] = [
     header: "Government",
     daily: "rotating",
     explain:
-      "How the state is constituted: republic, constitutional monarchy, federal republic and so on, 23 kinds " +
-      "across the dataset.",
+      "How the state is constituted: republic, federal republic, socialist republic, Islamic republic or " +
+      "monarchy, plus the Vatican, Andorra and Afghanistan in kinds of their own. Every monarchy counts as " +
+      "one, constitutional or not.",
     match: (f) => f.sameGovernmentType,
-    label: (f) => f.country.governmentType ?? "Unknown",
-    excluded: (f) => (f.country.governmentType ? [f.country.governmentType] : []),
+    label: (f) => governmentKind(f.country) ?? "Unknown",
+    excluded: (f) => {
+      const kind = governmentKind(f.country);
+      return kind ? [kind] : [];
+    },
   }),
   languageCategory(),
 ];
