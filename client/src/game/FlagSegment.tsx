@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { COLORS } from "../theme";
-import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
+import { FLAG_CROP_SIZE, cropOrigin, flagGeometry } from "./flagLayout";
+import { useFlagAspect } from "./useFlagAspect";
 
 export function FlagSegment({
   flagUrl,
@@ -11,8 +12,7 @@ export function FlagSegment({
   focalX: number;
   focalY: number;
 }) {
-  const scaledWidth = FLAG_CROP_SIZE.width * FLAG_ZOOM;
-  const scaledHeight = FLAG_CROP_SIZE.height * FLAG_ZOOM;
+  const aspect = useFlagAspect(flagUrl);
 
   return (
     <div
@@ -23,23 +23,42 @@ export function FlagSegment({
         border: `1px solid ${COLORS.border}`,
       }}
     >
-      <img
-        src={flagUrl}
-        alt=""
-        draggable={false}
-        onDragStart={(e) => e.preventDefault()}
-        onContextMenu={(e) => e.preventDefault()}
-        style={{
-          width: scaledWidth,
-          height: scaledHeight,
-          maxWidth: "none",
-          position: "relative",
-          left: `-${(focalX / 100) * (scaledWidth - FLAG_CROP_SIZE.width)}px`,
-          top: `-${(focalY / 100) * (scaledHeight - FLAG_CROP_SIZE.height)}px`,
-          userSelect: "none",
-          WebkitUserDrag: "none",
-        } as CSSProperties}
-      />
+      {aspect !== undefined && <CroppedFlag flagUrl={flagUrl} focalX={focalX} focalY={focalY} aspect={aspect} />}
     </div>
+  );
+}
+
+function CroppedFlag({
+  flagUrl,
+  focalX,
+  focalY,
+  aspect,
+}: {
+  flagUrl: string;
+  focalX: number;
+  focalY: number;
+  aspect: number;
+}) {
+  const { zoomed, cropFraction } = flagGeometry(aspect);
+  const origin = cropOrigin(focalX, focalY, cropFraction);
+
+  return (
+    <img
+      src={flagUrl}
+      alt=""
+      draggable={false}
+      onDragStart={(e) => e.preventDefault()}
+      onContextMenu={(e) => e.preventDefault()}
+      style={{
+        width: zoomed.width,
+        height: zoomed.height,
+        maxWidth: "none",
+        position: "relative",
+        left: -origin.x * zoomed.width,
+        top: -origin.y * zoomed.height,
+        userSelect: "none",
+        WebkitUserDrag: "none",
+      } as CSSProperties}
+    />
   );
 }

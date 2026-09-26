@@ -1,6 +1,5 @@
 import type { Country } from "../data/country";
 import { rng } from "../daily";
-import { FLAG_ZOOM } from "./flagLayout";
 import { pickFlagSegmentFocal } from "./flagSampler";
 
 // Clue 1, Clue 2, and Clue 3 always reveal in this fixed order. After that
@@ -75,7 +74,7 @@ function buildHint(type: Exclude<HintType, "flagSegment">, target: Country, seed
 }
 
 async function buildFlagSegmentHint(target: Country, seed: string): Promise<Hint> {
-  const { focalX, focalY } = await pickFlagSegmentFocal(target.flagUrl, FLAG_ZOOM, rng(`${seed}:flagSegment`));
+  const { focalX, focalY } = await pickFlagSegmentFocal(target.flagUrl, rng(`${seed}:flagSegment`));
   return { type: "flagSegment", focalX, focalY };
 }
 

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { COLORS } from "../theme";
-import { FLAG_CROP_SIZE, FLAG_ZOOM } from "./flagLayout";
+import { FLAG_CROP_SIZE, cropOrigin, flagGeometry } from "./flagLayout";
+import { useFlagAspect } from "./useFlagAspect";
 
 // The window is the one thing on the page pointing at something, and
 // the palette has exactly one colour for that job.
@@ -18,18 +19,25 @@ export function FlagOverview({
   focalX: number;
   focalY: number;
 }) {
-  const boxSizePct = 100 / FLAG_ZOOM;
-  const boxLeftPct = focalX * (1 - 1 / FLAG_ZOOM);
-  const boxTopPct = focalY * (1 - 1 / FLAG_ZOOM);
-  const boxLeftPx = (boxLeftPct / 100) * FLAG_CROP_SIZE.width;
-  const boxTopPx = (boxTopPct / 100) * FLAG_CROP_SIZE.height;
+  const aspect = useFlagAspect(flagUrl);
+
+  // Until the flag's shape is known, hold the crop box's footprint so the
+  // panel doesn't jump when it arrives.
+  if (aspect === undefined) {
+    return <div style={{ width: FLAG_CROP_SIZE.width, height: FLAG_CROP_SIZE.height }} />;
+  }
+
+  const { fit, cropFraction } = flagGeometry(aspect);
+  const origin = cropOrigin(focalX, focalY, cropFraction);
+  const boxLeftPx = origin.x * fit.width;
+  const boxTopPx = origin.y * fit.height;
 
   return (
     <div
       style={{
         position: "relative",
-        width: FLAG_CROP_SIZE.width,
-        height: FLAG_CROP_SIZE.height,
+        width: fit.width,
+        height: fit.height,
         backgroundColor: COLORS.mutedBorder,
         overflow: "hidden",
       }}
@@ -37,10 +45,10 @@ export function FlagOverview({
       <div
         style={{
           position: "absolute",
-          left: `${boxLeftPct}%`,
-          top: `${boxTopPct}%`,
-          width: `${boxSizePct}%`,
-          height: `${boxSizePct}%`,
+          left: boxLeftPx,
+          top: boxTopPx,
+          width: cropFraction.x * fit.width,
+          height: cropFraction.y * fit.height,
           overflow: "hidden",
           border: `2px solid ${HIGHLIGHT_COLOR}`,
           boxSizing: "border-box",
@@ -54,8 +62,8 @@ export function FlagOverview({
           onContextMenu={(e) => e.preventDefault()}
           style={{
             position: "absolute",
-            width: FLAG_CROP_SIZE.width,
-            height: FLAG_CROP_SIZE.height,
+            width: fit.width,
+            height: fit.height,
             maxWidth: "none",
             left: -boxLeftPx,
             top: -boxTopPx,
