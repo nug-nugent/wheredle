@@ -1,34 +1,6 @@
 import type { Stats } from "../stats";
+import { distributionRows, highlightedRow } from "./statsLayout";
 import { COLORS, FONT_FAMILY } from "../theme";
-
-interface Row {
-  key: string;
-  label: string;
-  count: number;
-  won: boolean;
-}
-
-// One row per winning guess count, then one for games lost.
-//
-// Losses are derived rather than recorded — they're what's left of `played`
-// once the wins are taken out — but they belong on the chart: without them
-// the bars only account for the games that were won, and a record of 20
-// played would draw as 12.
-//
-// Anything recorded past the current limit folds into the last row instead of
-// vanishing. That only happens if a mode's guess limit is ever lowered, and a
-// game genuinely won is better shown slightly wrong than not at all.
-function buildRows(stats: Stats, maxGuesses: number): Row[] {
-  const wins = new Array<number>(maxGuesses).fill(0);
-  stats.distribution.forEach((count, index) => {
-    wins[Math.min(index, maxGuesses - 1)] += count;
-  });
-
-  return [
-    ...wins.map((count, i) => ({ key: String(i + 1), label: String(i + 1), count, won: true })),
-    { key: "lost", label: "X", count: Math.max(0, stats.played - stats.wins), won: false },
-  ];
-}
 
 // How many guesses games have taken, as a bar per outcome.
 //
@@ -50,11 +22,11 @@ export function GuessDistribution({
   maxGuesses: number;
   latest: { won: boolean; guessCount: number } | null;
 }) {
-  const rows = buildRows(stats, maxGuesses);
+  const rows = distributionRows(stats, maxGuesses);
   // Never zero, so an empty record draws flat rather than dividing by nothing.
   const peak = Math.max(1, ...rows.map((row) => row.count));
 
-  const highlighted = latest === null ? null : latest.won ? String(Math.min(latest.guessCount, maxGuesses)) : "lost";
+  const highlighted = highlightedRow(latest, maxGuesses);
 
   return (
     <div style={{ fontFamily: FONT_FAMILY, marginTop: 20 }}>

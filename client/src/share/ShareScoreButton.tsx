@@ -7,10 +7,13 @@ export interface ShareScoreProps {
   gameLabel: string;
   /** Which day's puzzle, so two grids can be compared. Omitted for practice. */
   puzzleNumber?: number;
-  /** e.g. "4/7" or "Solved in 6" */
+  /** e.g. "4/7", "Solved in 6", or "Statistics" for a player's record */
   resultLabel: string;
-  /** One emoji row per guess, oldest first — the Wordle-style score grid. */
+  /** The body, a line each: for a score, one emoji row per guess, oldest
+      first — the Wordle-style grid. */
   rows: string[];
+  /** What the button says. Defaults to "Share score". */
+  buttonLabel?: string;
 }
 
 function currentUrl(): string {
@@ -55,21 +58,22 @@ const BUTTON_STYLE = {
 // in the same grid cell with the idle one hidden rather than removed, so the
 // button is permanently as wide as the wider of them and nothing moves.
 // That only stays cheap while the confirmation is short: "Copied!" is
-// narrower than "Share score", so the width reserved is the button's own.
-// The menu still says it in full, where there's a fixed 220px to say it in.
-const SHARE_LABEL = "Share score";
+// narrower than "Share score" or "Share stats", so the width reserved is the
+// button's own. The menu still says it in full, where there's a fixed 220px
+// to say it in.
+const DEFAULT_SHARE_LABEL = "Share score";
 const COPIED_LABEL = "Copied!";
 
 // Stacking the two labels leaves the button with no text of its own to be
 // named by, so it says its own name and the stack is decoration.
-function shareLabel(copied: boolean): string {
-  return copied ? COPIED_LABEL : SHARE_LABEL;
+function shareLabel(copied: boolean, label: string): string {
+  return copied ? COPIED_LABEL : label;
 }
 
-function ShareLabel({ copied }: { copied: boolean }) {
+function ShareLabel({ copied, label }: { copied: boolean; label: string }) {
   return (
     <span style={{ display: "grid" }} aria-hidden="true">
-      <span style={{ gridArea: "1 / 1", visibility: copied ? "hidden" : undefined }}>{SHARE_LABEL}</span>
+      <span style={{ gridArea: "1 / 1", visibility: copied ? "hidden" : undefined }}>{label}</span>
       <span style={{ gridArea: "1 / 1", visibility: copied ? undefined : "hidden" }}>{COPIED_LABEL}</span>
     </span>
   );
@@ -80,6 +84,7 @@ export function ShareScoreButton(props: ShareScoreProps) {
   const copiedTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const shareText = buildShareText(props);
   const payload = { title: shareTitle(props), text: shareText };
+  const label = props.buttonLabel ?? DEFAULT_SHARE_LABEL;
 
   // A share sheet can't open and be picked from in this long, so a resolve
   // this fast means nothing opened at all — see nativeShare.
@@ -145,8 +150,8 @@ export function ShareScoreButton(props: ShareScoreProps) {
 
   if (canNativeShare) {
     return (
-      <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied)} onClick={nativeShare}>
-        <ShareLabel copied={copied} />
+      <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied, label)} onClick={nativeShare}>
+        <ShareLabel copied={copied} label={label} />
       </button>
     );
   }
@@ -163,8 +168,8 @@ export function ShareScoreButton(props: ShareScoreProps) {
       }}
     >
       <Menu.Target>
-        <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied)}>
-          <ShareLabel copied={copied} />
+        <button type="button" style={BUTTON_STYLE} aria-label={shareLabel(copied, label)}>
+          <ShareLabel copied={copied} label={label} />
         </button>
       </Menu.Target>
       <Menu.Dropdown>

@@ -2,6 +2,8 @@ import { Modal } from "@mantine/core";
 import { GuessDistribution } from "./GuessDistribution";
 import type { Stats } from "../stats";
 import { StatsPanel } from "./StatsPanel";
+import { buildStatsShare } from "./statsShare";
+import { ShareScoreButton } from "../share/ShareScoreButton";
 import { COLORS, FONT_FAMILY } from "../theme";
 
 // A player's record for one mode, on demand rather than in the way. The
@@ -12,6 +14,10 @@ import { COLORS, FONT_FAMILY } from "../theme";
 // The two modes keep separate records — different guess limits, different
 // boards, so a combined streak would mean nothing — and the modal says so
 // rather than leaving the player to wonder which game they're looking at.
+//
+// The share button sends the modal itself, as text — the figures and the
+// chart drawn in emoji — so what lands in a chat is recognisably this panel
+// rather than a line of numbers.
 export function StatsModal({
   opened,
   onClose,
@@ -45,6 +51,13 @@ export function StatsModal({
       <div style={{ fontSize: 12, color: COLORS.textDimmed }}>{gameLabel}</div>
       <StatsPanel stats={stats} />
       <GuessDistribution stats={stats} maxGuesses={maxGuesses} latest={latest} />
+      <div style={{ marginTop: 20 }}>
+        <ShareScoreButton
+          gameLabel={gameLabel}
+          buttonLabel="Share stats"
+          {...buildStatsShare(stats, maxGuesses)}
+        />
+      </div>
       <div style={{ fontSize: 11, color: COLORS.textDimmed, marginTop: 18 }}>
         Each mode keeps its own record. Practice games count towards neither.
       </div>
