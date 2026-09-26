@@ -260,7 +260,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/az.svg",
     "religion": "Islam",
-    "governmentType": "Federal Republic",
+    "governmentType": "Republic",
     "borderCount": 5,
     "hdi": 0.789
   },
@@ -476,7 +476,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/bt.svg",
     "religion": "Buddhism",
-    "governmentType": "Monarchy",
+    "governmentType": "Constitutional Monarchy",
     "borderCount": 2,
     "hdi": 0.698
   },
@@ -867,7 +867,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cn.svg",
     "religion": null,
-    "governmentType": "People's Republic",
+    "governmentType": "Socialist Republic",
     "borderCount": 16,
     "hdi": 0.797
   },
@@ -915,7 +915,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/km.svg",
     "religion": "Islam",
-    "governmentType": "Republic",
+    "governmentType": "Federal Republic",
     "borderCount": 0,
     "hdi": 0.603
   },
@@ -1033,7 +1033,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/cu.svg",
     "religion": "Christianity",
-    "governmentType": "Socialistic Republic",
+    "governmentType": "Socialist Republic",
     "borderCount": 0,
     "hdi": 0.762
   },
@@ -1396,7 +1396,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/et.svg",
     "religion": "Christianity",
-    "governmentType": "Republic",
+    "governmentType": "Federal Republic",
     "borderCount": 6,
     "hdi": 0.497
   },
@@ -1915,7 +1915,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/iq.svg",
     "religion": "Islam",
-    "governmentType": "Republic",
+    "governmentType": "Federal Republic",
     "borderCount": 6,
     "hdi": 0.695
   },
@@ -2204,7 +2204,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/la.svg",
     "religion": "Buddhism",
-    "governmentType": "Republic",
+    "governmentType": "Socialist Republic",
     "borderCount": 5,
     "hdi": 0.617
   },
@@ -2322,7 +2322,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ly.svg",
     "religion": "Islam",
-    "governmentType": "Socialistic State",
+    "governmentType": "Republic",
     "borderCount": 6,
     "hdi": 0.721
   },
@@ -2418,7 +2418,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mg.svg",
     "religion": "Christianity",
-    "governmentType": "Federal Republic",
+    "governmentType": "Republic",
     "borderCount": 0,
     "hdi": 0.487
   },
@@ -2584,7 +2584,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/mr.svg",
     "religion": "Islam",
-    "governmentType": "Republic",
+    "governmentType": "Islamic Republic",
     "borderCount": 4,
     "hdi": 0.563
   },
@@ -2902,7 +2902,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/np.svg",
     "religion": "Hinduism",
-    "governmentType": "Federal parliamentary republic",
+    "governmentType": "Federal Republic",
     "borderCount": 2,
     "hdi": 0.622
   },
@@ -3043,7 +3043,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/kp.svg",
     "religion": null,
-    "governmentType": "Socialistic Republic",
+    "governmentType": "Socialist Republic",
     "borderCount": 3,
     "hdi": 0.55,
     "hdiEstimated": true
@@ -3140,7 +3140,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/pk.svg",
     "religion": "Islam",
-    "governmentType": "Republic",
+    "governmentType": "Federal Republic",
     "borderCount": 4,
     "hdi": 0.544
   },
@@ -3525,7 +3525,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ws.svg",
     "religion": "Christianity",
-    "governmentType": "Parliamentary Republic",
+    "governmentType": "Republic",
     "borderCount": 0,
     "hdi": 0.708
   },
@@ -3809,7 +3809,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/so.svg",
     "religion": "Islam",
-    "governmentType": "Republic",
+    "governmentType": "Federal Republic",
     "borderCount": 3,
     "hdi": 0.404
   },
@@ -3938,7 +3938,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/lk.svg",
     "religion": "Buddhism",
-    "governmentType": "Unitary Semi-Presidential Republic",
+    "governmentType": "Republic",
     "borderCount": 1,
     "hdi": 0.776
   },
@@ -3962,7 +3962,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/sd.svg",
     "religion": "Islam",
-    "governmentType": "Islamic Republic",
+    "governmentType": "Republic",
     "borderCount": 7,
     "hdi": 0.511
   },
@@ -4035,7 +4035,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ch.svg",
     "religion": "Christianity",
-    "governmentType": "Federation",
+    "governmentType": "Federal Republic",
     "borderCount": 5,
     "hdi": 0.97
   },
@@ -4155,7 +4155,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/tl.svg",
     "religion": "Christianity",
-    "governmentType": "Administrated by the UN",
+    "governmentType": "Republic",
     "borderCount": 1,
     "hdi": 0.634
   },
@@ -4584,7 +4584,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/vn.svg",
     "religion": "Folk Religions",
-    "governmentType": "Socialistic Republic",
+    "governmentType": "Socialist Republic",
     "borderCount": 3,
     "hdi": 0.766
   },

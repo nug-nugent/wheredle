@@ -1,4 +1,4 @@
-import { countries, letterCount, populationDensity, type Country } from "../data/country";
+import { countries, governmentKind, letterCount, populationDensity, type Country } from "../data/country";
 import { languageLineage, sharedLineageDepth } from "./languageFamily";
 
 // Every numeric category (population, land area, name length, border count)
@@ -307,7 +307,7 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     sameDensityValue: populationDensity(guessed) === populationDensity(target),
     densityDirection: tertileFlag(sameDensityTertile),
     sameReligion: guessed.religion === target.religion,
-    sameGovernmentType: guessed.governmentType === target.governmentType,
+    sameGovernmentType: governmentKind(guessed) === governmentKind(target),
     climateMatch: setMatch(guessed.climateZones, target.climateZones),
     languageChips: guessed.languages.map((name) => languageChip(name, target.languages)),
   };

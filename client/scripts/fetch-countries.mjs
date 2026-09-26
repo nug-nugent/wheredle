@@ -89,6 +89,45 @@ const DISPLAY_NAME_OVERRIDES = {
   "Ivory Coast": "Côte d'Ivoire",
 };
 
+// samayo's government types are hand-corrected here, because some are wrong
+// and some are years out of date: Libya was still Gaddafi's "Socialistic
+// State", Timor-Leste still "Administrated by the UN", and Madagascar and
+// Azerbaijan were federal while Ethiopia, Iraq and Pakistan weren't. The
+// republics are also brought down to four kinds — Republic, Federal
+// Republic, Socialist Republic and Islamic Republic — because Alex scores
+// the label as an exact match, so a one-country label like Nepal's "Federal
+// parliamentary republic" could never match anything. Keyed by mledoze's
+// name, like the lookup overrides above. Monarchies keep samayo's detailed
+// label; governmentKind() in src/data/country.ts groups those for scoring.
+//
+// Pakistan is both federal and an Islamic republic, and a label holds one;
+// it's filed as federal, which is the structural fact. Sudan has no state
+// religion, so it's a plain republic.
+const GOVERNMENT_TYPE_OVERRIDES = {
+  Azerbaijan: "Republic",
+  Libya: "Republic",
+  Madagascar: "Republic",
+  Samoa: "Republic",
+  "Sri Lanka": "Republic",
+  Sudan: "Republic",
+  "Timor-Leste": "Republic",
+  Comoros: "Federal Republic",
+  Ethiopia: "Federal Republic",
+  Iraq: "Federal Republic",
+  Nepal: "Federal Republic",
+  Pakistan: "Federal Republic",
+  Somalia: "Federal Republic",
+  Switzerland: "Federal Republic",
+  China: "Socialist Republic",
+  Cuba: "Socialist Republic",
+  Laos: "Socialist Republic",
+  "North Korea": "Socialist Republic",
+  Vietnam: "Socialist Republic",
+  Mauritania: "Islamic Republic",
+  // A constitutional monarchy since 2008.
+  Bhutan: "Constitutional Monarchy",
+};
+
 function flagUrl(cca2) {
   return `https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/${cca2.toLowerCase()}.svg`;
 }
@@ -136,7 +175,8 @@ async function main() {
     const religionValue = religionByName.get(religionLookupName.toLowerCase()) ?? null;
 
     const governmentLookupName = GOVERNMENT_NAME_OVERRIDES[commonName] ?? commonName;
-    const governmentType = governmentByName.get(governmentLookupName.toLowerCase()) ?? null;
+    const governmentType =
+      GOVERNMENT_TYPE_OVERRIDES[commonName] ?? governmentByName.get(governmentLookupName.toLowerCase()) ?? null;
 
     // The existing file is keyed by display name, since that's what it was
     // written with — look hdi up under the rename, not mledoze's spelling.

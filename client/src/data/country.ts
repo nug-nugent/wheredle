@@ -72,4 +72,19 @@ export function populationDensity(country: Country): number {
   return country.population / country.area;
 }
 
+// The government Alex scores against. The dataset spells monarchy eight ways —
+// "Constitutional Monarchy, Federation" for Canada but "Federation
+// Constitutional Monarchy" for Australia — so an exact match told a player
+// guessing Canada for the United Kingdom that it wasn't a monarchy. They're
+// all one kind here; the detailed label stays in governmentType for the
+// reveal. The UAE's "Emirate Federation" is a federation of monarchies and
+// goes with them. Andorra's co-principality, the Vatican and Afghanistan's
+// Islamic Emirate are left as they are.
+const MONARCHY = /Monarchy|^Emirate Federation$/;
+
+export function governmentKind(country: Country): string | null {
+  const type = country.governmentType;
+  return type && MONARCHY.test(type) ? "Monarchy" : type;
+}
+
 export const countries: Country[] = raw as Country[];
