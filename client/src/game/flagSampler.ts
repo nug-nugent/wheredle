@@ -6,6 +6,8 @@
 // Math.random, so a day's crop is the same one for everyone: two players
 // comparing a shared grid should have been looking at the same picture.
 
+import { cropOrigin, flagGeometry } from "./flagLayout";
+
 const WHITE_THRESHOLD = 245;
 const MAX_ATTEMPTS = 25;
 
@@ -15,30 +17,54 @@ interface FlagSample {
   data: Uint8ClampedArray;
 }
 
+const imageCache = new Map<string, Promise<HTMLImageElement>>();
+const aspectCache = new Map<string, number>();
 const sampleCache = new Map<string, Promise<FlagSample>>();
+
+function loadFlagImage(url: string): Promise<HTMLImageElement> {
+  const cached = imageCache.get(url);
+  if (cached) return cached;
+
+  const promise = new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      aspectCache.set(url, img.naturalWidth / img.naturalHeight);
+      resolve(img);
+    };
+    img.onerror = () => reject(new Error(`Failed to load flag image: ${url}`));
+    img.src = url;
+  });
+
+  imageCache.set(url, promise);
+  return promise;
+}
+
+// The flag's width over its height, if its image has already loaded — which
+// it has by the time a crop has been picked, so a freshly revealed hint can
+// lay itself out on its first render.
+export function knownFlagAspect(url: string): number | undefined {
+  return aspectCache.get(url);
+}
+
+export async function loadFlagAspect(url: string): Promise<number> {
+  const img = await loadFlagImage(url);
+  return img.naturalWidth / img.naturalHeight;
+}
 
 function loadFlagSample(url: string): Promise<FlagSample> {
   const cached = sampleCache.get(url);
   if (cached) return cached;
 
-  const promise = new Promise<FlagSample>((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        reject(new Error("2D canvas context unavailable"));
-        return;
-      }
-      ctx.drawImage(img, 0, 0);
-      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      resolve({ width: canvas.width, height: canvas.height, data });
-    };
-    img.onerror = () => reject(new Error(`Failed to load flag image: ${url}`));
-    img.src = url;
+  const promise = loadFlagImage(url).then((img) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("2D canvas context unavailable");
+    ctx.drawImage(img, 0, 0);
+    const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    return { width: canvas.width, height: canvas.height, data };
   });
 
   sampleCache.set(url, promise);
@@ -68,7 +94,6 @@ function randomPoint(random: () => number) {
 
 export async function pickFlagSegmentFocal(
   flagUrl: string,
-  zoom: number,
   random: () => number
 ): Promise<{ focalX: number; focalY: number }> {
   let sample: FlagSample;
@@ -78,16 +103,16 @@ export async function pickFlagSegmentFocal(
     return randomPoint(random);
   }
 
-  const cropWFrac = 1 / zoom;
-  const cropHFrac = 1 / zoom;
+  // The crop covers a different share of each axis depending on the flag's
+  // shape, so check exactly the region FlagSegment will show.
+  const { cropFraction } = flagGeometry(sample.width / sample.height);
+  const w = cropFraction.x * sample.width;
+  const h = cropFraction.y * sample.height;
 
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const { focalX, focalY } = randomPoint(random);
-    const x0 = (focalX / 100) * (1 - cropWFrac) * sample.width;
-    const y0 = (focalY / 100) * (1 - cropHFrac) * sample.height;
-    const w = cropWFrac * sample.width;
-    const h = cropHFrac * sample.height;
-    if (!isBlank(sample, x0, y0, w, h)) {
+    const origin = cropOrigin(focalX, focalY, cropFraction);
+    if (!isBlank(sample, origin.x * sample.width, origin.y * sample.height, w, h)) {
       return { focalX, focalY };
     }
   }
