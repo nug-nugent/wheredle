@@ -1,4 +1,5 @@
-import { averageGuesses, type Stats } from "../stats";
+import type { Stats } from "../stats";
+import { statFigures } from "./statsLayout";
 import { COLORS, FONT_FAMILY } from "../theme";
 
 function Figure({ value, label }: { value: string; label: string }) {
@@ -18,16 +19,11 @@ function Figure({ value, label }: { value: string; label: string }) {
 // bars are still mostly a shape — an em dash until there's a solved game to
 // average.
 export function StatsPanel({ stats }: { stats: Stats }) {
-  const winRate = stats.played === 0 ? 0 : Math.round((stats.wins / stats.played) * 100);
-  const average = averageGuesses(stats);
-
   return (
     <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 16, fontFamily: FONT_FAMILY }}>
-      <Figure value={String(stats.played)} label="Played" />
-      <Figure value={`${winRate}%`} label="Won" />
-      <Figure value={average === null ? "—" : average.toFixed(1)} label="Avg guesses" />
-      <Figure value={String(stats.currentStreak)} label="Streak" />
-      <Figure value={String(stats.maxStreak)} label="Best streak" />
+      {statFigures(stats).map((figure) => (
+        <Figure key={figure.label} value={figure.value} label={figure.label} />
+      ))}
     </div>
   );
 }
