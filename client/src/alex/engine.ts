@@ -307,7 +307,8 @@ export function computeGuessFeedback(target: Country, guessed: Country): GuessFe
     sameDensityValue: populationDensity(guessed) === populationDensity(target),
     densityDirection: tertileFlag(sameDensityTertile),
     sameReligion: guessed.religion === target.religion,
-    sameGovernmentType: governmentKind(guessed) === governmentKind(target),
+    // Unknown isn't a kind, so two countries without data don't match.
+    sameGovernmentType: governmentKind(guessed) !== null && governmentKind(guessed) === governmentKind(target),
     climateMatch: setMatch(guessed.climateZones, target.climateZones),
     languageChips: guessed.languages.map((name) => languageChip(name, target.languages)),
   };

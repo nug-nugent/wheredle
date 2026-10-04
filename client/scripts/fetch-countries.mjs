@@ -68,8 +68,9 @@ const RELIGION_NAME_OVERRIDES = {
 };
 
 // Unlike population/religion, this dataset already uses "Cape Verde" (matching
-// mledoze directly), so no override is needed for it here. Montenegro isn't in
-// this dataset at all — it ends up with governmentType: null.
+// mledoze directly), so no override is needed for it here. Montenegro and
+// South Sudan aren't in this dataset at all (it predates both), so their
+// labels come from GOVERNMENT_TYPE_OVERRIDES below instead.
 const GOVERNMENT_NAME_OVERRIDES = {
   "DR Congo": "The Democratic Republic of Congo",
   Czechia: "Czech Republic",
@@ -102,12 +103,16 @@ const DISPLAY_NAME_OVERRIDES = {
 //
 // Pakistan is both federal and an Islamic republic, and a label holds one;
 // it's filed as federal, which is the structural fact. Sudan has no state
-// religion, so it's a plain republic.
+// religion, so it's a plain republic. South Sudan's transitional constitution
+// is decentralised rather than federal — federalism is still only proposed —
+// so it's a plain republic too.
 const GOVERNMENT_TYPE_OVERRIDES = {
   Azerbaijan: "Republic",
   Libya: "Republic",
   Madagascar: "Republic",
+  Montenegro: "Republic",
   Samoa: "Republic",
+  "South Sudan": "Republic",
   "Sri Lanka": "Republic",
   Sudan: "Republic",
   "Timor-Leste": "Republic",
