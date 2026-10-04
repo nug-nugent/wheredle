@@ -2750,7 +2750,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/me.svg",
     "religion": "Christianity",
-    "governmentType": null,
+    "governmentType": "Republic",
     "borderCount": 5,
     "hdi": 0.862
   },
@@ -3891,7 +3891,7 @@
     ],
     "flagUrl": "https://cdn.jsdelivr.net/gh/hjnilsson/country-flags/svg/ss.svg",
     "religion": "Christianity",
-    "governmentType": null,
+    "governmentType": "Republic",
     "borderCount": 6,
     "hdi": 0.388
   },

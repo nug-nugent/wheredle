@@ -24,7 +24,7 @@ export interface Country {
   currencies: string[];
   flagUrl: string;
   religion: string | null; // null = no clear majority (e.g. Japan, Czechia)
-  governmentType: string | null; // null = no data (e.g. Montenegro, South Sudan)
+  governmentType: string | null; // null = no data (none today; the fetch fills gaps by hand)
   borderCount: number;
   hdi: number; // UNDP Human Development Index, most recent report
   // true only for North Korea and Vatican City, neither of which the UNDP
