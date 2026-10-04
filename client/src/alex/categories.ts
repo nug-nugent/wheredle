@@ -561,9 +561,11 @@ function setCategory(config: {
   };
 }
 
-// Language is the one attribute with a halfway state: a guess can share a
-// family with something the target speaks without naming it outright. It's
-// also multi-valued, so it draws a list of chips rather than a single tile.
+// Language is the one category scored value by value: each language a guess
+// lists is green, amber or red on its own, amber meaning it shares a family
+// with something the target speaks without naming it outright. Climate is
+// multi-valued too, but scores its set as a whole, so it stays a single tile
+// while this draws a list of chips and takes the best of them for the column.
 // Everything else about it is a category like any other, which is what keeps
 // it eligible for a day's draw instead of being bolted on beside the grid.
 function languageCategory(): CategoryDef {
